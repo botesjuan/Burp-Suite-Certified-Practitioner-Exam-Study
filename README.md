@@ -1,6 +1,6 @@
 
 # Burp-Suite-Certified-Practitioner-Exam-Study
-Burp Suite Certified Practitioner Exam Study Notes
+PortSwigger Academy - Burp Suite Certified Practitioner Exam Study Notes
 
 ## Cross Site Scripting
 
