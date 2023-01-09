@@ -134,7 +134,7 @@ Content-Type: application/x-www-form-urlencoded
 Content-Length: 860
 Cookie: session=your-session-token
 
-csrf=your-csrf-token&postId=5&name=Carlos+Montoya&email=carlos%40normal-user.net&website=&comment=test
+csrf=your-csrf-token&postId=5&name=Carlos+Montoya&email=carlos%40mail.net&website=&comment=test
 ```
 >View the blog **post** to see if there's a comment containing a user's request. Note that once the victim user browses the target website, then only will the attack be successful. Copy the user's Cookie header from the blog post comment, and use the cookie to access victim's account.
   
