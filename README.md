@@ -2,6 +2,8 @@
 # Burp-Suite-Certified-Practitioner-Exam-Study
 PortSwigger Academy - Burp Suite Certified Practitioner Exam Study Notes
 
+[Cross Site Scripting](## Cross Site Scripting)
+
 ## Cross Site Scripting
 
 + [Cross-site scripting (XSS) cheat sheet](https://portswigger.net/web-security/cross-site-scripting/cheat-sheet)
