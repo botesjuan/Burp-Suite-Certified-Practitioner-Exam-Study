@@ -2,7 +2,9 @@
 # Burp-Suite-Certified-Practitioner-Exam-Study
 PortSwigger Academy - Burp Suite Certified Practitioner Exam Study Notes
 
-[Cross Site Scripting](##-Cross-Site-Scripting)
+[Cross Site Scripting](#cross-site-scripting)
+[Host Header Poison - forgot-password](#host-header-poison---forgot-password)  
+
 
 ## Cross Site Scripting
 
