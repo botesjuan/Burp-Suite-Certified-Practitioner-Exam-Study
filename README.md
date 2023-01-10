@@ -184,7 +184,6 @@ x=1
   
 ![Collaborator capture xss Request from victim browsing target](collaborator-xss-Request-received.png)  
 
-
-
 [PortSwigger Lab: Exploiting HTTP request smuggling to deliver reflected XSS](https://portswigger.net/web-security/request-smuggling/exploiting/lab-deliver-reflected-xss)  
 
+>If Duplicate header names are allowed, and the vulnerability is detected as **dualchunk**, then add an additional header with name and value = **Transfer-encoding: cow**.  
