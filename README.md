@@ -4,6 +4,7 @@ My personal study notes on the PortSwigger Academy Burp Suite Certified Practiti
 
 [Cross Site Scripting](#cross-site-scripting)  
 [Host Header Poison - forgot-password](#host-header-poison---forgot-password)  
+[HTTP Request Smuggling](#http-request-smuggling)  
 [Privilege Escalation JSON RoleId](#privesc-json-roleid)  
 
 
