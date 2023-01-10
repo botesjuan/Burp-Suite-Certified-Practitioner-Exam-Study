@@ -7,7 +7,7 @@ My personal study notes on the PortSwigger Academy Burp Suite Certified Practiti
 [HTTP Request Smuggling](#http-request-smuggling)  
 [Privilege Escalation JSON RoleId](#privesc-json-roleid)  
 [SQLi Data Exfiltration](#sql-injection-data-exfiltration)  
-
+[XML entities & Injections](#xxe-injection)  
 
 ## Cross Site Scripting
 
