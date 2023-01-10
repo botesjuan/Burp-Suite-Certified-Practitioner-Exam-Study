@@ -140,9 +140,12 @@ Cookie: session=your-session-token
 
 csrf=your-csrf-token&postId=5&name=Carlos+Montoya&email=carlos%40mail.net&website=&comment=test
 ```
+  
+![Exploiting HTTP request smuggling with content-length value](content-length-capture-victim-request.png)  
+
 >View the blog **post** to see if there's a comment containing a user's request. Note that once the victim user browses the target website, then only will the attack be successful. Copy the user's Cookie header from the blog post comment, and use the cookie to access victim's account.
   
-![Exploiting HTTP request smuggling to capture other users' requests](request-smuggling-cookie-stealer.PNG)  
+![Exploiting HTTP request smuggling to capture other users' requests](victim-request-captured-blog-comment.png)  
 
 [PortSwigger Lab: Exploiting HTTP request smuggling to capture other users' requests](https://portswigger.net/web-security/request-smuggling/exploiting/lab-capture-other-users-requests)  
 
