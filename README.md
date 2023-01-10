@@ -4,7 +4,8 @@ My personal study notes on the PortSwigger Academy Burp Suite Certified Practiti
 
 [Cross Site Scripting](#cross-site-scripting)  
 [Host Header Poison - forgot-password](#host-header-poison---forgot-password)  
-[HTTP Request Smuggling](#http-request-smuggling)  
+[Privilege Escalation JSON RoleId](#privesc-json-roleid)  
+
 
 
 ## Cross Site Scripting
@@ -205,10 +206,11 @@ POST /
 
 
 ```  
+![Intruder Payload set to identify Admin role ID](intruder-payload-positions.png)  
 
 >Attack identify the possible role ID of administrator access role and then send this request with updated roleId to privile escalate the current logged in user to role of administator of target.  
 
-![Attack identify Admin role ID](admin-rileid-privesc.png)  
+![Attack identify Admin role ID](admin-roleid-privesc.png)  
 
 [PortSwigger Lab: User role can be modified in user profile](https://portswigger.net/web-security/access-control/lab-user-role-can-be-modified-in-user-profile)  
 
