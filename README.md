@@ -225,3 +225,15 @@ Connection: close
 
 [PortSwigger Lab: User role can be modified in user profile](https://portswigger.net/web-security/access-control/lab-user-role-can-be-modified-in-user-profile)  
 
+
+## SQL Injection Data Exfiltration
+
+>Blind SQL injection vulnerability, in application used to perform an SQL query to extract data or login credentials from data for administratot. SQLMAP used to fast track the exploit and retrieve the sensitive information.  
+
+```sql
+select * from users;
+
+```
+
+[PortSwigger Lab: SQL injection UNION attack, retrieving data from other tables](https://portswigger.net/web-security/sql-injection/union-attacks/lab-retrieve-data-from-other-tables)  
+
