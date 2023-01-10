@@ -112,6 +112,7 @@ X-Forwarded-Server: EXPLOIT-SERVER-ID.exploit-server.net
   
 ![Exploit Server Logs capture the forgot password reset token](HOST-Header-forgot-password-reset.PNG)  
 
+[PortSwigger Lab: Password reset poisoning via middleware](https://portswigger.net/web-security/authentication/other-mechanisms/lab-password-reset-poisoning-via-middleware)  
 
 ## HTTP Request Smuggling
 
@@ -119,7 +120,7 @@ X-Forwarded-Server: EXPLOIT-SERVER-ID.exploit-server.net
   
 <sub>Manually fixing the length fields in request smuggling attacks, requires each chunk size in bytes expressed in **hexadecimal**, and _ _Content-Length_ _ specifies the length of the message body in **bytes**. Chunk consists are followed by a **newline**, followed by the chunk contents. The message is terminated with a chunk of size zero.</sub>   
 
-### Content-Lenth Capture victim requests
+### Content-Length Capture victim requests
 
 >Sending a POST request with smuggled request but the content length is longer thant the real length and when victim browse their cookie session value is posted to blob comment.  
 
