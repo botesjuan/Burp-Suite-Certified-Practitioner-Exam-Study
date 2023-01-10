@@ -191,3 +191,23 @@ x=1
 
 >If Duplicate header names are allowed, and the vulnerability is detected as **dualchunk**, then add an additional header with name and value = **Transfer-encoding: cow**.  
 
+## PrivEsc JSON RoleId
+
+>Access control to the admin interface is based on user roles, and this can lead to IDOR or accessc ontrol security vulnerability.  
+
+<sub>Capture current logged in user email submission request and send to Intruder, then add "roleid":§99§ into the JSON body of the request, and fuzz the possible roleid for administrator access role.</sub>  
+
+```html
+POST /
+
+
+```  
+
+>Attack identify the possible role ID of administrator access role and then send this request with updated roleId to privile escalate the current logged in user to role of administator of target.  
+
+![Attack identify Admin role ID](admin-rileid-privesc.png)  
+
+[PortSwigger Lab: User role can be modified in user profile](https://portswigger.net/web-security/access-control/lab-user-role-can-be-modified-in-user-profile)  
+
+
+
