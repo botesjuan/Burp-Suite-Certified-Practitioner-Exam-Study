@@ -607,3 +607,7 @@ portswigger.net/research/template-injection
 [PortSwigger Lab: Client-side prototype pollution in third-party libraries](https://portswigger.net/web-security/prototype-pollution/finding/lab-prototype-pollution-client-side-prototype-pollution-in-third-party-libraries)
 
 <sup> Proto pollution section is incomplete ...</sup>  
+
+
+
+[My YouTube Exam Study Music Playlist](https://youtube.com/playlist?list=PLsDxQTEdg_YlA_fNwv4_tQAYYkIMfY5NY)  
