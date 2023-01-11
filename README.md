@@ -132,7 +132,7 @@ body:document.cookie
 
 ### Spoof IP Address  
 
->Identify that the altered HOST headers are supported, which allows you to spoof your IP address and bypass the IP-based brute-force protection or redirection attacks to do password reset poisoning.  
+>Identify that altered HOST headers are supported, which allows you to spoof your IP address and bypass the IP-based brute-force protection or redirection attacks to do password reset poisoning.  
   
 <sub>Change the username parameter to carlos and send the request.</sub>  
 
