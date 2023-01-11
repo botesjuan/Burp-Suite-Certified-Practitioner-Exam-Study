@@ -624,7 +624,7 @@ hacktricks xss cross site scripting server side xss dynamic pdf
 
 >Use the web framework native template syntax to inject a malicious payload into a **{{template}}**, which is then executed server-side.  
 
-<sub>SSTI exploit samples</sub>
+<sub>SSTI exploit identification payloads</sub>
 
 ```html
 {{fuzzer}}
