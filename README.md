@@ -688,5 +688,18 @@ portswigger.net/research/template-injection
 <sup> Proto pollution section is incomplete ...</sup>  
 
 
+## JWT  
+
+>JSON web tokens (JWTs) use to send cryptographically signed JSON data, and most commonly used to send information ("claims") about users as part of authentication, session handling, and access control.  
+
+
+```jwt
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+```  
+
+[PortSwigger Lab: JWT authentication bypass via jwk header injection](https://portswigger.net/web-security/jwt/lab-jwt-authentication-bypass-via-jwk-header-injection)  
+
+<sup> JWT section incomplete ...</sup>  
+
 
 [My YouTube Exam Study Music Playlist](https://youtube.com/playlist?list=PLsDxQTEdg_YlA_fNwv4_tQAYYkIMfY5NY)  
