@@ -489,14 +489,21 @@ http://127.1:6566/admin
 
 ### Absolute GET URL + HOST SSRF
 
->Possible to provide an absolute URL in the request line GET request and then supply different target for the HOST header.  
-
-[PortSwigger Lab: SSRF via flawed request parsing](https://portswigger.net/web-security/host-header/exploiting/lab-host-header-ssrf-via-flawed-request-parsing)  
+>Possible to provide an absolute URL in the GET request line and then supply different target for the HOST header.  
 
 ```html
 GET https://YOUR-LAB-ID.web-security-academy.net/
 Host: COLLABORATOR.DOMAIN
 ```  
+
+![identify-ssrf-host](identify-ssrf-host.png)  
+
+>Use the Host header to target 192.168.0.141 or localhost, and notice the response give 302 status admin interface found. Append /admin to the absolute URL in the request line and send the request. Observe SSRF response.  
+
+![ssrf](ssrf.png)  
+
+[PortSwigger Lab: SSRF via flawed request parsing](https://portswigger.net/web-security/host-header/exploiting/lab-host-header-ssrf-via-flawed-request-parsing)  
+
 
 ### SSRF redirect_uris  
 
