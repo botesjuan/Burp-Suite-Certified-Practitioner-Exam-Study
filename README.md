@@ -11,6 +11,7 @@ Maybe we can use the acronym BSCP, like OSCP  :)
 [XML entities & Injections](#xxe-injection)  
 [SSRF Server side request forgery](#ssrf---server-side-request-forgery)  
 [SSTI Server side template injection](#ssti---server-side-template-injection)  
+[Prototype pollution](#prototype-pollution)  
 
 
 ## Cross Site Scripting
@@ -603,3 +604,4 @@ portswigger.net/research/template-injection
 
 [PortSwigger Lab: Client-side prototype pollution in third-party libraries](https://portswigger.net/web-security/prototype-pollution/finding/lab-prototype-pollution-client-side-prototype-pollution-in-third-party-libraries)
 
+<sup> Proto pollution section is incomplete ...</sup>  
