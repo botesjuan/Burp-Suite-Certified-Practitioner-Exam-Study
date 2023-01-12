@@ -493,6 +493,11 @@ stockApi=http://localhost:6566/admin
 http://127.1:6566/admin  
 ```  
 
+>Double URL encode characters in URL such as to Obfuscate the "a" by double-URL encoding it to %2561  
+
+[PortSwigger Lab: SSRF with blacklist-based input filter](https://portswigger.net/web-security/ssrf/lab-ssrf-with-blacklist-filter)  
+
+
 ### Absolute GET URL + HOST SSRF
 
 >Possible to provide an absolute URL in the GET request line and then supply different target for the HOST header.  
