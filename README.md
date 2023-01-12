@@ -662,6 +662,8 @@ ${foobar}
 {% debug %}
 ```  
 
+>Identification of template injection.  
+
 ![Identify SSTI](identify-ssti.png)  
 
 >Tornado Template  
