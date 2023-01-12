@@ -12,6 +12,7 @@ Maybe we can use the acronym BSCP, like OSCP  :)
 [SSRF Server side request forgery](#ssrf---server-side-request-forgery)  
 [SSTI Server side template injection](#ssti---server-side-template-injection)  
 [Prototype pollution](#prototype-pollution)  
+[JSON Web Tokens](#jwt)  
 
 
 ## Cross Site Scripting
@@ -717,7 +718,7 @@ eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4
 
 [PortSwigger Lab: JWT authentication bypass via jwk header injection](https://portswigger.net/web-security/jwt/lab-jwt-authentication-bypass-via-jwk-header-injection)  
 
-<sup> JWT section incomplete ...need more input...</sup>  
+<sup> JWT section ...need more input...</sup>  
 
 
 [My YouTube Exam Study Music Playlist](https://youtube.com/playlist?list=PLsDxQTEdg_YlA_fNwv4_tQAYYkIMfY5NY)  
