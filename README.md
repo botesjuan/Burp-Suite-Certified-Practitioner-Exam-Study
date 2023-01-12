@@ -13,6 +13,7 @@ Maybe we can use the acronym BSCP, like OSCP  :)
 [SSTI Server side template injection](#ssti---server-side-template-injection)  
 [Prototype pollution](#prototype-pollution)  
 [JSON Web Tokens](#jwt)  
+[Focus target scanning](#focus-scanning)  
 
 
 ## Cross Site Scripting
