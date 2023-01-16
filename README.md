@@ -16,6 +16,7 @@ Maybe we can use the acronym BSCP, like OSCP  :)
 [Cross Site Request Forgery](#csrf)  
 [Brute force authentication](#brute-force-authentication)  
 [Focus target scanning](#focus-scanning)  
+[Youtube Study Playlist](#youtube-training-playlist)  
 
 
 ## Cross Site Scripting
