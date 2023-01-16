@@ -329,7 +329,7 @@ Connection: close
 
 ## SQL Injection Data Exfiltration
 
->Error based or Blind SQL injection vulnerabilities, in application is used to perform an SQL query to extract data or login credentials from database. SQLMAP is used to fast track the exploit and retrieve the sensitive information.  
+>Error based or Blind SQL injection vulnerabilities, allow SQL queries in an application to be used to extract data or login credentials from the  database. SQLMAP is used to fast track the exploit and retrieve the sensitive information.  
 
 >Adding a double or single quote to web parameters and evaluate the error message response, indicate possible SQL injection point.  
 
