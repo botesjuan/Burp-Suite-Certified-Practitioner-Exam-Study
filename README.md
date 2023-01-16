@@ -14,6 +14,7 @@ Maybe we can use the acronym BSCP, like OSCP  :)
 [Prototype pollution](#prototype-pollution)  
 [JSON Web Tokens](#jwt)  
 [Cross Site Request Forgery](#csrf)  
+[Brute force authentication](#brute-force-authentication)  
 [Focus target scanning](#focus-scanning)  
 
 
