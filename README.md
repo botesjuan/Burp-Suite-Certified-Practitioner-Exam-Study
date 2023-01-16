@@ -13,6 +13,7 @@ Maybe we can use the acronym BSCP, like OSCP  :)
 [SSTI Server side template injection](#ssti---server-side-template-injection)  
 [Prototype pollution](#prototype-pollution)  
 [JSON Web Tokens](#jwt)  
+[Cross Site Request Forgery](#csrf)  
 [Focus target scanning](#focus-scanning)  
 
 
@@ -845,7 +846,7 @@ hashcat -a 0 -m 16500 <YOUR-JWT> /path/to/jwt.secrets.list
 
 >Cross-Site Request Forgery vulnerability allows an attacker to force users to perform actions that they do not intend to perform.  
 
-!csrf](csrf.png)  
+![csrf](csrf.png)  
 
 >Intercepted the GET /oauth-linking?code=[...]. send to repeat to save code. Drop the request. Important to ensure that the code is not used and, remains valid. Save on exploit server an iframe in which the src attribute points to the URL you just copied.  
 
