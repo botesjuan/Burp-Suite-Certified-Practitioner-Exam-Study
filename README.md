@@ -850,12 +850,28 @@ hashcat -a 0 -m 16500 <YOUR-JWT> /path/to/jwt.secrets.list
 
 >Intercepted the GET /oauth-linking?code=[...]. send to repeat to save code. Drop the request. Important to ensure that the code is not used and, remains valid. Save on exploit server an iframe in which the src attribute points to the URL you just copied.  
 
-```xml
+```html
 <iframe src="https://TARGET.web-security-academy.net/oauth-linking?code=STOLEN-CODE"></iframe>
 ```  
 
 [PortSwigger Lab: Forced OAuth profile linking](https://portswigger.net/web-security/oauth/lab-oauth-forced-oauth-profile-linking)  
   
+
+## Brute Force Authentication  
+
+>Cookie value contain the password of the user logged in and is vulnerable to brute-forcing.  
+
+![brute](brute.png)  
+
+>Intruder Payload processing, add grep option and the rules in sequenctial order before attack is submitted. 1. Hash: MD5 2. Add prefix: wiener: 3. Encode: Base64-encode.
+
+```bash
+grep 'Update email'
+```  
+
+[PortSwigger Lab: Brute-forcing a stay-logged-in cookie](https://portswigger.net/web-security/authentication/other-mechanisms/lab-brute-forcing-a-stay-logged-in-cookie)  
+  
+
 ## Focus Scanning 
 
 >Due to the tight time limit during engagements, scan defined insertion points for specific requests.  
