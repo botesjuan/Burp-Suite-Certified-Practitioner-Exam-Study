@@ -280,7 +280,7 @@ x=1
 
 >If Duplicate header names are allowed, and the vulnerability is detected as **dualchunk**, then add an additional header with name and value = **Transfer-encoding: cow**.  Use [obfuscating](#obfuscation) techniques with second TE.  
 
-<sub>Some servers that do support the Transfer-Encoding header can be induced not to process it if the header is obfuscated in some way. Ways to obfuscate the Transfer-Encoding header. For example:</sub>  
+<sub>Some servers that do support the Transfer-Encoding header can be induced not to process it if the header is [obfuscated](#obfuscation) in some way. Ways to obfuscate the Transfer-Encoding header. For example:</sub>  
 
 ```html
 POST / HTTP/1.1
@@ -470,7 +470,7 @@ sqlmap -v -u 'https://TARGET.web.net/filter?category=*' -p 'category' --batch --
 <storeId>1 UNION SELECT NULL</storeId>
 ```  
 
->Bypass the WAF, Use Burp extension **Hackvertor** to obfuscate the SQL Injection payload in the XML post body. 
+>Bypass the WAF, Use Burp extension **Hackvertor** to [obfuscate](#obfuscation) the SQL Injection payload in the XML post body. 
 
 ![Web application firewall (WAF) bypass require obfuscate of malicious query with Hackvertor](hackvertor.png)  
 
