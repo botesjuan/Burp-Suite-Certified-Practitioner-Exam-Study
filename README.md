@@ -159,6 +159,14 @@ body:document.cookie
   
 >This example the target is vulnerable to dom-xss in the stock check function. Document.write is used with location.search which allow use to add new value to Javascript variable **storeId**.  
 
+```html
+/product?productId=1&storeId="></select><img%20src=1%20onerror=alert(document.cookie)>  
+```  
+
+![get-dom-xss.png](get-dom-xss.png)  
+
+>Dom-based XSS request with inserted malicious code into the variable read by the target JavaScript.  
+
 ![dom-xss](dom-xss.png)  
 
 [PortSwigger Lab: DOM XSS in document.write sink using source location.search inside a select element](https://portswigger.net/web-security/cross-site-scripting/dom-based/lab-document-write-sink-inside-select-element)  
