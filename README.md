@@ -157,7 +157,7 @@ body:document.cookie
 * location.search
 * addEventListener  
   
->This example the target is vulnerable to dom-xss in the stock check function. Document.write is used with location.search which allow use to add new value to Javascript variable **storeId**.  
+>This example the target is vulnerable to dom-xss in the stock check function. Document.write is sink used with location.search which allow us to add new value to Javascript variable **storeId**.  
 
 ```html
 /product?productId=1&storeId="></select><img%20src=1%20onerror=alert(document.cookie)>  
