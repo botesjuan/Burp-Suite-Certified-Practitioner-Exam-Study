@@ -406,6 +406,8 @@ sqlmap -v -r sqli-blind.txt --batch --random-agent --level=5 --risk=3 -p "Tracki
 
 >Sample SQLMAP commands to determine what SQL injection vulnerability exist and retrieving different types of information from backend database.  
 
+[SQLMAP Help usage](https://github.com/sqlmapproject/sqlmap/wiki/Usage)  
+
 <sub>SQLMAP determine the vulnerability, and perform initial enumeration.</sub>  
 
 ```bash
