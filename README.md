@@ -235,6 +235,13 @@ csrf=YOUR-CSRF-TOKEN&username=carlos
   
 >Manually fixing the length fields in request smuggling attacks, requires each chunk size in bytes expressed in **HEXADECIMAL**, and **Content-Length** specifies the length of the message body in **bytes**. Chunks are followed by a **newline**, then followed by the chunk contents. The message is terminated with a chunk of size ZERO.  
 
+![TE-CL-http-request-smuggle.png](TE-CL-http-request-smuggle.png)  
+
+>Above TE.CL (Transfer-Encoding / Content-Length) smuggle request count in **HEXADECIMAL** and the payload is between the hex length of **71** and the terminated ZERO, not include in counting payload length.  
+  
+[PortSwigger Lab: Exploiting HTTP request smuggling to bypass front-end security controls, TE.CL vulnerability](https://portswigger.net/web-security/request-smuggling/exploiting/lab-bypass-front-end-controls-te-cl)  
+
+
 ### Content-Length Capture victim requests
 
 >Sending a POST request with smuggled request but the content length is longer than the real length and when victim browse their cookie session value is posted to blob comment. Increased the comment-post request's Content-Length to **798**, then smuggle POST request to the back-end server.
