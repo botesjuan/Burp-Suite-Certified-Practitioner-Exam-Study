@@ -1,7 +1,7 @@
 
 # Burp-Suite-Certified-Practitioner-Exam-Study
-My personal study notes on the PortSwigger Academy Burp Suite Certified Practitioner (BSCP) Exam topics.  
-Maybe we can use the acronym BSCP, like OSCP  :)  
+My personal study notes on the PortSwigger Academy [Burp Suite Certified Practitioner](https://portswigger.net/web-security/certification) (BSCP) Exam topics.  
+The acronym BSCP has nice simular ring like OSCP  :)  
 
 [Cross Site Scripting](#cross-site-scripting)  
 [Host Header Poison - forgot-password](#host-header-poison---forgot-password)  
