@@ -50,7 +50,7 @@ The acronym BSCP has nice simular ring like OSCP  :)
 <iframe src="https://TARGET.web.net/?search=%22%3E%3Cbody%20onpopstate=print()%3E">  
 ```  
 
-### Cookie Stealers (Reflected)  
+### Cookie Stealers (Reflected XSS)  
 
 >In the Search function on webapp a Reflected XSS is identified, then deliver exploit link to victim with cookie stealing payload in hosted **iframe** on exploit server.  
 
@@ -143,6 +143,26 @@ body:document.cookie
 ```  
 
 [PortSwigger Lab: Exploiting cross-site scripting to steal cookies](https://portswigger.net/web-security/cross-site-scripting/exploiting/lab-stealing-cookies)  
+
+
+### DOM-Based XSS  
+
+>DOM-based XSS vulnerabilities arise when JavaScript takes data from an attacker-controllable source, such as the URL, and passes code to a sink that supports dynamic code execution. In the target source code look out for the following:  
+
+* URLSearchParams
+* eval()
+* innerHTML
+* JSON.parse
+* document.write
+* location.search
+* addEventListener  
+  
+>This example the target is vulnerable to dom-xss in the stock check function. Document.write is used with location.search which allow use to add new value to Javascript variable **storeId**.  
+
+![dom-xss](dom-xss.png)  
+
+[PortSwigger Lab: DOM XSS in document.write sink using source location.search inside a select element](https://portswigger.net/web-security/cross-site-scripting/dom-based/lab-document-write-sink-inside-select-element)  
+
 
 ## Host Header Poison - forgot-password
 
