@@ -171,6 +171,11 @@ body:document.cookie
 
 [PortSwigger Lab: DOM XSS in document.write sink using source location.search inside a select element](https://portswigger.net/web-security/cross-site-scripting/dom-based/lab-document-write-sink-inside-select-element)  
 
+#### Dom Invader  
+
+>Using Dom Invader plugin and set the canary to value, such as 'domxss' and detect DOM-XSS sinks that can be exploit.  
+
+![DOM Invader](dom-invader.png)  
 
 ## Host Header Poison - forgot-password
 
