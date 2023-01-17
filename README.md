@@ -237,7 +237,7 @@ csrf=YOUR-CSRF-TOKEN&username=carlos
 
 ![TE-CL-http-request-smuggle.png](TE-CL-http-request-smuggle.png)  
 
->Above TE.CL (Transfer-Encoding / Content-Length) smuggle request count in **HEXADECIMAL** and the payload is between the hex length of **71** and the terminated ZERO, not include in counting payload length.  
+>Above TE.CL (Transfer-Encoding / Content-Length) smuggle request count in **HEXADECIMAL** and the payload is between the hex length of **71** and the terminated ZERO, not including the ZERO as part of counting the payload length. The inital POSt request **content-length** is manually set.  
   
 [PortSwigger Lab: Exploiting HTTP request smuggling to bypass front-end security controls, TE.CL vulnerability](https://portswigger.net/web-security/request-smuggling/exploiting/lab-bypass-front-end-controls-te-cl)  
 
