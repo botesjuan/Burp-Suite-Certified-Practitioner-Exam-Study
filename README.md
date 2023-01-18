@@ -975,6 +975,8 @@ hashcat -a 0 -m 16500 <YOUR-JWT> /path/to/jwt.secrets.list
   
 ### Referer CSRF  
 
+>Identify change email vulnerable to the referer header to validate being part of the referer header value.  
+
 >Adding original domain of target and append it to the **Referer header** in the form of a query string, allow the change email to update.  
 
 ```html
@@ -983,7 +985,7 @@ Content-Type: text/html; charset=utf-8
 Referrer-Policy: unsafe-url
 ```  
 
-<sub>**Note:** that unlike the normal Referer header, the word "referrer" must be spelled correctly.</sub>  
+<sub>**Note:** that unlike the normal Referer header, the word **"referrer"** must be spelled correctly.</sub>  
 
 >Create a CSRF proof of concept exploit and host it on the exploit server. Edit the JavaScript so that the third argument of the **history.pushState()** function includes a query string with target URL.  
 
