@@ -726,6 +726,8 @@ Content-Type: application/x-www-form-urlencoded
 Content-Length: 0
 ```  
 
+>Identified SSRF with help from collaborator that other servers can be accessed and so this can allow access to localhost, by changing the **HOST** header.  
+
 [PortSwigger Lab: Routing-based SSRF](https://portswigger.net/web-security/host-header/exploiting/lab-host-header-routing-based-ssrf)  
 
 ### HTML to PDF  
