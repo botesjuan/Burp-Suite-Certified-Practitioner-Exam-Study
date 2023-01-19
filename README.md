@@ -149,14 +149,26 @@ body:document.cookie
 
 >DOM-based XSS vulnerabilities arise when JavaScript takes data from an attacker-controllable source, such as the URL, and passes code to a sink that supports dynamic code execution. In the target source code look out for the following:  
 
+* ng-app
 * URLSearchParams
 * eval()
+* replace()
 * innerHTML
 * JSON.parse
 * document.write
 * location.search
 * addEventListener  
   
+>AngularJS expression in the search box when angle brackets and double quotes HTML-encoded.  
+
+``JavaScript
+{{$on.constructor('alert(1)')()}}
+```  
+
+![domxss-on-constructor.png](domxss-on-constructor.png)  
+
+[PortSwigger Lab: DOM XSS in AngularJS expression with angle brackets and double quotes HTML-encoded](https://portswigger.net/web-security/cross-site-scripting/dom-based/lab-angularjs-expression)  
+
 >This example the target is vulnerable to dom-xss in the stock check function. Document.write is sink used with location.search which allow us to add new value to Javascript variable **storeId**.  
 
 ```html
