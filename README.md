@@ -995,7 +995,7 @@ hashcat -a 0 -m 16500 <YOUR-JWT> /path/to/jwt.secrets.list
 
 >Cross-Site Request Forgery vulnerability allows an attacker to force users to perform actions that they do not intend to perform.  
 
->Refresh password POST request,then change username parameter to administrator while logged in as low priv user
+>Refresh password POST request,then change username parameter to administrator while logged in as low priv user, CSRF where token is not tied to user session
 
 ```html
 POST /refreshpassword HTTP/1.1
