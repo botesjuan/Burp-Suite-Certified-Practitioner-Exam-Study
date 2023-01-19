@@ -161,7 +161,7 @@ body:document.cookie
   
 >AngularJS expression in the search box when angle brackets and double quotes HTML-encoded.  
 
-``JavaScript
+```JavaScript
 {{$on.constructor('alert(1)')()}}
 ```  
 
