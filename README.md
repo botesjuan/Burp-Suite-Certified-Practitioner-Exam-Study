@@ -1193,7 +1193,7 @@ Youtube channels:
 10. [bmdyy](https://www.youtube.com/@bmdyy/videos)  
 11. [securityguideme](https://www.youtube.com/@securityguideme/videos)  
 12. [nu11 security](https://www.youtube.com/@Nul1Secur1ty/videos)  
-13. [PortSwigger(https://www.youtube.com/@PortSwiggerTV/videos)  
+13. [PortSwigger](https://www.youtube.com/@PortSwiggerTV/videos)  
 14. [IppSec](https://www.youtube.com/@ippsec/videos)  
 
 
