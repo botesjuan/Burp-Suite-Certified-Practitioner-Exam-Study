@@ -3,12 +3,17 @@
 My personal study notes on the PortSwigger Academy [Burp Suite Certified Practitioner](https://portswigger.net/web-security/certification) (BSCP) Exam topics.  
 The acronym BSCP has nice simular ring like OSCP  :)  
 
-[Foothold](#foothold)
+[Foothold](#foothold)  
 [Web Cache Poison](#web-cache-poison)  
 [Cross Site Scripting](#cross-site-scripting)  
 [Host Header Poison - forgot-password](#host-header-poison---forgot-password)  
 [HTTP Request Smuggling](#http-request-smuggling)  
+  
 [Privilege Escalation](#privilege-escalation)  
+[JSON roleid PrivEsc](#privesc-json-roleid)  
+[Password refresh CSRF](#password-refresh-csrf)  
+[Brute force auth cookie](#brute-force-authentication)  
+  
 [Data Exfiltration](#Data-Exfiltration)  
 [SQLi Credential Data Exfil](#sql-injection-data-exfiltration)  
 [XML entities & Injections](#xxe-injections)  
@@ -17,8 +22,9 @@ The acronym BSCP has nice simular ring like OSCP  :)
 [Prototype pollution](#prototype-pollution)  
 [JSON Web Tokens](#jwt)  
 [Cross Site Request Forgery](#csrf)  
-[Focus target scanning](#focus-scanning)  
 [File path traversal](#file-path-traversal)  
+  
+[Focus target scanning](#focus-scanning)  
 [Youtube Study Playlist](#youtube-training-playlist)  
 
 # Foothold  
