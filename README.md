@@ -3,12 +3,14 @@
 My personal study notes on the PortSwigger Academy [Burp Suite Certified Practitioner](https://portswigger.net/web-security/certification) (BSCP) Exam topics.  
 The acronym BSCP has nice simular ring like OSCP  :)  
 
+[Foothold](#foothold)
 [Web Cache Poison](#web-cache-poison)  
 [Cross Site Scripting](#cross-site-scripting)  
 [Host Header Poison - forgot-password](#host-header-poison---forgot-password)  
 [HTTP Request Smuggling](#http-request-smuggling)  
 [Privilege Escalation](#privilege-escalation)  
-[SQLi Data Exfiltration](#sql-injection-data-exfiltration)  
+[Data Exfiltration](#Data-Exfiltration)  
+[SQLi Credential Data Exfil](#sql-injection-data-exfiltration)  
 [XML entities & Injections](#xxe-injections)  
 [SSRF Server side request forgery](#ssrf---server-side-request-forgery)  
 [SSTI Server side template injection](#ssti---server-side-template-injection)  
@@ -19,6 +21,7 @@ The acronym BSCP has nice simular ring like OSCP  :)
 [File path traversal](#file-path-traversal)  
 [Youtube Study Playlist](#youtube-training-playlist)  
 
+# Foothold  
 
 ## Web Cache Poison  
 
@@ -397,10 +400,10 @@ x=1
 [PortSwigger Lab: HTTP request smuggling, obfuscating the Transfer-Encoding (TE) header](https://portswigger.net/web-security/request-smuggling/lab-obfuscating-te-header)  
 
 
-## Privilege Escalation  
+# Privilege Escalation  
   
   
-### PrivEsc JSON RoleId  
+## PrivEsc JSON RoleId  
 
 >Access control to the admin interface is based on user roles, and this can lead to IDOR or accessc ontrol security vulnerability.  
 
@@ -429,7 +432,7 @@ Connection: close
 
 [PortSwigger Lab: User role can be modified in user profile](https://portswigger.net/web-security/access-control/lab-user-role-can-be-modified-in-user-profile)  
 
-### Password Refresh CSRF  
+## Password Refresh CSRF  
   
 >Refresh password POST request,then change username parameter to administrator while logged in as low priv user, CSRF where token is not tied to user session.  
 
@@ -462,7 +465,7 @@ csrf=TOKEN&username=administrator
 
 [PortSwigger Lab: Password reset broken logic](https://portswigger.net/web-security/authentication/other-mechanisms/lab-password-reset-broken-logic)  
 
-### Brute Force Authentication  
+## Brute Force Authentication  
 
 >Cookie value contain the password of the user logged in and is vulnerable to brute-forcing.  
 
@@ -477,8 +480,9 @@ grep 'Update email'
 [PortSwigger Lab: Brute-forcing a stay-logged-in cookie](https://portswigger.net/web-security/authentication/other-mechanisms/lab-brute-forcing-a-stay-logged-in-cookie)  
   
 
+# Data Exfiltration  
 
-## SQL Injection Data Exfiltration
+## SQL Injection  
 
 >Error based or Blind SQL injection vulnerabilities, allow SQL queries in an application to be used to extract data or login credentials from the  database. SQLMAP is used to fast track the exploit and retrieve the sensitive information.  
 
