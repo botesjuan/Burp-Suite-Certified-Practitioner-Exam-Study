@@ -477,7 +477,11 @@ csrf=TOKEN&username=administrator
 
 ![brute](brute.png)  
 
->Intruder Payload processing, add grep option and the rules in sequenctial order before attack is submitted. 1. Hash: MD5 2. Add prefix: wiener: 3. Encode: Base64-encode.
+>Intruder Payload processing, add grep option and the rules in sequenctial order before attack is submitted.  
+1. Hash: MD5  
+2. Add prefix: wiener:  
+3. Encode: Base64-encode.  
+
 
 ```bash
 grep 'Update email'
@@ -1166,8 +1170,19 @@ GET /admin_controls/metrics/admin-image?imagefile=%252e%252e%252f%252e%252e%252f
   
 [YouTube Study Playlist](https://youtube.com/playlist?list=PLsDxQTEdg_YkVMP6PybE7I-hAdhR7adem)  
 Youtube channels:  
-1. Rana Khalil 2. David Bombal 3. intigriti 4. Seven Seas Security 5. LiveUnderflow 6. Tib3rius 7. John Hammond 8. TraceTheCode 9. Sabyasachi Paul 10. Mr Magneto 11. securityguideme 12. nu11 security 13. PortSwigger  
-
+1. Rana Khalil  
+2. David Bombal  
+3. intigriti  
+4. Seven Seas Security  
+5. LiveUnderflow  
+6. Tib3rius  
+7. John Hammond  
+8. TraceTheCode  
+9. Sabyasachi Paul  
+10. Mr Magneto  
+11. securityguideme  
+12. nu11 security  
+13. PortSwigger  
 
 
 ## Footnote
