@@ -85,7 +85,9 @@ http://exploit-0ac30095035c7526c09ebd7401a00075.exploit-server.net/bs.png/?bd=do
 
 [PortSwigger Lab: DOM XSS using web messages and JSON.parse](https://portswigger.net/web-security/dom-based/controlling-the-web-message-source/lab-dom-xss-using-web-messages-and-json-parse)  
 
+>Identify web messages using **postmessage()** with **DOM Invader**.  
 
+![DOM Invader identify web messages](images/dom-invader-identify-web-messages.png)  
 
 ## Web Cache Poison  
 
