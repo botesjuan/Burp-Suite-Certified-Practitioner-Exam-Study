@@ -95,7 +95,7 @@ The acronym BSCP has nice simular ring like OSCP  :)
 
 ![DOM Invader resend web messages](images/dom-invader-resend-web-messages.png)  
   
-[Testing for DOM XSS using web messages](https://portswigger.net/burp/documentation/desktop/tools/dom-invader/web-messages)  
+[Testing for DOM XSS using web messages with PortSwigger DOM Invader](https://portswigger.net/burp/documentation/desktop/tools/dom-invader/web-messages)  
 
 
 ## Web Cache Poison  
