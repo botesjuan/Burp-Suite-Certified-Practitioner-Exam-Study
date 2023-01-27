@@ -12,6 +12,9 @@ oracle
 ftp
 pi
 puppet
+peter
+wiener
+C0nt3ntM4n4g3r
 ansible
 ec2-user
 vagrant
