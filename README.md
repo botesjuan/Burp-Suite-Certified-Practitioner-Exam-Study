@@ -515,7 +515,7 @@ x=1
   
 ```  
 
-![gpost.png](gpost.png)  
+![gpost Obfuscating the TE header](images/gpost.png)  
 
 >**Note:** You need to include the trailing sequence **\r\n\r\n** following the final **0**.  
 
