@@ -2,6 +2,6 @@
 
 >The following are the sample payloads for various vulnerabilities.  
 
-[CookieStealer XSS Payloads](payloads/CookieStealer-Payloads.md)  
-[XXE Payloads](payloads/xxe-payloads.md)  
+[CookieStealer XSS Payloads](CookieStealer-Payloads.md)  
+[XXE Payloads](xxe-payloads.md)  
   
