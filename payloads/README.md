@@ -2,4 +2,6 @@
 
 >The following are the sample payloads for various vulnerabilities.  
 
-[Web Cache Poison](#web-cache-poison)
+[CookieStealer XSS Payloads](payloads/CookieStealer-Payloads.md)  
+[XXE Payloads](payloads/xxe-payloads.md)  
+  

@@ -24,6 +24,8 @@ The acronym BSCP has nice simular ring like OSCP  :)
 [Cross Site Request Forgery](#csrf)  
 [File path traversal](#file-path-traversal)  
   
+[Payloads](https://github.com/botesjuan/Burp-Suite-Certified-Practitioner-Exam-Study/tree/main/payloads)  
+  
 [Focus target scanning](#focus-scanning)  
 [Youtube Study Playlist](#youtube-training-playlist)  
 
