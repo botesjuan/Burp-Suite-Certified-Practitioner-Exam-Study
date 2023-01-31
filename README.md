@@ -67,7 +67,7 @@ The acronym BSCP has nice simular ring to it, same as OSCP  :)
 </script>
 ```  
 
->To exploit above the above code, inject JavaScript into the JSON data to change "load-channel" field data steal document cookie.  
+>To exploit the above code, inject JavaScript into the JSON data to change "load-channel" field data and steal document cookie.  
 
   
 >Hosted **iframe** on exploit server html body, to send the victim cookie to the collaboration server.  
