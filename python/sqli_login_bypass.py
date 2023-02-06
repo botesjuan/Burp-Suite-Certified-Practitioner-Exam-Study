@@ -4,7 +4,7 @@ import urllib3
 
 import requests
 
-import urils    # code to this script was written by @tjc_  https://youtu.be/YYsZpJ83azQ
+import utils    # code to this script was written by @tjc_  https://youtu.be/YYsZpJ83azQ
 import Shop     # class also written by @tjc_ 
 
 log = logging.getLogger(__name__)
