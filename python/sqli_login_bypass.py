@@ -41,7 +41,7 @@ def main(args):
         if args.no_proxy:    #    provide option to set proxy or run script with no proxy
             resp = request.post(shop.login_url, data=data)
         else:
-            resp = request.post(
+            resp = requests.post(
                 shop.login_url, data=data, proxies=utils.PROXIES, verify=False
             )
         if resp.status_code == 200:
