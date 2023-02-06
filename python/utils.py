@@ -40,9 +40,9 @@ def is_solve(url, no_proxy):
     def _is_solved(url, no_proxy):
         log.info("Checking if solved.")
         if no_proxy:
-            resp = request.get(url)
+            resp = requests.get(url)
         else:
-            resp = request.get(url, proxies=PROXIES, verify=False)
+            resp = requests.get(url, proxies=PROXIES, verify=False)
         if "Congratulations, you solved the lab!" in resp.text:
             log.info("lab solved")
             return True
