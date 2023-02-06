@@ -1,4 +1,3 @@
-import re
 import sys
 import logging
 import urllib3
@@ -20,10 +19,10 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 
 def main(args):
-    shop = Shop(args.url)  # login url build into the class and this object
     session = requests.Session()  # keep track of cookies 
-    
-            utils.is_solved(shop.base_url, args.no_proxy)
+    shop = Shop(args.url, args.no_proxy, session)  # login url build into the Class and this object 
+    shop.login("administrator'--","password")
+    utils.is_solved(shop.base_url, args.no_proxy)
 
 
 if __name__ == "__main__":
