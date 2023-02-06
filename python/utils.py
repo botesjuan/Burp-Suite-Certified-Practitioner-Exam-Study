@@ -4,7 +4,7 @@ import logging
 import argparse
 import urllib3
 
-import requests
+import requests  #  this script to automate portswigger labs was written by $tjc_  https://youtu.be/YYsZpJ83azQ  
 
 
 PROXIES = {
