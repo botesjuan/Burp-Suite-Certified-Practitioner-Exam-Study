@@ -21,7 +21,6 @@ logging.basicConfig(
 )
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
-
 def parse_args(args: list):
     parser = argparse.ArgumentParser()
     parser.add_argument(
