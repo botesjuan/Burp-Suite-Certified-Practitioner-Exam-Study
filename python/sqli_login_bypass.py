@@ -19,11 +19,11 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 
 def main(args):
-    shop = Shop(args.url)  # login url build into the class and this object
+    shops = Shop(args.url)  # login url build into the class and this object
     if args.no_proxy:
-        resp = requests.get(shop.login_url)
+        resp = requests.get(shops.login_url)
     else:
-        resp = requests.get(shop.login_url, proxies=utils.PROXIES, verify=False)
+        resp = requests.get(shops.login_url, proxies=utils.PROXIES, verify=False)
     if resp.status_code == 200:
         print(resp.text)
 
