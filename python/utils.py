@@ -36,7 +36,7 @@ def normalize_url(url):
     return url
     
     
-def is_solve(url, no_proxy):
+def is_solved(url, no_proxy):
     def _is_solved(url, no_proxy):
         log.info("Checking if solved.")
         if no_proxy:
