@@ -49,7 +49,7 @@ def main(args):
                 shop.login_url, data=data, proxies=utils.PROXIES, verify=False
             )
         if resp.status_code == 200:
-            utils.is_solve(shop.base_url)
+            utils.is_solve(shop.base_url, args.no_proxy)
 
 
 if __name__ == "__main__":
