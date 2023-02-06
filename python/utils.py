@@ -24,7 +24,7 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 def parse_args(args: list):
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        "-n", "--no-proxy", default=false, action="store_true", help="do not use proxy"
+        "-n", "--no-proxy", default=False, action="store_true", help="do not use proxy"
     )
     parser.add_argument("url", help="url of target")
     return parser.parse_args()
