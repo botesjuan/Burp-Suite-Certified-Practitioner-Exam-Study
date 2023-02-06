@@ -19,7 +19,7 @@ logging.basicConfig(
     style="{",
     datefmt="%H:%M:%S",
 )
-urllib3.disable_warnings(urllib3.execeptions.InsecureRequestWarning)
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 
 def parse_args(args: list):
