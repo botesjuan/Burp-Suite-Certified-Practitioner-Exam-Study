@@ -5,7 +5,8 @@ import urllib3
 
 import requests
 
-import utils    # script written by @tjc_  https://youtu.be/YYsZpJ83azQ
+from utils import utils   # script written by @tjc_  https://youtu.be/YYsZpJ83azQ
+from utils.shop import Shop
 
 
 log = logging.getLogger(__name__)

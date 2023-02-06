@@ -2,6 +2,8 @@ import re
 import sys
 import logging
 
+import requests
+
 import utils   # this script was created from https://youtu.be/YYsZpJ83azQ tutorial by @tjc_   
 
 
