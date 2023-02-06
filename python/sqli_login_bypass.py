@@ -39,7 +39,7 @@ def main(args):
             "password": "junkpass",
         }
         if args.no_proxy:    #    provide option to set proxy or run script with no proxy
-            resp = request.post(shop.login_url, data=data)
+            resp = requests.post(shop.login_url, data=data)
         else:
             resp = requests.post(
                 shop.login_url, data=data, proxies=utils.PROXIES, verify=False
@@ -50,4 +50,4 @@ def main(args):
 
 if __name__ == "__main__":
     args = utils.parse_args(sys.argv)
-    main(args)    
+    main(args)
