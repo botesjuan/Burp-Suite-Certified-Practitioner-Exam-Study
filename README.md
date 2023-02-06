@@ -1,7 +1,7 @@
 
-# Burp-Suite-Certified-Practitioner-Exam-Study
-My personal study notes on the PortSwigger Academy [Burp Suite Certified Practitioner](https://portswigger.net/web-security/certification) (BSCP) Exam topics.  
-The acronym BSCP has nice simular ring to it, same as OSCP  :)  
+# Burp-Suite-Certified-Practitioner-Exam-Study  
+
+>My personal study notes on the PortSwigger Academy [Burp Suite Certified Practitioner](https://portswigger.net/web-security/certification) (BSCP) Exam topics. The acronym BSCP has nice simular ring to it, same as OSCP  :)  
 
 [Foothold](#foothold)  
 [Web Cache Poison](#web-cache-poison)  
