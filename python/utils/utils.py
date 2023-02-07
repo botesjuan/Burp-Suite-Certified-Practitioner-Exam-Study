@@ -28,30 +28,10 @@ def parse_args(args: list):
     )
     parser.add_argument("url", help="url of target")
     return parser.parse_args()
-    
-    
+
+
 def normalize_url(url):
     if not url.endswith("/"):
         url = url + "/"
     return url
     
-    
-def is_solved(url, no_proxy):
-    def _is_solved(url, no_proxy):
-        log.info("Checking if solved.")
-        if no_proxy:
-            resp = requests.get(url)
-        else:
-            resp = requests.get(url, proxies=PROXIES, verify=False)
-        if "Congratulations, you solved the lab!" in resp.text:
-            log.info("lab solved")
-            return True
-            
-    solved = _is_solved(url, no_proxy)
-    if solved:
-        return True
-    else:
-        time.sleep(2)
-        _is_solved(url, no_proxy)
-
-

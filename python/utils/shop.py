@@ -4,18 +4,18 @@ import logging
 
 import requests
 
-import utils   # this script was created from https://youtu.be/YYsZpJ83azQ tutorial by @tjc_   
+from utils import utils   # this script was created from YouTube https://youtu.be/YYsZpJ83azQ tutorial by @tjc_   
+from utils.site import Site
 
 
 log = logging.getLogger(__name__)
 
 
-class Shop():
-    def __init__(self, url, no_proxy, session):   #  part of arguments given is 'self' automatically included
-        self.base_url = utils.normalize_url(url)
+class Shop(Site):
+    def __init__(self, url, no_proxy, session=None):   #  part of arguments given is 'self' automatically included
+    	super().__init__(url, no_proxy, session)
         self.login_url = self.base_url + "login"
-        self.no_proxy = no_proxy
-        self.session = session
+        self.category_url = self.base_url + "filter?category="
 
     def login(self, username, password):
         log.info("Login Attempt to shop")
