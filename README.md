@@ -3,7 +3,8 @@
 
 >My personal study notes on the PortSwigger Academy [Burp Suite Certified Practitioner](https://portswigger.net/web-security/certification) (BSCP) Exam topics. The acronym BSCP has nice simular ring to it, same as OSCP  :)  
 
-**[Foothold](#foothold)**  
+**[Foothold](#foothold)**
+[Dom-XSS](#dom-xss-messages)   
 [Web Cache Poison](#web-cache-poison)  
 [Cross Site Scripting](#cross-site-scripting)  
 [Host Header Poison - forgot-password](#host-header-poison---forgot-password)  
