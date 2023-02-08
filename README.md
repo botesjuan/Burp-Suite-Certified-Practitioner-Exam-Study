@@ -1354,7 +1354,9 @@ GET /admin_controls/metrics/admin-image?imagefile=%252e%252e%252f%252e%252e%252f
 ## YouTube Training Playlist 
   
 [YouTube Study Playlist](https://youtube.com/playlist?list=PLsDxQTEdg_YkVMP6PybE7I-hAdhR7adem)  
+
 Youtube channels:  
+
 1. [Rana Khalil](https://www.youtube.com/@RanaKhalil101/videos)  
 2. [David Bombal](https://www.youtube.com/@davidbombal/videos)  
 3. [intigriti](https://www.youtube.com/@intigriti/videos)  
@@ -1370,7 +1372,7 @@ Youtube channels:
 13. [PortSwigger](https://www.youtube.com/@PortSwiggerTV/videos)  
 14. [IppSec](https://www.youtube.com/@ippsec/videos)  
 15. [@tjc_](https://www.youtube.com/@tjc_/videos)  
-
+  
 
 ## Footnote
 
