@@ -419,7 +419,7 @@ csrf=YOUR-CSRF-TOKEN&username=carlos
 
 ![TE-CL-http-request-smuggle.png](images/TE-CL-http-request-smuggle.png)  
 
->**Note:** Repeater menu ensure the **"Update Content-Length"** option is unchecked.  
+>**Note:** In certain smuggle vulnerabilities, go to Repeater menu and ensure the **"Update Content-Length"** option is unchecked.  
 
 ```
 POST / HTTP/1.1
