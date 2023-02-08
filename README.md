@@ -1254,7 +1254,7 @@ hashcat -a 0 -m 16500 <YOUR-JWT> /path/to/jwt.secrets.list
 
 [PortSwigger Lab: JWT authentication bypass via kid header path traversal](https://portswigger.net/web-security/jwt/lab-jwt-authentication-bypass-via-kid-header-path-traversal)  
 
-<sup> JWT section ...need more input...</sup>  
+>JWT section ...need more input...  
 
 ## CSRF  
 
@@ -1369,6 +1369,7 @@ Youtube channels:
 12. [nu11 security](https://www.youtube.com/@Nul1Secur1ty/videos)  
 13. [PortSwigger](https://www.youtube.com/@PortSwiggerTV/videos)  
 14. [IppSec](https://www.youtube.com/@ippsec/videos)  
+15. [@tjc_](https://www.youtube.com/@tjc_/videos)  
 
 
 ## Footnote
