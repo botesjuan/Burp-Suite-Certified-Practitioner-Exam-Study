@@ -575,7 +575,7 @@ x=1
 
 [PortSwigger Lab: HTTP request smuggling, obfuscating the Transfer-Encoding (TE) header](https://portswigger.net/web-security/request-smuggling/lab-obfuscating-te-header)  
   
->I fail to see how this in exam/prod can be played to be dangerous or lead to exploitation!?  
+>My opinion, this is rare scenario where users visiting site have their request stolen via HTTP Sync vulnerability in exam or live system exploited.  
   
 
 # Privilege Escalation  
