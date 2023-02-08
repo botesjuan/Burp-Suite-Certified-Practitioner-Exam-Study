@@ -1332,7 +1332,7 @@ GET /admin_controls/metrics/admin-image?imagefile=%252e%252e%252f%252e%252e%252f
 
 [PortSwigger Lab: File path traversal, traversal sequences stripped with superfluous URL-decode](https://portswigger.net/web-security/file-path-traversal/lab-superfluous-url-decode)  
   
-[PortSwigger Research File-path-traversal](https://portswigger.net/web-security/file-path-traversal)  
+[PortSwigger Academy File-path-traversal](https://portswigger.net/web-security/file-path-traversal)  
 
 
 ## Focus Scanning  
