@@ -665,7 +665,7 @@ Connection: close
 
 ## CSRF Change Password or email  
   
->Refresh password POST request, then change username parameter to administrator while logged in as low priv user, CSRF where token is not tied to user session.  
+>If cookie with the **isloggedin** name is identified, then a refresh of admin password POST request could be exploited. Change username parameter to administrator while logged in as low priv user, CSRF where token is not tied to user session.  
 
 ```html
 POST /refreshpassword HTTP/1.1
