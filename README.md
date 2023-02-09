@@ -14,6 +14,7 @@
 [JSON roleid PrivEsc](#privesc-json-roleid)  
 [Password refresh CSRF](#password-refresh-csrf)  
 [Brute force auth cookie](#brute-force-authentication)  
+[CSRF Change email](#csrf-change-email)  
   
 **[Data Exfiltration](#data-exfiltration)**  
 [SQLi Data Exfil](#sql-injection)  
