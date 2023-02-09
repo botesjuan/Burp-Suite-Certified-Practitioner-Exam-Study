@@ -664,7 +664,7 @@ Connection: close
 
 [PortSwigger Lab: User role can be modified in user profile](https://portswigger.net/web-security/access-control/lab-user-role-can-be-modified-in-user-profile)  
 
-## Password Refresh CSRF  
+## CSRF Change Password or email  
   
 >Refresh password POST request, then change username parameter to administrator while logged in as low priv user, CSRF where token is not tied to user session.  
 
@@ -696,6 +696,15 @@ csrf=TOKEN&username=administrator
 ![CSRF privesc](images/csrf-privesc.png)  
 
 [PortSwigger Lab: Password reset broken logic](https://portswigger.net/web-security/authentication/other-mechanisms/lab-password-reset-broken-logic)  
+  
+## CSRF Change email  
+
+>Target with no defenses against email change function, can allow the privilege escalation to admin role. In exam changing the email to the hacker email address on the exploit server can allow the change of password for the low priv user and can assist in privesc.  
+
+![csrf-change-email.png](images/csrf-change-email.png)  
+
+[PortSwigger Lab: CSRF vulnerability with no defenses](https://portswigger.net/web-security/csrf/lab-no-defenses)  
+  
 
 ## Brute Force Authentication  
 
@@ -716,15 +725,6 @@ grep 'Update email'
 ![brute](images/brute.png)  
 
 [PortSwigger Lab: Brute-forcing a stay-logged-in cookie](https://portswigger.net/web-security/authentication/other-mechanisms/lab-brute-forcing-a-stay-logged-in-cookie)  
-  
-
-## CSRF Change email  
-
->Target with no defenses against email change function, can allow the privilege escalation to admin role. In exam changing the password of low priv user can assist in other privesc, or just logging in as current user by knowning the new password.  
-
-![csrf-change-email.png](images/csrf-change-email.png)  
-
-[PortSwigger Lab: CSRF vulnerability with no defenses](https://portswigger.net/web-security/csrf/lab-no-defenses)  
   
 
 # Data Exfiltration  
