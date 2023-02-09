@@ -234,6 +234,8 @@ document.cookie = "TopSecret=UnSafeCookieSessionValueForTopSecretCookie";
 
 [PortSwigger Lab: Reflected DOM XSS](https://portswigger.net/web-security/cross-site-scripting/dom-based/lab-dom-xss-reflected)  
 
+### XSS WAF Bypass  
+
 >WAF is preventing dangerous search filters and tags, then bypass XSS filters using JavaScript global variables.  
 
 ```JavaScript
