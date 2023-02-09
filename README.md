@@ -717,6 +717,15 @@ grep 'Update email'
 [PortSwigger Lab: Brute-forcing a stay-logged-in cookie](https://portswigger.net/web-security/authentication/other-mechanisms/lab-brute-forcing-a-stay-logged-in-cookie)  
   
 
+## CSRF Change email  
+
+>Target with no defenses against email change function, can allow the privilege escalation to admin role. In exam changing the password of low priv user can assist in other privesc, or just logging in as current user by knowning the new password.  
+
+![csrf-change-email.png](images/csrf-change-email.png)  
+
+[PortSwigger Lab: CSRF vulnerability with no defenses](https://portswigger.net/web-security/csrf/lab-no-defenses)  
+  
+
 # Data Exfiltration  
 
 ## SQL Injection  
