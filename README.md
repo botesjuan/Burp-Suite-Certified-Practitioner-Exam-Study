@@ -879,13 +879,13 @@ sqlmap -v -u 'https://TARGET.web.net/filter?category=*' -p 'category' --batch --
 
 ![identify-math-evaluated-xml](images/identify-math-evaluated-xml.png)  
 
->WAF detect attack when appending SQL query such as a UNION SELECT statement to the original store ID.  
+>WAF detect attack when appending SQL query such as a UNION SELECT statement to the original store ID. Web application firewall (WAF) will block requests that contain obvious signs of a SQL injection attack.
 
 ```sql
 <storeId>1 UNION SELECT NULL</storeId>
 ```  
 
->Bypass the WAF, Use Burp extension **Hackvertor** to [obfuscate](#obfuscation) the SQL Injection payload in the XML post body. 
+>Bypass the WAF, Use Burp extension **[Hackvertor](https://portswigger.net/bappstore/65033cbd2c344fbabe57ac060b5dd100)** to [obfuscate](#obfuscation) the SQL Injection payload in the XML post body. 
 
 ![Web application firewall (WAF) bypass require obfuscate of malicious query with Hackvertor](images/hackvertor.png)  
 
@@ -964,7 +964,7 @@ stockApi=http://localhost:6566/admin
 http://127.1:6566/admin  
 ```  
 
->Double URL encode characters in URL such as to Obfuscate the "a" by double-URL encoding it to %2561  
+>Double URL encode characters in URL such as to **Obfuscate** the "a" by double-URL encoding it to ```%2561```, resulting in the bypass of blacklist filter.  
 
 ![ssrf obfuscated](images/ssrf-obfuscated.png)  
 
