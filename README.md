@@ -582,6 +582,37 @@ x=1
   
 >My opinion, this is rare scenario where users visiting site have their request stolen via HTTP Sync vulnerability in exam or live system exploited.  
   
+### HTTP/2 smuggling via CRLF injection  
+
+>Target is vulnerable to request smuggling because the front-end server **downgrades HTTP/2** requests and fails to adequately sanitize incoming headers. Exploitation is by use of an HTTP/2-exclusive request smuggling vector to steal a victims session cookie and gain access to user's account.  
+
+>Identify possible vulnerability when Target reflect previous and recent search history based on cookie, by removing cookie it is noticed that your search history is reset, confirming that it's tied to your session cookie.  
+
+![recent-searchs](images/recent-searchs.png)  
+
+>Expand the Inspector's Request Attributes section and change the protocol to HTTP/2, then append arbitrary header ```foo``` with value ```bar```, follow with the sequence ```\r\n```, then followed by the ```Transfer-Encoding: chunked```, by pressing **shift+ENTER**.  
+
+![http2-inspector](images/http2-inspector.png)  
+
+>Note: enable the **Allow HTTP/2 ALPN override** option and change the body of HTTP/2 request to below POST request.  
+
+```html
+0
+
+POST / HTTP/1.1
+Host: YOUR-LAB-ID.web-security-academy.net
+Cookie: session=HACKER-SESSION-COOKIE
+Content-Length: 800
+
+search=nutty
+```  
+  
+![http2 smuggle via crlf inject](images/http2-smuggle-via-crlf-inject.png)  
+  
+[PortSwigger Lab: HTTP/2 request smuggling via CRLF injection](https://portswigger.net/web-security/request-smuggling/advanced/lab-request-smuggling-h2-request-smuggling-via-crlf-injection)  
+  
+[Youtube demo HTTP/2 request smuggling via CRLF injection](https://youtu.be/E-bnCGzl7Rk)  
+
 
 # Privilege Escalation  
   
