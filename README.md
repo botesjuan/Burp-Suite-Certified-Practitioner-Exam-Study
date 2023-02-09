@@ -1412,5 +1412,8 @@ Youtube channels:
 
 ## Footnote
 
->The exam is designed to be challenging, it is not straight forward vulnerabilities, twisted challenges and even rabbit holes. Perseverance: persistence in doing something despite difficulty or delay in achieving success.  #TryHarder  
+>The exam is designed to be challenging, it is not straight forward vulnerabilities, twisted challenges and even rabbit holes.  
+>**Perseverance:** Persistence in doing something despite difficulty or delay in achieving success.  
+>#TryHarder  
+
   
