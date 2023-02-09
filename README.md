@@ -12,9 +12,8 @@
   
 **[Privilege Escalation](#privilege-escalation)**  
 [JSON roleid PrivEsc](#privesc-json-roleid)  
-[Password refresh CSRF](#password-refresh-csrf)  
+[CSRF Change email or Password](#csrf-change-password-or-email)  
 [Brute force auth cookie](#brute-force-authentication)  
-[CSRF Change email](#csrf-change-email)  
   
 **[Data Exfiltration](#data-exfiltration)**  
 [SQLi Data Exfil](#sql-injection)  
@@ -697,8 +696,6 @@ csrf=TOKEN&username=administrator
 
 [PortSwigger Lab: Password reset broken logic](https://portswigger.net/web-security/authentication/other-mechanisms/lab-password-reset-broken-logic)  
   
-## CSRF Change email  
-
 >Target with no defenses against email change function, can allow the privilege escalation to admin role. In exam changing the email to the hacker email address on the exploit server can allow the change of password for the low priv user and can assist in privesc.  
 
 ![csrf-change-email.png](images/csrf-change-email.png)  
