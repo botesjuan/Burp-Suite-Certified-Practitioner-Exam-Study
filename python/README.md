@@ -27,3 +27,6 @@ ln -s ../utils utils
 >The image below show the payload executed by the python domxss script in an attempt to steal victim cookie. The cookie is secure with HttpOnly flag set.  
 
 ![auto-lab-xss](images/auto-lab-xss.png)  
+
+[Script used in above DOMXSS example](https://github.com/botesjuan/Burp-Suite-Certified-Practitioner-Exam-Study/blob/main/python/xss/domxss-in-jquery-hashchange.py)  
+  
