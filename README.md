@@ -1469,7 +1469,7 @@ GET /admin_controls/metrics/admin-image?imagefile=%252e%252e%252f%252e%252e%252f
 
 # Appendix  
 
->This section contain addtional info to solving the Portswigger labs and BSCP exam for example the youtube content creators, speed scanning, and python automated scripts I copied from @tjc_.  
+>This section contain **additional** info to solving the Portswigger labs and BSCP exam for example the youtube content creators, speed scanning, and python automated scripts I copied from @tjc_.  
 
 ## Solve Labs with Python  
 
