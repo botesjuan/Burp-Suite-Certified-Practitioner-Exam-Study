@@ -73,7 +73,7 @@
 </script>
 ```  
 
->To exploit the above code, inject JavaScript into the JSON data to change "load-channel" field data and steal document cookie.  
+>To exploit the above code, inject JavaScript into the **JSON** data to change "load-channel" field data and steal document cookie.  
   
 >Host an **iframe** on the exploit server html body, and send it to the victim, resulting in the stealing of their cookie. The victim cookie is sned to the Burp collaboration server.  
 
@@ -84,6 +84,9 @@
 }), "*");'>
 
 ```  
+
+>At the end of the iframe onload values is a "*", this is to indicate the target is any.  
+
 
 [PortSwigger Lab: DOM XSS using web messages and JSON.parse](https://portswigger.net/web-security/dom-based/controlling-the-web-message-source/lab-dom-xss-using-web-messages-and-json-parse)  
 
@@ -339,15 +342,22 @@ body:document.cookie
 
 ### DOM-Based XSS  
 
->DOM-based XSS vulnerabilities arise when JavaScript takes data from an attacker-controllable source, such as the URL, and passes code to a sink that supports dynamic code execution. In the target source code look out for the following:  
+>DOM-based XSS vulnerabilities arise when JavaScript takes data from an attacker-controllable source, such as the URL, and passes code to a sink that supports dynamic code execution. In the target source code look out for the following **sinks**:  
 
+* document.write
+* window.location
+* document.cookie
+* eval()
+* document.domain
+* WebSocket
+* element.src
+* postmessage
+* setRequestHeader
+* JSON.parse
 * ng-app
 * URLSearchParams
-* eval()
 * replace()
 * innerHTML
-* JSON.parse
-* document.write
 * location.search
 * addEventListener  
   
