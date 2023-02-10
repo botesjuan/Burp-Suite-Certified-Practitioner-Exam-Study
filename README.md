@@ -35,7 +35,7 @@
   
 ## DOM-Based XSS  
 
->DOM-based XSS vulnerabilities arise when JavaScript takes data from an attacker-controllable source, such as the URL, and passes code to a sink that supports dynamic code execution. In the target source code look out for the following **sinks**:  
+>DOM-based XSS vulnerabilities arise when JavaScript takes data from an attacker-controllable source, such as the URL, and passes code to a sink that supports dynamic code execution. Review the code to identify **source** and **sinks** that may lead to exploit, list fo few examples:  
 
 * document.write
 * window.location
