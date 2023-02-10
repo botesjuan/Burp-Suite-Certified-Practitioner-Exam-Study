@@ -32,4 +32,7 @@ ln -s ../utils utils
   
 >This is simple example of the HTTP request smuggling basic CL.TE lab solved using python script.
 
+[Smuggle CL.TE basic Python code](https://github.com/botesjuan/Burp-Suite-Certified-Practitioner-Exam-Study/blob/main/python/smuggle/CL.TE-smuggle-basic.py)  
 ![CL.TE HTTP smuggle basic](images/cl.te-smuggle-basic.png)  
+
+[Youtube: @tjc_](https://youtu.be/1IoFrIxrzXA)  
