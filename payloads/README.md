@@ -6,4 +6,4 @@
 [XXE Payloads](xxe-payloads.md)  
 [File Path Traversal](file-path-traversal.md)  
 [SQLi Payloads](sqli-payloads.md)  
-  
+[SSRF](ssrf.md)    
