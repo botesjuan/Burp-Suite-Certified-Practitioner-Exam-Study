@@ -35,7 +35,7 @@
   
 ## DOM-Based XSS  
 
->DOM-based XSS vulnerabilities arise when JavaScript takes data from an attacker-controllable source, such as the URL, and passes code to a sink that supports dynamic code execution. Review the code to identify **source** and **sinks** that may lead to exploit, list fo few examples:  
+>DOM-based XSS vulnerabilities arise when JavaScript takes data from an attacker-controllable source, such as the URL, and passes code to a sink that supports dynamic code execution. Review the code to identify **source** and **sinks** that may lead to exploit, list of examples:  
 
 * document.write
 * window.location
@@ -54,7 +54,7 @@
 * location.search
 * addEventListener  
   
->AngularJS expression in the search box when angle brackets and double quotes HTML-encoded.  
+>AngularJS expression below can be injected into the search function when angle brackets and double quotes HTML-encoded.  
 
 ```JavaScript
 {{$on.constructor('alert(1)')()}}
