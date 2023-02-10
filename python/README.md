@@ -30,3 +30,6 @@ ln -s ../utils utils
 
 [Script used in above DOMXSS example](https://github.com/botesjuan/Burp-Suite-Certified-Practitioner-Exam-Study/blob/main/python/xss/domxss-in-jquery-hashchange.py)  
   
+>This is simple example of the HTTP request smuggling basic CL.TE lab solved using python script.
+
+![CL.TE HTTP smuggle basic](images/cl.te-smuggle-basic.png)  

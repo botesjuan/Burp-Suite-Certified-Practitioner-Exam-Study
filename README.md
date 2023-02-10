@@ -25,9 +25,10 @@
 [Cross Site Request Forgery](#csrf)  
 [File path traversal](#file-path-traversal)  
   
+**[Appendix](#appendix)**  
+[Solve Labs with Python](#solve-labs-with-python)  
 [Payloads](payloads/README.md)  
 [Lab Automated Python Scripts](python/README.md)  
-  
 [Focus target scanning](#focus-scanning)  
 [Youtube Study Playlist](#youtube-training-playlist)  
 
@@ -1467,6 +1468,15 @@ GET /admin_controls/metrics/admin-image?imagefile=%252e%252e%252f%252e%252e%252f
   
 [PortSwigger Academy File-path-traversal](https://portswigger.net/web-security/file-path-traversal)  
 
+# Appendix  
+
+>This section contain addtion info to solving the Portswigger labs for example the python automated scripts I copied from @tjc_  
+
+## Solve Labs with Python
+
+>These python scripts are small set of the code written by [Github: Trevor tjcim](https://github.com/tjcim).  
+
+[Automate the solving of the labs using python](https://github.com/botesjuan/Burp-Suite-Certified-Practitioner-Exam-Study/tree/main/python)
 
 ## Focus Scanning  
 

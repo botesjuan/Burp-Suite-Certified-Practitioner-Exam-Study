@@ -13,7 +13,7 @@ log = logging.getLogger(__name__)
 
 class Shop(Site):
     def __init__(self, url, no_proxy, session=None):   #  part of arguments given is 'self' automatically included
-    	super().__init__(url, no_proxy, session)
+        super().__init__(url, no_proxy, session)
         self.login_url = self.base_url + "login"
         self.category_url = self.base_url + "filter?category="
 
