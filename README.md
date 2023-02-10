@@ -1,5 +1,5 @@
 
-# Burp-Suite-Certified-Practitioner-Exam-Study  
+# Burp Suite Certified Practitioner Exam Study  
 
 >My study notes on the PortSwigger Academy [Burp Suite Certified Practitioner](https://portswigger.net/web-security/certification) (BSCP) Exam topics. The below BSCP notes may require going to PortSwigger Academy labs to understand my thinking in changing payloads to get require results needed to progress to next stage in exam.  
 
