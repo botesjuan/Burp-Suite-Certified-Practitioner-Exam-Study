@@ -29,13 +29,8 @@
 [Solve Labs with Python](#solve-labs-with-python)  
 [Payloads](payloads/README.md)  
 [Focus target scanning](#focus-scanning)  
+[Approach](#approach)  
 [Youtube Study Playlist](#youtube-training-playlist)  
-
-# Approach
-
->This is my personal view of the possible approach to leverage identified vulnerabilites that enable the progress through the BSCP exam stages.  
-
-![Three stages](images/3stages.png)  
 
 # Foothold  
   
@@ -1518,7 +1513,11 @@ GET /admin_controls/metrics/admin-image?imagefile=%252e%252e%252f%252e%252e%252f
 
 [PortSwigger Lab: Discovering vulnerabilities quickly with targeted scanning](https://portswigger.net/web-security/essential-skills/using-burp-scanner-during-manual-testing/lab-discovering-vulnerabilities-quickly-with-targeted-scanning)  
   
+# Approach  
 
+>This is my personal view of the possible approach to leverage identified vulnerabilites that enable the progress through the BSCP exam stages.  
+
+![Three stages](images/3stages.png)  
 
 ## YouTube Training Playlist 
   
