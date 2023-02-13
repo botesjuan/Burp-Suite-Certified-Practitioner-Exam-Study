@@ -38,3 +38,8 @@ ln -s ../utils utils
 
 [Youtube: @tjc_](https://youtu.be/1IoFrIxrzXA)  
   
+>Scripts in python to perform SSRF gilter bypass via open redirection vulnerability.  
+
+[SSRF Open Redirect lab solved using Python](https://github.com/botesjuan/Burp-Suite-Certified-Practitioner-Exam-Study/tree/main/python/ssrf)  
+  
+![python ssrf](images/python-ssrf.png)  

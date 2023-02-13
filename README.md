@@ -1215,7 +1215,7 @@ hacktricks xss cross site scripting server side xss dynamic pdf
 
 ### SSRF Open Redirection  
 
->The target make **GET** request to the next product on the ecommerce site, using a **path** parameter. On the stockAPI POPST request the value provided in body data is the partial path to interal system. The ***identification*** of this vulnerability is by testing various paths and observing the input path specified is reflected in the response **Location** header.  
+>The target make **GET** request to the next product on the ecommerce site, using a **path** parameter. On the stockAPI POST request the value provided in body data is the partial path to interal system. The ***identification*** of this vulnerability is by testing various paths and observing the input path specified is reflected in the response **Location** header.  
 
 ![SSRF Open Redirect Location reflect](images/ssrf-open-edirect-location-reflect.png)  
 
