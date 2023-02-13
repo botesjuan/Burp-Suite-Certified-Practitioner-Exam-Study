@@ -31,6 +31,12 @@
 [Focus target scanning](#focus-scanning)  
 [Youtube Study Playlist](#youtube-training-playlist)  
 
+# Approach
+
+>This is my personal view of the possible approach found vulnerabilites that can be leverage to progress through the BSCP exam stages.  
+
+![Three stages](images/3stages.png)  
+
 # Foothold  
   
 ## DOM-Based XSS  
