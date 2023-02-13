@@ -33,7 +33,7 @@
 
 # Approach
 
->This is my personal view of the possible approach found vulnerabilites that can be leverage to progress through the BSCP exam stages.  
+>This is my personal view of the possible approach to leverage identified vulnerabilites that enable the progress through the BSCP exam stages.  
 
 ![Three stages](images/3stages.png)  
 
