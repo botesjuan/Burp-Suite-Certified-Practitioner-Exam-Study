@@ -908,7 +908,7 @@ sqlmap -v -u 'https://TARGET.web.net/filter?category=*' -p 'category' --batch --
 
 >Possible to find XXE attack surface in requests that do not contain any XML.  
 
->Identify XXE in not so obvious parameters or requests by adding the below and URL encode the **&** symbol.  
+>To ***Identify*** XXE in not so obvious parameters or requests, require adding the below and URL encode the **&** symbol to see the response.  
 
 ```xml
 %26entity;
