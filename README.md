@@ -11,9 +11,9 @@
 [HTTP Request Smuggling](#http-request-smuggling)  
   
 **[Privilege Escalation](#privilege-escalation)**  
+[Brute force](#brute-force)  
 [JSON roleid PrivEsc](#privesc-json-roleid)  
 [CSRF Change email or Password](#csrf-change-password-or-email)  
-[Brute force auth cookie](#brute-force-authentication)  
   
 **[Data Exfiltration](#data-exfiltration)**  
 [SQLi Data Exfil](#sql-injection)  
@@ -797,7 +797,9 @@ csrf=TOKEN&username=administrator
 [PortSwigger Lab: CSRF vulnerability with no defenses](https://portswigger.net/web-security/csrf/lab-no-defenses)  
   
 
-## Brute Force Authentication  
+## Brute Force  
+
+### Stay-Logged-in  
 
 >Login option with a stay-logged-in checkbox result in Cookie value containing the password of the user logged in and is vulnerable to brute-forcing.  
 
@@ -816,6 +818,18 @@ grep 'Update email'
 ![brute](images/brute.png)  
 
 [PortSwigger Lab: Brute-forcing a stay-logged-in cookie](https://portswigger.net/web-security/authentication/other-mechanisms/lab-brute-forcing-a-stay-logged-in-cookie)  
+  
+### Brute Force Protected Login  
+
+>Identified brute force protection on login when backend enforce 30 minute ban. Testing ```X-Forwarded-For:``` header result in bypass of brute force protection. Observing the response time with long invalid password, mean we can use **Pitchfork** technique to identify first valid usernames with random long password and then rerun intruder with **Pitchfork**, set each payload position attack iterates through all sets simultaneously.  
+
+[Username & Password Wordlists](https://github.com/botesjuan/Burp-Suite-Certified-Practitioner-Exam-Study/tree/main/wordlists)  
+
+>Payload position 1 on IP address for ```X-Forwarded-For:``` and position 2 on username with a long password to see the response time delay in attack columns window.  
+
+![Intruder Pitchfork](images/pitchfork.png)  
+
+[PortSwigger Lab: Username enumeration via response timing](https://portswigger.net/web-security/authentication/password-based/lab-username-enumeration-via-response-timing)  
   
 
 # Data Exfiltration  
@@ -934,7 +948,7 @@ sqlmap -v -u 'https://TARGET.web.net/filter?category=*' -p 'category' --batch --
 
 ### Xinclude file read  
 
->Webapp **Check Stock** feature use server-side XML document that is parsed, but because the entire XML document, not possible to use a DTD file. Injecting an **XInclude** statement to retrieve the contents of /home/carlos/secret file instead.  
+>Webapp **Check Stock** feature use server-side XML document that is server side parsed inside XML document, and request is not constructed of the entire XML document, it is not possible to use a hosted DTD file. Injecting an **XInclude** statement to retrieve the contents of ```/home/carlos/secret``` file instead.  
 
 ```xml
 <foo xmlns:xi="http://www.w3.org/2001/XInclude"><xi:include parse="text" href="file:///home/carlos/secret"/></foo>  
