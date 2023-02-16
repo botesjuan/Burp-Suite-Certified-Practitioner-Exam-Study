@@ -37,7 +37,7 @@
   
 ## DOM-Based XSS  
 
->DOM-based XSS vulnerabilities arise when JavaScript takes data from an attacker-controllable source, such as the URL, and passes code to a sink that supports dynamic code execution. Review the code to ***identify*** **source** and **sinks** that may lead to exploit, list of examples:  
+>DOM-based XSS vulnerabilities arise when JavaScript takes data from an attacker-controllable source, such as the URL, and passes code to a sink that supports dynamic code execution. Review the code to ***identify*** the **source** and **sinks** that may lead to exploit, list of examples:  
 
 * document.write
 * window.location
@@ -931,9 +931,20 @@ sqlmap -v -u 'https://TARGET.web.net/filter?category=*' -p 'category' --batch --
 
 >JSON web tokens (JWTs) use to send cryptographically signed JSON data, and most commonly used to send information ("claims") about users as part of authentication, session handling, and access control.  
 
-```jwt
-eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
-```  
+### JWT bypass via JWK  
+
+>The burp scannner ***identify*** vulnerability in server as, JWT self-signed JWK header supported. Possible to exploit it through failed check of the provided key source.  
+
+1. New RSA Key  
+2. In request JWT payload, change the value of the **sub claim** to administrator  
+3. Select Attack, then select Embedded JWK with newly generated RSA key  
+4. A ```jwk``` parameter now contin our public key, sending request result in access to admin portal  
+  
+![jwk header](images/jwk-header.png)  
+
+[PortSwigger Lab: JWT authentication bypass via jwk header injection](https://portswigger.net/web-security/jwt/lab-jwt-authentication-bypass-via-jwk-header-injection)  
+
+### JWT Signing  
 
 >Brute force weak JWT signing key  
 
