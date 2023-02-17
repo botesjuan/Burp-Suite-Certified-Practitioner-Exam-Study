@@ -933,24 +933,30 @@ sqlmap -v -u 'https://TARGET.web.net/filter?category=*' -p 'category' --batch --
 
 ### JWT bypass via JWK  
 
->The burp scannner ***identify*** vulnerability in server as, JWT self-signed JWK header supported. Possible to exploit it through failed check of the provided key source.  
+>The burp scannner ***identify*** vulnerability in server as, **JWT self-signed JWK header supported**. Possible to exploit it through failed check of the provided key source. Exploit steps:  
 
 1. New RSA Key  
 2. In request JWT payload, change the value of the **sub claim** to administrator  
-3. Select Attack, then select Embedded JWK with newly generated RSA key  
-4. A ```jwk``` parameter now contin our public key, sending request result in access to admin portal  
+3. Select Attack, then select **Embedded JWK** with newly generated RSA key  
+4. Observe a ```jwk``` parameter now contain our public key, sending request result in access to admin portal  
   
 ![jwk header](images/jwk-header.png)  
 
 [PortSwigger Lab: JWT authentication bypass via jwk header injection](https://portswigger.net/web-security/jwt/lab-jwt-authentication-bypass-via-jwk-header-injection)  
 
-### JWT Signing  
+### JWT Weak secret  
 
 >Brute force weak JWT signing key  
 
 ```bash
 hashcat -a 0 -m 16500 <YOUR-JWT> /path/to/jwt.secrets.list 
 ```  
+
+>Hashcat result provide the secret, to be used to generate a forged signing key.  
+
+[PortSwigger JWT authentication bypass via weak signing key](https://portswigger.net/web-security/jwt/lab-jwt-authentication-bypass-via-weak-signing-key)  
+
+### JWT kid header  
 
 >JWT-based mechanism for handling sessions. In order to verify the signature, the server uses the **kid** parameter in JWT header to fetch the relevant key from its filesystem. Generate a new **Symmetric Key** and replace **k** property with base64 null byte **AA==**, to be used when signing the JWT.  
 
