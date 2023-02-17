@@ -1626,7 +1626,7 @@ GET /admin_controls/metrics/admin-image?imagefile=%252e%252e%252f%252e%252e%252f
 
 ## Focus Scanning  
 
->Due to the tight time limit during engagements, scan defined insertion points for specific requests.  
+>Due to the tight time limit during engagements or exam, [scan defined insertion points](https://portswigger.net/web-security/essential-skills/using-burp-scanner-during-manual-testing) for specific requests.  
 
 ![scan-defined-insertion-points](images/scan-defined-insertion-points.png)  
 
