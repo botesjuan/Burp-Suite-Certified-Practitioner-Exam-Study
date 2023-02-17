@@ -1,8 +1,8 @@
 
 # Burp Suite Certified Practitioner Exam Study  
 
->My study notes on the PortSwigger Academy [Burp Suite Certified Practitioner](https://portswigger.net/web-security/certification) (BSCP) Exam topics. The below BSCP notes may require going to PortSwigger Academy labs to understand my thinking in changing payloads to get require results needed to progress to next stage in exam.  
-
+>My study notes on the PortSwigger Academy [Burp Suite Certified Practitioner](https://portswigger.net/web-security/certification) (BSCP) Exam topics. Go to PortSwigger Academy labs to get more detail, in exam if stuck on stage, use [Micah van Deusen blog tip 5 table of category to stages](https://micahvandeusen.com/burp-suite-certified-practitioner-exam-review/) for guide to progress.  
+  
 **[Foothold](#foothold)**  
 [Dom-XSS](#dom-based-xss)  
 [Cross Site Scripting](#cross-site-scripting)  
