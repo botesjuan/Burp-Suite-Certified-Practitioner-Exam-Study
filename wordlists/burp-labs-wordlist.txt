@@ -27,6 +27,9 @@ admin.conf
 /resources/js/tracking.js
 /resources/js/downloadReport.js
 /resources/js/changeEmail.js
+/resources/js/searchResults.js
+searchResults.js
+searchResults
 downloadReport.js
 downloadReport
 download
