@@ -57,7 +57,7 @@
 * location.search
 * addEventListener  
   
->AngularJS expression below can be injected into the search function when angle brackets and double quotes HTML-encoded. The vulnerability is ***identified*** by noticing the search string is enclosed in an **ng-app** directive. Review the HTML code to ***identify*** ng-app directive telling AngularJS that this is the root element of the AngularJS application.  
+>AngularJS expression below can be injected into the search function when angle brackets and double quotes HTML-encoded. The vulnerability is ***identified*** by noticing the search string is enclosed in an **ng-app** directive and ```/js/angular 1-7-7.js``` script. Review the HTML code to ***identify*** ng-app directive telling AngularJS that this is the root element of the AngularJS application.  
 
 ![domxss-on-constructor.png](images/ng-app-code-review.png)  
 
