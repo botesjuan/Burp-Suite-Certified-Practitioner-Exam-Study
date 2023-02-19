@@ -1,7 +1,7 @@
 
 # Burp Suite Certified Practitioner Exam Study  
 
->My study notes on the PortSwigger Academy [Burp Suite Certified Practitioner](https://portswigger.net/web-security/certification) (BSCP) Exam topics. Go to PortSwigger Academy labs to get more detail.  
+>My study notes on the PortSwigger Academy [Burp Suite Certified Practitioner](https://portswigger.net/web-security/certification) (BSCP) Exam topics. Go to [PortSwigger Academy](https://portswigger.net/web-security/all-materials) learning materials to get more detail.  
   
 **[Foothold](#foothold)**  
 [Dom-XSS](#dom-based-xss)  
