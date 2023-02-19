@@ -773,7 +773,7 @@ grep 'Update email'
 
 >Identified brute force protection on login when backend enforce 30 minute ban. Testing ```X-Forwarded-For:``` header result in bypass of brute force protection. Observing the response time with long invalid password, mean we can use **Pitchfork** technique to identify first valid usernames with random long password and then rerun intruder with **Pitchfork**, set each payload position attack iterates through all sets simultaneously.  
 
-[Username & Password Wordlists](https://github.com/botesjuan/Burp-Suite-Certified-Practitioner-Exam-Study/tree/main/wordlists)  
+[Burp Lab Username, Password and directory fuzzing Wordlists](https://github.com/botesjuan/Burp-Suite-Certified-Practitioner-Exam-Study/tree/main/wordlists)  
 
 >Payload position 1 on IP address for ```X-Forwarded-For:``` and position 2 on username with a long password to see the response time delay in attack columns window.  
 
@@ -1396,7 +1396,17 @@ Content-Length: 0
 
 ### HTML to PDF  
 
->Identify if SSRF can reach a server which attacker control.  
+>**Identify** the source code uses ```JSON.stringify``` to create html and vulnerable to SSRF attack. Partial source code for downloadReport.js.  
+
+```JavaScript
+function downloadReport(event, path, param) {
+
+body: JSON.stringify({
+  [param]: html
+  }
+  )
+  
+```  
 
 ```html
 <div><p>Report Heading by <img src=”https://Collaborator.com/test.png”></p>
