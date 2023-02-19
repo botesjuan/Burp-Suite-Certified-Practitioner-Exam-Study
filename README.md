@@ -1,7 +1,7 @@
 
 # Burp Suite Certified Practitioner Exam Study  
 
->My study notes on the PortSwigger Academy [Burp Suite Certified Practitioner](https://portswigger.net/web-security/certification) (BSCP) Exam topics. Go to PortSwigger Academy labs to get more detail, in exam if stuck on stage, use [Micah van Deusen blog tip 5 table of category to stages](https://micahvandeusen.com/burp-suite-certified-practitioner-exam-review/) for guide to progress.  
+>My study notes on the PortSwigger Academy [Burp Suite Certified Practitioner](https://portswigger.net/web-security/certification) (BSCP) Exam topics. Go to PortSwigger Academy labs to get more detail.  
   
 **[Foothold](#foothold)**  
 [Dom-XSS](#dom-based-xss)  
@@ -651,7 +651,7 @@ x=1
 
 [PortSwigger Lab: HTTP request smuggling, obfuscating the Transfer-Encoding (TE) header](https://portswigger.net/web-security/request-smuggling/lab-obfuscating-te-header)  
   
->My opinion, this is rare scenario where users visiting site have their request stolen via HTTP Sync vulnerability in exam or live system exploited.  
+>Wonder how often this scenario occur that hacker is able to steal visiting user request via HTTP Sync vulnerability?  
   
 ### HTTP/2 smuggling via CRLF injection  
 
@@ -851,7 +851,7 @@ Referrer-Policy: unsafe-url
   
 ## LastSearchTerm  
 
->***Identify*** the CSRF vulnerability where token not tied to non-session cookie, by changing the **csrfkey** cookie result in rejected. Observe the LastSearchTerm cookie value containing the user supplied input ***indentifier***.  
+>***Identify*** the CSRF vulnerability where token not tied to non-session cookie, by changing the **csrfkey** cookie and seeing the result that the request is rejected. Observe the **LastSearchTerm** cookie value containing the user supplied input from the search parameter.  
 
 ![identify-csrf-non-session-tied.png](images/identify-csrf-non-session-tied.png)  
 
@@ -1365,7 +1365,7 @@ Content-Type: application/x-www-form-urlencoded
 Content-Length: 0
 ```  
 
->Identified SSRF with help from collaborator that other servers can be accessed and so this can allow access to localhost, by changing the **HOST** header.  
+>***Identified*** SSRF with the help from collaborator as remote server, and this can allow also access to localhost, by changing the **HOST** header.  
 
 [PortSwigger Lab: Routing-based SSRF](https://portswigger.net/web-security/host-header/exploiting/lab-host-header-routing-based-ssrf)  
 
@@ -1687,6 +1687,7 @@ GET /admin_controls/metrics/admin-image?imagefile=%252e%252e%252f%252e%252e%252f
   
 ## Approach  
 
+>If stuck in BSCP exam, then use [Micah van Deusen blog tip 5 table of category to stages](https://micahvandeusen.com/burp-suite-certified-practitioner-exam-review/) for ways to progress through the stages.  
 >This is my personal view of the possible approach to leverage identified vulnerabilites and then using these notes to progress through the BSCP exam stages.  
 
 ![Three stages](images/3stages.png)  
