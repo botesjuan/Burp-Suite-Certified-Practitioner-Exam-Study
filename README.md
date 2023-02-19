@@ -1712,7 +1712,7 @@ Youtube channels:
 12. [nu11 security](https://www.youtube.com/@Nul1Secur1ty/videos)  
 13. [PortSwigger](https://www.youtube.com/@PortSwiggerTV/videos)  
 14. [IppSec](https://www.youtube.com/@ippsec/videos)  
-15. [@tjc_](https://www.youtube.com/@tjc_/videos)  
+15. [TJCHacking](https://www.youtube.com/@tjchacking/videos)  
 16. [LiveUnderflow](https://www.youtube.com/@LiveUnderflow/videos)  
   
 
