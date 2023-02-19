@@ -764,9 +764,9 @@ grep 'Update email'
   
 ## PrivEsc JSON RoleId  
 
->Access control to the admin interface is based on user roles, and this can lead to IDOR or accessc ontrol security vulnerability.  
+>Access control to the admin interface is based on user roles, and this can lead to privilege escalation or accessc ontrol security vulnerability.  
 
->Capture current logged in user email submission request and send to **Intruder**, then add "roleid":§99§ into the JSON body of the request, and fuzz the possible roleid for administrator access role position.  
+>Capture current logged in user email change submission request and send to **Intruder**, then add ```"roleid":§99§``` into the JSON body of the request, and fuzz the possible roleid value for administrator access role.  
 
 ```html
 POST /my-account/change-email HTTP/1.1
@@ -779,9 +779,11 @@ Connection: close
 
 {
  "email":"newemail@wiener.peter",
- "roleid": 2
+ "roleid": 42
 }
 ```  
+
+>Hitchhikers Guide answer was [42](https://en.wikipedia.org/wiki/Phrases_from_The_Hitchhiker%27s_Guide_to_the_Galaxy#42_Puzzle)  
 
 ![Intruder Payload set to identify Admin role ID](images/intruder-payload-positions.png)  
 
@@ -793,7 +795,8 @@ Connection: close
 
 ## CSRF Account Takeover  
 
->Cross-Site Request Forgery vulnerability allows an attacker to force users to perform actions that they did not intend to perform.  
+>Cross-Site Request Forgery vulnerability allows an attacker to force users to perform actions that they did not intend to perform. This can enable attacker to change victim email address and use password reset to take over the account.  
+  
 ### OAuth  
 
 >oAuth linking exploit server hosting iframe, then deliver to victim, forcing user to update code linked.  
