@@ -516,7 +516,7 @@ x=1
 
 >Calculating TE.CL (Transfer-Encoding / Content-Length) smuggle request length in **HEXADECIMAL** and the payload is between the hex length of **71** and the terminating **ZERO**, not including the ZERO AND not the preceding \r\n on line above ZERO, as part of length. The inital POST request **content-length** is manually set.  
   
-[Trevor tjcim - Request Smuggling Calculator](https://github.com/tjcim/request_smuggling_calculator)  
+[TJCHacking - Request Smuggling Calculator](https://github.com/tjcim/request_smuggling_calculator)  
   
 [PortSwigger Lab: Exploiting HTTP request smuggling to bypass front-end security controls, TE.CL vulnerability](https://portswigger.net/web-security/request-smuggling/exploiting/lab-bypass-front-end-controls-te-cl)  
 
@@ -925,6 +925,10 @@ csrf=TOKEN&username=administrator
 ![csrf-change-email.png](images/csrf-change-email.png)  
 
 [PortSwigger Lab: CSRF vulnerability with no defenses](https://portswigger.net/web-security/csrf/lab-no-defenses)  
+
+>***Indetify*** the Change password do not need the current-password parameter to set a new password, and the user whom password will be changed is based on POST parameter **username**.  
+
+[PortSwigger Lab: Weak isolation on dual-use endpoint](https://portswigger.net/web-security/logic-flaws/examples/lab-logic-flaws-weak-isolation-on-dual-use-endpoint)  
   
 ## Deserialization  
 
