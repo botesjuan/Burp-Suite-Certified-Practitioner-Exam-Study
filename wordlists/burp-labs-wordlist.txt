@@ -29,6 +29,8 @@ admin.conf
 /resources/js/changeEmail.js
 /resources/js/searchResults.js
 /resources/js/stockCheck.js
+/resources/js/xmlStockCheckPayload.js
+xmlStockCheckPayload.js
 stockCheck.js
 stock
 searchResults.js
