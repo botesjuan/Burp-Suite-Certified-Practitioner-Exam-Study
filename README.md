@@ -818,7 +818,7 @@ Connection: close
 
 >Escalation to administrator is sometimes controlled by a role selector GET request, by **dropping** this GET request before it is presented to the user, the default role of admin is selected and access granted to the admin portal.  
 
-![Select a role](images\select-a-role.png)  
+![Select a role](images/select-a-role.png)  
 
 [PortSwigger Lab: Authentication bypass via flawed state machine](https://portswigger.net/web-security/logic-flaws/examples/lab-logic-flaws-authentication-bypass-via-flawed-state-machine)  
   
