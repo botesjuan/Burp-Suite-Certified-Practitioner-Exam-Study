@@ -19,6 +19,9 @@ confirmation.old
 confirmation.-old
 backup.zip
 /admin
+role-selector
+roleselector
+selector
 X-Custom-IP-Authorization: 127.0.0.1
 localhost
 trace
