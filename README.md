@@ -843,7 +843,7 @@ Connection: close
   
 ### Referer CSRF  
 
->***Identify*** change email is vulnerable to the referer header value accept as long as referrer value contains the expected domain somewhere in the string.  
+>***Identify*** change email function is vulnerable to CSRF by observing when the **referer** header value is accepted as long as the referrer value contains the expected target domain somewhere in the value.  
 
 >Adding original domain of target and append it to the **Referer header** in the form of a query string, allow the change email to update.  
 
