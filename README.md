@@ -30,6 +30,7 @@
 **[Appendix](#appendix)**  
 [Solve Labs with Python](#solve-labs-with-python)  
 [Payloads](payloads/README.md)  
+[Wordlists](https://github.com/botesjuan/Burp-Suite-Certified-Practitioner-Exam-Study/tree/main/wordlists)  
 [Focus target scanning](#focus-scanning)  
 [Approach](#approach)  
 [Youtube Study Playlist](#youtube-training-playlist)  
