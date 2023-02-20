@@ -12,6 +12,8 @@ robots.txt
 /post/comment/confirmation.zip
 confirmation.zip
 confirmation.bak
+/admin_panel/update_forgot_email/
+update_forgot_email
 confirmation.0
 confirmation.old
 confirmation.-old
