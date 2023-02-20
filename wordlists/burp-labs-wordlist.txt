@@ -132,6 +132,7 @@ bscp
 admin-image
 admin_image
 adminimage
+change
 change-email
 change_email
 changeemail
