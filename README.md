@@ -806,7 +806,7 @@ Connection: close
 }
 ```  
 
->Hitchhikers Guide answer was [42](https://en.wikipedia.org/wiki/Phrases_from_The_Hitchhiker%27s_Guide_to_the_Galaxy#42_Puzzle)  
+>The Hitchhiker's Guide to the Galaxy answer was [42](https://en.wikipedia.org/wiki/Phrases_from_The_Hitchhiker%27s_Guide_to_the_Galaxy#42_Puzzle)  
 
 ![Intruder Payload set to identify Admin role ID](images/intruder-payload-positions.png)  
 
