@@ -1180,9 +1180,7 @@ hashcat -a 0 -m 16500 <YOUR-JWT> /path/to/jwt.secrets.list
   
 ### SQL + XML + HackVector 
 
->SQL injection with filter bypass via XML encoding may allow extract of sensitive data.  
-
->Identify injection point by using mathematical expression such as **7x7**, and this indicate possible SQL injection or Template injections.
+>The combination of vulnerabilities are ***identified*** in a XML Post body and inserting mathematical expression such as **7x7** into field and observing the evaluated value. Using this type of XML and SQL injection with WAF filter bypass via encoding may allow extract of sensitive data.  
 
 ![identify-math-evaluated-xml](images/identify-math-evaluated-xml.png)  
 
@@ -1204,7 +1202,7 @@ hashcat -a 0 -m 16500 <YOUR-JWT> /path/to/jwt.secrets.list
 
 ![SQL injection with filter bypass via XML encoding obfuscation](images/xml-sql-obfuscation.png)  
 
->SQLi Payloads to read local file, and or output to another folder on target.  
+>Below is sample SQLi payloads to read local file, or output to another folder on target.  
 
 ```sql
 <@hex_entities>1 UNION all select load_file('/home/carlos/secret')<@/hex_entities>  

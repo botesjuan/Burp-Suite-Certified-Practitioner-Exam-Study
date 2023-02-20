@@ -28,6 +28,9 @@ admin.conf
 /resources/js/downloadReport.js
 /resources/js/changeEmail.js
 /resources/js/searchResults.js
+/resources/js/stockCheck.js
+stockCheck.js
+stock
 searchResults.js
 searchResults
 downloadReport.js
