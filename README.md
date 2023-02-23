@@ -288,10 +288,10 @@ https://TARGET.web-security-academy.net/?search=%22%3E%3Csvg%3E%3Canimatetransfo
 
 ### XSS Template Literal  
 
->JavaScript template literal is ***identified*** by the back ticks **`** used to contain the string. On the target we ***identify*** the search string is reflected inside a template literal string.  
+>JavaScript template literal is ***identified*** by the back ticks **`** used to contain the string. On the target code we ***identify*** the search string is reflected inside a template literal string.  
 
 ```
-${alert(1)}
+${alert(document.cookie)}
 ```  
 
 ![xss template literal](images/xss-template-literal.png)  
