@@ -1470,10 +1470,12 @@ hacktricks xss cross site scripting server side xss dynamic pdf
 
 ### SSRF Open Redirection  
 
->The target make **GET** request to the next product on the ecommerce site, using a **path** parameter. On the stockAPI POST request the value provided in body data is the partial path to interal system. The ***identification*** of this vulnerability is by testing various paths and observing the input path specified is reflected in the response **Location** header.  
+>The target make **GET** request to the ***next product*** on the ecommerce site, using a **path** parameter. On the stockAPI POST request the value provided in body data is the partial path to interal system. The ***identification*** of this vulnerability is by testing various paths and observing the input path specified is reflected in the response **Location** header.  
 
 ![SSRF Open Redirect Location reflect](images/ssrf-open-edirect-location-reflect.png)  
 
+>In this lab they state the admin interface is at ```http://192.168.0.12:8080/admin``` but in exam check on ```localhost:6566```.  
+  
 ```
 https://TARGET.web-security-academy.net/product/nextProduct?currentProductId=1&path=http%3a//192.168.0.12%3a8080/admin
 ```  
