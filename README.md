@@ -286,6 +286,18 @@ https://TARGET.web-security-academy.net/?search=%22%3E%3Csvg%3E%3Canimatetransfo
 
 [PortSwigger Lab: Reflected DOM XSS](https://portswigger.net/web-security/cross-site-scripting/dom-based/lab-dom-xss-reflected)  
 
+### XSS Template Literal  
+
+>JavaScript template literal is identified by the string contained inside back ticks **`**. On the target we see the search string is reflected in template literal string.  
+
+```
+${alert(1)}
+```  
+
+![xss template literal](images/xss-template-literal.png)  
+  
+[PortSwigger Lab: Reflected XSS into a template literal with angle brackets, single, double quotes, backslash and backticks Unicode-escaped](https://portswigger.net/web-security/cross-site-scripting/contexts/lab-javascript-template-literal-angle-brackets-single-double-quotes-backslash-backticks-escaped)  
+
 ### XSS WAF Bypass  
 
 >WAF is preventing dangerous search filters and tags, then bypass XSS filters using JavaScript global variables.  
@@ -1824,5 +1836,5 @@ Youtube channels:
 
 >This PortSwigger exam is designed to be challenging, it is not straight forward vulnerabilities, twisted challenges, mixed academy labs into single problem and even rabbit holes.  
 >**Perseverance:** Persistence in doing something despite difficulty or delay in achieving success.  
->OSCP certification learned me to #TryHarder and gave me the solid foundation penetration testing skills, but I believe BSCP will give me the next level of web application pentest knowledge.    
+>**OSCP** certification learned me to **#TryHarder** and gave me the solid foundation penetration testing skills, but I believe **BSCP** will give me the next level of web application pentest knowledge.    
   
