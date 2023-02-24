@@ -16,12 +16,12 @@
 [CSRF Account Takeover](#csrf-account-takeover)  
 [SQLi Admin Credential Exfil](#sql-injection)  
 [JSON Web Tokens](#jwt)  
+[Prototype pollution](#prototype-pollution)  
   
 **[Data Exfiltration](#data-exfiltration)**  
 [XML entities & Injections](#xxe-injections)  
 [SSRF Server side request forgery](#ssrf---server-side-request-forgery)  
 [SSTI Server side template injection](#ssti---server-side-template-injection)  
-[Prototype pollution](#prototype-pollution)  
 [Cross Site Request Forgery](#csrf)  
 [File path traversal](#file-path-traversal)  
 [File Uploads](#file-uploads)  
@@ -1231,9 +1231,9 @@ hashcat -a 0 -m 16500 <YOUR-JWT> /path/to/jwt.secrets.list
 
 ![Proto pollution](images/proto-pollution.png)  
 
-### __Proto__ Privilege Escalation  
+### __Proto__ Privilege Escalate  
 
->To identify Proto pollution, insert the follow into a JSON post request updating user profile information.  
+>To identify Proto pollution, insert the follow into a JSON post request when updating a user profile information authenticated as low privileged role.  
 
 ```JSON
 "__proto__": {
