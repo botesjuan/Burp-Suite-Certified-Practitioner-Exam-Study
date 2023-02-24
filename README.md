@@ -1300,9 +1300,11 @@ hashcat -a 0 -m 16500 <YOUR-JWT> /path/to/jwt.secrets.list
 
 [PortSwigger Lab: SQL injection with filter bypass via XML encoding](https://portswigger.net/web-security/sql-injection/lab-sql-injection-with-filter-bypass-via-xml-encoding)  
   
-### Obfuscation
+### Obfuscation  
 
->URL replacing **.** with %2e  
+>Obfuscation is the action of making something obscure, unclear, or unintelligible.  
+
+>URL replacing the period character ```.``` with encoded value of ```%2e```.  
 
 >Double-encode the injection  
 
