@@ -807,13 +807,19 @@ grep 'Update email'
   
 ### Brute Force Protected Login  
 
->Identified brute force protection on login when backend enforce 30 minute ban. Testing ```X-Forwarded-For:``` header result in bypass of brute force protection. Observing the response time with long invalid password, mean we can use **Pitchfork** technique to identify first valid usernames with random long password and then rerun intruder with **Pitchfork**, set each payload position attack iterates through all sets simultaneously.  
+>***Identified*** brute force protection on login when backend enforce 30 minute ban, resulting in **IP blocked** after too many invalid login attempts. Testing ```X-Forwarded-For:``` header result in bypass of brute force protection. Observing the response time with long invalid password, mean we can use **Pitchfork** technique to identify first valid usernames with random long password and then rerun intruder with **Pitchfork**, set each payload position attack iterates through all sets simultaneously.  
 
 [Burp Lab Username, Password and directory fuzzing Wordlists](https://github.com/botesjuan/Burp-Suite-Certified-Practitioner-Exam-Study/tree/main/wordlists)  
 
->Payload position 1 on IP address for ```X-Forwarded-For:``` and position 2 on username with a long password to see the response time delay in attack columns window.  
+>Payload position 1 on IP address for ```X-Forwarded-For:``` and position 2 on username with a long password to see the **response time delay** in attack columns window.  
+
+```
+X-Forwarded-For: 12.13.14.15
+```
 
 ![Intruder Pitchfork](images/pitchfork.png)  
+
+>Repeat above **Pitchfork** intruder attack on the password field and then ***identify*** valid password from the status column with 302 result.  
 
 [PortSwigger Lab: Username enumeration via response timing](https://portswigger.net/web-security/authentication/password-based/lab-username-enumeration-via-response-timing)  
   
