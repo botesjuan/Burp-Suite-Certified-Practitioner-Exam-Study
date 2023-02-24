@@ -1923,5 +1923,4 @@ Youtube channels:
 
 >This PortSwigger exam is designed to be challenging, it is not straight forward vulnerabilities, twisted challenges, mixed academy labs into single problem and even rabbit holes.  
 >**Perseverance:** Persistence in doing something despite difficulty or delay in achieving success.  
->**OSCP** certification learned me to **#TryHarder** and gave me the solid foundation penetration testing skills, but I believe **BSCP** will give me the next level of web application pentest knowledge.    
-  
+>**OSCP** certification learned me to **#TryHarder** and gave me the foundation penetration testing skills, but I believe the **BSCP** will give me the next level of web application pentest knowledge.  
