@@ -272,7 +272,7 @@ https://TARGET.web-security-academy.net/?search=%22%3E%3Csvg%3E%3Canimatetransfo
 
 ### Reflected String XSS  
 
->Submiting search string and reviewing the source code of the search result page, JavaScript string variable is identified reflecting the search string.  
+>Submiting search string and reviewing the source code of the search result page, JavaScript string variable is identified to reflect the search string.  
 
 ![JavaScript string with single quote and backslash escaped](images/javascript-string-reflection.png)  
 
