@@ -1791,23 +1791,37 @@ wrtz{{#with "s" as |string|}}
   
 ## File Path Traversal
 
->The imagefile parameter is vulnerable to directory traversal path attacks, enabling read access to arbitrary files on the server.
+>Directory traversal attacks allow the malicious actor to read file on the server.  
 
-```bash
-../../../../../../../../../../
-```  
+1. Application blocks traversal sequences but treats the supplied filename as being relative to a absolute path and can be exploit with ```/etc/passwd``` payload.  
+2. Images on app is loaded using ```filename``` parameter, and is defending against traversal attacks by stripping path traversal. Exploit using ```....//....//....//....//etc/passwd``` payloads.  
+3. Using URL-encoded ```..%252f..%252f..%252fetc/passwd``` payload can bypass application security controls.  
+4. Leading the begining of the called filename with the original path and then appending ```/var/www/images/../../../etc/passwd``` payload at end bypasses the protection.  
+5. Using a **null** byte charater at end plus an image extension to fool app controls that an image is requested, this ```../../../etc/passwd%00.png``` payload succeed.  
+  
+>Corresponding Directory travelsal labs.
 
->On the admin portal the images are loaded using **imagefile=** parameter, vulnerable to directory traversal.  
+1. [PortSwigger Lab: File path traversal, traversal sequences blocked with absolute path bypass](https://portswigger.net/web-security/file-path-traversal/lab-absolute-path-bypass)  
+2. [PortSwigger Lab: File path traversal, traversal sequences stripped non-recursively](https://portswigger.net/web-security/file-path-traversal/lab-sequences-stripped-non-recursively)  
+3. [PortSwigger Lab: File path traversal, traversal sequences stripped with superfluous URL-decode](https://portswigger.net/web-security/file-path-traversal/lab-superfluous-url-decode)  
+4. [PortSwigger Lab: File path traversal, validation of start of path](https://portswigger.net/web-security/file-path-traversal/lab-validate-start-of-path)  
+5. [PortSwigger Lab: File path traversal, validation of file extension with null byte bypass](https://portswigger.net/web-security/file-path-traversal/lab-validate-file-extension-null-byte-bypass)  
+  
+![file-path-traversal-null-byte.png](images/file-path-traversal-null-byte.png)   
+
+### Admin Portal Files  
+
+>On the admin portal ***identify*** that the images are loaded using **imagefile=** parameter. Test if vulnerable to directory traversal. The imagefile parameter is vulnerable to directory traversal path attacks, enabling read access to arbitrary files on the server.  
 
 ```html
 GET /admin_controls/metrics/admin-image?imagefile=%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252fetc%252fpasswd
 ```  
 
-![URL encode path traverse](images/encode-path-traverse.png)  
+>Note: Add the fuzzing path traversal payload from dropdown list option, **"Add from list ..."**. Then set processing rule on the provided payload to replace the FILE place holder with regex ```\{FILE\}``` for each of the attacks.  
 
->Burp Intruder provides a predefined payload list (Fuzzing - path traversal).  
+![payloads for path traverse](images/payloads-for-path-traverse.png)  
 
-[PortSwigger Lab: File path traversal, traversal sequences stripped with superfluous URL-decode](https://portswigger.net/web-security/file-path-traversal/lab-superfluous-url-decode)  
+>Burp Intruder provides a predefined payload list, as example **"Fuzzing - path traversal"**.  
   
 [PortSwigger Academy File-path-traversal](https://portswigger.net/web-security/file-path-traversal)  
 
