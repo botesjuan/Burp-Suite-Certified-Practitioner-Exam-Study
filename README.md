@@ -1791,9 +1791,9 @@ wrtz{{#with "s" as |string|}}
   
 ## File Path Traversal
 
->Directory traversal attacks allow the malicious actor to read file on the server.  
+>Directory traversal attacks allow the malicious actor to read file on the server. ***Identify*** web parameters such as ```filename=``` that are requesting files.  
 
-1. Application blocks traversal sequences but treats the supplied filename as being relative to a absolute path and can be exploit with ```/etc/passwd``` payload.  
+1. Application blocks traversal sequences but treats the supplied filename as being relative to a absolute path and can be exploit with ```/etc/passwd```absolute path to target file payload.  
 2. Images on app is loaded using ```filename``` parameter, and is defending against traversal attacks by stripping path traversal. Exploit using ```....//....//....//....//etc/passwd``` payloads.  
 3. Using URL-encoded ```..%252f..%252f..%252fetc/passwd``` payload can bypass application security controls.  
 4. Leading the begining of the called filename with the original path and then appending ```/var/www/images/../../../etc/passwd``` payload at end bypasses the protection.  
