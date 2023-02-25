@@ -1122,7 +1122,7 @@ TrackingId=xxx'+UNION+SELECT+EXTRACTVALUE(xmltype('<%3fxml+version%3d"1.0"+encod
 
 ![sqli conditional response](images/sqli-conditional-response.png)  
 
->Alterative use **cluster bomb** attack is setting to payload positions, on on the character position with payload of numbers ```1..20``` and second position the alpha and number characters, this will iterate through each permutation of payload combinations.  
+>Alterative use a **cluster bomb** attack and setting **two** payload positions, first one for the character position with a payload of numbers ```1..20``` and the second position, using alpha and number characters, this will iterate through each permutation of payload combinations.  
 
 ![cluster bomb](images/cluster-bomb.png)  
 
