@@ -18,6 +18,7 @@ confirmation.0
 confirmation.old
 confirmation.-old
 backup.zip
+path
 /admin
 role-selector
 roleselector
