@@ -5,13 +5,20 @@ phpinfo
 pragma
 ProductTemplate.java.bak
 robots.txt
+robots
+robot
 /backup
 .git
 /.git/
+invalid
+admin-roles
 /backup/ProductTemplate.java.bak
 /post/comment/confirmation.zip
 confirmation.zip
 confirmation.bak
+administrator-panel
+administrator_panel
+administratorpanel
 /admin_panel/update_forgot_email/
 update_forgot_email
 confirmation.0
@@ -23,6 +30,7 @@ path
 role-selector
 roleselector
 role
+roles
 selector
 X-Custom-IP-Authorization: 127.0.0.1
 localhost
