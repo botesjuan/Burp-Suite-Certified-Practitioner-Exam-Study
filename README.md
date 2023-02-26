@@ -17,6 +17,7 @@
 [SQLi Admin Credential Exfil](#sql-injection)  
 [JSON Web Tokens](#jwt)  
 [Prototype pollution](#prototype-pollution)  
+[Access Control](#access-control)  
   
 **[Data Exfiltration](#data-exfiltration)**  
 [XML entities & Injections](#xxe-injections)  
@@ -1334,6 +1335,20 @@ hashcat -a 0 -m 16500 <YOUR-JWT> /path/to/jwt.secrets.list
 
 [PortSwigger Lab: Privilege escalation via server-side prototype pollution](https://portswigger.net/web-security/prototype-pollution/server-side/lab-privilege-escalation-via-server-side-prototype-pollution)  
   
+## Access Control  
+  
+### Original URL  
+
+>Admin portal only accessable from internal. Identify if access control can be bypassed using header ```X-Original-URL```, observe different response to ```/admin``` endpoint requests depending on header value.  
+
+```
+X-Original-URL: /admin
+```  
+
+![x-original-url](images/x-original-url.png)  
+  
+[PortSwigger Lab: URL-based access control can be circumvented](https://portswigger.net/web-security/access-control/lab-url-based-access-control-can-be-circumvented)  
+  
 # Data Exfiltration  
 
 ## XXE Injections
@@ -1694,7 +1709,6 @@ stockApi=%2fproduct%2fnextProduct%3fcurrentProductId%3d1%26path%3dhttp%253a%2f%2
 ![SSRF Open Rerdirect](images/ssrf-open-rerdirect.png)  
 
 [PortSwigger Lab: SSRF with filter bypass via open redirection vulnerability](https://portswigger.net/web-security/ssrf/lab-ssrf-filter-bypass-via-open-redirection)  
-  
   
 ## SSTI - Server Side Template Injection
 
