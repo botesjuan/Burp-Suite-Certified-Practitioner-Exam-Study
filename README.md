@@ -1450,8 +1450,8 @@ X-Original-URL: /admin
 
 >URL replacing the period character ```.``` with encoded value of ```%2e```.  
 
->Double-encode the injection  
-
+>Double-encode the injecting payload.  
+  
 ```
 /?search=%253Cimg%2520src%253Dx%2520onerror%253Dalert(1)%253E
 ```  
