@@ -1,7 +1,7 @@
 
 # Burp Suite Certified Practitioner Exam Study  
 
->This is my study notes on the PortSwigger Academy [Burp Suite Certified Practitioner](https://portswigger.net/web-security/certification) (BSCP) Exam topics. Go to [PortSwigger Academy](https://portswigger.net/web-security/all-materials) learning materials to get more detail.  
+>This is my study notes on the PortSwigger Academy [Burp Suite Certified Practitioner](https://portswigger.net/web-security/certification) (BSCP) Exam topics. Go to [PortSwigger Academy](https://portswigger.net/web-security/all-materials) learning materials to get more detail. ***Thanks*** everyone for all the **stars** ```\o/```  
   
 **[Foothold](#foothold)**  
 [Dom-XSS](#dom-based-xss)  
@@ -887,7 +887,7 @@ grep 'Update email'
 
 >***Identified*** brute force protection on login when back-end enforce 30 minute ban, resulting in **IP blocked** after too many invalid login attempts. Testing ```X-Forwarded-For:``` header result in bypass of brute force protection. Observing the response time with long invalid password, mean we can use **Pitchfork** technique to identify first valid usernames with random long password and then rerun intruder with **Pitchfork**, set each payload position attack iterates through all sets simultaneously.  
 
-[Burp Lab Username, Password and directory fuzzing Wordlists](https://github.com/botesjuan/Burp-Suite-Certified-Practitioner-Exam-Study/tree/main/wordlists)  
+[Burp Lab Username, Password and directory fuzzing Word lists](https://github.com/botesjuan/Burp-Suite-Certified-Practitioner-Exam-Study/tree/main/wordlists)  
 
 >Payload position 1 on IP address for ```X-Forwarded-For:``` and position 2 on username with a long password to see the **response time delay** in attack columns window.  
 
@@ -903,11 +903,11 @@ X-Forwarded-For: 12.13.14.15
   
 ### Subtly Invalid Login  
 
->***Identify*** that the login page is not protected by brute force attack, and no IP block or timeout enforced for invalid username or passsword.  
+>***Identify*** that the login page is not protected by brute force attack, and no IP block or time-out enforced for invalid username or password.  
 
 ![Subtly invalid login](images/subtly-invalid-login.png)  
 
->Notice on the Intruder attack grep column for ```Invalid username or password.``` on response message for failed username attack do not contain full stop period at end. Repeat the attack with this identified username, and sniper attack the password field to ***identify*** 302 response for valid login.  
+>Notice on the Intruder attack column for the GREP value, ```Invalid username or password.``` the one response message for a failed username attack do not contain full stop period at the end. Repeat the attack with this identified username, and **Sniper** attack the password field to ***identify*** 302 response for valid login.  
 
 [PortSwigger Lab: Username enumeration via subtly different responses](https://portswigger.net/web-security/authentication/password-based/lab-username-enumeration-via-subtly-different-responses)  
   
@@ -960,7 +960,7 @@ Connection: close
 
 ![csrf](images/csrf.png)  
 
->Intercepted the GET /oauth-linking?code=[...]. send to repeat to save code. Drop the request. Important to ensure that the code is not used and, remains valid. Save on exploit server an iframe in which the src attribute points to the URL you just copied.  
+>Intercepted the GET /oauth-linking?code=[...]. send to repeat to save code. Drop the request. Important to ensure that the code is not used and, remains valid. Save on exploit server an iframe in which the ```src``` attribute points to the URL you just copied.  
 
 ```html
 <iframe src="https://TARGET.web-security-academy.net/oauth-linking?code=STOLEN-CODE"></iframe>
@@ -970,7 +970,7 @@ Connection: close
   
 ### Referer CSRF  
 
->***Identify*** change email function is vulnerable to CSRF by observing when the **referer** header value is accepted as long as the referrer value contains the expected target domain somewhere in the value.  
+>***Identify*** change email function is vulnerable to CSRF by observing when the **Referer** header value is accepted as long as the referrer value contains the expected target domain somewhere in the value.  
 
 >Adding original domain of target and append it to the **Referer header** in the form of a query string, allow the change email to update.  
 
@@ -982,7 +982,7 @@ Referrer-Policy: unsafe-url
 
 >**Note:** Unlike the normal Referer header spelling, the word **"referrer"** must be spelled correctly in the above code^^.  
 
-![referer csrf](images/referer-csrf.png)  
+![Referer csrf](images/referer-csrf.png)  
 
 >Create a CSRF proof of concept exploit and host it on the exploit server. Edit the JavaScript so that the third argument of the **history.pushState()** function includes a query string with target URL.  
 
@@ -1002,7 +1002,7 @@ Referrer-Policy: unsafe-url
 </html>
 ```  
 
->When above exploit payload is delivered to victim, the CSRF POC payload changes the victim email to **hacker@exploit.net**, because the referer header contained target in value.  
+>When above exploit payload is delivered to victim, the CSRF POC payload changes the victim email to **hacker@exploit.net**, because the Referer header contained target in value.  
 
 [PortSwigger Lab: CSRF with broken Referer validation](https://portswigger.net/web-security/csrf/bypassing-referer-based-defenses/lab-referer-validation-broken)  
   
@@ -1046,7 +1046,7 @@ Referrer-Policy: unsafe-url
   
 ### Is Logged In  
   
->If cookie with the **isloggedin** name is identified, then a refresh of admin password POST request could be exploited. Change username parameter to administrator while logged in as low priv user, CSRF where token is not tied to user session.  
+>If cookie with the **isloggedin** name is identified, then a refresh of admin password POST request could be exploited. Change username parameter to administrator while logged in as low privilege user, CSRF where token is not tied to user session.  
 
 ```html
 POST /refreshpassword HTTP/1.1
@@ -1077,11 +1077,11 @@ csrf=TOKEN&username=administrator
 
 [PortSwigger Lab: Password reset broken logic](https://portswigger.net/web-security/authentication/other-mechanisms/lab-password-reset-broken-logic)  
   
->Target with no defenses against email change function, can allow the privilege escalation to admin role. In exam changing the email to the hacker email address on the exploit server can allow the change of password for the low priv user and can assist in privesc.  
+>Target with no defences against email change function, can allow the privilege escalation to admin role. In exam changing the email to the hacker email address on the exploit server can allow the change of password for the low privilege user and can assist in privesc.  
 
 ![csrf-change-email.png](images/csrf-change-email.png)  
 
-[PortSwigger Lab: CSRF vulnerability with no defenses](https://portswigger.net/web-security/csrf/lab-no-defenses)  
+[PortSwigger Lab: CSRF vulnerability with no defences](https://portswigger.net/web-security/csrf/lab-no-defenses)  
 
 >***Identify*** the Change password do not need the current-password parameter to set a new password, and the user whom password will be changed is based on POST parameter **username**.  
 
@@ -1147,7 +1147,7 @@ TrackingId=xxx'+UNION+SELECT+EXTRACTVALUE(xmltype('<%3fxml+version%3d"1.0"+encod
 
 ![sqli conditional response](images/sqli-conditional-response.png)  
 
->Alternative use a **cluster bomb** attack and setting **two** payload positions, first one for the character position with a payload of numbers ```1..20``` and the second position, using alpha and number characters, this will iterate through each permutation of payload combinations.  
+>Alternative use a **Cluster Bomb** attack and setting **two** payload positions, first one for the character position with a payload of numbers ```1..20``` and the second position, using alpha and number characters, this will iterate through each permutation of payload combinations.  
 
 ![cluster bomb](images/cluster-bomb.png)  
 
@@ -1179,7 +1179,7 @@ TrackingId=xxx'+UNION+SELECT+EXTRACTVALUE(xmltype('<%3fxml+version%3d"1.0"+encod
 
 ### SQLMAP 
 
->Sample SQLMAP commands to determine what SQL injection vulnerability exist and retrieving different types of information from backend database.  
+>Sample SQLMAP commands to determine what SQL injection vulnerability exist and retrieving different types of information from back-end database.  
 
 [SQLMAP Help usage](https://github.com/sqlmapproject/sqlmap/wiki/Usage)  
 
