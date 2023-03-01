@@ -895,6 +895,11 @@ Sec-Ch-Ua-Platform: "Linux"
 
 ## Brute Force  
 
+[Stay-Logged-in](#stay-logged-in)  
+[Stay-logged-in Offline Crack](#stay-logged-in-offline-crack)  
+[Brute Force Protected Login](#brute-force-protected-login)  
+[Subtly Invalid Login](#subtly-invalid-login)  
+
 ### Stay-Logged-in  
 
 >Login option with a stay-logged-in check-box result in Cookie value containing the password of the user logged in and is vulnerable to brute-forcing.  
