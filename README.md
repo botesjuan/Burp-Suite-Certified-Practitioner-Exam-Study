@@ -41,6 +41,7 @@
 ## DOM-Based XSS  
 
 [Vulnerable AngularJS](#vuln-angularjs)  
+[Document Write Location search](#doc-write-location-search)  
 [Dom Invader](#dom-invader)  
 [DOM XSS JSON.parse web messages](#dom-xss-jsonparse-web-messages)  
 [Reflected DOM Cookie Stealer](#dom-cookie-stealers)  
@@ -88,7 +89,11 @@
 
 [PortSwigger Lab: DOM XSS in AngularJS expression with angle brackets and double quotes HTML-encoded](https://portswigger.net/web-security/cross-site-scripting/dom-based/lab-angularjs-expression)  
 
->Below the target is vulnerable to dom-xss in the stock check function. Document.write is the sink used with location.search allowing us to add new value to JavaScript variable **storeId**.  
+[z3nsh3ll give an amazingly detail understanding on the constructor vulnerability in this lab on YouTube](https://youtu.be/QpQp2JLn6JA)  
+
+### Doc Write Location search  
+
+>Below the target is vulnerable to dom-xss in the stock check function. Document.write is the sink used with location.search allowing us to add new value to the JavaScript variable named **storeId**.  
 
 ```html
 /product?productId=1&storeId="></select><img%20src=1%20onerror=alert(document.cookie)>  
