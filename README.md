@@ -1084,7 +1084,7 @@ history.pushState('', '', '/');
 </html>
 ```  
 
-![csrf-referer-present.png](images\csrf-referer-present.png)  
+![csrf-referer-present.png](images/csrf-referer-present.png)  
 
 [PortSwigger Lab: CSRF where Referer validation depends on header being present](https://portswigger.net/web-security/csrf/bypassing-referer-based-defenses/lab-referer-validation-depends-on-header-being-present)  
 
