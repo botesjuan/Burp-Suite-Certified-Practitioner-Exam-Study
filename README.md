@@ -2234,3 +2234,6 @@ Youtube channels:
 >**OSCP** certification taught me to **#TryHarder** and gave me the foundation penetration testing skills.  
 >I believe eventually I will pass the **BSCP** exam and it has already given me the next level of web application security analyst knowledge.  
   
+## Support  
+
+[If you find the content valuable for Bug Bounty, Penetration Testing or Burp Exam studies, I will use the coffee funds to pay my next exam](https://www.buymeacoffee.com/botesjuan)  
