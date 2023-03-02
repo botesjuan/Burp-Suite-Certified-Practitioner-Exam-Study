@@ -2090,7 +2090,7 @@ fileurl=https://EXPLOIT.net/images.svg.png
 
 ![info-disclose](images/info-disclose.png)  
 
->Reviewing PHP source code by adding tilde ***~*** character at end of GET request ```https://target.net/libs/CustomTemplate.php~```, we notice the **desctruct** method.  
+>Reviewing PHP source code by adding tilde ***~*** character at end of GET request ```https://target.net/libs/CustomTemplate.php~```, we notice the **destruct** method.  
 
 ![comments-in-source-code](images/comments-in-source-code.png)  
 
