@@ -2084,6 +2084,10 @@ fileurl=https://EXPLOIT.net/images.svg.png
   
 ## Deserialization  
 
+[CustomTemplate PHP](#customtemplate-php)  
+[Burp Deserialization Scanner](#burp-deserialization-scanner)  
+[YsoSerial](#ysoserial)  
+  
 ### CustomTemplate PHP  
 
 >Reading page source code and noticing comment mentioning **<!-- TODO: Refactor once /libs/CustomTemplate.php is updated -->**, this ***identify*** possible PHP framework and the Burp scanner identify serialized session cookie object after we logged in with stolen ```wiener:peter``` credentials.  
