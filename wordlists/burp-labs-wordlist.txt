@@ -1,6 +1,8 @@
 cgi-bin
 /cgi-bin/phpinfo.php
 phpinfo.php
+sitemap.xml
+sitemap
 phpinfo
 pragma
 ProductTemplate.java.bak
