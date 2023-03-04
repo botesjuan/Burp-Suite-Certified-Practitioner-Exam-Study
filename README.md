@@ -2249,8 +2249,8 @@ Youtube channels:
 15. [IppSec](https://www.youtube.com/@ippsec/videos)  
 16. [TJCHacking](https://www.youtube.com/@tjchacking/videos)  
 17. [LiveUnderflow](https://www.youtube.com/@LiveUnderflow/videos)  
+18. [JSONSEC](https://www.youtube.com/@JSONSEC/videos)  
   
-
 ## Footnote
 
 >My experience so far taking the PortSwigger exam, it is designed to be challenging, it is not straight forward vulnerabilities, twisted challenges, mixed academy labs into single stage and even rabbit holes.  
