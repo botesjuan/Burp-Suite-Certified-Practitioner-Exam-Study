@@ -1166,11 +1166,12 @@ csrf=TOKEN&username=administrator
 ## SQL Injection  
   
 [Blind SQLi](#blind-sqli)  
+[Blind SQLi no indication](#blind-sqli-no-indication)  
 [Blind SQLi Conditional Response](#blind-sqli-conditional-response)  
 [Oracle](#oracle)  
 [SQLMAP](#sqlmap)  
 [Manual SQLi](#manual-sqli)  
-
+  
 >Error based or Blind SQL injection vulnerabilities, allow SQL queries in an application to be used to extract data or login credentials from the  database. SQLMAP is used to fast track the exploit and retrieve the sensitive information.  
 
 >***Identify*** SQLi, by adding a double (") or single quote (') to web parameters or tracking cookies, if this break the SQL syntax resulting in error message response, then positive SQL injection identified.  
