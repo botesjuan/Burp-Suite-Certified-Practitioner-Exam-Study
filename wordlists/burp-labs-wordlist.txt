@@ -72,8 +72,12 @@ sign_out
 logout
 logoff
 comment
+registration
+register
+new
 blog
 posts
+account
 my-account
 my_account
 my-account-details

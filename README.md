@@ -970,6 +970,24 @@ X-Forwarded-For: 12.13.14.15
 
 [PortSwigger Lab: Username enumeration via subtly different responses](https://portswigger.net/web-security/authentication/password-based/lab-username-enumeration-via-subtly-different-responses)  
   
+# Authentication  
+
+## Account Registration  
+
+>Business logic flaw in the account registration feature allow for gaining foothold as target user role access. Content discovery find the path ```/admin```, message state the Admin interface is only available if logged in as a **DontWannaCry** user.  
+
+![Register length flaw](images/register-length-flaw.png)  
+
+>Creating email with more that 200 character before the ```@``` symbol is then truncated to 255 characters. This ***identify*** the vulnerability in the account registration page logic **flaw**. In the email below the ```m``` at the end of ```@dontwannacry.com``` is character 255 exactly.  
+
+```
+very-long-strings-so-very-long-string-so-very-long-string-so-very-long-string-so-very-long-string-so-very-long-string-so-very-long-string-so-very-long-string-so-very-long-string-so-very-long-string-so-very-long-string-so-very-long-strings@dontwannacry.com.exploit-0afe007b03a34169c10b8fc501510091.exploit-server.net
+```  
+  
+![Inconsistent-handling-exceptional-input](images/Inconsistent-handling-exceptional-input.png)  
+
+[PortSwigger Lab: Inconsistent handling of exceptional input](https://portswigger.net/web-security/logic-flaws/examples/lab-logic-flaws-inconsistent-handling-of-exceptional-input)  
+
 # Privilege Escalation  
   
 ## CSRF Account Takeover  
@@ -1492,7 +1510,7 @@ X-Original-URL: /admin
 [Identify XML](#identify-xml)  
 [Xinclude file read](#xinclude-file-read)  
 [DTD Hosted Exploit](#dtd-hosted-exploit)  
-[SQL + XML + HackVector](#sql--xml--hackvector)  
+[SQL + XML + HackVertor](#sql--xml--hackvertor)  
 [Obfuscation](#obfuscation)  
 
 >File upload or user import function on web target use XML file format. This can be vulnerable to XML external entity (XXE) injection.  
@@ -1558,7 +1576,7 @@ X-Original-URL: /admin
 
 [PortSwigger Lab: Exploiting blind XXE to exfiltrate data using a malicious external DTD](https://portswigger.net/web-security/xxe/blind/lab-xxe-with-out-of-band-exfiltration)  
   
-### SQL + XML + HackVector 
+### SQL + XML + HackVertor 
 
 >The combination of vulnerabilities are ***identified*** in a XML Post body and inserting mathematical expression such as **7x7** into field and observing the evaluated value. Using this type of XML and SQL injection with WAF filter bypass via encoding may allow extract of sensitive data.  
 
