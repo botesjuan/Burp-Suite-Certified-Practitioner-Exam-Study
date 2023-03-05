@@ -23,7 +23,6 @@
 [XML entities & Injections](#xxe-injections)  
 [SSRF Server side request forgery](#ssrf---server-side-request-forgery)  
 [SSTI Server side template injection](#ssti---server-side-template-injection)  
-[Cross Site Request Forgery](#csrf)  
 [File path traversal](#file-path-traversal)  
 [File Uploads](#file-uploads)  
 [Deserialization](#deserialization)  
