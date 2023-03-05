@@ -10,6 +10,7 @@
 [Host Headers](#host-headers)  
 [HTTP Request Smuggling](#http-request-smuggling)  
 [Brute force](#brute-force)  
+[Authentication](#authentication)  
   
 **[Privilege Escalation](#privilege-escalation)**  
 [CSRF Account Takeover](#csrf-account-takeover)  

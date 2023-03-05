@@ -163,3 +163,7 @@ secret
 home
 carlos
 product
+Burp
+Suite
+Certified
+Practitioner
