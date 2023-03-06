@@ -1959,6 +1959,10 @@ blog-post-author-display=user.name}}{%25+import+os+%25}{{os.system('cat%20/home/
 
 ![Tornado Template](images/tornado-template.png)  
 
+>Output from reloading the comment previously saved by logged in user after changing the preferred display name.  
+
+![ssti tornado results](images/ssti-tornado-results.png)  
+
 [PortSwigger Lab: Basic server-side template injection data exfiltrate](https://portswigger.net/web-security/server-side-template-injection/exploiting/lab-server-side-template-injection-basic-code-context)  
 
 ### Django  
