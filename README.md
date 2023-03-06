@@ -972,6 +972,9 @@ X-Forwarded-For: 12.13.14.15
   
 # Authentication  
 
+[Account Registration](#account-registration)  
+[Auth Token bypass Macro](#auth-token-bypass-macro)  
+  
 ## Account Registration  
 
 >Business logic flaw in the account registration feature allow for gaining foothold as target user role access. Content discovery find the path ```/admin```, message state the Admin interface is only available if logged in as a **DontWannaCry** user.  
@@ -987,6 +990,26 @@ very-long-strings-so-very-long-string-so-very-long-string-so-very-long-string-so
 ![Inconsistent-handling-exceptional-input](images/Inconsistent-handling-exceptional-input.png)  
 
 [PortSwigger Lab: Inconsistent handling of exceptional input](https://portswigger.net/web-security/logic-flaws/examples/lab-logic-flaws-inconsistent-handling-of-exceptional-input)  
+
+## Auth Token bypass Macro  
+
+>If the authentication login is protected against brute force by using random token that is used on every login POST, a Burp Macro can be used to bypass protection.  
+  
+>Create Burp Macro  
+1. Open Proxy settings and select **sessions** under Project choices.  
+2. Scroll down to ```Macros```, and add new macro.  
+3. Select **request** from the list to use for the value to be used.  
+4. click ```Configure item``` and add custom parameter location to extract.  
+5. Click **OK** to return to Sessions under Project choices.  
+6. Add a Session handling **rule**, and the editor dialogue opens.  
+7. In the dialogue, go to the "Scope" tab. 
+8. Under scope for the session handling rule editor, **check** Target, Intruder, and Repeater.  
+9. Still under "URL Scope", select ```Include all URLs```.  
+10. Close Settings.  
+  
+[create-macro.png](images/create-macro.png)  
+
+[PortSwigger Lab: Infinite money logic flaw - show how to create Burp Macro](https://portswigger.net/web-security/logic-flaws/examples/lab-logic-flaws-infinite-money)  
 
 # Privilege Escalation  
   
@@ -1828,7 +1851,7 @@ body: JSON.stringify({
 
 >Sample code below can be injected on vulnerable implementation of HTML to PDF converter such as ```wkhtmltopdf``` to read local file (SSRF).  
 
->Thehackerish showing wkHTMLtoPDF exploitation using [https://www.root-me.org/](https://www.root-me.org/) CTF lab in the video [Pentest SSRF Ep4](https://youtu.be/Prqt3N5QU2Q?t=345)  
+>Thehackerish showing wkHTMLtoPDF exploitation using [root-me.org - Gemini-Pentest-v1](https://www.root-me.org/) CTF lab in the video [Pentest SSRF Ep4](https://youtu.be/Prqt3N5QU2Q?t=345)  
 
 ```html
 <html>
@@ -1862,11 +1885,10 @@ POST request - Body JSON
 { 
 	"tableHtml":"........<html code snip>......."
 }
-
-pdf creator: wkhtmltopdf 0.12.5
-hacktricks xss cross site scripting server side xss dynamic pdf 
 ```  
 
+>The PDF creator: wkhtmltopdf 0.12.5 is known for SSRF vulnerabilities, and in hacktricks there is cross site scripting and server side exploits documented.  
+  
 ### SSRF Open Redirection  
 
 >The target make **GET** request to the ***next product*** on the e-commerce site, using a **path** parameter. On the stockAPI POST request the value provided in body data is the partial path to internal system. The ***identification*** of this vulnerability is by testing various paths and observing the input path specified is reflected in the response **Location** header.  
