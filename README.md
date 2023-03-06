@@ -1851,7 +1851,9 @@ body: JSON.stringify({
 
 >Sample code below can be injected on vulnerable implementation of HTML to PDF converter such as ```wkhtmltopdf``` to read local file (SSRF).  
 
->Thehackerish showing wkHTMLtoPDF exploitation using [root-me.org - Gemini-Pentest-v1](https://www.root-me.org/) CTF lab in the video [Pentest SSRF Ep4](https://youtu.be/Prqt3N5QU2Q?t=345)  
+>Thehackerish showing wkHTMLtoPDF exploitation using [root-me.org - Gemini-Pentest-v1](https://www.root-me.org/) CTF lab in the video [Pentest SSRF Ep4](https://youtu.be/Prqt3N5QU2Q?t=345) by editing the name of the admin profile with HTML content it is then generated server side by including remote or local files.  
+  
+![root-me ctf gemini pentest v1](images/root-me-ctf-gemini-pentest-v1.png)  
 
 ```html
 <html>
@@ -1887,7 +1889,7 @@ POST request - Body JSON
 }
 ```  
 
->The PDF creator: wkhtmltopdf 0.12.5 is known for SSRF vulnerabilities, and in hacktricks there is cross site scripting and server side exploits documented.  
+>The PDF creator: wkhtmltopdf 0.12.5 is known for SSRF vulnerabilities, and in [Server Side XSS -Dynamic PDF](https://book.hacktricks.xyz/pentesting-web/xss-cross-site-scripting/server-side-xss-dynamic-pdf) there is cross site scripting and server side exploits documented.  
   
 ### SSRF Open Redirection  
 
