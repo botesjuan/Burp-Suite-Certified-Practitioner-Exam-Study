@@ -1881,17 +1881,8 @@ body: JSON.stringify({
 ![root-me ctf wkhtmltopdf 0.12.4](images/root-me-ctf-wkhtmltopdf0.12.4.png)  
 
 >Above the display name is injected with ```HTML``` payload and on export the HTML-to-PDF converter perform SSRF.  
-
-```
-"Download report as PDF"
-/adminpanel/save-report/
-POST request - Body JSON 
-{ 
-	"tableHtml":"........<html code snip>......."
-}
-```  
-
->The PDF creator: wkhtmltopdf 0.12.5 is known for SSRF vulnerabilities, and in [Server Side XSS -Dynamic PDF](https://book.hacktricks.xyz/pentesting-web/xss-cross-site-scripting/server-side-xss-dynamic-pdf) there is cross site scripting and server side exploits documented.  
+  
+>The PDF creator: wkhtmltopdf 0.12.5 is known for SSRF vulnerabilities, and in [HackTricks - Server Side XSS - Dynamic PDF](https://book.hacktricks.xyz/pentesting-web/xss-cross-site-scripting/server-side-xss-dynamic-pdf) there is cross site scripting and server side exploits documented.  
   
 ### SSRF Open Redirection  
 
