@@ -1878,7 +1878,9 @@ body: JSON.stringify({
 }
 ```  
 
->Random notes on HTML-to-PDF converters & SSRF  
+![root-me ctf wkhtmltopdf 0.12.4](images/root-me-ctf-wkhtmltopdf0.12.4.png)  
+
+>Above the display name is injected with ```HTML``` payload and on export the HTML-to-PDF converter perform SSRF.  
 
 ```
 "Download report as PDF"
