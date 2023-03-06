@@ -2310,6 +2310,7 @@ Youtube channels:
 16. [TJCHacking](https://www.youtube.com/@tjchacking/videos)  
 17. [LiveUnderflow](https://www.youtube.com/@LiveUnderflow/videos)  
 18. [JSONSEC](https://www.youtube.com/@JSONSEC/videos)  
+19. [thehackerish](https://www.youtube.com/@thehackerish/videos)  
   
 ## Footnote
 
