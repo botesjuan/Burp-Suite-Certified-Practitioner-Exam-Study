@@ -4,8 +4,12 @@ phpinfo.php
 sitemap.xml
 sitemap
 phpinfo
+info
 pragma
 ProductTemplate.java.bak
+infoleak
+leak
+bypass
 robots.txt
 robots
 robot
@@ -13,6 +17,7 @@ robot
 .git
 /.git/
 invalid
+authentication
 admin-roles
 /backup/ProductTemplate.java.bak
 /post/comment/confirmation.zip
@@ -50,6 +55,9 @@ admin.conf
 xmlStockCheckPayload.js
 stockCheck.js
 stock
+settings
+setting
+debug
 searchResults.js
 searchResults
 downloadReport.js
@@ -89,6 +97,11 @@ my-account-details/update-email
 new-password
 new_password
 refresh
+version
+ver
+v1
+v2
+back
 refreshpassword
 refresh_password
 refresh-password
@@ -97,8 +110,10 @@ js
 resources
 image
 images
+third-party
 login
 exploit
+productID
 search_term
 search-term
 searchterm
@@ -139,10 +154,15 @@ imagefile
 /admin_controls/metrics/admin-image/
 /metrics/admin-image/
 metrics
+submit
 metric
 exam
 apps
 app
+strut
+struts
+delete
+apache
 bscp
 admin-image
 admin_image
@@ -160,6 +180,8 @@ removeuser
 remove-user
 remove_user
 secret
+secretkey
+secret_key
 home
 carlos
 product
@@ -167,3 +189,4 @@ Burp
 Suite
 Certified
 Practitioner
+all-labs
