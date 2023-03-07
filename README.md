@@ -72,7 +72,7 @@ git-cola --repo 0ad900ad039b4591c0a4f91b00a600e7.web-security-academy.net/
 [Document Write Location search](#doc-write-location-search)  
 [Dom Invader](#dom-invader)  
 [DOM XSS JSON.parse web messages](#dom-xss-jsonparse-web-messages)  
-[DOM XSS AddEventListener JavaScript URL](#-dom-xss-addeventlistener-javascript-url)  
+[DOM XSS AddEventListener JavaScript URL](#dom-xss-addeventlistener-javascript-url)  
 [DOM XSS AddEventListener Ads Message](#dom-xss-addeventlistener-ads-message)  
 [Reflected DOM Cookie Stealer](#dom-cookie-stealer)  
 
