@@ -750,7 +750,7 @@ x=1
 
 >**Note:** include the trailing sequence \r\n\r\n following the final 0.  
 
->Calculating TE.CL (Transfer-Encoding / Content-Length) smuggle request length in **HEXADECIMAL** and the payload is between the hex length of **71** and the terminating **ZERO**, not including the ZERO AND not the preceding \r\n on line above ZERO, as part of length. The initial POST request **content-length** is manually set.  
+>Calculating TE.CL (Transfer-Encoding / Content-Length) smuggle request length in **HEXADECIMAL** and the payload is between the hex length of **71** and the terminating **ZERO**, not including the ZERO AND not the preceding ```\r\n``` on line above ZERO, as part of length. The initial POST request **content-length** is manually set.  
   
 [TJCHacking - Request Smuggling Calculator](https://github.com/tjcim/request_smuggling_calculator)  
   
