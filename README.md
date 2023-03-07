@@ -1081,6 +1081,7 @@ very-long-strings-so-very-long-string-so-very-long-string-so-very-long-string-so
 [Referer Validation CSRF](#referer-validation-csrf)  
 [Referer Header Present](#referer-header-present)  
 [LastSearchTerm](#lastsearchterm)  
+[CSRF duplicated in cookie](#csrf-duplicated-in-cookie)  
 [Is Logged In](#is-logged-in)  
   
 >Cross-Site Request Forgery vulnerability allows an attacker to force users to perform actions that they did not intend to perform. This can enable attacker to change victim email address and use password reset to take over the account.  
