@@ -4,6 +4,7 @@
 >This is my study notes on the PortSwigger Academy [Burp Suite Certified Practitioner](https://portswigger.net/web-security/certification) (BSCP) Exam topics. Go to [PortSwigger Academy](https://portswigger.net/web-security/all-materials) learning materials to get more detail. ***Thanks*** everyone for all the **stars** ```\o/```  
   
 **[Foothold](#foothold)**  
+[Content Discovery](#content-discovery)  
 [Dom-XSS](#dom-based-xss)  
 [Cross Site Scripting](#cross-site-scripting)  
 [Web Cache Poison](#web-cache-poison)  
@@ -38,6 +39,32 @@
 [Footnote](#footnote)  
   
 # Foothold  
+  
+# Content Discovery  
+
+>Enumeration of target start with fuzzing web directories and files. Either use the Burp engagement tools, content discovery option to find hidden paths and files or use ```FFUF``` to enumerate web directories and files.  
+
+```bash
+wget https://raw.githubusercontent.com/botesjuan/Burp-Suite-Certified-Practitioner-Exam-Study/main/wordlists/burp-labs-wordlist.txt
+
+ffuf -c -w ./burp-labs-wordlist.txt -u https://TARGET.web-security-academy.net/FUZZ
+```  
+
+>Burp engagement tool, content discovery using my compiled wordlist [burp-labs-wordlist](https://github.com/botesjuan/Burp-Suite-Certified-Practitioner-Exam-Study/blob/main/wordlists/burp-labs-wordlist.txt) as custom file list.  
+
+![content-discovery.png](images/content-discovery.png)  
+
+>Examine the git repo branches on local downloaded copy, using ```git-cola``` tool. Then select **Undo last commit** and extract admin password from the diff window.  
+
+```
+wget -r https://TARGET.web-security-academy.net/.git/
+
+git-cola --repo 0ad900ad039b4591c0a4f91b00a600e7.web-security-academy.net/
+```  
+
+![git-cola](images/git-cola.png)  
+
+[PortSwigger Lab: Information disclosure in version control history](https://portswigger.net/web-security/information-disclosure/exploiting/lab-infoleak-in-version-control-history)  
   
 ## DOM-Based XSS  
 
@@ -977,7 +1004,7 @@ X-Forwarded-For: 12.13.14.15
   
 ## Account Registration  
 
->Business logic flaw in the account registration feature allow for gaining foothold as target user role access. Content discovery find the path ```/admin```, message state the Admin interface is only available if logged in as a **DontWannaCry** user.  
+>Business logic flaw in the account registration feature allow for gaining foothold as target user role access. [Content Discovery](#content-discovery) find the path ```/admin```, message state the Admin interface is only available if logged in as a **DontWannaCry** user.  
 
 ![Register length flaw](images/register-length-flaw.png)  
 
@@ -1010,7 +1037,7 @@ very-long-strings-so-very-long-string-so-very-long-string-so-very-long-string-so
 [create-macro.png](images/create-macro.png)  
 
 [PortSwigger Lab: Infinite money logic flaw - show how to create Burp Macro](https://portswigger.net/web-security/logic-flaws/examples/lab-logic-flaws-infinite-money)  
-
+  
 # Privilege Escalation  
   
 ## CSRF Account Takeover  
