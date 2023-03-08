@@ -3,7 +3,7 @@
 
 >This is my study notes on the PortSwigger Academy [Burp Suite Certified Practitioner](https://portswigger.net/web-security/certification) (BSCP) Exam topics. Go to [PortSwigger Academy](https://portswigger.net/web-security/all-materials) learning and research materials to get original detail. ***Thanks*** everyone for all the **stars** ```\o/```  
   
-**[Foothold](#foothold)**  
+**[FOOTHOLD](#foothold)**  
 [Content Discovery](#content-discovery)  
 [Dom-XSS](#dom-based-xss)  
 [Cross Site Scripting](#cross-site-scripting)  
@@ -13,14 +13,14 @@
 [Brute force](#brute-force)  
 [Authentication](#authentication)  
   
-**[Privilege Escalation](#privilege-escalation)**  
+**[PRIVILEGE ESCALATION](#privilege-escalation)**  
 [CSRF Account Takeover](#csrf-account-takeover)  
 [SQL Injection](#sql-injection)  
 [JSON Web Tokens](#jwt)  
 [Prototype pollution](#prototype-pollution)  
 [Access Control](#access-control)  
   
-**[Data Exfiltration](#data-exfiltration)**  
+**[DATA EXFILTRATION](#data-exfiltration)**  
 [XML entities & Injections](#xxe-injections)  
 [SSRF Server side request forgery](#ssrf---server-side-request-forgery)  
 [SSTI Server side template injection](#ssti---server-side-template-injection)  
@@ -29,7 +29,7 @@
 [Deserialization](#deserialization)  
 [OS Command Injection](#os-command-injection)  
   
-**[Appendix](#appendix)**  
+**[APPENDIX](#appendix)**  
 [Solve Labs with Python](#solve-labs-with-python)  
 [Payloads](payloads/README.md)  
 [Word lists](https://github.com/botesjuan/Burp-Suite-Certified-Practitioner-Exam-Study/tree/main/wordlists)  
