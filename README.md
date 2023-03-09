@@ -30,7 +30,7 @@
 [OS Command Injection](#os-command-injection)  
   
 **[APPENDIX](#appendix)**  
-[Solve Labs with Python](#solve-labs-with-python)  
+[Python Scripts](#python-scripts)  
 [Payloads](payloads/README.md)  
 [Word lists](https://github.com/botesjuan/Burp-Suite-Certified-Practitioner-Exam-Study/tree/main/wordlists)  
 [Focus target scanning](#focus-scanning)  
