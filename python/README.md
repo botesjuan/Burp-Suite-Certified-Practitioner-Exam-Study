@@ -1,11 +1,9 @@
 
 # PortSwigger Academy Lab automation scripts
 
->Came across this great YouTube channel by [@tjc_](https://www.youtube.com/@tjc_/videos), where he step through the process of writng python scripts to automate the exploitation of the PortSwigger labs.  
+>I am collecting scripts to help ***[identify](https://github.com/botesjuan/Burp-Suite-Certified-Practitioner-Exam-Study/tree/main/python/identify)*** vulnerabilities using python scripts to aid in my enumeration and discovery. I also followed the YouTube channel by [TJCHacking](https://www.youtube.com/@tjchacking/videos), where he step through the process of writing python scripts to automate the exploitation of the PortSwigger labs.  
   
->I followed his videos and reproduced the python scripts but credit goes to **@tjc_**  
-
->The utils and other pythons scripts imported into each vulnerability catagory lab is reference with symbolic link, under each sub folder. In below example in the XSS folder there is symbolic link to ../utils folder.
+>The utils and other pythons scripts imported into each vulnerability category lab is reference with symbolic link, under each sub folder. In below example in the XSS folder there is symbolic link to ../utils folder.
 
 ```bash
 cd xss/
@@ -16,7 +14,7 @@ ln -s ../utils utils
 
 ## Code Structure
 
->The is my explanation of the code structure developed by @tjc_.  
+>The is my explanation of the code structure developed by [TJCHacking](https://www.youtube.com/@tjchacking/videos).  
   
 1. **site.py** contain the class, super-class, attributes, objects and functions reused between the tipe of targets, if it is blog or site, these include the common objects.  
 2. **utils.py** is the commong python functions reused in the main program.  

