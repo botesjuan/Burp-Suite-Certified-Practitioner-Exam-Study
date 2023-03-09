@@ -2504,7 +2504,7 @@ Youtube Information Security content creators channels:
 9. [TraceTheCode](https://www.youtube.com/@TraceTheCode/videos)  
 10. [Sabyasachi Paul](https://www.youtube.com/@h0tPlug1n/videos)  
 11. [bmdyy](https://www.youtube.com/@bmdyy/videos)  
-12. [securityguideme](https://www.youtube.com/@securityguideme/videos)  
+12. [CyberSecurityTV](https://www.youtube.com/@CyberSecurityTV/videos)  
 13. [nu11 security](https://www.youtube.com/@Nul1Secur1ty/videos)  
 14. [PortSwigger](https://www.youtube.com/@PortSwiggerTV/videos)  
 15. [IppSec](https://www.youtube.com/@ippsec/videos)  
@@ -2512,6 +2512,7 @@ Youtube Information Security content creators channels:
 17. [LiveUnderflow](https://www.youtube.com/@LiveUnderflow/videos)  
 18. [JSONSEC](https://www.youtube.com/@JSONSEC/videos)  
 19. [thehackerish](https://www.youtube.com/@thehackerish/videos)  
+20. [Daniel Redfern](https://www.youtube.com/@danielredfern9827/videos)  
   
 ## Footnote  
 
