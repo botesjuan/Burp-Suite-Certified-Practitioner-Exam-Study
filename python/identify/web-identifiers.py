@@ -19,11 +19,11 @@ if len(sys.argv) != 4:
     sys.exit(1)
 
 url = sys.argv[1]
-print(f'\n{YELLOW}Supplied {BOLD}TARGET{RESET} from the command line argument:{RESET} {url}')
+print(f'\n{YELLOW}Supplied {BOLD}TARGET{RESET} from the command line argument:{GREEN} {url}{RESET}')
 SEARCH_headers_TERMS_file = sys.argv[2]
-print(f'{YELLOW}Supplied {BOLD}HEADERS{RESET} input file containing search terms:{RESET} {url}')
+print(f'{YELLOW}Supplied {BOLD}HEADERS{RESET} input file containing search terms:{GREEN} {SEARCH_headers_TERMS_file}{RESET}')
 SEARCH_body_TERMS_file = sys.argv[3]
-print(f'{YELLOW}Supplied {BOLD}BODY{RESET} input file containing search terms:{RESET} {url}\n')
+print(f'{YELLOW}Supplied {BOLD}BODY{RESET} input file containing search terms:{GREEN} {SEARCH_body_TERMS_file}{RESET}\n')
 
 # Read the search terms from the files
 with open(SEARCH_headers_TERMS_file, 'r') as f:
