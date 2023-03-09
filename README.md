@@ -2485,7 +2485,7 @@ Youtube Information Security content creators channels:
 18. [JSONSEC](https://www.youtube.com/@JSONSEC/videos)  
 19. [thehackerish](https://www.youtube.com/@thehackerish/videos)  
   
-## Footnote
+## Footnote  
 
 >My experience so far taking the PortSwigger exam, it is designed to be challenging, it is not straight forward vulnerabilities, twisted challenges, mixed academy labs into single stage and even rabbit holes.  
 >**Perseverance:** Persistence in doing something despite difficulty or delay in achieving success.  

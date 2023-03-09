@@ -13,6 +13,11 @@ bypass
 robots.txt
 robots
 robot
+dev
+tst
+prd
+prod
+test
 /backup
 .git
 /.git/
@@ -32,6 +37,11 @@ confirmation.0
 confirmation.old
 confirmation.-old
 backup.zip
+source.zip
+code.zip
+secrets.zip
+password.zip
+info.zip
 path
 /admin
 role-selector
