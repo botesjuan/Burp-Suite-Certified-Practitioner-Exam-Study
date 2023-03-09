@@ -690,7 +690,7 @@ X-Forwarded-Host: EXPLOIT.net
 X-Forwarded-Scheme: nothttps
 ```  
 
-![x-forwarded-scheme nohttps](images\x-forwarded-scheme-nohttps.png)  
+![x-forwarded-scheme not https](images/x-forwarded-scheme-nohttps.png)  
 
 >On the exploit server change the file path to ```/resources/js/tracking.js``` and the update the poison request ```X-Forwarded-Host: EXPLOIT.net``` header. Place the payload on exploit server body.  
 
