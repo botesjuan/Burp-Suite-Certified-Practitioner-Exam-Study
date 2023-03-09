@@ -268,7 +268,7 @@ git-cola --repo 0ad900ad039b4591c0a4f91b00a600e7.web-security-academy.net/
 [XSS Resources](#xss-resources)  
 [Identify allowed Tags](#identify-allowed-tags)  
 [Bypass Blocked Tags](#bypass-blocked-tags)  
-[XSS Assign protocol](#xss-assign-protocol]  
+[XSS Assign protocol](#xss-assign-protocol)  
 [Custom Tags not Blocked](#custom-tags-not-blocked)  
 [XSS Tags & Events](#xss-tags--events)  
 [OnHashChange](#onhashchange)  
