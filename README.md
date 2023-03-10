@@ -1692,6 +1692,8 @@ X-Original-URL: /admin
 %26entity;
 ```  
 
+>Below the server respond with indication that XML Entities are not allowed for security reasons.  
+
 ![Identify XML Injections](images/identify-xxe.png)
 
 ### Xinclude file read  
