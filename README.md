@@ -1679,15 +1679,14 @@ X-Original-URL: /admin
 [SQL + XML + HackVertor](#sql--xml--hackvertor)  
 [XXE perform SSRF](#xxe--ssrf)  
 [XXE with SVG upload](xxe-via-svg-image-upload)  
-
-
+  
 >File upload or user import function on web target use XML file format. This can be vulnerable to XML external entity (XXE) injection.  
 
 ### Identify XML
 
 >Possible to find XXE attack surface in requests that do not contain any XML.  
 
->To ***Identify*** XXE in not so obvious parameters or requests, require adding the below and URL encode the **&** symbol to see the response.  
+>To ***Identify*** XXE in not so obvious parameters or requests, require adding the below and URL encode the **&** ampersand symbol to see the response.  
 
 ```xml
 %26entity;
@@ -1715,7 +1714,7 @@ X-Original-URL: /admin
 
 ### DTD Blind Out-of-band  
 
->On the exploit server change the hosted file name to ```/exploit.dtd``` as the exploit file with **Document Type Definition (DTD)** extension, containing the following payload. The ```&#x25;``` is the Unicode hex character code for percent sign ```%```.  
+>On the exploit server change the hosted file name to ```/exploit.dtd``` as the exploit file with **Document Type Definition (DTD)** extension, containing the following payload. The ```&#x25;``` is the Unicode hex character code for percent sign ```%```. **Parameter entities** are referenced using the **percent** character instead of the usual ampersand.  
 
 ```xml
 <!ENTITY % file SYSTEM "file:///home/carlos/secret">
