@@ -1836,6 +1836,11 @@ http://127.1:6566/admin
 Host: localhost
 ```  
 
+>Alternative IP representation of ```127.0.0.1```:  
+1. 2130706433  
+2. 017700000001  
+3. 127.1  
+  
 >Double URL encode characters in URL to **Obfuscate** the "a" by double-URL encoding it to ```%2561```, resulting in the bypass of blacklist filter.  
 
 ![ssrf obfuscated](images/ssrf-obfuscated.png)  
