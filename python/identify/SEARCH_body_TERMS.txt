@@ -8,3 +8,12 @@ fuzzer
 stay-logged-in
 invalid
 lastsearchterm
+<scri
+iframe
+onpopstate
+document.write
+search
+hidden
+csrf
+recent
+oauth

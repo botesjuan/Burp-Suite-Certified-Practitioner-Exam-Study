@@ -1,7 +1,17 @@
 Age
+Cache
 X-Cache
 admin
 fuzzer
 stay-logged-in
 invalid
 lastsearchterm
+csrf
+csrfkey
+secret
+session
+oauth
+referer
+origin
+isloggedin
+category
