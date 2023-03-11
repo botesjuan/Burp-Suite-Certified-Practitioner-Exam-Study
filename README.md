@@ -124,10 +124,10 @@ git-cola --repo 0ad900ad039b4591c0a4f91b00a600e7.web-security-academy.net/
 
 ### Doc Write Location search  
 
->Below the target is vulnerable to dom-xss in the stock check function. Document.write is the sink used with location.search allowing us to add new value to the JavaScript variable named **storeId**.  
+>Below the target is vulnerable to DOM-XSS in the stock check function. Document.write is the sink used with location.search allowing us to add new value to the JavaScript variable named **storeId**.  
 
 ```html
-/product?productId=1&storeId="></select><img%20src=1%20onerror=alert(document.cookie)>  
+/product?productId=1&storeId="></select><img%20src=1%20onerror=alert(document.cookie)>
 ```  
 
 ![get-dom-xss.png](images/get-dom-xss.png)  
@@ -300,7 +300,9 @@ document.cookie = "TopSecret=UnsecureCookieValue4Peanut2019";
 ```html
 <img src=1 onerror=alert(1)>
 ```  
-  
+
+>Submitting the above payload may give response message, ***"Tag is not allowed"***. Then ***identify*** allowed tags using [methodology](https://portswigger.net/web-security/cross-site-scripting/contexts/lab-html-context-with-most-tags-and-attributes-blocked).  
+
 ### Identify allowed Tags  
 
 >The below lab gives great **Methodology** to ***identify*** allowed HTML tags and events for crafting POC XSS.  
