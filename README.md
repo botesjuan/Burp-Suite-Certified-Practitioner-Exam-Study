@@ -1577,6 +1577,13 @@ hashcat -a 0 -m 16500 <YOUR-JWT> /path/to/jwt.secrets.list
   
 ## ProtoType Pollution  
 
+>Attacker add arbitrary properties to global JavaScript object prototypes, which is inherited by user-defined objects that lead to client-side DOM XSS or server-side code execution.  
+
+[Client-Side Proto](#client-side-proto)  
+[Server-Side Proto](#server-side-proto)  
+  
+### Client-Side Proto  
+
 >A target is vulnerable to DOM XSS via client side prototype pollution. **[DOM Invader](#dom-invader)** will ***identify*** the gadget and using a hosted payload to performing phishing directed at the victim and steal their cookie.  
 
 >Exploit server Body section, host an exploit that will navigate the victim to a malicious URL.  
@@ -1587,11 +1594,15 @@ hashcat -a 0 -m 16500 <YOUR-JWT> /path/to/jwt.secrets.list
 </script>  
 ```  
 
+![Proto pollution](images/proto-pollution.png)  
+
+>Above image show the **Deliver to Victim** phishing request being send.  
+
 [PortSwigger Lab: Client-side prototype pollution in third-party libraries](https://portswigger.net/web-security/prototype-pollution/finding/lab-prototype-pollution-client-side-prototype-pollution-in-third-party-libraries)
 
 ![Proto pollution](images/proto-pollution.png)  
 
-### __Proto__ Privilege Escalate  
+### Server-Side Proto  
 
 >To ***identify*** Proto pollution, insert the follow into a JSON post request when updating a user profile information authenticated as low privileged role.  
 
