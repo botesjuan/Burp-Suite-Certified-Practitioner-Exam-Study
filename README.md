@@ -2207,7 +2207,7 @@ wrtz{{#with "s" as |string|}}
 >Directory traversal attacks allow the malicious actor to read file on the server. ***Identify*** web parameters such as ```filename=``` that are requesting files.  
 
 1. Application blocks traversal sequences but treats the supplied filename as being relative to a absolute path and can be exploit with ```/etc/passwd```absolute path to target file payload.  
-2. Images on app is loaded using ```filename``` parameter, and is defending against traversal attacks by stripping path traversal. Exploit using ```....//....//....//....//etc/passwd``` payloads.  
+2. Images on target is loaded using ```filename``` parameter, and is defending against traversal attacks by stripping path traversal. Exploit using ```....//....//....//....//etc/passwd``` payloads.  
 3. Using URL-encoded ```..%252f..%252f..%252fetc/passwd``` payload can bypass application security controls.  
 4. Leading the beginning of the filename referenced with the original path and then appending ```/var/www/images/../../../etc/passwd``` payload at end bypasses the protection.  
 5. Using a **null** byte character at end plus an image extension to fool APP controls that an image is requested, this ```../../../etc/passwd%00.png``` payload succeed.  
@@ -2219,6 +2219,7 @@ wrtz{{#with "s" as |string|}}
 3. [PortSwigger Lab: File path traversal, traversal sequences stripped with superfluous URL-decode](https://portswigger.net/web-security/file-path-traversal/lab-superfluous-url-decode)  
 4. [PortSwigger Lab: File path traversal, validation of start of path](https://portswigger.net/web-security/file-path-traversal/lab-validate-start-of-path)  
 5. [PortSwigger Lab: File path traversal, validation of file extension with null byte bypass](https://portswigger.net/web-security/file-path-traversal/lab-validate-file-extension-null-byte-bypass)  
+6. Windows OS accept both ```../``` and ```..\``` for directory traversal syntax, and as example retrieving ```/loadImage?filename=..\..\..\windows\win.ini``` on windows target to ***identify*** valid path traversal.  
   
 ![file-path-traversal-null-byte.png](images/file-path-traversal-null-byte.png)   
 
