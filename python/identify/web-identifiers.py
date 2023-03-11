@@ -1,9 +1,15 @@
 import sys
 import requests
+import datetime
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+from webdriver_manager.chrome import ChromeDriverManager
 
-# Define the headers and strings to search for
-SEARCH_headers_TERMS = ['Age', 'X-Cache', 'admin', 'fuzzer', 'stay-logged-in', 'invalid', 'lastsearchterm']
-SEARCH_body_TERMS = ['tracking.js', 'admin', 'addeventlistener', 'ads', 'hashchange', 'hash', 'fuzzer', 'stay-logged-in', 'invalid', 'lastsearchterm']
+now = datetime.datetime.now()
+
+# Format the date and time as a string
+date_string = now.strftime('%Y-%m-%d-%H-%M-%S')
+print(f'\nThe time is now: {date_string}\n')
 
 # Define ANSI escape codes for color
 YELLOW = '\033[33m'
@@ -12,18 +18,19 @@ GREEN = '\033[92m'
 BLUE = '\033[94m'
 RESET = '\033[0m'
 BOLD = '\033[1m'
+UNDERLINE = '\033[4m'
 
 # Check the number of command line arguments
-if len(sys.argv) != 4:
-    print(f'\n{YELLOW}Usage: python web_checker.py <url> <SEARCH_headers_TERMS_file> <SEARCH_body_TERMS_file>{RESET}\n')
+if len(sys.argv) < 5 or len(sys.argv) > 6:
+    print(f'\n{YELLOW}Usage: python web_checker.py <url> <SEARCH_headers_TERMS_file> <SEARCH_body_TERMS_file>{RESET} {BLUE}[--screenshot]{RESET}\n')
     sys.exit(1)
 
 url = sys.argv[1]
-print(f'\n{YELLOW}Supplied {BOLD}TARGET{RESET} from the command line argument:{GREEN} {url}{RESET}')
+print(f'\n{YELLOW}Supplied {BOLD}TARGET{RESET} from the command line argument:{RESET} {url}')
 SEARCH_headers_TERMS_file = sys.argv[2]
-print(f'{YELLOW}Supplied {BOLD}HEADERS{RESET} input file containing search terms:{GREEN} {SEARCH_headers_TERMS_file}{RESET}')
+print(f'{YELLOW}Supplied {BOLD}HEADERS{RESET} input file containing search terms:{RESET} {url}')
 SEARCH_body_TERMS_file = sys.argv[3]
-print(f'{YELLOW}Supplied {BOLD}BODY{RESET} input file containing search terms:{GREEN} {SEARCH_body_TERMS_file}{RESET}\n')
+print(f'{YELLOW}Supplied {BOLD}BODY{RESET} input file containing search terms:{RESET} {url}\n')
 
 # Read the search terms from the files
 with open(SEARCH_headers_TERMS_file, 'r') as f:
@@ -31,6 +38,18 @@ with open(SEARCH_headers_TERMS_file, 'r') as f:
 with open(SEARCH_body_TERMS_file, 'r') as f:
     SEARCH_body_TERMS = [line.strip() for line in f]
 
+# Check if the --screenshot option is specified
+if len(sys.argv) == 5 and sys.argv[4] == '--screenshot':
+    # Set up the Selenium WebDriver with headless Chrome
+    options = Options()
+    options.add_argument('--headless')
+    #driver = webdriver.Chrome(options=options)
+    driver = webdriver.Chrome(ChromeDriverManager().install())
+
+    # Navigate to the URL and take a screenshot
+    driver.get(url)
+    driver.save_screenshot('screenshot-' + date_string + '.png')
+    driver.quit()
 
 response = requests.get(url)
 print(f'{BLUE}[+] Making the request to the URL\n{RESET}')
