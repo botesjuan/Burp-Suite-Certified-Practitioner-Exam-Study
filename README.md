@@ -1117,7 +1117,7 @@ very-long-strings-so-very-long-string-so-very-long-string-so-very-long-string-so
 9. Still under "URL Scope", select ```Include all URLs```.  
 10. Close Settings.  
   
-[create-macro.png](images/create-macro.png)  
+![How To Create a Macro in Burp Suite Professional](images/create-macro.png)  
 
 [PortSwigger Lab: Infinite money logic flaw - show how to create Burp Macro](https://portswigger.net/web-security/logic-flaws/examples/lab-logic-flaws-infinite-money)  
   
