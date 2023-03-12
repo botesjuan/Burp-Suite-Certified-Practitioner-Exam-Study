@@ -1,6 +1,12 @@
+avatars
+avatar
 cgi-bin
 /cgi-bin/phpinfo.php
 phpinfo.php
+CustomTemplate.php
+/libs/CustomTemplate.php
+libs
+lib
 sitemap.xml
 sitemap
 phpinfo
@@ -14,6 +20,7 @@ robots.txt
 robots
 robot
 dev
+development
 tst
 prd
 prod
@@ -24,6 +31,11 @@ test
 invalid
 authentication
 admin-roles
+attack
+attacker
+hack
+hacker
+hackers
 /backup/ProductTemplate.java.bak
 /post/comment/confirmation.zip
 confirmation.zip
@@ -56,6 +68,7 @@ TRACE
 hello
 administrator
 admin.conf
+js
 /resources/js/tracking.js
 /resources/js/downloadReport.js
 /resources/js/changeEmail.js
@@ -116,13 +129,14 @@ refreshpassword
 refresh_password
 refresh-password
 post
-js
 resources
 image
 images
 third-party
 login
 exploit
+upload
+files
 productID
 search_term
 search-term
@@ -173,6 +187,7 @@ strut
 struts
 delete
 apache
+Apache
 bscp
 admin-image
 admin_image
@@ -180,6 +195,9 @@ adminimage
 change
 change-email
 change_email
+change-password
+change_password
+changepassword
 changeemail
 update-email
 updateemail
