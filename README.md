@@ -1023,7 +1023,7 @@ Sec-Ch-Ua-Platform: "Linux"
 
 ![stay-logged-in](images/stay-logged-in.png)  
 
->Intruder Payload processing, add GREP option and the following rules in sequential order before attack is submitted.  
+>The exploit steps below plus the Intruder Payload processing rules in order and including the GREP option in sequence before starting the attack.  
   
 1. Logout as current user.  
 2. Send the most recent GET /my-account request to Burp Intruder.  
@@ -1077,7 +1077,8 @@ X-Forwarded-For: 12.13.14.15
 
 ![Subtly invalid login](images/subtly-invalid-login.png)  
 
->Notice on the Intruder attack column for the GREP value, ```Invalid username or password.``` the one response message for a failed username attack do not contain full stop period at the end. Repeat the attack with this ***identified*** username, and **Sniper** attack the password field to ***identify*** ```302``` response for valid login. In the exam ***lookout*** for other input field disclosing valid accounts on the application and brute force ***identified*** account passwords.  
+>Notice on the Intruder attack column for the GREP value, ```Invalid username or password.``` the one response message for a failed username attack do not contain full stop period at the end. Repeat the attack with this ***identified*** username, and **Sniper** attack the password field to ***identify*** ```302``` response for valid login.  
+>In the exam ***lookout*** for other input field disclosing valid accounts on the application and brute force ***identified*** account passwords, such as example to password reset function.  
 
 [PortSwigger Lab: Username enumeration via subtly different responses](https://portswigger.net/web-security/authentication/password-based/lab-username-enumeration-via-subtly-different-responses)  
   
@@ -1133,6 +1134,7 @@ very-long-strings-so-very-long-string-so-very-long-string-so-very-long-string-so
 [CSRF duplicated in cookie](#csrf-duplicated-in-cookie)  
 [CSRF Token Present](#csrf-token-present)  
 [Is Logged In](#is-logged-in)  
+[CSRF No Defences](#csrf-no-defences)  
   
 >Cross-Site Request Forgery vulnerability allows an attacker to force users to perform actions that they did not intend to perform. This can enable attacker to change victim email address and use password reset to take over the account.  
   
@@ -1284,9 +1286,9 @@ history.pushState('', '', '/');
 
 ### CSRF Token Present  
 
->Changing the value of the ```csrf``` parameter result in change email request being rejected. Deleting the CSRF token allow the change email accepted, and this ***identify*** that the validation of token being present vulnerable.
+>Changing the value of the ```csrf``` parameter result in change email request being **rejected**. Deleting the CSRF token allow the change email to be **accepted**, and this ***identify*** that the validation of token being present is vulnerable.
 
->CSRF PoC Payload:  
+>CSRF PoC Payload hosted on exploit server:  
 
 ```html
 <form method="POST" action="https://YOUR-LAB-ID.web-security-academy.net/my-account/change-email">
@@ -1331,16 +1333,43 @@ csrf=TOKEN&username=administrator
 ```  
 
 ![CSRF privesc](images/csrf-privesc.png)  
-
-[PortSwigger Lab: Password reset broken logic](https://portswigger.net/web-security/authentication/other-mechanisms/lab-password-reset-broken-logic)  
   
->Target with no defences against email change function, can allow the privilege escalation to admin role. In exam changing the email to the hacker email address on the exploit server can allow the change of password for the low privilege user and can assist in privesc.  
+### CSRF No Defences  
+
+>Target with no defences against email change function, can allow the privilege escalation to admin role. In exam changing the email to the ```attacker@EXPLOIT.NET``` email address on the exploit server can allow the change of password for the low privilege user and can assist in privesc.  
+>In the exam there is only on active user, and if the previous stage was completed using attack that did not involve active user clicking on link send from exploit server ```Deliver to Victim``` then this can be used in next stage.  
 
 ![csrf-change-email.png](images/csrf-change-email.png)  
 
 [PortSwigger Lab: CSRF vulnerability with no defences](https://portswigger.net/web-security/csrf/lab-no-defenses)  
+  
+## Password Reset  
 
->***Identify*** the Change password do not need the current-password parameter to set a new password, and the user whom password will be changed is based on POST parameter **username**.  
+[Refresh Password broken logic](#refresh-password-broken-logic)  
+[Current Password](#current-password)  
+
+### Refresh Password broken logic  
+
+>If the application **Refresh Password** feature is flawed, this vulnerability can be exploited without any user clicking on link or interaction. This can lead to identifying valid users accounts or privilege escalation.  
+
+>***Identify*** in the source code for the ```/forgot-password``` page the username is a hidden field.  
+
+![Password reset hidden username](images/passwoed-reset-hidden-username.png)  
+
+>Exploit the post request by deleting the ```temp-forgot-password-token``` parameter in both the URL and request body. Change the username parameter to ```carlos```.  
+
+![Temp-forgot-password-token](images/temp-forgot-password-token.png)  
+
+[PortSwigger Lab: Password reset broken logic](https://portswigger.net/web-security/authentication/other-mechanisms/lab-password-reset-broken-logic)  
+  
+### Current Password  
+
+>***Identify*** the Change password do not need the ```current-password``` parameter to set a new password, and the **user** whom password will be changed is based on POST parameter ```username=administrator```  
+>In the PortSwigger labs they provide you the credentials for ```wiener:peter```, and this simulate in the exam stage 1 achieved low level user access. In exam this password reset vulnerability is example of how it is possible without **interaction** from active user to privilege escalate your access to admin.  
+  
+>Intercept the ```/my-account/change-password``` request as the ```csrf``` token is single random use value, set ```username=administrator```, and remove ```current-password``` parameter.  
+
+![Change password without current](images/change-password-without-current.png)  
 
 [PortSwigger Lab: Weak isolation on dual-use endpoint](https://portswigger.net/web-security/logic-flaws/examples/lab-logic-flaws-weak-isolation-on-dual-use-endpoint)  
   
