@@ -15,6 +15,7 @@
   
 **[PRIVILEGE ESCALATION](#privilege-escalation)**  
 [CSRF Account Takeover](#csrf-account-takeover)  
+[Password Reset](#password-reset)  
 [SQL Injection](#sql-injection)  
 [JSON Web Tokens](#jwt)  
 [Prototype pollution](#prototype-pollution)  
