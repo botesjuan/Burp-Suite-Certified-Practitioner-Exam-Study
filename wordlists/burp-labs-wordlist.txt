@@ -1,3 +1,5 @@
+ai
+chat
 avatars
 avatar
 cgi-bin
