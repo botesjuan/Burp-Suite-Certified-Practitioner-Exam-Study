@@ -3,6 +3,7 @@ avatar
 cgi-bin
 /cgi-bin/phpinfo.php
 phpinfo.php
+customtemplate
 CustomTemplate.php
 /libs/CustomTemplate.php
 libs
