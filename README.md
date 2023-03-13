@@ -2321,7 +2321,7 @@ wrtz{{#with "s" as |string|}}
 4. Leading the beginning of the filename referenced with the original path and then appending ```/var/www/images/../../../etc/passwd``` payload at end bypasses the protection.  
 5. Using a **null** byte character at end plus an image extension to fool APP controls that an image is requested, this ```../../../etc/passwd%00.png``` payload succeed.  
 6. Windows OS accept both ```../``` and ```..\``` for directory traversal syntax, and as example retrieving ```/loadImage?filename=..\..\..\windows\win.ini``` on windows target to ***identify*** valid path traversal.  
-7. PHP Wrapper filter vulnerability allow traversal bypass to result in remote code execution (RCE) critical. Using [PHP filter chain generator](https://github.com/synacktiv/php_filter_chain_generator) to get your RCE without uploading a file if you control entirely the parameter passed to a require or an include in PHP! See [Tib3rius YouTube demo](https://youtu.be/OGjpTT6xiFI?t=1019)  
+7. PHP Wrapper filter vulnerability allow traversal bypass to result in remote code execution (RCE) critical. Using [PHP filter chain generator](https://github.com/synacktiv/php_filter_chain_generator) to get your RCE without uploading a file if you control entirely the parameter passed to a require or an include in PHP! See [Tib3rius YouTube demo](https://youtu.be/OGjpTT6xiFI?t=1019) ```python php_filter_chain.generator.py --chain '<?=`$_GET[0]`; ?>' | tail -n 1 | urlencode``` 
   
 >Corresponding PortSwigger Directory traversal labs.  
 
