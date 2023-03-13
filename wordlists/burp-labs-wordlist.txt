@@ -26,6 +26,7 @@ tst
 prd
 prod
 test
+backup
 /backup
 .git
 /.git/
@@ -37,6 +38,11 @@ attacker
 hack
 hacker
 hackers
+java
+AccessTokenUser.java
+/backup/AccessTokenUser.java
+ProductTemplate.java
+/backup/ProductTemplate.java
 /backup/ProductTemplate.java.bak
 /post/comment/confirmation.zip
 confirmation.zip
