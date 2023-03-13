@@ -2341,7 +2341,7 @@ wrtz{{#with "s" as |string|}}
 GET /admin_controls/metrics/admin-image?imagefile=%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252fetc%252fpasswd
 ```  
 
->Note: Add the fuzzing path traversal payload from drop-down list option, **"Add from list ..."**. Then set processing rule on the provided payload to replace the FILE place holder with reg-ex ```\{FILE\}``` for each of the attacks.  
+>Note: Add the fuzzing path traversal payload from drop-down list option, ***Add from list ...***. Then set processing rule on the provided payload to replace the FILE place holder with reg-ex ```\{FILE\}``` for each of the attacks.  
 
 ![payloads for path traverse](images/payloads-for-path-traverse.png)  
 
@@ -2354,6 +2354,7 @@ GET /admin_controls/metrics/admin-image?imagefile=%252e%252e%252f%252e%252e%252f
 [Bypass Upload Controls](#bypass-upload-controls)  
 [XXE via SVG Image upload](#xxe-via-svg-image-upload)  
 [Remote File Inclusion](#remote-file-inclusion)  
+[XSS SVG Upload](#xss-svg-upload)  
 
 ### Bypass Upload Controls  
   
