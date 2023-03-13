@@ -1779,7 +1779,7 @@ Origin: http://subdomain.TARGET.NET
 [DTD Blind Error messages](#dtd-blind-error-messages)  
 [SQL + XML + HackVertor](#sql--xml--hackvertor)  
 [XXE perform SSRF](#xxe--ssrf)  
-[XXE with SVG upload](xxe-via-svg-image-upload)  
+[XXE with SVG upload](#xxe-via-svg-image-upload)  
   
 >File upload or user import function on web target use XML file format. This can be vulnerable to XML external entity (XXE) injection.  
 
