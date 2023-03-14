@@ -2663,7 +2663,7 @@ CHAR(83)+CHAR(69)+CHAR(76)+CHAR(69)+CHAR(67)+CHAR(84)
 Youtube Information Security content creators channels:  
 
 1. [Rana Khalil](https://www.youtube.com/@RanaKhalil101/videos)  
-2. [David Bombal](https://www.youtube.com/@davidbombal/videos)  
+2. [TJCHacking](https://www.youtube.com/@tjchacking/videos)  
 3. [intigriti](https://www.youtube.com/@intigriti/videos)  
 4. [Seven Seas Security](https://www.youtube.com/@7SeasSecurity/videos)  
 5. [z3nsh3ll](https://www.youtube.com/@z3nsh3ll/videos)  
@@ -2677,11 +2677,11 @@ Youtube Information Security content creators channels:
 13. [nu11 security](https://www.youtube.com/@Nul1Secur1ty/videos)  
 14. [PortSwigger](https://www.youtube.com/@PortSwiggerTV/videos)  
 15. [IppSec](https://www.youtube.com/@ippsec/videos)  
-16. [TJCHacking](https://www.youtube.com/@tjchacking/videos)  
+16. [Daniel Redfern](https://www.youtube.com/@danielredfern9827/videos)  
 17. [LiveUnderflow](https://www.youtube.com/@LiveUnderflow/videos)  
 18. [JSONSEC](https://www.youtube.com/@JSONSEC/videos)  
 19. [thehackerish](https://www.youtube.com/@thehackerish/videos)  
-20. [Daniel Redfern](https://www.youtube.com/@danielredfern9827/videos)  
+20. [David Bombal](https://www.youtube.com/@davidbombal/videos)  
   
 ## Footnote  
 
