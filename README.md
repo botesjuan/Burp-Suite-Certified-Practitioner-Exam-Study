@@ -84,7 +84,11 @@ git-cola --repo 0ad900ad039b4591c0a4f91b00a600e7.web-security-academy.net/
 ### Identify DOM-XSS  
 
 >DOM-based XSS vulnerabilities arise when JavaScript takes data from an attacker-controllable source, such as the URL, and passes code to a sink that supports dynamic code execution. 
->Test the following sequence of characters to identify XSS / DOM-XSS charters to use in escape: ```<>\'\"<script>{{7*7}}$(alert(1)}fuzzer``` fuzzer string.  
+>Test the what characters enable escaping the source code injection point, fuzzer string.  
+
+```
+<>\'\"<script>{{7*7}}$(alert(1)}fuzzer
+```  
 
 >Review the code to ***identify*** the **sources** and **sinks** that may lead to exploit, list of samples:  
 
