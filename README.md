@@ -90,7 +90,7 @@ git-cola --repo 0ad900ad039b4591c0a4f91b00a600e7.web-security-academy.net/
 <>\'\"<script>{{7*7}}$(alert(1)}fuzzer
 ```  
 
->Review the code to ***identify*** the **sources** and **sinks** that may lead to exploit, list of samples:  
+>Review the code to ***identify*** the **sources** , **sinks** or **methods** that may lead to exploit, list of samples:  
 
 * document.write()  
 * window.location  
