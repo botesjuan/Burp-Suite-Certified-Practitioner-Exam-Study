@@ -161,7 +161,7 @@ git-cola --repo 0ad900ad039b4591c0a4f91b00a600e7.web-security-academy.net/
 
 ![dom-xss](images/dom-xss.png)  
 
-[PortSwigger Lab: DOM XSS in document.write sink using source location.search inside a <select> element](https://portswigger.net/web-security/cross-site-scripting/dom-based/lab-document-write-sink-inside-select-element)  
+[PortSwigger Lab: DOM XSS in document.write sink using source location.search inside a select element](https://portswigger.net/web-security/cross-site-scripting/dom-based/lab-document-write-sink-inside-select-element)  
 
 ### Dom Invader  
 
