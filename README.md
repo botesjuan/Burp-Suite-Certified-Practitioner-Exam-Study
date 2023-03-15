@@ -141,7 +141,9 @@ git-cola --repo 0ad900ad039b4591c0a4f91b00a600e7.web-security-academy.net/
 
 ### Doc Write Location search  
 
->Below the target is vulnerable to DOM-XSS in the stock check function. Document.write is the sink used with location.search allowing us to add new value to the JavaScript variable named **storeId**.  
+>The target is vulnerable to DOM-XSS in the stock check function. Source code reveal ```Document.write``` is the sink used with ```location.search``` allowing us to add new value to the JavaScript variable named **storeId**.  
+
+![DOM-XSS doc write inside select](images/dom-xss-doc-write-inside-select.png)  
 
 ```html
 /product?productId=1&storeId="></select><img%20src=1%20onerror=alert(document.cookie)>
