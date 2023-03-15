@@ -1689,8 +1689,8 @@ hashcat -a 0 -m 16500 <YOUR-JWT> /path/to/jwt.secrets.list
 >Exploit steps to Upload a malicious JWK Set, then Modify and sign the JWT:  
 
 1. Generate **New RSA Key pair** automatically, and ignore the size.  
-2. on the exploit server body create **empty JWK** ``` { "keys": [ ] } ```.  
-3. **Copy Public Key as JWK** from the new RSA key pair generate in previous step.  
+2. On the exploit server body create **empty JWK** ``` { "keys": [ ] } ```.  
+3. **Copy Public Key as JWK** from the new RSA key pair generate in previous step, in between the exploit body square brackets ``` [ paste ] ```.  
 4. Copy kid value of generate RSA key into the ```/admin``` request JWT header ```kid``` value.  
 5. Set new ```jku``` parameter to the value of the exploit server URL ```https://exploit-server.net/exploit```.  
 6. Change JWT payload value of the ```sub``` claim to ```administrator```.  
