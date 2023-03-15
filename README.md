@@ -1625,6 +1625,7 @@ sqlmap -v -u 'https://TARGET.net/filter?category=*' -p 'category' --batch --flus
 [JWT bypass via JWK](#manual-sqli)  
 [JWT Weak secret](#jwt-weak-secret)  
 [JWT kid header](#jwt-kid-header)  
+[JWT arbitrary jku header](#jwt-arbitrary-jku-header)  
 
 
 >JSON web tokens (JWTs) use to send cryptographically signed JSON data, and most commonly used to send information ("claims") about users as part of authentication, session handling, and access control.  
