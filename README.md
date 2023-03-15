@@ -1632,7 +1632,10 @@ sqlmap -v -u 'https://TARGET.net/filter?category=*' -p 'category' --batch --flus
 
 ### JWT bypass via JWK  
 
->The burp scanner ***identify*** vulnerability in server as, **JWT self-signed JWK header supported**. Possible to exploit it through failed check of the provided key source. Exploit steps:  
+>The burp scanner ***identify*** vulnerability in server as, **JWT self-signed JWK header supported**. Possible to exploit it through failed check of the provided key source.  
+>**jwk (JSON Web Key)** - Provides an embedded JSON object representing the key.  
+
+>Authentication bypass Exploit steps via jwk header injection:  
 
 1. New RSA Key  
 2. In request JWT payload, change the value of the **sub claim** to administrator  
@@ -1658,6 +1661,7 @@ hashcat -a 0 -m 16500 <YOUR-JWT> /path/to/jwt.secrets.list
 ### JWT kid header  
 
 >JWT-based mechanism for handling sessions. In order to verify the signature, the server uses the **kid** parameter in JWT header to fetch the relevant key from its file system. Generate a new **Symmetric Key** and replace **k** property with the base64 null byte ```AA==```, to be used when signing the JWT.  
+>**kid (Key ID)** - Provides an ID that servers can use to identify the correct key in cases where there are multiple keys to choose from.  
 
 >JWS  
 
@@ -1685,6 +1689,7 @@ hashcat -a 0 -m 16500 <YOUR-JWT> /path/to/jwt.secrets.list
 ### JWT arbitrary jku header  
 
 >Burp scanner identified vulnerability stating the application appears to trust the ```jku``` header of the JWT found in the manual insertion point. It fetched a public key from an arbitrary URL provided in this header and attempted to use it to verify the signature.  
+>**jku (JSON Web Key Set URL)** - Provides a URL from which servers can fetch keys containing the correct key.  
 
 >Exploit steps to Upload a malicious JWK Set, then Modify and sign the JWT:  
 
