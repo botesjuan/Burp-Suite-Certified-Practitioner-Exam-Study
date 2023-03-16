@@ -69,6 +69,7 @@ secrets.zip
 password.zip
 info.zip
 path
+nextproduct
 /admin
 role-selector
 roleselector
@@ -102,7 +103,8 @@ downloadReport
 download
 download-transcript
 transcript
-
+load
+loadimage
 report
 save-report
 save_report
