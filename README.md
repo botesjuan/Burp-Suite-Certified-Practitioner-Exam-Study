@@ -2203,7 +2203,11 @@ body: JSON.stringify({
   
 ### SSRF Open Redirection  
 
->The target make **GET** request to the ***next product*** on the e-commerce site, using a **path** parameter. On the stockAPI POST request the value provided in body data is the partial path to internal system. The ***identification*** of this vulnerability is by testing various paths and observing the input path specified is reflected in the response **Location** header.  
+>The target make **GET** request to the ***next product*** on the e-commerce site, using a **path** parameter. On the stockAPI POST request the value provided in body data is the partial path to internal system. See product page source code below.  
+
+![ssrf-open-redirection-code.png](images/ssrf-open-redirection-code.png)  
+  
+>The ***identification*** of this vulnerability is by testing various paths and observing the input path specified is reflected in the response **Location** header.  
 
 ![SSRF Open Redirect Location reflect](images/ssrf-open-edirect-location-reflect.png)  
 
