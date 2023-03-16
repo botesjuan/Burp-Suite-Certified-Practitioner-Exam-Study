@@ -1435,7 +1435,7 @@ csrf=TOKEN&username=administrator
   
 >Error based or Blind SQL injection vulnerabilities, allow SQL queries in an application to be used to extract data or login credentials from the  database. SQLMAP is used to fast track the exploit and retrieve the sensitive information.  
 
->***Identify*** SQLi, by adding a double (") or single quote (') to web parameters or tracking cookies, if this break the SQL syntax resulting in error message response, then positive SQL injection ***identified***.  
+>***Identify*** SQLi, by adding a double (") or single quote (') to web parameters or tracking cookies, if this break the SQL syntax resulting in error message response, then positive SQL injection ***identified***. If no error or conditional message observed test blind [Time delays](https://portswigger.net/web-security/sql-injection/cheat-sheet) payloads.  
 
 [SQL Injection cheat sheet examples](https://portswigger.net/web-security/sql-injection/cheat-sheet)  
 
