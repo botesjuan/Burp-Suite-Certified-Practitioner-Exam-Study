@@ -1425,7 +1425,7 @@ csrf=TOKEN&username=administrator
   
 ## SQL Injection  
   
-[Blind Time Delay](blind-time-delay)   
+[Blind Time Delay](#blind-time-delay)   
 [Blind SQLi](#blind-sqli)  
 [Blind SQLi no indication](#blind-sqli-no-indication)  
 [Blind SQLi Conditional Response](#blind-sqli-conditional-response)  
