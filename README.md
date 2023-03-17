@@ -820,6 +820,7 @@ csrf=TheCSRFTokenValue&username=carlos
 >Architecture with front-end and back-end server, and front-end or back-end does not support chunked encoding **(HEX)** or content-length **(Decimal)**. Bypass security controls to retrieve the victim's request and use the victim user's cookies to access their account.  
   
 [TE.CL multiCase - Transfer-Encoding](#tecl-multicase---transfer-encoding)  
+[CL.TE multiCase - Admin blocked](#clte-multicase---admin-blocked)  
 [CL.TE multiCase - Content-Length](#clte-multicase---content-length)  
 [CL.TE multiCase - User-Agent Cookie Stealer](#clte-multicase---user-agent-cookie-stealer)  
 [TE.CL dualchunk - Transfer-encoding obfuscated](#tecl-dualchunk---transfer-encoding-obfuscated)  
@@ -883,6 +884,8 @@ Content-Length: 10
 
 x=
 ```  
+
+>On the second time the request is send the admin portal is returned in response.  
 
 ![cl.te multicase admin blocked](images/cl.te-multicase-admin-blocked.png)  
 
