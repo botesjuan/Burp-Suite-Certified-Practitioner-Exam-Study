@@ -122,6 +122,7 @@ sign_out
 logout
 logoff
 comment
+reg
 registration
 register
 new

