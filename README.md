@@ -654,7 +654,7 @@ body:document.cookie
 
 ### Stored DOM XSS  
 
->In the JavaScript source code ***identify*** the ```replace()``` function inside the custom ```loadComments```, and testing payloads we see the function only replaces the first occurrence.  
+>In the JavaScript source code ***identify*** the ```html.replace()``` function inside the custom ```loadComments```, and testing payloads we see the function only replaces the first occurrence.  
 
 ![stored dom-xss code replace](images/stored-dom-xss-code.png)  
 
