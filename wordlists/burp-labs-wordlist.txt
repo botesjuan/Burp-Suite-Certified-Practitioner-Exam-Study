@@ -8,6 +8,7 @@ chat
 avatars
 avatar
 cgi-bin
+phpinfo
 /cgi-bin/phpinfo.php
 phpinfo.php
 customtemplate
@@ -17,7 +18,6 @@ libs
 lib
 sitemap.xml
 sitemap
-phpinfo
 info
 pragma
 ProductTemplate.java.bak
