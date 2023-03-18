@@ -1196,8 +1196,9 @@ X-Forwarded-For: 12.13.14.15
 ![Subtly invalid login](images/subtly-invalid-login.png)  
 
 >Notice on the Intruder attack column for the GREP value, ```Invalid username or password.``` the one response message for a failed username attack do not contain full stop period at the end. Repeat the attack with this ***identified*** username, and **Sniper** attack the password field to ***identify*** ```302``` response for valid login.  
->In the exam ***lookout*** for other input field disclosing valid accounts on the application and brute force ***identified*** account passwords, such as example to password reset function.  
-
+  
+>In the BSCP exam ***lookout*** for other messages returned that are different and disclose valid accounts on the application and allow the brute force ***identified*** of account passwords, such as example on the refresh password reset function.  
+  
 [PortSwigger Lab: Username enumeration via subtly different responses](https://portswigger.net/web-security/authentication/password-based/lab-username-enumeration-via-subtly-different-responses)  
   
 # Authentication  
