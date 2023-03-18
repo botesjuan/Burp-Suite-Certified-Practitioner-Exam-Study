@@ -2755,6 +2755,7 @@ email=carlos@exam.net||curl+`whoami`.COLLABORATOR.net||
 [Focus Scanning](#focus-scanning)  
 [Approach](#approach)  
 [YouTube & Extra Training Content](#extra-training-content)  
+[Convert epoch time to milliseconds from human readable may be in exam](https://www.epochconverter.com/)  
 
 ## Obfuscation  
 
