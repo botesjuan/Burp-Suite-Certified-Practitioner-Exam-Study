@@ -1219,6 +1219,8 @@ X-Forwarded-For: 12.13.14.15
 
 >In the BSCP exam ***lookout*** for other messages returned that are different and disclose valid accounts on the application and allow the brute force ***identified*** of account passwords, such as example on the [refresh password reset](#refresh-password-broken-logic) function.  
   
+>Once valid username identified from different response message, the perform [brute force](#brute-force) using Burp Intruder on the password.  
+
 [PortSwigger Lab: Username enumeration via subtly different responses](https://portswigger.net/web-security/authentication/password-based/lab-username-enumeration-via-subtly-different-responses)  
   
 # Authentication  
