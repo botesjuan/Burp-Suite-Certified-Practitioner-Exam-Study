@@ -478,7 +478,7 @@ location = 'https://TARGET.net/?search=%3Cxss+id%3Dx+onfocus%3Ddocument.location
 
 ### Reflected String XSS  
 
->Submitting a search string and reviewing the `source code` of the search result page, the JavaScript string variable is ***identified*** to reflect the search string ```tracjer.gif``` in the `source code` variable named ```searchTerms```.  
+>Submitting a search string and reviewing the `source code` of the search result page, the JavaScript string variable is ***identified*** to reflect the search string `tracker.gif` in the `source code` variable named `searchTerms`.  
 
 ```html
 <section class=blog-header>
