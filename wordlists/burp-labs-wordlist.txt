@@ -4,6 +4,10 @@
 1.txt
 2.txt
 ai
+api
+accountapi
+account-api
+account_api
 chat
 avatars
 avatar
@@ -150,10 +154,12 @@ refresh_password
 refresh-password
 post
 resources
+resource
 image
 images
 third-party
 login
+log-in
 exploit
 upload
 files
@@ -210,6 +216,9 @@ delete
 apache
 Apache
 bscp
+blog-image
+blogimage
+blog_image
 admin-image
 admin_image
 adminimage
