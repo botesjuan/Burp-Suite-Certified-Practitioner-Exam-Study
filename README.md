@@ -1947,6 +1947,11 @@ X-Original-URL: /admin
   
 ## CORS  
 
+[Trusted insecure protocols](#trusted-insecure-protocols)  
+[Null origin trusted](#null-origin-trusted)  
+
+### Trusted insecure protocols  
+
 >***Identify*** in the `source code` the account details are requested with AJAX request and it contains the user session cookie in the response.  
 
 ![cors-ajax-request.png](images/cors-ajax-request.png)  
@@ -1971,6 +1976,10 @@ Origin: http://subdomain.TARGET.NET
 
 [PortSwigger Lab: CORS vulnerability with trusted insecure protocols](https://portswigger.net/web-security/cors/lab-breaking-https-attack)  
   
+### Null origin trusted  
+
+>Identify the CORS insecure configuration by checking the AJAX response if it contains the `Access-Control-Allow-Credentials`, then add header `Origin: null`. If the `null` origin is reflected in the `Access-Control-Allow-Origin` header it is vulnerable.  
+
 >Payload that may work in BSCP exam on getting the administrator account API and session cookie. Host on exploit server.  
 
 ```html
@@ -1986,6 +1995,10 @@ Origin: http://subdomain.TARGET.NET
 </script>"></iframe>
 ```  
 
+![CORS-NULL trusted](images/CORS-NULL.png)  
+
+[PortSwigger Lab: CORS vulnerability with trusted null origin](https://portswigger.net/web-security/cors/lab-null-origin-whitelisted-attack)  
+  
 # Data Exfiltration  
 
 ## XXE Injections  
@@ -2566,6 +2579,12 @@ GET /admin_controls/metrics/admin-image?imagefile=%252e%252e%252f%252e%252e%252f
 >Burp Intruder provides a predefined payload list, as example **"Fuzzing - path traversal"**.  
   
 [PortSwigger Academy File-path-traversal](https://portswigger.net/web-security/file-path-traversal)  
+
+[403bypasser](https://www.geeksforgeeks.org/403bypasser-bypass-403-restricted-directory/)  
+
+```
+python3 403bypasser.py -u https://TARGET.net -d /secret
+```
 
 ## File Uploads  
   

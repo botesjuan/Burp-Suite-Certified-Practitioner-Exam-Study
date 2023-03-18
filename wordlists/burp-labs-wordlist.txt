@@ -118,6 +118,7 @@ tracking.js
 isloggedin
 password
 username
+sign
 sign-in
 signin
 sign_in
@@ -202,7 +203,10 @@ admin
 admins
 deliver-to-victim
 imagefile
+blog_images
+blog_image
 /admin_controls/metrics/admin-image/
+/admin_controls/metrics/blog_images/
 /metrics/admin-image/
 metrics
 submit
