@@ -1209,13 +1209,15 @@ X-Forwarded-For: 12.13.14.15
   
 ### Subtly Invalid Login  
 
->***Identify*** that the login page is not protected by brute force attack, and no IP block or time-out enforced for invalid username or password.  
+>***Identify*** that the login page & password reset is not protected by brute force attack, and no IP block or time-out enforced for invalid username or password.  
 
 ![Subtly invalid login](images/subtly-invalid-login.png)  
 
 >Notice on the Intruder attack column for the GREP value, ```Invalid username or password.``` the one response message for a failed username attack do not contain full stop period at the end. Repeat the attack with this ***identified*** username, and **Sniper** attack the password field to ***identify*** ```302``` response for valid login.  
   
->In the BSCP exam ***lookout*** for other messages returned that are different and disclose valid accounts on the application and allow the brute force ***identified*** of account passwords, such as example on the refresh password reset function.  
+![Refresh Password](images/refresh-password.png)  
+
+>In the BSCP exam ***lookout*** for other messages returned that are different and disclose valid accounts on the application and allow the brute force ***identified*** of account passwords, such as example on the [refresh password reset](#refresh-password-broken-logic) function.  
   
 [PortSwigger Lab: Username enumeration via subtly different responses](https://portswigger.net/web-security/authentication/password-based/lab-username-enumeration-via-subtly-different-responses)  
   
@@ -1487,8 +1489,10 @@ csrf=TOKEN&username=administrator
 
 ### Refresh Password broken logic  
 
->If the application **Refresh Password** feature is flawed, this vulnerability can be exploited without any user clicking on link or interaction. This can lead to identifying valid users accounts or privilege escalation.  
-
+>If the application [Refresh Password](#subtly-invalid-login) feature is flawed, this vulnerability can be exploited to identify valid accounts or obtain password reset token. This can lead to identifying valid users accounts or privilege escalation.  
+    
+>This is the type of vulnerability that do not require active user on application to interact with the exploit, and without any user clicking on link or interaction. Take note of vulnerabilities that do not require active user on application for the BSCP exam, as this mean in the next stage of the exam it is possible to use for example [other](#cors) interactive phishing links send to victim.   
+  
 >***Identify*** in the `source code` for the ```/forgot-password``` page the username is a hidden field.  
 
 ![Password reset hidden username](images/passwoed-reset-hidden-username.png)  
