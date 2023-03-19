@@ -236,6 +236,7 @@ change-password
 change_password
 changepassword
 changeemail
+changeemail.js
 update
 patch
 update-email
