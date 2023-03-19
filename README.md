@@ -2912,6 +2912,8 @@ CHAR(83)+CHAR(69)+CHAR(76)+CHAR(69)+CHAR(67)+CHAR(84)
   
 ## Approach  
 
+>Tips from [Daniel Redfern](https://youtu.be/Lbn8zQJByGY?t=551) is best I have come access about BSCP exam, especially Tip 7, only one active user and may be on stage 2 if you did not use interactive exploit on stage 1.  
+  
 >When stuck in BSCP exam, reference the below [Micah van Deusen blog tip 5 table of category to stages](https://micahvandeusen.com/burp-suite-certified-practitioner-exam-review/) for ways to progress through the stages.  
 
 ![MicahVanDeusens-blog](images/MicahVanDeusens-blog.png)  
