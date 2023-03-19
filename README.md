@@ -1211,6 +1211,8 @@ X-Forwarded-For: 12.13.14.15
 
 >***Identify*** that the login page & password reset is not protected by brute force attack, and no IP block or time-out enforced for invalid username or password.  
 
+>Tip for the BSCP Exam, there is sometimes another user with weak password that can be brute forced. Carlos is not always the account to target to give a foothold access in stage 1.  
+
 ![Subtly invalid login](images/subtly-invalid-login.png)  
 
 >Notice on the Intruder attack column for the GREP value, ```Invalid username or password.``` the one response message for a failed username attack do not contain full stop period at the end. Repeat the attack with this ***identified*** username, and **Sniper** attack the password field to ***identify*** ```302``` response for valid login.  
