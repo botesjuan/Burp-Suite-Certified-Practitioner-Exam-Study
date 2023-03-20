@@ -933,9 +933,11 @@ x=1
 
 ```  
 
->Calculating TE.CL (Transfer-Encoding / Content-Length) smuggle request length in **HEXADECIMAL** and the payload is between the hex length of **71** and the terminating **ZERO**, not including the ZERO AND not the preceding ```\r\n``` on line above ZERO, as part of length. The initial POST request **content-length** is manually set.  
+>Calculating TE.CL (Transfer-Encoding / Content-Length) smuggle request length in **HEXADECIMAL** and the payload is between the hex length of **71** and the terminating **ZERO**, not including the ZERO AND not the preceding `\r\n` on line above ZERO, as part of length. The initial POST request **content-length** is manually set.  
   
 ![te.cl.multicase-smuggle.png](images/te.cl.multicase-smuggle.png)  
+
+>When sending the `/admin/delete?username=carlos` to delete user, the transfer encoding hex length is changed from `71` to `88` hexadecimal value to include extra smuggled request size.  
 
 [PortSwigger Lab: Exploiting HTTP request smuggling to bypass front-end security controls, TE.CL vulnerability](https://portswigger.net/web-security/request-smuggling/exploiting/lab-bypass-front-end-controls-te-cl)  
 
