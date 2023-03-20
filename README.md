@@ -1956,7 +1956,7 @@ Connection: close
 
 ### Drop Select a role  
   
->Escalation to administrator is sometimes controlled by a role selector GET request, by **dropping** the "Please select a role" GET request before it is presented to the user, the default role of **admin** is selected by back-end and access is granted to the admin portal.  
+>Escalation to administrator is sometimes controlled by a role selector GET request, by **dropping** the `Please select a role` GET request before it is presented to the user, the default role of **admin** is selected by back-end and access is granted to the admin portal.  
 
 ![Select a role](images/select-a-role.png)  
 
