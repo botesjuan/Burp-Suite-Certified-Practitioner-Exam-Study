@@ -1832,19 +1832,19 @@ hashcat -a 0 -m 16500 <YOUR-JWT> /path/to/jwt.secrets.list
 
 ### JWT arbitrary jku header  
 
->Burp scanner identified vulnerability stating the application appears to trust the ```jku``` header of the JWT found in the manual insertion point. It fetched a public key from an arbitrary URL provided in this header and attempted to use it to verify the signature.  
+>Burp scanner identified vulnerability stating the application appears to trust the `jku` header of the JWT found in the manual insertion point. It fetched a public key from an arbitrary URL provided in this header and attempted to use it to verify the signature.  
 >**jku (JSON Web Key Set URL)** - Provides a URL from which servers can fetch keys containing the correct key.  
 
 >Exploit steps to Upload a malicious JWK Set, then Modify and sign the JWT:  
 
 1. Generate **New RSA Key pair** automatically, and ignore the size.  
-2. On the exploit server body create **empty JWK** ``` { "keys": [ ] } ```.  
-3. **Copy Public Key as JWK** from the new RSA key pair generate in previous step, in between the exploit body square brackets ``` [ paste ] ```.  
-4. Copy kid value of generate RSA key into the ```/admin``` request JWT header ```kid``` value.  
-5. Set new ```jku``` parameter to the value of the exploit server URL ```https://exploit-server.net/exploit```.  
-6. Change JWT payload value of the ```sub``` claim to ```administrator```.  
-7. On the ```/admin``` request in repeat, at bottom of the JSON Web Token tab, click ```Sign```.
-8. On Sign option, then select the ```RSA signing key``` that was generated in the previous steps.  
+2. On the exploit server body create **empty JWK** ` { "keys": [ ] } `.  
+3. **Copy Public Key as JWK** from the new RSA key pair generate in previous step, in between the exploit body square brackets ` [ paste ] `.  
+4. Copy kid value of generate RSA key into the `/admin` request JWT header `kid` value.  
+5. Set new ```jku``` parameter to the value of the exploit server URL `https://exploit-server.net/exploit`.  
+6. Change JWT payload value of the ```sub``` claim to `administrator`.  
+7. On the `/admin` request in repeat, at bottom of the JSON Web Token tab, click `Sign`.
+8. On Sign option, then select the `RSA signing key` that was generated in the previous steps.  
 9. Send request, and gain access to admin portal.  
   
 ![jwt-jku-header-setup.png](images/jwt-jku-header-setup.png)  
