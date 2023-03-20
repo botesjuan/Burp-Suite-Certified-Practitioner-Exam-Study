@@ -1804,7 +1804,7 @@ hashcat -a 0 -m 16500 <YOUR-JWT> /path/to/jwt.secrets.list
 
 ### JWT kid header  
 
->JWT-based mechanism for handling sessions. In order to verify the signature, the server uses the **kid** parameter in JWT header to fetch the relevant key from its file system. Generate a new **Symmetric Key** and replace **k** property with the base64 null byte ```AA==```, to be used when signing the JWT.  
+>JWT-based mechanism for handling sessions. In order to verify the signature, the server uses the `kid` parameter in JWT header to fetch the relevant key from its file system. Generate a new **Symmetric Key** and replace ` k ` property with the base64 null byte `AA==`, to be used when signing the JWT.  
 >**kid (Key ID)** - Provides an ID that servers can use to identify the correct key in cases where there are multiple keys to choose from.  
 
 >JWS  
