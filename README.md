@@ -2978,6 +2978,7 @@ CHAR(83)+CHAR(69)+CHAR(76)+CHAR(69)+CHAR(67)+CHAR(84)
 ![MicahVanDeusens-blog](images/MicahVanDeusens-blog.png)  
   
 >The image below is my view of possible vulnerabilities ***identified*** and exploitation to reach the next BSCP exam stage and progress through the exam challenges.  
+>The SQL injection challenge I was able on previous exam able to pass but something changed, no longer successful, marked it red.  
 
 ![Three stages](images/3stages.png)  
   
