@@ -85,6 +85,7 @@ localhost
 trace
 TRACE
 hello
+log_in
 administrator
 admin.conf
 js

