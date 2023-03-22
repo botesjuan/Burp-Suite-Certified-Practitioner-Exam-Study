@@ -55,6 +55,8 @@ GET /admin_controls/metrics/adminimage?imagefilename=/blog/posts/49.jpg&size=%22
 
 >path traversal ? Template injection ? SSRF ? Access control ? LFI ?  
   
+-----
+  
 ## 2 - 1  
   
 >identify `User-Agent` in blog post comment load `/post?postId=10`  
