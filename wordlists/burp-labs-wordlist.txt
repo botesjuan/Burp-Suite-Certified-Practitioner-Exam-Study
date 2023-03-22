@@ -160,6 +160,7 @@ resources
 resource
 image
 images
+/resources/images/tracker.gif
 third-party
 login
 log-in

