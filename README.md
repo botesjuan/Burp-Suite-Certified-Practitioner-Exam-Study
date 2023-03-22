@@ -2225,6 +2225,8 @@ Origin: http://subdomain.TARGET.NET
 
 [PortSwigger Lab: SQL injection with filter bypass via XML encoding](https://portswigger.net/web-security/sql-injection/lab-sql-injection-with-filter-bypass-via-xml-encoding)  
   
+-----
+
 ## SSRF - Server Side Request Forgery  
 
 [SSRF blacklist filter](#ssrf-blacklist-filter)  
