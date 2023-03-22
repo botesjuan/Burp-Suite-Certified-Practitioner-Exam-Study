@@ -222,6 +222,9 @@ apps
 app
 strut
 struts
+del
+james
+kettle
 delete
 apache
 Apache

