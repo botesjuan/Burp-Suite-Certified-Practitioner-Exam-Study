@@ -2921,6 +2921,9 @@ echo $cookie;
   
 ## OS Command Injection
 
+[Feedback](#feedback)  
+Output redirection[](#output-redirection)  
+
 ### Feedback  
 
 >Use following command separation characters to ***identify*** Operating System Command injection vulnerabilities.  
