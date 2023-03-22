@@ -1266,6 +1266,11 @@ X-Forwarded-For: 12.13.14.15
 >Once valid username identified from different response message, the perform [brute force](#brute-force) using Burp Intruder on the password.  
 
 [PortSwigger Lab: Username enumeration via subtly different responses](https://portswigger.net/web-security/authentication/password-based/lab-username-enumeration-via-subtly-different-responses)  
+
+>Another scenario to identify valid username on the WEB APP is to provide list of usernames on login and one invalid password value. In the Intruder attack results one response will contain message `Incorrect password`.  
+>Intruder attack injection position, `username=§invalid-username§&password=SomeStupidLongWrongPassword123456789`.  
+
+[PortSwigger Lab: Username enumeration via different responses](https://portswigger.net/web-security/authentication/password-based/lab-username-enumeration-via-different-responses)  
   
 -----
 
