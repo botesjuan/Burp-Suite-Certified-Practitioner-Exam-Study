@@ -24,6 +24,7 @@ sitemap.xml
 sitemap
 info
 pragma
+ProductTemplate
 ProductTemplate.java.bak
 infoleak
 leak
