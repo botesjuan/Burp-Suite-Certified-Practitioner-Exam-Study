@@ -259,6 +259,9 @@ secret_key
 home
 carlos
 product
+productcatalog
+products
+/image/productcatalog/products/
 Burp
 Suite
 Certified
