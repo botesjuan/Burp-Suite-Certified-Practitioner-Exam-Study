@@ -2181,11 +2181,11 @@ Origin: http://subdomain.TARGET.NET
 
 ## XXE Injections  
 
-[Identify XML](#identify-xml)  
-[Xinclude file read](#xinclude-file-read)  
-[DTD Blind Out-of-band](#dtd-blind-out-of-band)  
-[DTD Blind Error messages](#dtd-blind-error-messages)  
-[SQL + XML + HackVertor](#sql--xml--hackvertor)  
+[XXE Identify](#identify-xml)  
+[XXE Xinclude file read](#xinclude-file-read)  
+[XXE DTD Blind Out-of-band](#dtd-blind-out-of-band)  
+[XXE DTD Blind Error messages](#dtd-blind-error-messages)  
+[XXE SQLi inside XML + HackVertor](#sql--xml--hackvertor)  
 [XXE perform SSRF](#xxe--ssrf)  
 [XXE with SVG upload](#xxe-via-svg-image-upload)  
   
@@ -2328,12 +2328,12 @@ Origin: http://subdomain.TARGET.NET
 ## SSRF - Server Side Request Forgery  
 
 [SSRF blacklist filter](#ssrf-blacklist-filter)  
-[Absolute GET URL + HOST SSRF](#absolute-get-url--host-ssrf)  
-[XXE + SSRF](#xxe--ssrf)  
-[HOST Routing-based SSRF](#host-routing-based-ssrf)  
-[HTML to PDF](#html-to-pdf)  
+[SSRF via Absolute GET URL + HOST Header](#absolute-get-url--host-ssrf)  
+[SSRF inside XXE](#xxe--ssrf)  
+[SSRF HOST Routing-based](#host-routing-based-ssrf)  
+[SSRF inside HTML-to-PDF](#html-to-pdf)  
 [SSRF Open Redirection](#ssrf-open-redirection)  
-[Host Header Connection State + SSRF](#host-connection-state)  
+[SSRF Consecutive Connection State](#host-connection-state)  
 
 >SSRF attack cause the server to make a connection to internal services within the organization, or force the server to connect to arbitrary external systems, potentially leaking sensitive data. Burp scanner may detect SSRF issue as an, `External service interaction (HTTP)`.  
   
