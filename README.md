@@ -2366,14 +2366,14 @@ Host: localhost
   
 ### Absolute GET URL + HOST SSRF
 
->***Identify*** SSRF by changing the ```HOST``` header to Collaborator and providing an absolute URL in the GET request line and observe the response from the Collaborator server.  
+>***Identify*** SSRF flawed request parsing vulnerability by changing the `HOST` header to Collaborator server and providing an absolute URL in the GET request line and observe the response from the Collaborator server.  
 
 ```html
-GET https://TARGET.web-security-academy.net/
+GET https://TARGET.net/
 Host: COLLABORATOR.NET
 ```  
 
-![identify-ssrf-host](images/identify-ssrf-host.png)  
+![identify ssrf flawed request parsing host header](images/identify-ssrf-host.png)  
 
 >Use the Host header to target 192.168.0.141 or ```localhost```, and notice the response give 302 status admin interface found. Append /admin to the absolute URL in the request line and send the request. Observe SSRF response.  
 
