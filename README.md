@@ -3246,5 +3246,5 @@ Youtube Information Security content creators channels (***in no particular orde
 >This study notes I used to document my own lab guides from the official PortSwigger academy to make sure I know how to identify the vulnerability, use it in different scenarios and make payloads that are more specific in showing the vulnerability impact if exploited such as crafting a cookie stealer in XSS in stead of just calling the print function.  
 >The BSCP qualification on my resume will provide a measurement of my skill and experience in Web Application Penetration Testing.  
 
-[Please Support me by buying me 'coffee'](https://www.buymeacoffee.com/botesjuan)  
+<br><br><a href="[https://www.buymeacoffee.com/NafisiAslH](https://www.buymeacoffee.com/botesjuan)" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
   
