@@ -39,7 +39,7 @@
 [Approach](#approach)  
 [Extra Training Content](#extra-training-content)  
 
-[Footnote](#footnote)  
+[My Burp Exam Results](#burp-exam-results)  
   
 -----
 
@@ -989,7 +989,7 @@ Transfer-encoding: identity
 Transfer-encoding: cow
 ```  
 
->Some servers that do support the Transfer-Encoding header can be induced not to process it if the header is **obfuscation** in some way.  
+>Some servers that do support the `Transfer-Encoding` header can be induced not to process it if the header is **obfuscation** in some way.  
 
 >On Repeater menu ensure that the **"Update Content-Length"** option is unchecked.  
 
@@ -3197,7 +3197,7 @@ CHAR(83)+CHAR(69)+CHAR(76)+CHAR(69)+CHAR(67)+CHAR(84)
 ![MicahVanDeusens-blog](images/MicahVanDeusens-blog.png)  
   
 >The image below is my view of possible vulnerabilities ***identified*** and exploitation to reach the next BSCP exam stage and progress through the exam challenges.  
->I have managed solved the challenges in green using [PortSwigger Academy Labs](https://portswigger.net/web-security/all-labs), but we never stop learning......  
+>I have managed solve the challenges in green using the [PortSwigger Academy Labs](https://portswigger.net/web-security/all-labs), but we never stop learning......  
 
 ![Three stages](images/3stages.png)  
   
@@ -3233,11 +3233,18 @@ Youtube Information Security content creators channels (***in no particular orde
   
 ## Footnote  
 
->My experience so far taking the PortSwigger exam, it is designed to be challenging, it is not straight forward vulnerabilities, twisted challenges, mixed academy labs into single stage and even rabbit holes.  
->**Perseverance:** Persistence in doing something despite difficulty or delay in achieving success.  
+>My experience taking the PortSwigger exam, it is designed to be challenging, it is not straight forward vulnerabilities, twisted challenges, mixed academy labs into single stage and some rabbit holes.  
+>**Perseverance:** is Persistence in doing something despite difficulty or delay in achieving success.  
 >**OSCP** certification taught me to **#TryHarder** and gave me the foundation penetration testing skills.  
->I believe eventually I will pass the **BSCP** exam and it has already given me the next level of web application security analyst knowledge.  
+>The **BSCP** exam gave me the next level of web application security analyst knowledge.  
   
-## Support  
+## Burp Exam Results  
 
-[If you find the content valuable for Bug Bounty, Penetration Testing or Burp Exam studies, I will appreciate sponsoring me 'coffee' funds to pay for my next exam](https://www.buymeacoffee.com/botesjuan)  
+>I hope these notice offer other Information Security Students some guidenance and walkthrough tips.  
+>The BSCP verify my skills and experienced gained through the Burp Academy, but also give my customers and my employer a means to measure my value I bring to security assessments.
+>My tip when preparing, is to understand the academy labs show the exploitation, but sometimes the identification of the vulnerability is missing in some lab guides. 
+>This study notes I used to document my own lab guides from the official PortSwigger academy to make sure I know how to identify the vulnerability, use it in different scenarios and make payloads that are more specific in showing the vulnerability impact if exploited such as crafting a cookie stealer in XSS in stead of just calling the print function.  
+>The BSCP qualification on my resume will provide a measurement of my skill and experience in Web Application Penetration Testing.  
+
+[Please Support me by buying me 'coffee'](https://www.buymeacoffee.com/botesjuan)  
+  
