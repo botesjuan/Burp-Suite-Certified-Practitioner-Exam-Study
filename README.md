@@ -1,7 +1,7 @@
 
 # Burp Suite Certified Practitioner Exam Study  
 
->This is my study notes on 100 of the PortSwigger Academy labs that I used to prepare for the [Burp Suite Certified Practitioner](https://portswigger.net/web-security/certification) (BSCP) Exam.  
+>This is my study notes on 100 PortSwigger Academy labs that I used to prepare for the [Burp Suite Certified Practitioner](https://portswigger.net/web-security/certification) Exam.  
 >Go to [PortSwigger Academy](https://portswigger.net/web-security/all-materials) to get the original learning materials.  
 >I also found this PortSwigger advice on [Retaking your exam](https://portswigger.net/web-security/certification/exam-hints-and-guidance/retaking-your-exam?tid=SNL7Q8oXE1mjUW1rSgswXSPIjhdLL5210Y-ogEuD1GZVp1w5spKfl5OJjAtj8AAC) very informative.  
   
