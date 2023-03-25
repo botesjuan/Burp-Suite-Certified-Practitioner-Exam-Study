@@ -1,9 +1,10 @@
 
 # PortSwigger Academy Lab automation scripts
 
->I am collecting scripts to help ***[identify](https://github.com/botesjuan/Burp-Suite-Certified-Practitioner-Exam-Study/tree/main/python/identify)*** vulnerabilities using python scripts to aid in my enumeration and discovery. I also followed the YouTube channel by [TJCHacking](https://www.youtube.com/@tjchacking/videos), where he step through the process of writing python scripts to automate the exploitation of the PortSwigger labs.  
+>A collecting of scripts to ***[identify](https://github.com/botesjuan/Burp-Suite-Certified-Practitioner-Exam-Study/tree/main/python/identify)*** vulnerabilities using python scripts to aid in enumeration and discovery.  
+>I followed the YouTube channel by [TJCHacking](https://www.youtube.com/@tjchacking/videos), where he step through the process of writing python scripts to automate the exploitation of the PortSwigger labs.  
   
->The utils and other pythons scripts imported into each vulnerability category lab is reference with symbolic link, under each sub folder. In below example in the XSS folder there is symbolic link to ../utils folder.
+>The `utils` and other pythons scripts imported into each vulnerability category lab is reference with symbolic link, under each sub folder. In below example in the XSS folder there is symbolic link to ../utils folder.
 
 ```bash
 cd xss/

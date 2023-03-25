@@ -9,6 +9,11 @@ accountapi
 account-api
 account_api
 chat
+history
+help
+helpline
+halpline
+hal
 avatars
 avatar
 cgi-bin
@@ -182,6 +187,7 @@ mail
 log
 logs
 page
+forgot
 forgot-password
 forgotpassword
 forgot_password
