@@ -3320,14 +3320,13 @@ Youtube Information Security content creators channels (***in no particular orde
   
 ## Footnote  
 
->My experience taking the PortSwigger exam, it is designed to be challenging, it is not straight forward vulnerabilities, twisted challenges, mixed academy labs into single stage and some rabbit holes.  
 >**Perseverance:** is Persistence in doing something despite difficulty or delay in achieving success.  
->**OSCP** certification taught me to **#TryHarder** and gave me the foundation penetration testing skills.  
+>The **OSCP** certification taught me to **#TryHarder** and gave me the foundation penetration testing skills.  
 >The **BSCP** exam gave me the next level of web application security analyst knowledge.  
+>I hope my notes offer other Information Security Students some guidance and walkthrough tips.  
   
 ## Burp Exam Results  
 
->I hope my notes offer other Information Security Students some guidance and walkthrough tips.  
 >The Burp Suite Certified Practitioner exam is a challenging practical examination designed to demonstrate your web security testing knowledge and Burp Suite Professional skills.  
 >My tip when preparing, is to understand the academy labs. Extra work is required as the labs do not always provide the identification of the vulnerability step.  
 >In my study notes I document the lab guides from the official PortSwigger academy to make sure I know how to identify the vulnerability, use it in different scenarios and make payloads that show the impact when exploiting the vulnerability. As example crafting a XSS cookie stealer payload instead of just calling the `print` function.  
