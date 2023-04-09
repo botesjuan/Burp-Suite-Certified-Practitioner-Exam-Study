@@ -20,6 +20,10 @@ cgi-bin
 phpinfo
 /cgi-bin/phpinfo.php
 phpinfo.php
+cross
+crossdomain
+crossdomain.xml
+domain
 customtemplate
 CustomTemplate.php
 /libs/CustomTemplate.php
