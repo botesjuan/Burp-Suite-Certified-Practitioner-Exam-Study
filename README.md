@@ -3375,7 +3375,7 @@ Youtube Information Security content creators channels (***in no particular orde
 >The Burp Suite Certified Practitioner exam is a challenging practical examination designed to demonstrate your web security testing knowledge and Burp Suite Professional skills.  
 >My tip when preparing, is to understand the academy labs. Extra work is required as the labs do not always provide the identification of the vulnerability step.  
 >In my study notes I document the lab guides from the official PortSwigger academy to make sure I know how to identify the vulnerability, use it in different scenarios and make payloads that show the impact when exploiting the vulnerability. As example crafting a XSS cookie stealer payload instead of just calling the `print` function.  
->The BSCP qualification on my resume will demonstrate a deep knowledge of the latest vulnerability classes and how to exploit Web Applications, proving my hacking ability to employers and the community.  
+>The BSCP qualification on my resume demonstrate a deep knowledge of the latest vulnerability classes and how to exploit Web Applications, proving my hacking ability to employers and the community.  
 
 <br><br><a href="https://www.buymeacoffee.com/botesjuan" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
   
