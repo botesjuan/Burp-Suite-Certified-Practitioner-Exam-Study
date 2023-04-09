@@ -1,11 +1,11 @@
 
 # Burp Suite Certified Practitioner Exam Study  
 
->This is my study notes on 100 PortSwigger Academy labs that I used to prepare for the [Burp Suite Certified Practitioner](https://portswigger.net/web-security/certification) Exam.  
+>This is my study notes on 100 PortSwigger Academy labs that I used to pass the [Burp Suite Certified Practitioner](https://portswigger.net/web-security/certification) Exam and obtained my BSCP qualification.  
 >Go to [PortSwigger Academy](https://portswigger.net/web-security/all-materials) to get the original learning materials.  
 >I also found this PortSwigger advice on [Retaking your exam](https://portswigger.net/web-security/certification/exam-hints-and-guidance/retaking-your-exam?tid=SNL7Q8oXE1mjUW1rSgswXSPIjhdLL5210Y-ogEuD1GZVp1w5spKfl5OJjAtj8AAC) very informative.  
   
-**[FOOTHOLD](#foothold)**  
+**[FOOTHOLD](#foothold) - Stage 1**  
 [Content Discovery](#content-discovery)  
 [DOM-XSS](#dom-based-xss)  
 [XSS Cross Site Scripting](#cross-site-scripting)  
@@ -15,7 +15,7 @@
 [Brute force](#brute-force)  
 [Authentication](#authentication)  
   
-**[PRIVILEGE ESCALATION](#privilege-escalation)**  
+**[PRIVILEGE ESCALATION](#privilege-escalation) - Stage 2**  
 [CSRF - Account Takeover](#csrf-account-takeover)  
 [Password Reset](#password-reset)  
 [SQLi - SQL Injection](#sql-injection)  
@@ -24,7 +24,7 @@
 [Access Control](#access-control)  
 [CORS - Cross-origin resource sharing](#cors)  
   
-**[DATA EXFILTRATION](#data-exfiltration)**  
+**[DATA EXFILTRATION](#data-exfiltration) - Stage 3**  
 [XXE - XML entities & Injections](#xxe-injections)  
 [SSRF - Server side request forgery](#ssrf---server-side-request-forgery)  
 [SSTI - Server side template injection](#ssti---server-side-template-injection)  
