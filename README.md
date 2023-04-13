@@ -476,6 +476,8 @@ location = 'https://TARGET.net/?search=%3Cxss+id%3Dx+onfocus%3Ddocument.location
 ![Custom XSS tag](images/custom-xss-tag.png)  
   
 [PortSwigger Lab: Reflected XSS into HTML context with all tags blocked except custom ones](https://portswigger.net/web-security/cross-site-scripting/contexts/lab-html-context-with-all-standard-tags-blocked)  
+
+[z3nsh3ll - explaining custom tags for XSS attacks](https://youtu.be/sjs6RS7lURk)  
   
 ### OnHashChange  
 
