@@ -3330,6 +3330,8 @@ CHAR(83)+CHAR(69)+CHAR(76)+CHAR(69)+CHAR(67)+CHAR(84)
 
 ![MicahVanDeusens-blog](images/MicahVanDeusens-blog.png)  
   
+### Identified  
+  
 >The image below is my view of possible vulnerabilities ***identified*** and exploitation to reach the next BSCP exam stage and progress through the exam challenges.  
 >I have managed solve the challenges in green using the [PortSwigger Academy Labs](https://portswigger.net/web-security/all-labs), but we never stop learning......  
 
