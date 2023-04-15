@@ -3379,7 +3379,7 @@ CHAR(83)+CHAR(69)+CHAR(76)+CHAR(69)+CHAR(67)+CHAR(84)
 >The image below is my view of possible vulnerabilities ***identified*** and exploitation to reach the next BSCP exam stage and progress through the exam challenges.  
 >I have managed solve the challenges in green using the [PortSwigger Academy Labs](https://portswigger.net/web-security/all-labs), but we never stop learning......  
 
-![Three stages](images/3stages.png)  
+<br><br><a href="https://github.com/botesjuan/Burp-Suite-Certified-Practitioner-Exam-Study/tree/main/extras" target="_blank"><img src="https://github.com/botesjuan/Burp-Suite-Certified-Practitioner-Exam-Study/blob/main/images/3stages.png" alt="Passed BSCP Exam Stages" style="height: 186px !important;width: 666px !important;" ></a>
   
 ## Extra Training Content  
   
