@@ -351,7 +351,7 @@ I am unable to get a working cookie stealer payload for this vulnerable lab.....
 + [Cross-site scripting (XSS) cheat sheet](https://portswigger.net/web-security/cross-site-scripting/cheat-sheet)
 + [PayloadsAllTheThings (XSS)](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/XSS%20Injection#xss-in-htmlapplications)  
 
->CSP Evaluator tool to check if content security policy is in place to mitigate XSS attacks. Example is the missing `base-uri` allow to use exploit method describe at alternative method for [Upgrade stored self-XSS](#upgrade-stored-self---xss).  
+>CSP Evaluator tool to check if content security policy is in place to mitigate XSS attacks. Example is if the `base-uri` is missing, this vulnerability will allow attacker to use the alternative exploit method described at [Upgrade stored self-XSS](#upgrade-stored-self-xss).  
 
 + [CSP Evaluator](https://csp-evaluator.withgoogle.com/)  
   
@@ -728,7 +728,7 @@ body:document.cookie
 
 #### Upgrade stored self-XSS  
 
->Blog comment with **Stored self-XSS**, upgrading the payload to steal information such as to steal the victim name. The CSRF token for the **write comment** is same as the **edit blog** functions. Combining CSRF and XSS enable attacker to make the below payload to trick victim in using **write comment**. The `a` character is to escape the `#` hash character from the initial application `source code`. The below `source code` in the blog entry is full exploit to steal victim info.  
+>Blog comment with **Stored self-XSS**, upgrading the payload to steal victim information from DOM. The function **edit content** reflect the input in the `<script>` tag. The CSRF token for the **write comment** is same as the **edit content** functions. Below payload use **write comment** and **edit content**. to exploit victim. The `a` character is added to escape the `#` hash character from the initial application `source code`. The below `source code` in the blog entry is full exploit to steal victim info.  
 
 ```html
 <button form=comment-form formaction="/edit" id=share-button>Click Button</button>
@@ -737,7 +737,7 @@ body:document.cookie
 
 ```  
 
->Sending url that reference the above blog entry to the victim will trigger XSS as them.  
+>Deliver Exploit, by Sending url that reference the above blog entry to the victim will trigger XSS as them.  
 
 ```
 https://challenge-1222.intigriti.io/blog/unique-guid-value-abc123?share=1
