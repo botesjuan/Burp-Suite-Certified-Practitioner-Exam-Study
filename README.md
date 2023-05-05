@@ -3414,7 +3414,7 @@ Youtube Information Security content creators channels (***in no particular orde
 ## Footnote  
 
 >**Perseverance:** is Persistence in doing something despite difficulty or delay in achieving success.  
->The **OSCP** certification taught me to **#TryHarder** and gave me the foundation penetration testing skills.  
+>The **OSCP** certification taught me to [#TryHarder and joining the HackSouth Discord family](https://discord.gg/hacksouth) gave me the foundation penetration testing skills.  
 >The **BSCP** exam gave me the next level of web application security analyst knowledge.  
 >I hope my notes offer other Information Security Students some guidance and walkthrough tips.  
   
