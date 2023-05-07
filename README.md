@@ -2617,6 +2617,8 @@ body: JSON.stringify({
   
 ```  
 
+>**Note:** The `<div>` tag defines a division or a section in an HTML document. The <div> tag is used as a container for HTML elements - which is then styled with CSS. [z3nsh3ll explain HTML DIV demarcation and SPAN different ways to style the elements.](https://youtu.be/5djtMMciBlw)   
+
 ```html
 <div><p>Report Heading by <img src=”https://Collaborator.com/test.png”></p>
 ```  
@@ -2637,7 +2639,7 @@ body: JSON.stringify({
 
 >Thehackerish showing wkHTMLtoPDF exploitation using [root-me.org - Gemini-Pentest-v1](https://www.root-me.org/) CTF lab in the video [Pentest SSRF Ep4](https://youtu.be/Prqt3N5QU2Q?t=345) by editing the name of the admin profile with HTML content it is then generated server side by including remote or local files.  
   
-![root-me ctf gemini pentest v1](images/root-me-ctf-gemini-pentest-v1.png)  
+![root-me ctf Gemini pentest v1](images/root-me-ctf-gemini-pentest-v1.png)  
 
 ```html
 <html>
