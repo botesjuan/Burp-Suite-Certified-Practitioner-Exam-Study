@@ -1762,6 +1762,7 @@ https://cms-TARGET.net/login?username=%3Cscript%3Ealert%28%27reflectXSS%27%29%3C
 [Oracle](#oracle)  
 [SQLMAP](#sqlmap)  
 [Non-Oracle Manual SQLi](#non-oracle-manual-sqli)  
+[Visual error-based SQLi](visual-error---based-sqli)  
   
 >Error based or Blind SQL injection vulnerabilities, allow SQL queries in an application to be used to extract data or login credentials from the  database. SQLMAP is used to fast track the exploit and retrieve the sensitive information.  
 
@@ -2024,6 +2025,26 @@ sqlmap -v -u 'https://TARGET.NET/search?term=x&organizeby=DATE&journalist=&cache
 
 [PortSwigger Lab: SQL injection attack, listing the database contents on non-Oracle databases](https://portswigger.net/web-security/sql-injection/examining-the-database/lab-listing-database-contents-non-oracle)  
   
+### Visual error-based SQLi  
+
+>Adding a single quote to the end of the `TrackingId` cookie value, we can ***identify*** and confirm the SQL Injection based on the message in the response.  
+
+![identify-visual-error-based-sqli.png](images/identify-visual-error-based-sqli.png)  
+
+>The two payloads validate administrator record and then to retrieve the password for the Administrator account from the `user` table in the database, from the columns `username` and `password`.  
+
+```
+TrackingId=x'||CAST((SELECT username FROM users LIMIT 1) AS int)--;
+  
+TrackingId=x'||CAST((SELECT password FROM users LIMIT 1) AS int)--;
+```  
+
+>Due to the cookie value length limit the payload is shortened by using `limit 1`, and the actual cookie value replace with just a letter `x`. SQL Injection used the [CAST function](https://portswigger.net/web-security/sql-injection/blind).  
+
+![SQL Injection CAST function](images/SQL-Injection-CAST-function.png)  
+
+[PortSwigger Lab: Visible error-based SQL injection](https://portswigger.net/web-security/sql-injection/blind/lab-sql-injection-visible-error-based)  
+
 -----
 
 ## JWT  
