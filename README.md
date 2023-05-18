@@ -1762,7 +1762,7 @@ https://cms-TARGET.net/login?username=%3Cscript%3Ealert%28%27reflectXSS%27%29%3C
 [Oracle](#oracle)  
 [SQLMAP](#sqlmap)  
 [Non-Oracle Manual SQLi](#non-oracle-manual-sqli)  
-[Visual error-based SQLi](visual-error---based-sqli)  
+[Visual error-based SQLi](#visual-error-based-sqli)  
   
 >Error based or Blind SQL injection vulnerabilities, allow SQL queries in an application to be used to extract data or login credentials from the  database. SQLMAP is used to fast track the exploit and retrieve the sensitive information.  
 
