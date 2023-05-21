@@ -3,8 +3,6 @@
 
 >This is my study notes more than a 100 PortSwigger Academy labs that I used to pass the [Burp Suite Certified Practitioner](https://portswigger.net/web-security/certification) Exam and obtained my [BSCP qualification](https://portswigger.net/web-security/e/c/6e42f5738e5b9bf8).  
 >Go to [PortSwigger Academy](https://portswigger.net/web-security/all-materials) to get the original learning materials.  
->I can recommend doing as many as possible [Mystery lab challenge](https://portswigger.net/web-security/mystery-lab-challenge) to test your skills and decrease the time it takes you to ***identify*** the vulnerabilities, before taking the exam.  
->I also found this PortSwigger advice on [Retaking your exam](https://portswigger.net/web-security/certification/exam-hints-and-guidance/retaking-your-exam?tid=SNL7Q8oXE1mjUW1rSgswXSPIjhdLL5210Y-ogEuD1GZVp1w5spKfl5OJjAtj8AAC) very informative.  
   
 **[FOOTHOLD](#foothold) - Stage 1**  
 [Content Discovery](#content-discovery)  
@@ -44,6 +42,9 @@
 [Extra Training Content](#extra-training-content)  
 
 [My Burp Exam Results](#burp-exam-results)  
+  
+>I can recommend doing as many as possible [Mystery lab challenge](https://portswigger.net/web-security/mystery-lab-challenge) to test your skills and decrease the time it takes you to ***identify*** the vulnerabilities, before taking the exam.  
+>I also found this PortSwigger advice on [Retaking your exam](https://portswigger.net/web-security/certification/exam-hints-and-guidance/retaking-your-exam?tid=SNL7Q8oXE1mjUW1rSgswXSPIjhdLL5210Y-ogEuD1GZVp1w5spKfl5OJjAtj8AAC) very informative.  
   
 -----
 
