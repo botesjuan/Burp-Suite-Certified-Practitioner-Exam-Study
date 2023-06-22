@@ -78,7 +78,7 @@ git-cola --repo 0ad900ad039b4591c0a4f91b00a600e7.web-security-academy.net/
 
 >Always open `source code` to look for any developer comments that reveal hidden files or paths. Below example lead to [symphony token deserialization](#deserialization).  
 
-![dev-code-debug-comment de-serial](images/dev-code-debug-comment.png)  
+![DEV code debug comment deserial](images/dev-code-debug-comment.png)  
   
 -----
 
