@@ -1921,7 +1921,9 @@ TrackingId=xxx'+UNION+SELECT+EXTRACTVALUE(xmltype('<%3fxml+version%3d"1.0"+encod
 
 ### SQLMAP  
 
->In the [PortSwigger Practice Exam APP](https://portswigger.net/web-security/certification/takepracticeexam/index.html) we ***identify*** SQLi on the advance search function by adding a single quote and the response result in `HTTP/2 500 Internal Server Error`.  
+>In the [PortSwigger Practice Exam APP](https://portswigger.net/web-security/certification/takepracticeexam/index.html) we ***identify*** SQLi on the advance search function by adding a single quote and the response result in `HTTP/2 500 Internal Server Error`.
+
+>Here is my HackTheBox CPTS study notes on SQLMAP examples to bypass primitive protection WAF mechanisms. [SQLMAP Essentials - Cases](https://github.com/botesjuan/cpts-quick-references/blob/main/module/sqlmap%20Essentials.md#exercise-cases)  
 
 >After doing some testing with SQLMAP versions `1.7.2#stable` and `1.6`, I found that both are able to exploit the PortSwigger Practice exam. Walkthrough from [bmdyy doing the Practice Exam using SQLMAP](https://youtu.be/yC0F05oggTE?t=563) for reference of the parameters used.  
 
