@@ -351,7 +351,8 @@ I am unable to get a working cookie stealer payload for this vulnerable lab.....
 >XSS Resources pages to lookup payloads for **tags** and **events**.   
 
 + [Cross-site scripting (XSS) cheat sheet](https://portswigger.net/web-security/cross-site-scripting/cheat-sheet)
-+ [PayloadsAllTheThings (XSS)](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/XSS%20Injection#xss-in-htmlapplications)  
++ [PayloadsAllTheThings (XSS)](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/XSS%20Injection#xss-in-htmlapplications)
++ [HackTheBox CPTS Study notes on XSS](https://github.com/botesjuan/cpts-quick-references/blob/main/module/Cross-site-scripting-xss.md)  
 
 >CSP Evaluator tool to check if content security policy is in place to mitigate XSS attacks. Example is if the `base-uri` is missing, this vulnerability will allow attacker to use the alternative exploit method described at [Upgrade stored self-XSS](#upgrade-stored-self-xss).  
 
