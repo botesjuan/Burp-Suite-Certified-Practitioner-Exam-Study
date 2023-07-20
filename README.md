@@ -2946,6 +2946,7 @@ Inject exploit in to read or delete user sensitive data. After injection, trigge
 
 ## File Path Traversal
 
+[HackTheBox CPTS File Inclusion](https://github.com/botesjuan/cpts-quick-references/blob/main/module/File%20Inclusions.md)  
 [LFI Attacks](#lfi-attacks)  
 [Admin Portal Files](#admin-portal-files)  
 [Path Traversal Authz](#path-traversal-authz)  
