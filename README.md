@@ -3033,6 +3033,7 @@ X-ProxyUser-Ip: 127.0.0.1
 [XXE via SVG Image upload](#xxe-via-svg-image-upload)  
 [Remote File Inclusion](#remote-file-inclusion)  
 [XSS SVG Upload](#xss-svg-upload)  
+[HackTheBox CPTS File Uploads](https://github.com/botesjuan/cpts-quick-references/blob/main/module/File%20Upload%20Attacks.md)
 
 ### Bypass Upload Controls  
   
