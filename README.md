@@ -3248,8 +3248,9 @@ echo $cookie;
 
 ## OS Command Injection
 
-[Feedback](#feedback)  
-[Output redirection](#output-redirection)  
++ [Feedback](#feedback)  
++ [Output redirection](#output-redirection)  
++ [HackTheBox Academy CPTS OS Command Injection](https://github.com/botesjuan/cpts-quick-references/blob/main/module/command%20injection.md)  
 
 ### Feedback  
 
