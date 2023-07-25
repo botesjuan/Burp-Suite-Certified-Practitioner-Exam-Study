@@ -2214,10 +2214,11 @@ hashcat -a 0 -m 16500 <YOUR-JWT> /path/to/jwt.secrets.list
 [Original URL](#original-url)  
 [Drop Select a role](#drop-select-a-role)  
 [Trace to Admin](#trace-to-admin)  
+[HTB - CPTS - IDOR](https://github.com/botesjuan/cpts-quick-references/blob/main/module/Web-Attacks.md#idor)
 
 ### PrivEsc JSON RoleId  
 
->Access control to the admin interface is based on user roles, and this can lead to privilege escalation or access control security vulnerability.  
+>Access control to the admin interface is based on user roles, and this can lead to privilege escalation or access control (IDOR) security vulnerability.  
 
 >Capture current logged in user email change email submission request and send to **Intruder**, then add `"roleid":§32§` into the JSON body of the request, and fuzz the possible `roleid` value for administrator access role.  
 
