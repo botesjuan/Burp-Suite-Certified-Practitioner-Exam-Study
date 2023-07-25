@@ -2390,7 +2390,7 @@ Origin: http://subdomain.TARGET.NET
 
 ### DTD Blind Out-of-band  
 
->On the exploit server change the hosted file name to ```/exploit.dtd``` as the exploit file with **Document Type Definition (DTD)** extension, containing the following payload. The ```&#x25;``` is the Unicode hex character code for percent sign ```%```. **Parameter entities** are referenced using the **percent** character instead of the usual ampersand.  
+>On the exploit server change the hosted file name to ```/exploit.dtd``` as the exploit file with **Document Type Definition (DTD)** extension, containing the following payload. The ```&#x25;``` is the Unicode hex character code for percent sign ```%```. **[Parameter entities](https://academy.hackthebox.com/module/134/section/1206)** are referenced using the **percent** character instead of the usual ampersand.  
 
 ```xml
 <!ENTITY % file SYSTEM "file:///home/carlos/secret">
