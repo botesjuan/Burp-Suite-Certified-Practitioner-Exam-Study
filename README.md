@@ -21,6 +21,7 @@
 [JWT - JSON Web Tokens](#jwt)  
 [Prototype pollution](#prototype-pollution)  
 [Access Control](#access-control)  
+[GraphQL API Endpoints](#graphql-api)  
 [CORS - Cross-origin resource sharing](#cors)  
   
 **[DATA EXFILTRATION](#data-exfiltration) - Stage 3**  
@@ -2289,7 +2290,7 @@ Cookie: session=2ybmTxFLPlisA6GZvcw22Mvc29jYVuJm
 
 ## GraphQL API  
 
-[Identify GraphQL API](#identify-graphQL-api)  
+[Identify GraphQL API](#identify-graphql-api)  
 [GraphQL Reveal Credentials](#graphql-reveal-creds)  
 
 ### Identify GraphQL API  
