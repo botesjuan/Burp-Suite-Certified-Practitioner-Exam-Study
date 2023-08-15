@@ -2215,7 +2215,8 @@ hashcat -a 0 -m 16500 <YOUR-JWT> /path/to/jwt.secrets.list
 [Original URL](#original-url)  
 [Drop Select a role](#drop-select-a-role)  
 [Trace to Admin](#trace-to-admin)  
-[HTB - CPTS - IDOR](https://github.com/botesjuan/cpts-quick-references/blob/main/module/Web-Attacks.md#idor)
+[GraphQL Reveal Credentials](#graphql-reveal-creds)  
+[HTB requested I remove my write-up for CPTS Skills assessments - IDOR](https://github.com/botesjuan/cpts-quick-references/blob/main/module/Web-Attacks.md#idor)
 
 ### PrivEsc JSON RoleId  
 
@@ -2259,7 +2260,7 @@ Connection: close
 
 ### Original URL  
 
->Admin portal only accessible from internal. ***Identify*** if access control can be bypassed using header ```X-Original-URL```, observe different response to ```/admin``` endpoint requests depending on header value.  
+>Admin portal only accessible from internal. ***Identify*** if access control can be bypassed using header `X-Original-URL`, observe different response to `/admin` endpoint requests depending on header value.  
 
 ```
 X-Original-URL: /admin
@@ -2271,7 +2272,8 @@ X-Original-URL: /admin
   
 ### Trace to Admin  
 
->Unable to reach `/admin` portal, but when changing the GET request to `TRACE /admin` this response contain an `X-Custom-IP-Authorization: ` header. Use the ***identified*** header to by access control to the admin authentication.  
+>Unable to reach `/admin` portal, but when changing the GET request to `TRACE /admin` this response contain an `X-Custom-IP-Authorization: ` header.  
+>Use the ***identified*** header to by access control to the admin authentication.  
 
 ![trace info](images/trace-info.png)  
 
@@ -2284,6 +2286,27 @@ Cookie: session=2ybmTxFLPlisA6GZvcw22Mvc29jYVuJm
 
 [PortSwigger Lab: Authentication bypass via information disclosure](https://portswigger.net/web-security/information-disclosure/exploiting/lab-infoleak-authentication-bypass)  
 
+### GraphQL Reveal Creds  
+
+>Intercept the login POST request to the target. ***Identify*** the GraphQL mutation contain the username and password.  
+
+![graphql-identify](images/graphql-identify.png)  
+
+>Copy the URL of the `/graphql/v1` POST request and past into the ***InQL Scanner*** tab to scan API.  
+
+![graphql-scanner.png](images/graphql-scanner.png)  
+
+>There is a getUser query that returns a user's username and password. This query fetches the relevant user information via a direct reference to an id number.  
+
+>Modify a request by replacing the inQL tab query value to the below discovered `getuser` query from scanner.  
+>In the POST JSON body remove the `operationname` property and value.  
+
+![graphql-modify-request.png](images/graphql-modify-request.png)  
+
+>Log in to the site as the administrator, and gain access to the Admin panel.  
+
+[PortSwigger Lab: Accidental exposure of private GraphQL fields](https://portswigger.net/web-security/graphql/lab-graphql-accidental-field-exposure)  
+  
 -----
 
 ## CORS  
@@ -2303,7 +2326,7 @@ Cookie: session=2ybmTxFLPlisA6GZvcw22Mvc29jYVuJm
 Origin: http://subdomain.TARGET.NET
 ```  
 
->The target call subdomain to retrieve stock values, and the ```productid``` parameter is vulnerable to cross-site scripting (XSS).
+>The target call subdomain to retrieve stock values, and the `productid` parameter is vulnerable to cross-site scripting (XSS).
 
 ![Subdomain cors xss](images/subdomain-cors-xss.png)  
 
