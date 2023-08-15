@@ -2215,7 +2215,6 @@ hashcat -a 0 -m 16500 <YOUR-JWT> /path/to/jwt.secrets.list
 [Original URL](#original-url)  
 [Drop Select a role](#drop-select-a-role)  
 [Trace to Admin](#trace-to-admin)  
-[GraphQL Reveal Credentials](#graphql-reveal-creds)  
 [HTB requested I remove my write-up for CPTS Skills assessments - IDOR](https://github.com/botesjuan/cpts-quick-references/blob/main/module/Web-Attacks.md#idor)
 
 ### PrivEsc JSON RoleId  
@@ -2286,6 +2285,56 @@ Cookie: session=2ybmTxFLPlisA6GZvcw22Mvc29jYVuJm
 
 [PortSwigger Lab: Authentication bypass via information disclosure](https://portswigger.net/web-security/information-disclosure/exploiting/lab-infoleak-authentication-bypass)  
 
+-----
+
+## GraphQL API  
+
+[Identify GraphQL API](#identify-graphQL-api)  
+[GraphQL Reveal Credentials](#graphql-reveal-creds)  
+
+### Identify GraphQL API  
+
+>To ***identify*** if there is hidden GraphQL API endpoint send an invalid GET request endpoint and observe message `Not Found`, but when sending `/api` the response is `Query not present`.  
+
+![graphql API identify](images/graphql-api-identify.png)  
+
+>Enumeration of the GraphQL API endpoint require testing with a universal query.  
+>Modify GET request with query as a URL parameter `/api?query=query{__typename}`.  
+
+>The below response validate the ***identity*** of GraphQL endpoint:  
+
+```JSON
+{
+  "data": {
+	"__typename": "query"
+  }
+}
+```  
+
+>Check introspection, with new request URL-encoded introspection query as a query parameter.  
+
+```HTML
+/api?query=query+IntrospectionQuery+%7B%0D%0A++__schema+%7B%0D%0A++++queryType+%7B%0D%0A++++++name%0D%0A++++%7D%0D%0A++++mutationType+%7B%0D%0A++++++name%0D%0A++++%7D%0D%0A++++subscriptionType+%7B%0D%0A++++++name%0D%0A++++%7D%0D%0A++++types+%7B%0D%0A++++++...FullType%0D%0A++++%7D%0D%0A++++directives+%7B%0D%0A++++++name%0D%0A++++++description%0D%0A++++++args+%7B%0D%0A++++++++...InputValue%0D%0A++++++%7D%0D%0A++++%7D%0D%0A++%7D%0D%0A%7D%0D%0A%0D%0Afragment+FullType+on+__Type+%7B%0D%0A++kind%0D%0A++name%0D%0A++description%0D%0A++fields%28includeDeprecated%3A+true%29+%7B%0D%0A++++name%0D%0A++++description%0D%0A++++args+%7B%0D%0A++++++...InputValue%0D%0A++++%7D%0D%0A++++type+%7B%0D%0A++++++...TypeRef%0D%0A++++%7D%0D%0A++++isDeprecated%0D%0A++++deprecationReason%0D%0A++%7D%0D%0A++inputFields+%7B%0D%0A++++...InputValue%0D%0A++%7D%0D%0A++interfaces+%7B%0D%0A++++...TypeRef%0D%0A++%7D%0D%0A++enumValues%28includeDeprecated%3A+true%29+%7B%0D%0A++++name%0D%0A++++description%0D%0A++++isDeprecated%0D%0A++++deprecationReason%0D%0A++%7D%0D%0A++possibleTypes+%7B%0D%0A++++...TypeRef%0D%0A++%7D%0D%0A%7D%0D%0A%0D%0Afragment+InputValue+on+__InputValue+%7B%0D%0A++name%0D%0A++description%0D%0A++type+%7B%0D%0A++++...TypeRef%0D%0A++%7D%0D%0A++defaultValue%0D%0A%7D%0D%0A%0D%0Afragment+TypeRef+on+__Type+%7B%0D%0A++kind%0D%0A++name%0D%0A++ofType+%7B%0D%0A++++kind%0D%0A++++name%0D%0A++++ofType+%7B%0D%0A++++++kind%0D%0A++++++name%0D%0A++++++ofType+%7B%0D%0A++++++++kind%0D%0A++++++++name%0D%0A++++++%7D%0D%0A++++%7D%0D%0A++%7D%0D%0A%7D%0D%0A
+```  
+
+![graphql-api-introspection-query.png](images/graphql-api-introspection-query.png)  
+
+>Bypass introspection protection matching the **regex** filters, and modify the query to include a `%0a` newline character after `__schema` and resend.  
+
+>Save the introspection response to file as `graphql.json`, and remove HTTP headers from the saved response file leaving only body.  
+
+>On the InQL Scanner tab, load the file `graphql.json` and enter to scan API endpoint.  
+>Expand scan results for the schema and find the `getUser` query.  
+>In Repeater, copy and paste the getUser query as parameter and send it to the API endpoint discovered but first URL encode all characters.  
+
+>Test alternative user IDs until the API confirms `carlos` user ID as 3.
+
+![graphql-api-getuser-sensitivedata.png](images/graphql-api-getuser-sensitivedata.png)  
+
+>This give you sensitive information for a user on the system such as login token, login password information, etc.  
+
+[PortSwigger Lab: Finding a hidden GraphQL endpoint](https://portswigger.net/web-security/graphql/lab-graphql-find-the-endpoint)  
+  
 ### GraphQL Reveal Creds  
 
 >Intercept the login POST request to the target. ***Identify*** the GraphQL mutation contain the username and password.  
