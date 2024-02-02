@@ -2861,7 +2861,7 @@ body: JSON.stringify({
 >**Note:** The `<div>` tag defines a division or a section in an HTML document. The <div> tag is used as a container for HTML elements - which is then styled with CSS. [z3nsh3ll explain HTML DIV demarcation and SPAN different ways to style the elements.](https://youtu.be/5djtMMciBlw)   
 
 ```html
-<div><p>Report Heading by <img src=”https://Collaborator.com/test.png”></p>
+<div><p>Report Heading by <img src="https://Collaborator.com/test.png"></p>
 ```  
 
 >Identify file download HTML-to-PDF convert function on target is vulnerable.  
