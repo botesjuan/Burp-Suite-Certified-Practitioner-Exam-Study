@@ -20,7 +20,7 @@
 [SQLi - SQL Injection](#sql-injection)  
 [JWT - JSON Web Tokens](#jwt)  
 [Prototype pollution](#prototype-pollution)  
-[API Testing](### API Testing)  
+[API Testing](#api-testing)  
 [Access Control](#access-control)  
 [GraphQL API Endpoints](#graphql-api)  
 [CORS - Cross-origin resource sharing](#cors)  
