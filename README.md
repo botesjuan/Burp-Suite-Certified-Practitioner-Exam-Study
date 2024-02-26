@@ -20,6 +20,7 @@
 [SQLi - SQL Injection](#sql-injection)  
 [JWT - JSON Web Tokens](#jwt)  
 [Prototype pollution](#prototype-pollution)  
+[API Testing](### API Testing)  
 [Access Control](#access-control)  
 [GraphQL API Endpoints](#graphql-api)  
 [CORS - Cross-origin resource sharing](#cors)  
@@ -2294,7 +2295,36 @@ hashcat -a 0 -m 16500 <YOUR-JWT> /path/to/jwt.secrets.list
 ```  
 
 [PortSwigger Lab: Privilege escalation via server-side prototype pollution](https://portswigger.net/web-security/prototype-pollution/server-side/lab-privilege-escalation-via-server-side-prototype-pollution)  
+
+
+-----
+
+## API Testing  
   
+[Exploiting a mass assignment](#exploiting-a-mass-assignment)  
+
+### Exploiting a mass assignment  
+
+>API performing GET request and directly after a POST request and in the POST request notice additional JSON parameters in the body of response, indicate hidden parameter fields.
+>Add hidden fields such as `{"admin":true}` can elevate access to higher privileged users or gain sensitive information about user.
+
+>In below lab exercise the ecommerce site have a discount parameter and adding it with value of 100 allow for the product to be free on checkout.
+
+![Mass assignment hidden parameter](images/mass-assignment-hidden-parameter.png)  
+
+>Privilege escalation using API endpoints hidden parameters in POST or PATCH HTTP verb request.
+
+```json
+{
+    "username": "carlos",
+    "email": "carlos@exploit.com",
+    "isAdminLevel": true
+}
+```
+
+[](https://portswigger.net/web-security/api-testing/lab-exploiting-mass-assignment-vulnerability)  
+
+
 -----
 
 ## Access Control  
