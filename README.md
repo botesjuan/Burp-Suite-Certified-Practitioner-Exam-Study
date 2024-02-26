@@ -2322,10 +2322,9 @@ hashcat -a 0 -m 16500 <YOUR-JWT> /path/to/jwt.secrets.list
 }
 ```
 
-[](https://portswigger.net/web-security/api-testing/lab-exploiting-mass-assignment-vulnerability)  
+[PortSwigger Lab: Exploiting a mass assignment vulnerability](https://portswigger.net/web-security/api-testing/lab-exploiting-mass-assignment-vulnerability)  
 
-
------
+-----  
 
 ## Access Control  
   
