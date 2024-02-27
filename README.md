@@ -2296,12 +2296,12 @@ hashcat -a 0 -m 16500 <YOUR-JWT> /path/to/jwt.secrets.list
 
 [PortSwigger Lab: Privilege escalation via server-side prototype pollution](https://portswigger.net/web-security/prototype-pollution/server-side/lab-privilege-escalation-via-server-side-prototype-pollution)  
 
-
 -----
 
 ## API Testing  
   
 [Exploiting a mass assignment](#exploiting-a-mass-assignment)  
+[API Reset Password Parameter Pollution](#api-reset-password-parameter-pollution)  
 
 ### Exploiting a mass assignment  
 
@@ -2323,6 +2323,23 @@ hashcat -a 0 -m 16500 <YOUR-JWT> /path/to/jwt.secrets.list
 ```
 
 [PortSwigger Lab: Exploiting a mass assignment vulnerability](https://portswigger.net/web-security/api-testing/lab-exploiting-mass-assignment-vulnerability)  
+
+### API Reset Password Parameter Pollution  
+
+>Notice the reset password API function uses parameter in POST body for username. To ***identify*** aditional hidden parameters for the API function insert random parameter ```&x=y``` to observe error message leaking information of positive result.
+>URL encode the random parameter and add it to current POST body parameters ```username=administrator%26x=y```.
+
+>Based on the response there is possible second parameter named `field` and reviewing the JavaScript source code there is `reset_token` parameter.
+
+![api-code-review-forgetpassword](images/api-code-review-forgetpassword.png)  
+
+>Adding the additional parameter `field` with variable `reset_token` in the POST request, leak the senitive information to reset password token.
+
+![api-resetpassword-leak-token](images/api-resetpassword-leak-token.png)  
+
+Browsing to the target URL and adding the stolen reset token, and change the administrator or carlos user password to gain access.  
+
+[PortSwigger Lab: Exploiting server-side parameter pollution in a query string](https://portswigger.net/web-security/api-testing/server-side-parameter-pollution/lab-exploiting-server-side-parameter-pollution-in-query-string)  
 
 -----  
 
