@@ -6,7 +6,7 @@
   
 **[SCANNING](#scanning) - Enumeration**  
 [Focus Scanning](#focus-scanning)  
-[Scan non-standard entities](#scanning-non---standard-data-structures)   
+[Scan non-standard entities](#scanning-non-standard-data-structures)  
 
 **[FOOTHOLD](#foothold) - Stage 1**  
 [Content Discovery](#content-discovery)  
@@ -65,7 +65,7 @@
 >Enumeration of the Web Applications start with initial and directed scanning in time limited engagement.  
 
 [Focus Scanning](#focus-scanning)  
-[Scan non-standard entities](#scanning-non---standard-data-structures)  
+[Scan non-standard entities](#scanning-non-standard-data-structures)  
 
 ## Focus Scanning  
 
@@ -87,7 +87,7 @@
 
 [PortSwigger Lab: Discovering vulnerabilities quickly with targeted scanning](https://portswigger.net/web-security/essential-skills/using-burp-scanner-during-manual-testing/lab-discovering-vulnerabilities-quickly-with-targeted-scanning)  
 
-### Scanning non-standard data structures  
+## Scanning non-standard data structures  
 
 >Scanning non-standard data structures using Burp feature to scan selected insertion point for select text in response or requests.
 
