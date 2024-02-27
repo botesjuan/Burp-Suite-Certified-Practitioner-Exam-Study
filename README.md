@@ -3728,15 +3728,7 @@ CHAR(83)+CHAR(69)+CHAR(76)+CHAR(69)+CHAR(67)+CHAR(84)
 
 [Obfuscating attacks using encodings](https://portswigger.net/web-security/essential-skills/obfuscating-attacks-using-encodings)
 
-## Python Scripts 
-
->Python script to ***[identify](https://github.com/botesjuan/Burp-Suite-Certified-Practitioner-Exam-Study/tree/main/python/identify)*** vulnerabilities in the exam and provide indicators of exploits.  
-
-[Python Script to ***identify*** possible vulnerabilities in headers, cookies or the response body](https://github.com/botesjuan/Burp-Suite-Certified-Practitioner-Exam-Study/tree/main/python/identify)  
-
-[Lab Automated Python Scripts](python/README.md)  
-
-[Automate the solving of the labs using python scripts](https://github.com/botesjuan/Burp-Suite-Certified-Practitioner-Exam-Study/tree/main/python)  
+-----  
 
 ## Focus Scanning  
 
@@ -3757,7 +3749,27 @@ CHAR(83)+CHAR(69)+CHAR(76)+CHAR(69)+CHAR(67)+CHAR(84)
 ```  
 
 [PortSwigger Lab: Discovering vulnerabilities quickly with targeted scanning](https://portswigger.net/web-security/essential-skills/using-burp-scanner-during-manual-testing/lab-discovering-vulnerabilities-quickly-with-targeted-scanning)  
-  
+
+### Scanning non-standard data structures  
+
+>Scanning non-standard data structures using Burp feature to scan selected insertion point for select text in response or requests.
+
+![scan-selected-insertion-point](images/scan-selected-insertion-point.png)  
+
+[PortSwigger Lab: Scanning non-standard data structures](https://portswigger.net/web-security/essential-skills/using-burp-scanner-during-manual-testing/lab-scanning-non-standard-data-structures)  
+
+-----  
+
+## Python Scripts  
+
+>Python script to ***[identify](https://github.com/botesjuan/Burp-Suite-Certified-Practitioner-Exam-Study/tree/main/python/identify)*** vulnerabilities in the exam and provide indicators of exploits.  
+
+[Python Script to ***identify*** possible vulnerabilities in headers, cookies or the response body](https://github.com/botesjuan/Burp-Suite-Certified-Practitioner-Exam-Study/tree/main/python/identify)  
+
+[Lab Automated Python Scripts](python/README.md)  
+
+[Automate the solving of the labs using python scripts](https://github.com/botesjuan/Burp-Suite-Certified-Practitioner-Exam-Study/tree/main/python)  
+
 ## Approach  
 
 >Tips from [Daniel Redfern](https://youtu.be/Lbn8zQJByGY?t=551) is best I have come access explaining fundamental mechanics in BSCP exam, especially Tip 7, only one active user per application and if you reach stage 2 and you did not use interactive exploit in stage 1 that required the **Deliver to Victim** function of the exploit server, then use an interactive exploit on stage 2 to reach admin user role.  
