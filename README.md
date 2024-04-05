@@ -2442,6 +2442,8 @@ Connection: close
 
 [PortSwigger Lab: User role can be modified in user profile](https://portswigger.net/web-security/access-control/lab-user-role-can-be-modified-in-user-profile)  
 
+>See [API Mass assignment lab exercises](https://github.com/botesjuan/Burp-Suite-Certified-Practitioner-Exam-Study?tab=readme-ov-file#exploiting-a-mass-assignment) to alter JSON values by inserting additional fields in JSON POST data.  
+
 ### Drop Select a role  
   
 >Escalation to administrator is sometimes controlled by a role selector GET request, by **dropping** the `Please select a role` GET request before it is presented to the user, the default role of **admin** is selected by back-end and access is granted to the admin portal.  
