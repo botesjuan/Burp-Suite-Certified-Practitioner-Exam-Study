@@ -871,8 +871,10 @@ body:document.cookie
 </script>
 ```  
 
-[PortSwigger Lab: Exploiting cross-site scripting to steal cookies](https://portswigger.net/web-security/cross-site-scripting/exploiting/lab-stealing-cookies)  
+>[IPPSEC YouTube using the HackTheBox Bookworm](https://youtu.be/UqDdR10F54A?si=nkhilLzyKQcfqtfU&t=1737), showing `payload.js` JavaScript code how he using `fetch` and learning JavaScript.  
 
+[PortSwigger Lab: Exploiting cross-site scripting to steal cookies](https://portswigger.net/web-security/cross-site-scripting/exploiting/lab-stealing-cookies)  
+  
 #### Upgrade stored self-XSS  
 
 >Blog comment with **Stored self-XSS**, upgrading the payload to steal victim information from DOM. The function **edit content** reflect the input in the `<script>` tag. The CSRF token for the **write comment** is same as the **edit content** functions. Below payload use **write comment** function to make the victim create a blog entry on their on blog with our malicious content.
