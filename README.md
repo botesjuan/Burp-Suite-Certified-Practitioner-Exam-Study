@@ -875,7 +875,9 @@ body:document.cookie
 
 #### Upgrade stored self-XSS  
 
->Blog comment with **Stored self-XSS**, upgrading the payload to steal victim information from DOM. The function **edit content** reflect the input in the `<script>` tag. The CSRF token for the **write comment** is same as the **edit content** functions. Below payload use **write comment** function to make the victim create a blog entry on their on blog with our malicious content. The `a` character is added to escape the `#` hash character from the initial application `source code`. The below `source code` in the blog entry is full exploit to steal victim info.  
+>Blog comment with **Stored self-XSS**, upgrading the payload to steal victim information from DOM. The function **edit content** reflect the input in the `<script>` tag. The CSRF token for the **write comment** is same as the **edit content** functions. Below payload use **write comment** function to make the victim create a blog entry on their on blog with our malicious content.
+>The `a` character is added to escape the `#` hash character from the initial application `source code`.
+>The below `source code` in the blog entry is full exploit to steal victim info.  
 
 ```html
 <button form=comment-form formaction="/edit" id=share-button>Click Button</button>
