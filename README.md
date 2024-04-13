@@ -448,7 +448,8 @@ document.cookie = "TopSecret=UnsecureCookieValue4Peanut2019";
 <>\'\"<script>{{7*7}}$(alert(1)}"-prompt(69)-"fuzzer
 ```  
 
->Submitting the above payloads may give response message, ***"Tag is not allowed"***. Then ***identify*** allowed tags using [PortSwigger Academy Methodology](https://portswigger.net/web-security/cross-site-scripting/contexts/lab-html-context-with-most-tags-and-attributes-blocked).  
+>Submitting the above payloads may give response message, ***"Tag is not allowed"*** due to Web Application Firewall (WAF) blocking injections.
+>Then ***identify*** allowed tags using [PortSwigger Academy Methodology](https://portswigger.net/web-security/cross-site-scripting/contexts/lab-html-context-with-most-tags-and-attributes-blocked).  
 
 >URL and Base64 online encoders and decoders  
 
