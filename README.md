@@ -50,7 +50,7 @@
 [My Burp Tips](#burp-exam-results)  
   
 >I can recommend doing as many as possible [Mystery lab challenge](https://portswigger.net/web-security/mystery-lab-challenge) to test your skills and decrease the time it takes you to ***identify*** the vulnerabilities, before taking the exam.  
->I also found this PortSwigger advice on [Retaking your exam](https://portswigger.net/web-security/certification/exam-hints-and-guidance/retaking-your-exam?tid=SNL7Q8oXE1mjUW1rSgswXSPIjhdLL5210Y-ogEuD1GZVp1w5spKfl5OJjAtj8AAC) very informative.
+>I also found this PortSwigger advice on [Retaking your exam](https://portswigger.net/web-security/certification/exam-hints-and-guidance/retaking-your-exam?tid=SNL7Q8oXE1mjUW1rSgswXSPIjhdLL5210Y-ogEuD1GZVp1w5spKfl5OJjAtj8AAC) very informative.  
 >Watch [CryptoCat - Burp Suite Certified Professional (BSCP) Review + Tips/Tricks](https://youtu.be/L-3jJTGLAhc?si=Mze8eY9mjaJl1PWR) for fresh view of the BSCP exam in 2024.  
   
 -----
