@@ -3359,6 +3359,7 @@ X-ProxyUser-Ip: 127.0.0.1
 [XSS SVG Upload](#xss-svg-upload)  
 [Race Condition Web shell upload](#race-condition-web-shell-upload)  
 [HackTheBox CPTS File Uploads](https://github.com/botesjuan/cpts-quick-references/blob/main/module/File%20Upload%20Attacks.md)
+[Exploit-Notes: File Upload Attack references](https://exploit-notes.hdks.org/exploit/web/security-risk/file-upload-attack/)  
 
 ### Bypass Upload Controls  
   
