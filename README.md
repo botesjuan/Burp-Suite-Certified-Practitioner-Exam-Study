@@ -3824,7 +3824,7 @@ CHAR(83)+CHAR(69)+CHAR(76)+CHAR(69)+CHAR(67)+CHAR(84)
 >Some great links to YouTube content creators training material and links to study stuff.  
 
 - [My YouTube BSCP Study Playlist](https://youtube.com/playlist?list=PLsDxQTEdg_YkVMP6PybE7I-hAdhR7adem)  
-- [Cookies, Sessions, JSON Web Tokens (JWT) Explained](https://youtu.be/uXDnS5PcjCA)  
+- [Using Burp and Postman, Brad Schiff explain Cookies, Sessions, JSON Web Tokens (JWT) - thanks!](https://youtu.be/uXDnS5PcjCA)  
 
 Youtube Information Security content creators channels (***in no particular order***):  
 
@@ -3848,6 +3848,7 @@ Youtube Information Security content creators channels (***in no particular orde
 18. [JSONSEC](https://www.youtube.com/@JSONSEC/videos)  
 19. [thehackerish](https://www.youtube.com/@thehackerish/videos)  
 20. [David Bombal](https://www.youtube.com/@davidbombal/videos)  
+21. [LearnWebCode Brad Schiff](https://www.youtube.com/@LearnWebCode/videos)  
   
 ## Footnote  
 
