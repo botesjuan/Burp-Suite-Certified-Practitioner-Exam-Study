@@ -2826,6 +2826,8 @@ Origin: http://subdomain.TARGET.NET
 [SSRF Open Redirection](#ssrf-open-redirection)  
 [SSRF Consecutive Connection State](#host-connection-state)  
 
+>Server-side request forgery is a web security vulnerability that allows an attacker to cause the server-side application to make requests to an unintended malicious exploit location URL.  
+
 >SSRF attack cause the server to make a connection to internal services within the organization, or force the server to connect to arbitrary external systems, potentially leaking sensitive data. Burp scanner may detect SSRF issue as an, `External service interaction (HTTP)`.  
   
 >SSRF Sample payloads.  
@@ -2880,6 +2882,7 @@ Cookie: session=PQcb5CMC9ECh5fBobuxSalaBdxyLis01
   
 ### SSRF redirect_uris  
 
+>In this Server Side Request a Redirect to URI is exploited.  
 >POST request to register data to the client application with redirect URL endpoint in JSON body. Provide a redirect_uris array containing an arbitrary white-list of callback URIs. Observe the redirect_uri.  
 
 ```html
