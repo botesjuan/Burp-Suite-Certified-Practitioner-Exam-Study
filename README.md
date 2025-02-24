@@ -3166,6 +3166,7 @@ ${foobar}
 
 ### ERB  
 
+>Embedded Ruby (ERB) template syntax  
 >Identify ERB template in a `GET /?message=Unfortunately%20this%20product%20is%20out%20of%20stock HTTP/2` request that then reflects the message value in the response, `Unfortunately this product is out of stock`.  
 
 ```
