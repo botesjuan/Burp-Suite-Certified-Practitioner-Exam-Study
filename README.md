@@ -3887,7 +3887,7 @@ CHAR(83)+CHAR(69)+CHAR(76)+CHAR(69)+CHAR(67)+CHAR(84)
 
 >Tips from [Daniel Redfern](https://youtu.be/Lbn8zQJByGY?t=551) is best I have come access explaining fundamental mechanics in BSCP exam, especially Tip 7, only one active user per application and if you reach stage 2 and you did not use interactive exploit in stage 1 that required the **Deliver to Victim** function of the exploit server, then use an interactive exploit on stage 2 to reach admin user role.
 
->[https://github.com/Hacking-Notes](https://github.com/Hacking-Notes) created a awesome website with an interactive checklist to help people during BSCP exams to track phases of attacks:  
+>[Hacking-Notes](https://github.com/Hacking-Notes) created a awesome website with an interactive checklist to help people during BSCP exams to track phases of attacks:  
 >[https://bscp.guide](https://bscp.guide)  
   
 >When stuck in BSCP exam, reference the below [Micah van Deusen blog tip 5 table of category to stages](https://micahvandeusen.com/burp-suite-certified-practitioner-exam-review/) for ways to progress through the stages.  
