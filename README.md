@@ -2414,7 +2414,27 @@ hashcat -a 0 -m 16500 <YOUR-JWT> /path/to/jwt.secrets.list
 ### API Reset Password Parameter Pollution  
 
 >Notice the reset password API function uses parameter in POST body for username. To ***identify*** aditional hidden parameters for the API function insert random parameter ```&x=y``` to observe error message leaking information of positive result.
->URL encode the random parameter and add it to current POST body parameters ```username=administrator%26x=y```.
+>URL encode the random parameter and add it to current POST body parameters:  
+
+```
+username=administrator%26x=y
+```  
+
+#### URL Encode Character Table  
+
+* `%3F` - `?`
+* `%3E` - `>`
+* `%3D` - `=`
+* `%3C` - `<`
+* `%3B` - `;`
+* `%2C` - ','
+* `%28` - `(`
+* `%27` - `'`
+* `%26` - `&` delimiter between different parameters
+* `%25` - `%`
+* `%24` - `$`
+* `%23` - `#` fragment identifier  
+* `%22` - `"`
 
 >Based on the response there is possible second parameter named `field` and reviewing the JavaScript source code there is `reset_token` parameter.
 
@@ -2424,11 +2444,11 @@ hashcat -a 0 -m 16500 <YOUR-JWT> /path/to/jwt.secrets.list
 
 ![api-resetpassword-leak-token](images/api-resetpassword-leak-token.png)  
 
-Browsing to the target URL and adding the stolen reset token, and change the administrator or carlos user password to gain access.  
+Browsing to the target URL and adding the stolen reset token, and change the `administrator` or `carlos` user password to gain access.  
 
 [PortSwigger Lab: Exploiting server-side parameter pollution in a query string](https://portswigger.net/web-security/api-testing/server-side-parameter-pollution/lab-exploiting-server-side-parameter-pollution-in-query-string)  
 
------  
+----    
 
 ## Access Control  
   
