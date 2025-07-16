@@ -1940,9 +1940,10 @@ https://cms-TARGET.net/login?username=%3Cscript%3Ealert%28%27reflectXSS%27%29%3C
 
 ![portswigger_race_condition_force-forgot-password-tokenz.png](/images/portswigger_race_condition_force-forgot-password-tokenz.png)  
 
->[PortSwigger Lab: Exploiting time-sensitive vulnerabilities](https://portswigger.net/web-security/learning-paths/race-conditions/race-conditions-time-sensitive-attacks/race-conditions/lab-race-conditions-exploiting-time-sensitive-vulnerabilities#)  
->[Reference: API University and PortSwigger Labs study notes](https://github.com/botesjuan/API-Web-Security/blob/main/module/race-condition.md#time-sensitive-tokenz)  
+>[PortSwigger Lab: Exploiting time-sensitive vulnerabilities](https://portswigger.net/web-security/race-conditions/lab-race-conditions-exploiting-time-sensitive-vulnerabilities)  
 
+>[Reference: API University and PortSwigger Labs study notes](https://github.com/botesjuan/API-Web-Security/blob/main/module/race-condition.md#time-sensitive-tokenz)  
+  
 ----  
 
 ## SQL Injection  
