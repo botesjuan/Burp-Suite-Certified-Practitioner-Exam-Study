@@ -1900,7 +1900,8 @@ https://cms-TARGET.net/login?username=%3Cscript%3Ealert%28%27reflectXSS%27%29%3C
 
 [Refresh Password broken logic](#refresh-password-broken-logic)  
 [Current Password](#current-password)  
-
+[Time-Sensitive Password Tokenz](#time-sensitive-password-tokenz)  
+  
 ### Refresh Password broken logic  
 
 >If the application [Refresh Password](#subtly-invalid-login) feature is flawed, this vulnerability can be exploited to identify valid accounts or obtain password reset token. This can lead to identifying valid users accounts or privilege escalation.  
@@ -1928,7 +1929,21 @@ https://cms-TARGET.net/login?username=%3Cscript%3Ealert%28%27reflectXSS%27%29%3C
 
 [PortSwigger Lab: Weak isolation on dual-use endpoint](https://portswigger.net/web-security/logic-flaws/examples/lab-logic-flaws-weak-isolation-on-dual-use-endpoint)  
   
------
+### Time-Sensitive Password Tokenz  
+ 
+>The target site uses time stamps to generate a hash password reset token URL.  
+
+>By sending parallel force password reset requests for two different users at the same time,  
+>will result in duplicate matching tokens because the same timestamp used by backend to generate the reset tokenz.  
+
+>Our own user `carlos` receive the reset token url in their email and then edit the name in the url to match `administrator` target victim user.  
+
+![portswigger_race_condition_force-forgot-password-tokenz.png](/images/portswigger_race_condition_force-forgot-password-tokenz.png)  
+
+>[PortSwigger Lab: Exploiting time-sensitive vulnerabilities](https://portswigger.net/web-security/learning-paths/race-conditions/race-conditions-time-sensitive-attacks/race-conditions/lab-race-conditions-exploiting-time-sensitive-vulnerabilities#)  
+>[Reference: API University and PortSwigger Labs study notes](https://github.com/botesjuan/API-Web-Security/blob/main/module/race-condition.md#time-sensitive-tokenz)  
+
+----  
 
 ## SQL Injection  
   
