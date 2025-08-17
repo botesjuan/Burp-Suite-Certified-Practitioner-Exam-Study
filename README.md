@@ -2509,7 +2509,7 @@ username=administrator%26x=y
 * `%2C` - ','
 * `%28` - `(`
 * `%27` - `'`
-* `%26` - `&` delimiter between different parameters
+* `%26` - `&` [delimiter](https://github.com/botesjuan/Burp-Suite-Certified-Practitioner-Exam-Study/blob/main/wordlists/delimiters.txt) between different parameters
 * `%25` - `%`
 * `%24` - `$`
 * `%23` - `#` fragment identifier  
@@ -3548,7 +3548,7 @@ X-ProxyUser-Ip: 127.0.0.1
 
 1. Extension with varied capitalization, such as .```sVG```  
 2. Double extension, such as ```.jpg.svg``` or ```.svg.jpg```  
-3. Extension with a delimiter, such as ```%0a, %09, %0d, %00, #```. Other examples, ```file.png%00.svg``` or ```file.png\x0d\x0a.svg```  
+3. Extension with a [delimiter](https://github.com/botesjuan/Burp-Suite-Certified-Practitioner-Exam-Study/blob/main/wordlists/delimiters.txt), such as ```%0a, %09, %0d, %00, #```. Other examples, ```file.png%00.svg``` or ```file.png\x0d\x0a.svg```  
 4. Empty filename, ```.svg```  
 5. Try to cut allowed extension with more than the maximum filename length.  
 
