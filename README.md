@@ -2614,6 +2614,7 @@ Cookie: session=2ybmTxFLPlisA6GZvcw22Mvc29jYVuJm
 [Identify GraphQL API](#identify-graphql-api)  
 [GraphQL Reveal Credentials](#graphql-reveal-creds)  
 [GraphQL Brute Force](#graphql-brute-force)  
+[GraphQL Voyager Visualize attack paths](#graphql-voyager)
 
 ### Identify GraphQL API  
 
@@ -2729,7 +2730,28 @@ bruteforce$index:login(input:{password: "$password", username: "carlos"}) {
 >Replace the cookie in browser to impersonate Carlos user session.  
 
 [PortSwigger Lab: Bypassing GraphQL brute force protections](https://portswigger.net/web-security/graphql/lab-graphql-brute-force-protection-bypass)  
-  
+
+### GraphQL Voyager  
+
+>Using GraphQL Voyager to visually find attack paths, sensitive functions, types, objects and data.
+
+>Run Introspection query and copy response body to file `introspection.json`
+>Host local GraphQL Voyager on Kali Linux:
+
+```
+mkdir graphql-voyager-local
+cp ../introspection.json graphql-voyager-local/
+sudo apt install nodejs npm
+npm install express graphql-voyager
+node server.js
+```
+
+>See code for the server.js in repo files.
+
+>Browse to GraphQL voyager instance `http://localhost:3001/voyager`
+
+![GraphQL Voyager](/images/graphql.png)  
+
 -----
 
 ## CORS  
