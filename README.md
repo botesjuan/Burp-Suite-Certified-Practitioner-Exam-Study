@@ -2508,12 +2508,15 @@ username=administrator%26x=y
 * `%3B` - `;`
 * `%2C` - ','
 * `%28` - `(`
+* `%29` - `)`  
 * `%27` - `'`
 * `%26` - `&` [delimiter](https://github.com/botesjuan/Burp-Suite-Certified-Practitioner-Exam-Study/blob/main/wordlists/delimiters.txt) between different parameters
 * `%25` - `%`
 * `%24` - `$`
 * `%23` - `#` fragment identifier  
 * `%22` - `"`
+* `%2F` - `/`
+* `%27` - back tick  
 
 >Based on the response there is possible second parameter named `field` and reviewing the JavaScript source code there is `reset_token` parameter.
 
