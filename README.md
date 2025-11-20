@@ -431,7 +431,7 @@ From the Site Map, open the `searchResults.js` file and notice that the JSON res
 
 ```  
 
-!DOM_based_cookie_manipulation.png](/images/DOM_based_cookie_manipulation.png)  
+![DOM_based_cookie_manipulation.png](/images/DOM_based_cookie_manipulation.png)  
 
 Once the victim cookie is updated the Exploit server log captures their secret cookie value.  
 
