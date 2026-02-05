@@ -2953,7 +2953,8 @@ The following XML payload in POST body can be used to identify existing DTD file
   
 ### SQL + XML + HackVertor 
 
->The combination of vulnerabilities are ***identified*** in a XML Post body and inserting mathematical expression such as **7x7** into field and observing the evaluated value. Using this type of XML and SQL injection with WAF filter bypass via encoding may allow extract of sensitive data.  
+>The combination of vulnerabilities are ***identified*** in a XML Post body and inserting mathematical expression such as **7x7** into field and observing the evaluated value. Using this type of XML and SQL injection with WAF filter bypass via encoding may allow extract of sensitive data.
+>[HackVertor Online tool](https://hackvertor.co.uk/)  
 
 ![identify-math-evaluated-xml](images/identify-math-evaluated-xml.png)  
 
